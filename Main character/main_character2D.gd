@@ -6,10 +6,12 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 
+
 func _physics_process(delta):
 	# Gravité
 	if not is_on_floor():
 		falling(gravity, delta)
+		
 
 	
 	# Saut
@@ -23,19 +25,20 @@ func _physics_process(delta):
 
 	# Flip du sprite
 	if direction < 0:
-		anim.flip_h = true
+		flipAnim("right")
 	elif direction > 0:
-		anim.flip_h = false
-
-
-		
+		flipAnim("left")
 	elif direction != 0:
-		anim.play("run")
+		run()
 	else:
-		anim.play("idle")
+		idleAnim()
 
 	move_and_slide()
-
+func idleAnim():
+	anim.play("idle")
+	print("idle")
+func run():
+	anim.play("running")
 func jump():
 	velocity.y = jump_force
 	anim.play("jump")
@@ -44,3 +47,9 @@ func falling(gravity, delta):
 	anim.play("falling")
 	velocity.y += gravity * delta
 	print("FALLING")	
+func flipAnim(direction):
+	print("flip")
+	if direction == "right":
+		anim.flip_h = true
+	if direction == "left":
+		anim.flip_h = false

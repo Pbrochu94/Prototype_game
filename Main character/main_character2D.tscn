@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c0pg8a4xs3ao4"]
+[gd_scene load_steps=43 format=3 uid="uid://c0pg8a4xs3ao4"]
 
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://Main character/Sci-fi Samurai with Sword 124x49.png" id="1_ea1f2"]
 [ext_resource type="Script" path="res://Main character/main_character2D.gd" id="1_g7u0v"]
@@ -123,6 +123,38 @@ region = Rect2(248, 196, 124, 49)
 atlas = ExtResource("1_ea1f2")
 region = Rect2(372, 196, 124, 49)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyngs"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(0, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh3ha"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(124, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gew7"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(248, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4n6j"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(372, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85dmv"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(496, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lhkv"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(620, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg5ql"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(744, 49, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crf73"]
+atlas = ExtResource("1_ea1f2")
+region = Rect2(868, 49, 124, 49)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bb37l"]
 animations = [{
 "frames": [{
@@ -228,7 +260,36 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 10.0
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyngs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh3ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gew7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4n6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85dmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lhkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg5ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crf73")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swws7"]
@@ -239,8 +300,8 @@ script = ExtResource("1_g7u0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bb37l")
-animation = &"falling"
-frame_progress = 0.579028
+animation = &"running"
+frame_progress = 0.513166
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 12)
