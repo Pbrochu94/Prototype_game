@@ -3,53 +3,70 @@ extends CharacterBody2D
 @export var speed := 120.0
 @export var jump_force := -300.0
 @export var gravity := 800.0
-
 @onready var anim = $AnimatedSprite2D
+var direction
+enum State {
+	IDLE,
+	RUNNING,
+	JUMPING,
+	FALLING
+}
+var currentState = State.IDLE
+
 
 
 func _physics_process(delta):
-	# Gravité
-	if not is_on_floor():
-		falling(gravity, delta)
-		
+	#Gravity
+	velocity.y += gravity * delta
+	print(State.keys()[currentState])
 
-	
-	# Saut
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		jump()
-	
-
-	# Mouvement gauche/droite
+	#Direction
 	var direction = Input.get_axis("move_left", "move_right")
 	velocity.x = direction * speed
-
-	# Flip du sprite
-	if direction < 0:
-		flipAnim("right")
-	elif direction > 0:
-		flipAnim("left")
-	elif direction != 0:
-		run()
-	else:
-		idleAnim()
-
+	#Update state
+	updateState(direction)
+	#Check for inputs
+	inputListener()
+	#Update sprite direction
+	updateSpriteDirection(direction)
+	#Update animation
+	updateAnim()
 	move_and_slide()
-func idleAnim():
-	anim.play("idle")
-	print("idle")
-func run():
-	anim.play("running")
+
+func inputListener():
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		jump()
+	
+func updateState(direction):
+	if not is_on_floor():
+		if velocity.y < 0:
+			currentState = State.JUMPING
+		else:
+			currentState = State.FALLING
+	elif is_on_floor():
+		if direction == 0:
+			currentState = State.IDLE
+		else:
+			currentState = State.RUNNING
+func updateAnim():
+	match currentState:
+		State.IDLE:
+			if anim.animation != "idle":
+				anim.play("idle")
+		State.RUNNING:
+			if anim.animation != "running":
+				anim.play("running")
+		State.JUMPING:
+			if anim.animation != "jump":
+				anim.play("jump")
+		State.FALLING:
+			if anim.animation != "falling":
+				anim.play("falling")
 func jump():
 	velocity.y = jump_force
-	anim.play("jump")
 	print("JUMP")
-func falling(gravity, delta):
-	anim.play("falling")
-	velocity.y += gravity * delta
-	print("FALLING")	
-func flipAnim(direction):
-	print("flip")
-	if direction == "right":
+func updateSpriteDirection(direction):
+	if direction < 0:
 		anim.flip_h = true
-	if direction == "left":
+	if direction > 0:
 		anim.flip_h = false
