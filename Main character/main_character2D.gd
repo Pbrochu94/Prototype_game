@@ -34,7 +34,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func inputListener():
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and currentState in [State.IDLE, State.RUNNING]:
 		jump()
 	
 func updateState(direction):
