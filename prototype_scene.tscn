@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcelirrfixell"]
+[gd_scene load_steps=7 format=3 uid="uid://dcelirrfixell"]
 
 [ext_resource type="Texture2D" uid="uid://c54ertcqi2va0" path="res://map/world 1/tiles/Tileset/DARK Edition Tileset with background.png" id="1_412v1"]
 [ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://Main character/main_character2D.tscn" id="2_6h02j"]
+[ext_resource type="PackedScene" uid="uid://b6eu8gs55c5b1" path="res://enemies/Minor gun enemy/minor_gun_enemy.tscn" id="3_ak7a5"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_yfqiq"]
 tile_data = PackedInt32Array(0, 851968, 2, 1, 131072, 2, 2, 262144, 2, 3, 327680, 2, 4, 393216, 2, 5, 458752, 2, 6, 524288, 2, 7, 131072, 2, 8, 196608, 2, 9, 524288, 2, 10, 589824, 2, 11, 655360, 2, 12, 720896, 2, 13, 851968, 2, 14, 393216, 2)
@@ -717,3 +718,6 @@ position = Vector2(-81, 69)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-80, 120)
 zoom = Vector2(1.885, 1.885)
+
+[node name="MinorGunEnemy" parent="." instance=ExtResource("3_ak7a5")]
+position = Vector2(-183, 196)

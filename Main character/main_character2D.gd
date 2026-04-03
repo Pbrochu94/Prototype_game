@@ -3,7 +3,9 @@ extends CharacterBody2D
 @export var speed := 120.0
 @export var jump_force := -300.0
 @export var gravity := 800.0
-@onready var anim = $AnimatedSprite2D
+@onready var anim = $SpritePivot/AnimatedSprite2D
+@export var currentState = State.IDLE
+
 var direction
 enum State {
 	IDLE,
@@ -11,14 +13,14 @@ enum State {
 	JUMPING,
 	FALLING
 }
-var currentState = State.IDLE
 
 
 
 func _physics_process(delta):
+	move_and_slide()
 	#Gravity
 	velocity.y += gravity * delta
-	print(State.keys()[currentState])
+	#print(State.keys()[currentState])
 
 	#Direction
 	var direction = Input.get_axis("move_left", "move_right")
@@ -29,7 +31,6 @@ func _physics_process(delta):
 	inputListener()
 	#Update sprite direction
 	updateSpriteDirection(direction)
-	move_and_slide()
 
 func inputListener():
 	if Input.is_action_just_pressed("jump") and currentState in [State.IDLE, State.RUNNING]:
@@ -66,11 +67,10 @@ func exitState(state):
 func updateAnim(animation):
 	if anim.animation != animation:
 		anim.play(animation)
-	print("Switch anim")
 func jump():
 	velocity.y = jump_force
 func updateSpriteDirection(direction):
 	if direction < 0:
-		anim.flip_h = true
+		$SpritePivot.scale.x = -1
 	if direction > 0:
-		anim.flip_h = false
+		$SpritePivot.scale.x = 1

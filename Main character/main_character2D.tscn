@@ -295,13 +295,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swws7"]
 size = Vector2(12, 24.7519)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="MainCharacter" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g7u0v")
+currentState = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="SpritePivot" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_bb37l")
 animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 12)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_swws7")
