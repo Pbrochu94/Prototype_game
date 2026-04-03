@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6eu8gs55c5b1"]
+[gd_scene load_steps=15 format=3 uid="uid://b6eu8gs55c5b1"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/minor_gun_enemy.gd" id="1_7y7rn"]
 [ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://enemies/Minor gun enemy/sprites/idle 112x26.png" id="1_ka2h7"]
@@ -83,8 +83,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1mr1"]
 size = Vector2(21, 23)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n4otp"]
-
 [node name="MinorGunEnemy" type="CharacterBody2D"]
 script = ExtResource("1_7y7rn")
 
@@ -95,17 +93,15 @@ position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_lmvle")
 animation = &"walk"
 
+[node name="DetectionArea" type="Area2D" parent="SpritePivot" groups=["enemy"]]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpritePivot/DetectionArea"]
+polygon = PackedVector2Array(78, -178, 2, -7, 89, 117, 262, 137, 260, -208)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 0.5)
 shape = SubResource("RectangleShape2D_k1mr1")
 
-[node name="DetectionArea" type="Area2D" parent="." groups=["enemy"]]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-scale = Vector2(15, 15)
-shape = SubResource("CircleShape2D_n4otp")
-debug_color = Color(0.921569, 0.188235, 0.529412, 0.419608)
-
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="SpritePivot/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="SpritePivot/DetectionArea" to="." method="_on_detection_area_body_exited"]
