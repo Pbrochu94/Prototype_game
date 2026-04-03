@@ -29,42 +29,46 @@ func _physics_process(delta):
 	inputListener()
 	#Update sprite direction
 	updateSpriteDirection(direction)
-	#Update animation
-	updateAnim()
 	move_and_slide()
 
 func inputListener():
 	if Input.is_action_just_pressed("jump") and currentState in [State.IDLE, State.RUNNING]:
 		jump()
-	
 func updateState(direction):
 	if not is_on_floor():
 		if velocity.y < 0:
-			currentState = State.JUMPING
+			setState(State.JUMPING)
 		else:
-			currentState = State.FALLING
+			setState(State.FALLING)
 	elif is_on_floor():
 		if direction == 0:
-			currentState = State.IDLE
+			setState(State.IDLE)
 		else:
-			currentState = State.RUNNING
-func updateAnim():
-	match currentState:
+			setState(State.RUNNING)
+func setState(newState):
+	if currentState == newState:
+		return
+	exitState(currentState)
+	currentState = newState
+	enterState(newState)
+func enterState(state):
+	match state:
 		State.IDLE:
-			if anim.animation != "idle":
-				anim.play("idle")
+			updateAnim("idle")
 		State.RUNNING:
-			if anim.animation != "running":
-				anim.play("running")
+			updateAnim("run")
 		State.JUMPING:
-			if anim.animation != "jump":
-				anim.play("jump")
+			updateAnim("jump")
 		State.FALLING:
-			if anim.animation != "falling":
-				anim.play("falling")
+			updateAnim("falling")
+func exitState(state):
+	pass #Not sure yet what happens here
+func updateAnim(animation):
+	if anim.animation != animation:
+		anim.play(animation)
+	print("Switch anim")
 func jump():
 	velocity.y = jump_force
-	print("JUMP")
 func updateSpriteDirection(direction):
 	if direction < 0:
 		anim.flip_h = true
