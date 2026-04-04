@@ -82,3 +82,6 @@ func walk(delta):
 		enterState(State.IDLE)
 func attack(weapon):
 	print("ATTACK")
+	chooseTarget()
+func chooseTarget():
+	pass

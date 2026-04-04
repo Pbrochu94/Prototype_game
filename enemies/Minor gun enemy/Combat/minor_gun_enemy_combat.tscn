@@ -93,6 +93,7 @@ position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
 animation = &"walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0.5)
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_2fn00")
