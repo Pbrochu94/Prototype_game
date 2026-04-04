@@ -1,30 +1,26 @@
-extends Node2D
-
+extends CharacterBody2D
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
-@onready var actionsUI = $PlayerActionsUI
-#STATS
-@export var hp = 100
-@export var attackPower = 10
-@export var weponEquipped = "sword"
 
+#Stats
+@export var hp = 100
+@export var attackPower = 5
+#Properties
 var isWalking = false
 var startingPosition: Vector2
 const walkSpeed = 80
-
 var currentState
-var direction
-enum State {
-	WALK_IN,
+enum State{
 	IDLE,
-	ATTACK,
-	DAMAGE,
-	DEAD
+	WALK_IN,
+	ATTACK
 }
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentState = State.IDLE
-	setState(State.WALK_IN)
+	enterState(State.IDLE)
+	$SpritePivot.scale.x = -1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,14 +29,18 @@ func _process(delta):
 	updateAnimation()
 
 
-#CHECKS
-func checkIfWalkIn(delta):
-	if not isWalking:
-		return
-	walk(delta)
+#ANIMATIONS HANDLERS
+func updateAnimation():
+	match currentState:
+		State.IDLE:
+			anim.play("idle")
+		State.ATTACK:
+			anim.play("attack")
+		State.WALK_IN:
+			anim.play("walk")
 
 
-#STATES HANDLERS
+#STATE HANDLERS
 func setState(newState:State):
 	if currentState == newState:
 		return
@@ -53,32 +53,25 @@ func enterState(newState:State):
 		State.WALK_IN:
 			isWalking = true
 		State.IDLE:
-			actionsUI.visible = true
+			pass
 func exitState():
 	pass
 
 
-#ANIMATIONS HANDLERS
-func updateAnimation():
-	match currentState:
-		State.IDLE:
-			anim.play("idle")
-		State.ATTACK:
-			anim.play("attack")
-		State.WALK_IN:
-			anim.play("walk_in")
+#BEHAVIORS
 func intro(target:Node2D):
 	startingPosition = target.global_position
 	setState(State.WALK_IN)
 
-
-#BEHAVIORS
-func startTurn():
-	print("Player start")
 func walk(delta):
 	global_position = global_position.move_toward(startingPosition, walkSpeed*delta)
 	if global_position == startingPosition:
 		isWalking = false
 		enterState(State.IDLE)
-func attack(weapon):
-	print("ATTACK")
+
+
+#CHECKS
+func checkIfWalkIn(delta):
+	if not isWalking:
+		return
+	walk(delta)

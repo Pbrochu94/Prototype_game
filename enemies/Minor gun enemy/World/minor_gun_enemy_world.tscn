@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3 uid="uid://b6eu8gs55c5b1"]
+
+[ext_resource type="Script" path="res://enemies/Minor gun enemy/World/MinorGunEnemyWorld.gd" id="1_7y7rn"]
+[ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://enemies/Minor gun enemy/sprites/idle 112x26.png" id="1_ka2h7"]
+[ext_resource type="Texture2D" uid="uid://dm5wog2pdqapi" path="res://enemies/Minor gun enemy/sprites/move 112x26.png" id="2_0e26n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fail"]
+atlas = ExtResource("1_ka2h7")
+region = Rect2(0, 0, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b533i"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 0, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wic8"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 26, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkcbt"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 52, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs6q1"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 78, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grddo"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 104, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6swvh"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 130, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ho1o"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 156, 112, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u85vs"]
+atlas = ExtResource("2_0e26n")
+region = Rect2(0, 182, 112, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lmvle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fail")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b533i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wic8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkcbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs6q1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grddo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6swvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ho1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u85vs")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1mr1"]
+size = Vector2(21, 23)
+
+[node name="MinorGunEnemy" type="CharacterBody2D"]
+script = ExtResource("1_7y7rn")
+
+[node name="SpritePivot" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(38, 0)
+sprite_frames = SubResource("SpriteFrames_lmvle")
+animation = &"walk"
+
+[node name="DetectionArea" type="Area2D" parent="SpritePivot" groups=["enemy"]]
+collision_layer = 2
+
+[node name="Vision" type="CollisionPolygon2D" parent="SpritePivot/DetectionArea"]
+polygon = PackedVector2Array(78, -178, 2, -7, 89, 117, 262, 137, 260, -208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_k1mr1")
+
+[connection signal="body_entered" from="SpritePivot/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="SpritePivot/DetectionArea" to="." method="_on_detection_area_body_exited"]

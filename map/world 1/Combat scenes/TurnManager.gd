@@ -1,19 +1,22 @@
 extends Node
 
-@onready var player = get_node("PlayerCombat")
+@onready var player 
 @onready var playerAnchor = get_parent().get_node("PlayerAnchor")
-var enemy
+@onready var enemy 
+@onready var enemyAnchor = get_parent().get_node("EnemyAnchor")
 var currentTurn = "player"
 
 func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
+	player = get_parent().get_node("PlayerCombat")
+	enemy = get_parent().get_node("MinorGunEnemyCombat")
 	start_combat()
+	print(enemy)
 
 func start_combat():
-	player = get_parent().get_node("PlayerCombat")
-	#enemy = get_parent().get_node("EnemyCombat")
 	player.intro(playerAnchor)
+	enemy.intro(enemyAnchor)
 	startPlayerTurn()
 
 func startPlayerTurn():
