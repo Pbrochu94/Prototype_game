@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://fb5mqui46rrv"]
+
+[node name="CombatLayout" type="Node2D"]
+
+[node name="PlayerAnchor" type="Node2D" parent="."]
+
+[node name="EnemyAnchor" type="Node2D" parent="."]

@@ -336,8 +336,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_twnhf")
 }],
 "loop": true,
-"name": &"run",
-"speed": 12.0
+"name": &"walk_in",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdy5s"]
@@ -351,8 +351,8 @@ script = ExtResource("1_1xdif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"attack"
-frame_progress = 0.0642231
+animation = &"walk_in"
+frame_progress = 0.0612356
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
@@ -360,3 +360,4 @@ shape = SubResource("RectangleShape2D_kdy5s")
 
 [node name="PlayerActionsUI" parent="." instance=ExtResource("3_edbd4")]
 position = Vector2(1, -94)
+script = null

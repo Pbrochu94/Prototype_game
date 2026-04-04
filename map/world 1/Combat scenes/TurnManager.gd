@@ -1,6 +1,7 @@
 extends Node
 
 @onready var player = get_node("PlayerCombat")
+@onready var playerAnchor = get_parent().get_node("PlayerAnchor")
 var enemy
 var currentTurn = "player"
 
@@ -12,7 +13,7 @@ func _ready():
 func start_combat():
 	player = get_parent().get_node("PlayerCombat")
 	#enemy = get_parent().get_node("EnemyCombat")
-	
+	player.intro(playerAnchor)
 	startPlayerTurn()
 
 func startPlayerTurn():
