@@ -43,14 +43,15 @@ func setState(newState:State):
 	if currentState == newState:
 		return
 	currentState = newState
-	enterState(newState)
-
-func enterState(newState:State):
 	print(State.keys()[currentState])
+	enterState(newState)
+func enterState(newState:State):
+	setState(newState)
 	match newState:
 		State.WALK_IN:
 			isWalking = true
-
+		State.IDLE:
+			actionsUI.visible = true
 func exitState():
 	pass
 
@@ -64,9 +65,7 @@ func updateAnimation():
 			anim.play("attack")
 		State.WALK_IN:
 			anim.play("walk_in")
-
 func intro(target:Node2D):
-	print("TAGET POSITION",target.global_position)
 	startingPosition = target.global_position
 	setState(State.WALK_IN)
 
@@ -74,10 +73,10 @@ func intro(target:Node2D):
 #BEHAVIORS
 func startTurn():
 	print("Player start")
-	actionsUI.visible = true
-
 func walk(delta):
-	print("walks")
 	global_position = global_position.move_toward(startingPosition, walkSpeed*delta)
+	if global_position == startingPosition:
+		isWalking = false
+		enterState(State.IDLE)
 func attack(weapon):
 	pass
