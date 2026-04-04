@@ -79,4 +79,4 @@ func walk(delta):
 		isWalking = false
 		enterState(State.IDLE)
 func attack(weapon):
-	pass
+	print("ATTACK")

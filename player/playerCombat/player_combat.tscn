@@ -343,7 +343,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdy5s"]
 size = Vector2(12, 24.7519)
 
-[node name="PlayerCombat" type="CharacterBody2D"]
+[node name="PlayerCombat" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_1xdif")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -352,7 +352,7 @@ script = ExtResource("1_1xdif")
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"walk_in"
-frame_progress = 0.783056
+frame_progress = 0.635481
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
