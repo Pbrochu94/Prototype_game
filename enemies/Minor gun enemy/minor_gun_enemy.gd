@@ -11,6 +11,8 @@ var direction = 0
 var isMoving = false
 var playerIsInRange = false
 var hasAggro = false
+var aggroTimer = 0
+const aggroDuration = 5
 enum State {
 	IDLE,
 	WANDER,
@@ -24,7 +26,7 @@ func _ready():
 	direction = 1
 	enterState(currentState)
 func _physics_process(delta):
-	print(State.keys()[currentState])
+	#print(State.keys()[currentState])
 	if justSpawned:
 		justSpawned = false
 		return
@@ -35,19 +37,17 @@ func _physics_process(delta):
 	stateProcess()
 	#Update sprite direction
 	updateSpriteDirection(direction)
+	#Check if enemy still aggro
+	updateAggro(delta)
 	#Move character/detectwall/modify velocity if hit wall
 	move_and_slide()
 	#Gère les réactions après les collisions (ex: flip on wall)
 	postPhysics()
-	print(hasAggro)
-	print("Enemy direction", direction)
-	if player != null:
-		print("player direction", player.global_position)
+
 func postPhysics():
 	match currentState:
 		State.WANDER:
 			if is_on_wall():
-				print("hit wall")
 				direction *= -1
 
 
@@ -104,7 +104,6 @@ func updateAnim(animation):
 #BEHAVIORS
 func wander():
 	currentSpeed = baseSpeed
-	#print("step")
 	isMoving = true
 	velocity.x = direction * currentSpeed
 func pursuit():
@@ -114,12 +113,21 @@ func pursuit():
 	currentSpeed = pursuitSpeed
 	direction = dir
 	velocity.x = direction * currentSpeed
+
+
+#DETECTIONS
+func updateAggro(delta):
+	if hasAggro and not playerIsInRange:
+		aggroTimer += delta
+		if aggroTimer >= aggroDuration:
+			hasAggro = false
+			player = null
+
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		playerIsInRange = true
 		hasAggro = true
-		print("DETECTED", player)
 		setState(State.PURSUIT)
 
 
@@ -127,5 +135,4 @@ func _on_detection_area_body_exited(body):
 	if body.is_in_group("player"):
 		playerIsInRange = false
 		setState(State.WANDER)
-		if !hasAggro:
-			player = null
+
