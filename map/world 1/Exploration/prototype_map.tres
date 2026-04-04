@@ -1,14 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcelirrfixell"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bf8mio6gymvui"]
 
-[ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://player/playerWorld/playerWorld.tscn" id="1_6fvex"]
-[ext_resource type="Texture2D" uid="uid://c54ertcqi2va0" path="res://Map/world 1/Exploration/tiles/Tileset/DARK Edition Tileset with background.png" id="2_gdi0m"]
-[ext_resource type="PackedScene" uid="uid://b6eu8gs55c5b1" path="res://enemies/Minor gun enemy/minor_gun_enemy.tscn" id="3_ak7a5"]
+[ext_resource type="Texture2D" uid="uid://c54ertcqi2va0" path="res://Map/world 1/Exploration/tiles/Tileset/DARK Edition Tileset with background.png" id="1_ghl67"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_yfqiq"]
 tile_data = PackedInt32Array(0, 851968, 2, 1, 131072, 2, 2, 262144, 2, 3, 327680, 2, 4, 393216, 2, 5, 458752, 2, 6, 524288, 2, 7, 131072, 2, 8, 196608, 2, 9, 524288, 2, 10, 589824, 2, 11, 655360, 2, 12, 720896, 2, 13, 851968, 2, 14, 393216, 2)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rmnu6"]
-texture = ExtResource("2_gdi0m")
+texture = ExtResource("1_ghl67")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -700,24 +698,7 @@ texture = ExtResource("2_gdi0m")
 2:2/0/physics_layer_0/angular_velocity = 0.0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 
-[sub_resource type="TileSet" id="TileSet_ves0k"]
+[resource]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rmnu6")
 pattern_0 = SubResource("TileMapPattern_yfqiq")
-
-[node name="Node2D" type="Node2D"]
-
-[node name="MainCharacter" parent="." instance=ExtResource("1_6fvex")]
-position = Vector2(-632, 144)
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_ves0k")
-format = 2
-layer_0/tile_data = PackedInt32Array(851969, 458752, 2, 851970, 524288, 2, 851971, 131072, 2, 851972, 196608, 2, 851973, 524288, 2, 851974, 589824, 2, 851975, 655360, 2, 851977, 851968, 2, 851978, 393216, 2, 786442, 65536, 11, 720906, 65536, 10, 655370, 65536, 10, 917493, 327680, 2, 720875, 196608, 11, 786411, 196608, 10, 851947, 196608, 11, 917483, 458752, 2, 917484, 524288, 2, 917485, 589824, 2, 917486, 655360, 2, 917487, 720896, 2, 917488, 786432, 2, 917489, 524288, 2, 917490, 851968, 2, 917491, 131072, 2, 917492, 262144, 2, 851968, 393216, 2, 851976, 720896, 2, 917495, 393216, 2, 917496, 458752, 2, 917497, 524288, 2, 917498, 131072, 2, 917499, 196608, 2, 917500, 524288, 2, 917501, 589824, 2, 917502, 655360, 2, 917503, 720896, 2, 917494, 524288, 2, 720843, 458752, 2, 720844, 524288, 2, 720845, 589824, 2, 720846, 655360, 2, 720847, 720896, 2, 720848, 786432, 2, 720849, 524288, 2, 720850, 851968, 2, 720851, 131072, 2, 720852, 262144, 2, 720853, 327680, 2, 720854, 524288, 2, 720855, 393216, 2, 720856, 458752, 2, 720857, 524288, 2, 720858, 131072, 2, 720859, 196608, 2, 720860, 524288, 2, 720861, 589824, 2, 720862, 655360, 2, 720863, 720896, 2, 720864, 393216, 2, 720865, 458752, 2, 720866, 524288, 2, 720867, 131072, 2, 720868, 196608, 2, 720869, 524288, 2, 720870, 589824, 2, 720871, 655360, 2, 720872, 720896, 2, 720873, 851968, 2, 720874, 393216, 2)
-
-[node name="MinorGunEnemy" parent="." instance=ExtResource("3_ak7a5")]
-position = Vector2(-183, 196)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-80, 120)
-zoom = Vector2(1.035, 1.035)

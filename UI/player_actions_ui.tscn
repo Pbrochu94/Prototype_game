@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ivr2vk67mm3"]
+
+[ext_resource type="Script" path="res://UI/player_actions_ui.gd" id="1_j03no"]
+
+[node name="PlayerActionsUI" type="Node2D"]
+visible = false
+script = ExtResource("1_j03no")
+
+[node name="ChooseAction" type="Node2D" parent="."]
+
+[node name="ChooseActionLabel" type="Label" parent="ChooseAction"]
+offset_left = -52.0
+offset_top = -34.0
+offset_right = 59.0
+offset_bottom = -8.0
+text = "Choose Action"
+
+[node name="Attack" type="Node2D" parent="ChooseAction"]
+position = Vector2(-1, 2)
+
+[node name="AttackLabel" type="Label" parent="ChooseAction/Attack"]
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 26.0
+offset_bottom = 22.0
+text = "Attack
+"
+
+[node name="Items" type="Node2D" parent="ChooseAction"]
+position = Vector2(54, 47)
+
+[node name="Items" type="Label" parent="ChooseAction/Items"]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 46.0
+offset_bottom = 29.0
+text = "Items
+"
+
+[node name="Spells" type="Node2D" parent="ChooseAction"]
+position = Vector2(-88, 51)
+
+[node name="Spells" type="Label" parent="ChooseAction/Spells"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Spells
+"
