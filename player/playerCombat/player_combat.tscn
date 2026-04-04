@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ceqtqoynsm8pp"]
+[gd_scene load_steps=49 format=3 uid="uid://ceqtqoynsm8pp"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
@@ -340,10 +340,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdy5s"]
-size = Vector2(12, 24.7519)
-
-[node name="PlayerCombat" type="CharacterBody2D" groups=["player"]]
+[node name="PlayerCombat" type="Node2D"]
 script = ExtResource("1_1xdif")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -353,10 +350,6 @@ position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"walk_in"
 frame_progress = 0.635481
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.5)
-shape = SubResource("RectangleShape2D_kdy5s")
 
 [node name="PlayerActionsUI" parent="." instance=ExtResource("3_edbd4")]
 visible = false
