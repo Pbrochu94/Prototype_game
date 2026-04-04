@@ -12,6 +12,8 @@ var isMoving = false
 var playerIsInRange = false
 var hasAggro = false
 var aggroTimer = 0
+var wanderTimer = 0
+const wanderDuration = 3
 const aggroDuration = 5
 enum State {
 	IDLE,
@@ -34,7 +36,7 @@ func _physics_process(delta):
 	
 	#Update state
 	updateState()
-	stateProcess()
+	stateProcess(delta)
 	#Update sprite direction
 	updateSpriteDirection(direction)
 	#Check if enemy still aggro
@@ -48,17 +50,17 @@ func postPhysics():
 	match currentState:
 		State.WANDER:
 			if is_on_wall():
+				wanderTimer = 0
 				direction *= -1
 
 
 #STATES HANDLERS
-func stateProcess():
+func stateProcess(delta):
 	match currentState:
 		State.IDLE:
 			pass
 		State.WANDER:
-			#direction = 1
-			wander()
+			wander(delta)
 		State.PURSUIT:
 			pursuit()
 func updateState():
@@ -83,7 +85,6 @@ func enterState(state):
 			updateAnim("idle")
 		State.WANDER:
 			updateAnim("walk")
-			wander()
 		State.FALLING:
 			updateAnim("falling")
 func exitState(state):
@@ -102,7 +103,13 @@ func updateAnim(animation):
 
 
 #BEHAVIORS
-func wander():
+func wander(delta):
+	print("WANDER TIMER", wanderTimer)
+	print("WANDER DURATION", wanderDuration)
+	wanderTimer += delta
+	if wanderTimer >= wanderDuration :
+		direction *= -1
+		wanderTimer = 0
 	currentSpeed = baseSpeed
 	isMoving = true
 	velocity.x = direction * currentSpeed
