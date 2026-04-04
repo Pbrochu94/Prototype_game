@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7ivr2vk67mm3"]
 
 [ext_resource type="Script" path="res://UI/player_actions_ui.gd" id="1_j03no"]
-[ext_resource type="Script" path="res://UI/Attack/Area2D.gd" id="2_bekub"]
+[ext_resource type="Script" path="res://UI/Attack/AttackActionHitbox.gd" id="2_sraof"]
 [ext_resource type="Script" path="res://UI/Items/Area2D.gd" id="3_i831w"]
 [ext_resource type="Script" path="res://UI/Spells/Area2D.gd" id="4_u7anx"]
 
@@ -32,7 +32,7 @@ text = "Attack
 "
 
 [node name="Area2D" type="Area2D" parent="ChooseAction/Attack"]
-script = ExtResource("2_bekub")
+script = ExtResource("2_sraof")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChooseAction/Attack/Area2D"]
 position = Vector2(1.5, 8.5)

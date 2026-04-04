@@ -3,10 +3,12 @@ extends Node2D
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var actionsUI = $PlayerActionsUI
+@onready var enemy = get_tree().get_nodes_in_group("enemy")
 #STATS
 @export var hp = 100
 @export var attackPower = 10
 @export var weponEquipped = "sword"
+
 
 var isWalking = false
 var startingPosition: Vector2
@@ -27,6 +29,7 @@ func _ready():
 	setState(State.WALK_IN)
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	checkIfWalkIn(delta)
@@ -45,7 +48,7 @@ func setState(newState:State):
 	if currentState == newState:
 		return
 	currentState = newState
-	print(State.keys()[currentState])
+	#print(State.keys()[currentState])
 	enterState(newState)
 func enterState(newState:State):
 	setState(newState)

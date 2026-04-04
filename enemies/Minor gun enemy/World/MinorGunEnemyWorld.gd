@@ -79,7 +79,7 @@ func setState(newState):
 	currentState = newState
 	enterState(newState)
 func enterState(state):
-	print(State.keys()[currentState])
+	#print(State.keys()[currentState])
 	match state:
 		State.IDLE:
 			updateAnim("idle")
@@ -104,8 +104,8 @@ func updateAnim(animation):
 
 #BEHAVIORS
 func wander(delta):
-	print("WANDER TIMER", wanderTimer)
-	print("WANDER DURATION", wanderDuration)
+	#print("WANDER TIMER", wanderTimer)
+	#print("WANDER DURATION", wanderDuration)
 	wanderTimer += delta
 	if wanderTimer >= wanderDuration :
 		direction *= -1
@@ -124,8 +124,8 @@ func pursuit():
 
 #DETECTIONS
 func updateAggro(delta):
-	print("IS VISIBLE", playerIsInRange)
-	print("IS AGGRO", hasAggro)	
+	#print("IS VISIBLE", playerIsInRange)
+	#print("IS AGGRO", hasAggro)	
 	if hasAggro and not playerIsInRange:
 		aggroTimer += delta
 		if aggroTimer >= aggroDuration:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=10 format=3 uid="uid://ch2prna5yfto8"]
 
+[ext_resource type="Script" path="res://combatScenes/baseCombatScene.gd" id="1_0w4e2"]
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/TurnManager.gd" id="1_fvmgh"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="1_ntcr6"]
 [ext_resource type="PackedScene" uid="uid://ceqtqoynsm8pp" path="res://player/playerCombat/player_combat.tscn" id="2_pqiis"]
@@ -498,6 +499,7 @@ texture = ExtResource("1_ntcr6")
 sources/0 = SubResource("TileSetAtlasSource_xnv3b")
 
 [node name="CombatScenePrototype" type="Node2D"]
+script = ExtResource("1_0w4e2")
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("1_fvmgh")

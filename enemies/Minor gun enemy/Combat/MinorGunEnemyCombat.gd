@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 
@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var hp = 100
 @export var attackPower = 5
 #Properties
+var combatScene 
 var isWalking = false
 var startingPosition: Vector2
 const walkSpeed = 80
@@ -45,7 +46,7 @@ func setState(newState:State):
 	if currentState == newState:
 		return
 	currentState = newState
-	print(State.keys()[currentState])
+	#print(State.keys()[currentState])
 	enterState(newState)
 func enterState(newState:State):
 	setState(newState)

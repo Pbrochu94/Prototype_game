@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwwlscsgltqfi"]
+[gd_scene load_steps=16 format=3 uid="uid://dwwlscsgltqfi"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://enemies/Minor gun enemy/sprites/idle 112x26.png" id="2_lcux3"]
 [ext_resource type="Texture2D" uid="uid://dm5wog2pdqapi" path="res://enemies/Minor gun enemy/sprites/move 112x26.png" id="3_ebq36"]
+[ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/Hitbox.gd" id="4_w3fm8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fail"]
 atlas = ExtResource("2_lcux3")
@@ -83,7 +84,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fn00"]
 size = Vector2(20, 23)
 
-[node name="MinorGunEnemyCombat" type="CharacterBody2D" groups=["enemy"]]
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_otu23")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -93,7 +94,8 @@ position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
 animation = &"walk"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_w3fm8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_2fn00")

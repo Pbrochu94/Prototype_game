@@ -12,11 +12,12 @@ func _ready():
 	player = get_parent().get_node("PlayerCombat")
 	enemy = get_parent().get_node("MinorGunEnemyCombat")
 	start_combat()
-	print(enemy)
+	#print(enemy)
 
 func start_combat():
 	player.intro(playerAnchor)
 	enemy.intro(enemyAnchor)
+	enemy.combatScene = self
 	startPlayerTurn()
 
 func startPlayerTurn():
