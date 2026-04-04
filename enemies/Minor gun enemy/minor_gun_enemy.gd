@@ -124,9 +124,12 @@ func pursuit():
 
 #DETECTIONS
 func updateAggro(delta):
+	print("IS VISIBLE", playerIsInRange)
+	print("IS AGGRO", hasAggro)	
 	if hasAggro and not playerIsInRange:
 		aggroTimer += delta
 		if aggroTimer >= aggroDuration:
+			aggroTimer = 0
 			hasAggro = false
 			player = null
 

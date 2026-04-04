@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c54ertcqi2va0"
-path="res://.godot/imported/DARK Edition Tileset with background.png-7841f5cae88e1bbea1e0e6b3275e6194.ctex"
+path="res://.godot/imported/DARK Edition Tileset with background.png-9a458f0d2765399bbc5e09c07e60b9ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/world 1/tiles/Tileset/DARK Edition Tileset with background.png"
-dest_files=["res://.godot/imported/DARK Edition Tileset with background.png-7841f5cae88e1bbea1e0e6b3275e6194.ctex"]
+source_file="res://Map/world 1/tiles/Tileset/DARK Edition Tileset with background.png"
+dest_files=["res://.godot/imported/DARK Edition Tileset with background.png-9a458f0d2765399bbc5e09c07e60b9ee.ctex"]
 
 [params]
 

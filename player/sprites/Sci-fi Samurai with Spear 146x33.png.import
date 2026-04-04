@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tohjwncbem4c"
-path="res://.godot/imported/Sci-fi Samurai with Spear 146x33.png-2f2aa7486423f282a123e88a12c987b8.ctex"
+path="res://.godot/imported/Sci-fi Samurai with Spear 146x33.png-47c42f4ff5550652f0dbb9b30a539966.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Main character/Sci-fi Samurai with Spear 146x33.png"
-dest_files=["res://.godot/imported/Sci-fi Samurai with Spear 146x33.png-2f2aa7486423f282a123e88a12c987b8.ctex"]
+source_file="res://player/sprites/Sci-fi Samurai with Spear 146x33.png"
+dest_files=["res://.godot/imported/Sci-fi Samurai with Spear 146x33.png-47c42f4ff5550652f0dbb9b30a539966.ctex"]
 
 [params]
 

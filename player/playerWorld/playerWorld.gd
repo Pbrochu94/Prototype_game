@@ -23,7 +23,7 @@ func _physics_process(delta):
 	#print(State.keys()[currentState])
 
 	#Direction
-	var direction = Input.get_axis("move_left", "move_right")
+	direction = Input.get_axis("move_left", "move_right")
 	velocity.x = direction * speed
 	#Update state
 	updateState(direction)
@@ -61,7 +61,7 @@ func enterState(state):
 		State.JUMPING:
 			updateAnim("jump")
 		State.FALLING:
-			updateAnim("falling")
+			updateAnim("fall")
 func exitState(state):
 	pass #Not sure yet what happens here
 func updateAnim(animation):

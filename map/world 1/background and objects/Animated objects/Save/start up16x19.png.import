@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cth8bn1l0ffsy"
-path="res://.godot/imported/start up16x19.png-865263c94054f8771495c54cdcae3605.ctex"
+path="res://.godot/imported/start up16x19.png-c1428919c0aa898e965d31c215ec7a2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/world 1/background and objects/Animated objects/Save/start up16x19.png"
-dest_files=["res://.godot/imported/start up16x19.png-865263c94054f8771495c54cdcae3605.ctex"]
+source_file="res://Map/world 1/background and objects/Animated objects/Save/start up16x19.png"
+dest_files=["res://.godot/imported/start up16x19.png-c1428919c0aa898e965d31c215ec7a2c.ctex"]
 
 [params]
 
