@@ -96,7 +96,7 @@ animation = &"walk"
 [node name="DetectionArea" type="Area2D" parent="SpritePivot" groups=["enemy"]]
 collision_layer = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpritePivot/DetectionArea"]
+[node name="Vision" type="CollisionPolygon2D" parent="SpritePivot/DetectionArea"]
 polygon = PackedVector2Array(78, -178, 2, -7, 89, 117, 262, 137, 260, -208)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

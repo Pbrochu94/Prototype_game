@@ -4,10 +4,13 @@ extends CharacterBody2D
 @export var gravity := 800.0
 @onready var anim = $SpritePivot/AnimatedSprite2D
 const baseSpeed = 60
+const pursuitSpeed = 100
+var player = null
 var justSpawned = true
 var direction = 0
 var isMoving = false
 var playerIsInRange = false
+var hasAggro = false
 enum State {
 	IDLE,
 	WANDER,
@@ -21,6 +24,7 @@ func _ready():
 	direction = 1
 	enterState(currentState)
 func _physics_process(delta):
+	print(State.keys()[currentState])
 	if justSpawned:
 		justSpawned = false
 		return
@@ -35,10 +39,15 @@ func _physics_process(delta):
 	move_and_slide()
 	#Gère les réactions après les collisions (ex: flip on wall)
 	postPhysics()
+	print(hasAggro)
+	print("Enemy direction", direction)
+	if player != null:
+		print("player direction", player.global_position)
 func postPhysics():
 	match currentState:
 		State.WANDER:
 			if is_on_wall():
+				print("hit wall")
 				direction *= -1
 
 
@@ -57,7 +66,7 @@ func updateState():
 		pass
 	elif not isMoving:
 		setState(State.IDLE)
-	elif playerIsInRange:
+	elif hasAggro:
 		setState(State.PURSUIT)
 	else:
 		setState(State.WANDER)
@@ -99,17 +108,24 @@ func wander():
 	isMoving = true
 	velocity.x = direction * currentSpeed
 func pursuit():
-	currentSpeed = 120
+	if !hasAggro:
+		return
+	var dir = sign(player.global_position.x - global_position.x)
+	currentSpeed = pursuitSpeed
+	direction = dir
 	velocity.x = direction * currentSpeed
 func _on_detection_area_body_entered(body):
 	if body.is_in_group("player"):
+		player = body
 		playerIsInRange = true
-		print("DETECTED")
+		hasAggro = true
+		print("DETECTED", player)
 		setState(State.PURSUIT)
 
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("player"):
 		playerIsInRange = false
-		print("RESET AGGRO")
 		setState(State.WANDER)
+		if !hasAggro:
+			player = null
