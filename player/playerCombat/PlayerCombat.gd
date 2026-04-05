@@ -8,6 +8,7 @@ extends Node2D
 @export var hp = 100
 @export var attackPower = 10
 @export var weponEquipped = "sword"
+signal introFinished
 
 
 var isWalking = false
@@ -77,8 +78,8 @@ func intro(target:Node2D):
 
 
 #BEHAVIORS
-func startTurn():
-	print("Player start")
+func chooseAction():
+	print("Player is choosing...")
 func walk(delta):
 	global_position = global_position.move_toward(startingPosition, walkSpeed*delta)
 	if global_position == startingPosition:

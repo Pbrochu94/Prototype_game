@@ -6,6 +6,7 @@ extends Node2D
 @export var hp = 100
 @export var attackPower = 5
 #Properties
+signal introFinished
 var currentCombatScene 
 var isWalking = false
 var startingPosition: Vector2

@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @export var currentState = State.IDLE
 
+
 var direction
 enum State {
 	IDLE,
