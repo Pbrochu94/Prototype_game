@@ -9,6 +9,7 @@
 size = Vector2(49, 15)
 
 [node name="PlayerActionsUI" type="Node2D"]
+visible = false
 script = ExtResource("1_j03no")
 
 [node name="ChooseAction" type="Node2D" parent="."]

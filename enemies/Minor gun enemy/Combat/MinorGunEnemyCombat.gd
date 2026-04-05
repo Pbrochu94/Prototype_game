@@ -6,7 +6,7 @@ extends Node2D
 @export var hp = 100
 @export var attackPower = 5
 #Properties
-var combatScene 
+var currentCombatScene 
 var isWalking = false
 var startingPosition: Vector2
 const walkSpeed = 80
@@ -21,6 +21,8 @@ enum State{
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enterState(State.IDLE)
+	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
+	print(currentCombatScene)
 	$SpritePivot.scale.x = -1
 
 

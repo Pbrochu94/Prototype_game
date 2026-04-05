@@ -340,7 +340,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerCombat" type="Node2D"]
+[node name="PlayerCombat" type="Node2D" groups=["player"]]
 script = ExtResource("1_1xdif")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -352,6 +352,5 @@ animation = &"walk_in"
 frame_progress = 0.635481
 
 [node name="PlayerActionsUI" parent="." instance=ExtResource("3_edbd4")]
-visible = false
 position = Vector2(1, -94)
 script = null

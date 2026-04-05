@@ -71,6 +71,7 @@ func updateAnimation():
 		State.WALK_IN:
 			anim.play("walk_in")
 func intro(target:Node2D):
+	print(target)
 	startingPosition = target.global_position
 	setState(State.WALK_IN)
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cien54hksgjv"]
+
+[ext_resource type="Script" path="res://Map/world 1/Combat scenes/TurnManager.gd" id="1_au6nr"]
+
+[node name="TurnManager" type="Node" groups=["turn manager"]]
+script = ExtResource("1_au6nr")
