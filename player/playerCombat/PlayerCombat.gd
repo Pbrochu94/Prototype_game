@@ -9,7 +9,7 @@ extends Node2D
 @export var attackPower = 10
 @export var weponEquipped = "sword"
 #PARAMETERS
-var walkTarget
+var walkTarget:Vector2
 signal introFinished
 
 
@@ -27,8 +27,7 @@ enum State {
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentState = State.IDLE
-	setState(State.WALK_IN)
+	currentState = State.WALK_IN
 
 
 

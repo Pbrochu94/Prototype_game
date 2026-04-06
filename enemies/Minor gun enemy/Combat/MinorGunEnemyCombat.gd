@@ -9,7 +9,7 @@ extends Node2D
 signal introFinished
 var currentCombatScene 
 var isWalking = false
-var startingPosition: Vector2
+var walkTarget:Vector2
 const walkSpeed = 80
 var currentState
 enum State{
@@ -21,15 +21,14 @@ enum State{
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	enterState(State.IDLE)
+	currentState = State.WALK_IN
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
-	print(currentCombatScene)
 	$SpritePivot.scale.x = -1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	checkIfWalkIn(delta)
+	walk(delta)
 	updateAnimation()
 
 
@@ -63,19 +62,14 @@ func exitState():
 
 
 #BEHAVIORS
-func intro(target:Node2D):
-	startingPosition = target.global_position
-	setState(State.WALK_IN)
+
 
 func walk(delta):
-	global_position = global_position.move_toward(startingPosition, walkSpeed*delta)
-	if global_position == startingPosition:
+	global_position = global_position.move_toward(walkTarget, walkSpeed*delta)
+	if global_position == walkTarget:
 		isWalking = false
 		enterState(State.IDLE)
 
 
 #CHECKS
-func checkIfWalkIn(delta):
-	if not isWalking:
-		return
-	walk(delta)
+
