@@ -9,7 +9,6 @@ extends Node2D
 @export var attackPower = 10
 @export var weponEquipped = "sword"
 #PARAMETERS
-var walkTarget:Vector2
 signal introFinished
 var currentCombatScene:Node2D
 
@@ -79,21 +78,13 @@ func updateAnimation():
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
-	print(self.global_position)
-	print(walkTarget)
-	self.walkTarget = walkTarget
-	isWalking = true
-	if global_position == walkTarget:
-		emit_signal("introFinished")
-		setState(State.IDLE)
-		print("INTRO FINISHGED")
 func chooseAction():
 	print("Player is choosing...")
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
-	global_position = global_position.move_toward(walkTarget, walkSpeed*delta)
-	if global_position == walkTarget:
+	global_position = global_position.move_toward(destination, walkSpeed*delta)
+	if global_position == destination:
 		isWalking = false
 		setState(State.IDLE)
 func attack(weapon):

@@ -5,7 +5,6 @@ var currentTurn = "player"
 var currentCombatScene 
 var player 
 var enemy 
-var playerAnchor
 var enemyAnchor
 
 func _ready():
