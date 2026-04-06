@@ -16,7 +16,7 @@ signal introFinished
 var isWalking = false
 const walkSpeed = 80
 
-var currentState
+var currentState:State = State.IDLE
 var direction
 enum State {
 	WALK_IN,
@@ -27,7 +27,7 @@ enum State {
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentState = State.WALK_IN
+	setState(State.WALK_IN)
 
 
 
@@ -44,18 +44,20 @@ func _process(delta):
 func setState(newState:State):
 	if currentState == newState:
 		return
+	exitState(currentState)
 	currentState = newState
-	#print(State.keys()[currentState])
 	enterState(newState)
 func enterState(newState:State):
-	setState(newState)
 	match newState:
 		State.WALK_IN:
 			isWalking = true
 		State.IDLE:
 			actionsUI.visible = true
-func exitState():
-	pass
+func exitState(state:State):
+	match state:
+		State.WALK_IN:
+			print("EXCITT")
+			emit_signal("introFinished")
 
 
 #ANIMATIONS HANDLERS
@@ -73,10 +75,12 @@ func updateAnimation():
 func chooseAction():
 	print("Player is choosing...")
 func walk(delta):
+	if not isWalking:
+		return
 	global_position = global_position.move_toward(walkTarget, walkSpeed*delta)
 	if global_position == walkTarget:
 		isWalking = false
-		enterState(State.IDLE)
+		setState(State.IDLE)
 func attack(weapon):
 	print("ATTACK")
 	chooseTarget()
