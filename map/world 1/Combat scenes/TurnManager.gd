@@ -20,10 +20,10 @@ func _ready():
 
 func playIntro():
 	if player and enemy:
-		player.intro(playerAnchor)
+		print(enemyAnchor)
+		print(playerAnchor)
+		player.walkTarget = playerAnchor.global_position
 		enemy.intro(enemyAnchor)
-		await player.intro_finished
-		await enemy.intro_finished
 	else:
 		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER< ENEMY OR TURN MANAGER")
 

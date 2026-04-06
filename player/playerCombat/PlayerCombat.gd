@@ -8,11 +8,12 @@ extends Node2D
 @export var hp = 100
 @export var attackPower = 10
 @export var weponEquipped = "sword"
+#PARAMETERS
+var walkTarget
 signal introFinished
 
 
 var isWalking = false
-var startingPosition: Vector2
 const walkSpeed = 80
 
 var currentState
@@ -33,15 +34,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	checkIfWalkIn(delta)
+	walk(delta)
 	updateAnimation()
 
 
 #CHECKS
-func checkIfWalkIn(delta):
-	if not isWalking:
-		return
-	walk(delta)
 
 
 #STATES HANDLERS
@@ -71,18 +68,14 @@ func updateAnimation():
 			anim.play("attack")
 		State.WALK_IN:
 			anim.play("walk_in")
-func intro(target:Node2D):
-	print(target)
-	startingPosition = target.global_position
-	setState(State.WALK_IN)
 
 
 #BEHAVIORS
 func chooseAction():
 	print("Player is choosing...")
 func walk(delta):
-	global_position = global_position.move_toward(startingPosition, walkSpeed*delta)
-	if global_position == startingPosition:
+	global_position = global_position.move_toward(walkTarget, walkSpeed*delta)
+	if global_position == walkTarget:
 		isWalking = false
 		enterState(State.IDLE)
 func attack(weapon):
