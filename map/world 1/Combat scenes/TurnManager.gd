@@ -12,16 +12,16 @@ func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
 	enemyAnchor = currentCombatScene.enemyAnchor
-	playerAnchor = currentCombatScene.playerAnchor	
 	player = currentCombatScene.player
 	enemy = currentCombatScene.enemy
-	await playIntro()
+	playIntro()
 	startCombat()
 
 func playIntro():
 	if player and enemy:
-		player.walkTarget = playerAnchor.global_position
-		enemy.walkTarget = enemyAnchor.global_position
+#		player.walkTarget = playerAnchor.global_position
+#		enemy.walkTarget = enemyAnchor.global_position
+		player.playIntroWalk(currentCombatScene.playerStartingPosition)
 	else:
 		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER< ENEMY OR TURN MANAGER")
 

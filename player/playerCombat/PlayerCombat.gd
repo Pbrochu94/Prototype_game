@@ -11,6 +11,7 @@ extends Node2D
 #PARAMETERS
 var walkTarget:Vector2
 signal introFinished
+var currentCombatScene:Node2D
 
 
 var isWalking = false
@@ -27,13 +28,18 @@ enum State {
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	setState(State.WALK_IN)
+	pass
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	walk(delta)
+	match currentState:
+		State.WALK_IN:
+			isWalking = true
+			walk(delta, currentCombatScene.playerStartingPosition)
+		State.IDLE:
+			actionsUI.visible = true
 	updateAnimation()
 
 
@@ -56,7 +62,6 @@ func enterState(newState:State):
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
-			print("EXCITT")
 			emit_signal("introFinished")
 
 
@@ -72,9 +77,19 @@ func updateAnimation():
 
 
 #BEHAVIORS
+func playIntroWalk(walkTarget:Vector2):
+	setState(State.WALK_IN)
+	print(self.global_position)
+	print(walkTarget)
+	self.walkTarget = walkTarget
+	isWalking = true
+	if global_position == walkTarget:
+		emit_signal("introFinished")
+		setState(State.IDLE)
+		print("INTRO FINISHGED")
 func chooseAction():
 	print("Player is choosing...")
-func walk(delta):
+func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(walkTarget, walkSpeed*delta)
