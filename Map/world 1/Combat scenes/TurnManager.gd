@@ -21,6 +21,7 @@ func playIntro():
 #		player.walkTarget = playerAnchor.global_position
 #		enemy.walkTarget = enemyAnchor.global_position
 		player.playIntroWalk(currentCombatScene.playerStartingPosition)
+		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
 	else:
 		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER< ENEMY OR TURN MANAGER")
 
