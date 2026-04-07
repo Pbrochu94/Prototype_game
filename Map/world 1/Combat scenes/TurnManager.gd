@@ -13,13 +13,11 @@ func _ready():
 	enemyAnchor = currentCombatScene.enemyAnchor
 	player = currentCombatScene.player
 	enemy = currentCombatScene.enemy
+	player.introFinished.connect(startCombat)
 	playIntro()
-	startCombat()
 
 func playIntro():
 	if player and enemy:
-#		player.walkTarget = playerAnchor.global_position
-#		enemy.walkTarget = enemyAnchor.global_position
 		player.playIntroWalk(currentCombatScene.playerStartingPosition)
 		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
 	else:

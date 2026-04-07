@@ -38,7 +38,7 @@ func _process(delta):
 			isWalking = true
 			walk(delta, currentCombatScene.playerStartingPosition)
 		State.IDLE:
-			actionsUI.visible = true
+			pass
 	updateAnimation()
 
 
@@ -57,7 +57,7 @@ func enterState(newState:State):
 		State.WALK_IN:
 			isWalking = true
 		State.IDLE:
-			actionsUI.visible = true
+			pass
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
@@ -79,6 +79,7 @@ func updateAnimation():
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
 func chooseAction():
+	actionsUI.visible = true
 	print("Player is choosing...")
 func walk(delta, destination:Vector2):
 	if not isWalking:
