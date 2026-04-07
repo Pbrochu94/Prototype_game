@@ -2,7 +2,6 @@ extends Node2D
 
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
-@onready var actionsUI = $PlayerActionsUI
 @onready var enemy = get_tree().get_nodes_in_group("enemy")
 #STATS
 @export var hp = 100
@@ -79,7 +78,10 @@ func updateAnimation():
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
 func chooseAction():
-	actionsUI.visible = true
+	print(currentCombatScene)
+	print(currentCombatScene.playerActionBox)
+	currentCombatScene.playerActionBox.show()
+	print("VISIBLE:", currentCombatScene.playerActionBox.visible)
 	print("Player is choosing...")
 func walk(delta, destination:Vector2):
 	if not isWalking:

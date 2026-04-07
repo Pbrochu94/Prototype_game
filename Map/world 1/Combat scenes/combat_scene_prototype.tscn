@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=11 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://combatScenes/baseCombatScene.gd" id="1_0w4e2"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="1_ntcr6"]
 [ext_resource type="PackedScene" uid="uid://ceqtqoynsm8pp" path="res://player/playerCombat/player_combat.tscn" id="2_pqiis"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://combatScenes/turn_manager.tscn" id="2_q1nne"]
 [ext_resource type="PackedScene" uid="uid://dwwlscsgltqfi" path="res://enemies/Minor gun enemy/Combat/minor_gun_enemy_combat.tscn" id="4_p1crc"]
+[ext_resource type="PackedScene" uid="uid://b7ivr2vk67mm3" path="res://UI/player_actions_ui.tscn" id="6_v6aeo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
 texture = ExtResource("1_ntcr6")
@@ -528,3 +529,13 @@ position = Vector2(123, 53)
 
 [node name="MinorGunEnemyCombat" parent="." instance=ExtResource("4_p1crc")]
 position = Vector2(243, 53)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerActionsUI" parent="CanvasLayer" instance=ExtResource("6_v6aeo")]
+offset_left = -122.0
+offset_top = -38.0
+offset_right = 78.0
+offset_bottom = 162.0
+scale = Vector2(0.76, 0.76)
+script = null

@@ -1,75 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7ivr2vk67mm3"]
+[gd_scene load_steps=2 format=3 uid="uid://b7ivr2vk67mm3"]
 
 [ext_resource type="Script" path="res://UI/player_actions_ui.gd" id="1_j03no"]
-[ext_resource type="Script" path="res://UI/Attack/AttackActionHitbox.gd" id="2_sraof"]
-[ext_resource type="Script" path="res://UI/Items/Area2D.gd" id="3_i831w"]
-[ext_resource type="Script" path="res://UI/Spells/Area2D.gd" id="4_u7anx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_usd1u"]
-size = Vector2(49, 15)
-
-[node name="PlayerActionsUI" type="Node2D"]
+[node name="PlayerActionsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 259.0
+offset_top = 161.0
+offset_right = 259.0
+offset_bottom = 161.0
 script = ExtResource("1_j03no")
 
-[node name="ChooseAction" type="Node2D" parent="."]
-
-[node name="ChooseActionLabel" type="Label" parent="ChooseAction"]
+[node name="ChooseActionLabel" type="Label" parent="."]
 offset_left = -52.0
 offset_top = -34.0
 offset_right = 59.0
 offset_bottom = -8.0
 text = "Choose Action"
 
-[node name="Attack" type="Node2D" parent="ChooseAction"]
-position = Vector2(-1, 2)
+[node name="Attack" type="Button" parent="."]
+layout_mode = 0
+offset_left = -30.0
+offset_top = -5.0
+offset_right = 28.0
+offset_bottom = 26.0
+text = "Attack"
 
-[node name="AttackLabel" type="Label" parent="ChooseAction/Attack"]
-offset_left = -24.0
-offset_top = -4.0
-offset_right = 26.0
-offset_bottom = 22.0
-text = "Attack
+[node name="Items" type="Button" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 47.0
+offset_right = 54.0
+offset_bottom = 47.0
+text = "Items"
+
+[node name="Abilities" type="Button" parent="."]
+layout_mode = 0
+offset_left = -116.0
+offset_top = 47.0
+offset_right = -46.0
+offset_bottom = 78.0
+text = "Abilities
 "
 
-[node name="Area2D" type="Area2D" parent="ChooseAction/Attack"]
-script = ExtResource("2_sraof")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChooseAction/Attack/Area2D"]
-position = Vector2(1.5, 8.5)
-shape = SubResource("RectangleShape2D_usd1u")
-
-[node name="Items" type="Node2D" parent="ChooseAction"]
-position = Vector2(54, 47)
-
-[node name="Items" type="Label" parent="ChooseAction/Items"]
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 46.0
-offset_bottom = 29.0
-text = "Items
-"
-
-[node name="Area2D" type="Area2D" parent="ChooseAction/Items"]
-position = Vector2(23, 8)
-script = ExtResource("3_i831w")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChooseAction/Items/Area2D"]
-position = Vector2(1.5, 8.5)
-shape = SubResource("RectangleShape2D_usd1u")
-
-[node name="Spells" type="Node2D" parent="ChooseAction"]
-position = Vector2(-88, 51)
-
-[node name="Spells" type="Label" parent="ChooseAction/Spells"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Spells
-"
-
-[node name="Area2D" type="Area2D" parent="ChooseAction/Spells"]
-position = Vector2(21, 5)
-script = ExtResource("4_u7anx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChooseAction/Spells/Area2D"]
-position = Vector2(1.5, 8.5)
-shape = SubResource("RectangleShape2D_usd1u")
+[connection signal="pressed" from="Items" to="." method="ItemsPressed"]
+[connection signal="pressed" from="Abilities" to="." method="abilitiesPressed"]

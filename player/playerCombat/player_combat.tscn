@@ -1,8 +1,7 @@
-[gd_scene load_steps=49 format=3 uid="uid://ceqtqoynsm8pp"]
+[gd_scene load_steps=48 format=3 uid="uid://ceqtqoynsm8pp"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
-[ext_resource type="PackedScene" uid="uid://b7ivr2vk67mm3" path="res://UI/player_actions_ui.tscn" id="3_edbd4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
 atlas = ExtResource("2_uhkjs")
@@ -350,7 +349,3 @@ position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"walk_in"
 frame_progress = 0.635481
-
-[node name="PlayerActionsUI" parent="." instance=ExtResource("3_edbd4")]
-position = Vector2(1, -94)
-script = null

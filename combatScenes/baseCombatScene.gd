@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var combatScene = self
+@onready var playerActionBox = $CanvasLayer/PlayerActionsUI
 @onready var playerAnchor = get_node("PlayerAnchor")
 @onready var enemyAnchor = get_node("EnemyAnchor")
 var player:Node2D 
@@ -12,6 +13,7 @@ var enemyStartingPosition:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	playerActionBox.hide()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	player = get_tree().get_first_node_in_group("player")
 	enemy = get_tree().get_first_node_in_group("enemy")
