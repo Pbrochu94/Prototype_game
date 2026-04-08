@@ -6,6 +6,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.visible = false
 	attackBtn.pressed.connect(openAttackMenu)
 	inventoryBtn.pressed.connect(openInventoryMenu)
 	abilityBtn.pressed.connect(openAbilityMenu)
