@@ -14,10 +14,6 @@ config/name="Prototype_game"
 run/main_scene="res://prototype_scene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
-[autoload]
-
-PlayerActionsUi="res://UI/playerChoiceMenu.tscn"
-
 [input]
 
 jump={

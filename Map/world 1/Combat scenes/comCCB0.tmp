@@ -530,7 +530,7 @@ position = Vector2(123, 53)
 [node name="MinorGunEnemyCombat" parent="." instance=ExtResource("4_p1crc")]
 position = Vector2(243, 53)
 
-[node name="combatMenu" parent="." groups=["combat menu"] instance=ExtResource("6_7ohq0")]
+[node name="combatMenu" parent="." instance=ExtResource("6_7ohq0")]
 offset_left = -151.0
 offset_top = -79.0
 offset_right = -151.0

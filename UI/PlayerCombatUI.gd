@@ -2,6 +2,7 @@ extends Control
 @onready var attackBtn = $actionChoiceMenu/Attack
 @onready var inventoryBtn = $actionChoiceMenu/Inventory
 @onready var abilityBtn = $actionChoiceMenu/Abilities
+signal actionSelected(action:Signal)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,10 +19,13 @@ func _process(delta):
 
 
 func openAttackMenu():
-	print("attack")
+	emit_signal("actionSelected", "attack")
+
 
 func openInventoryMenu():
-	print("Inventory opened")
+	emit_signal("actionSelected", "inventory")
+
 
 func openAbilityMenu():
-	print("Ability")
+	emit_signal("actionSelected", "ability")
+

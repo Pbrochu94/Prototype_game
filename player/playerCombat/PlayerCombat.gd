@@ -77,9 +77,7 @@ func updateAnimation():
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
-func chooseAction():
-	currentCombatScene.combatMenu.visible = true
-	print("Player is choosing...")
+
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
@@ -89,6 +87,4 @@ func walk(delta, destination:Vector2):
 		setState(State.IDLE)
 func attack(weapon):
 	print("ATTACK")
-	chooseTarget()
-func chooseTarget():
-	pass
+#	chooseTarget()
