@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcelirrfixell"]
+[gd_scene load_steps=8 format=3 uid="uid://dcelirrfixell"]
 
 [ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://player/playerWorld/playerWorld.tscn" id="1_6fvex"]
+[ext_resource type="Script" path="res://prototypeScene.gd" id="1_rcay3"]
 [ext_resource type="Texture2D" uid="uid://c54ertcqi2va0" path="res://Map/world 1/Exploration/tiles/Tileset/DARK Edition Tileset with background.png" id="2_gdi0m"]
 [ext_resource type="PackedScene" uid="uid://b6eu8gs55c5b1" path="res://enemies/Minor gun enemy/World/minor_gun_enemy_world.tscn" id="3_ak7a5"]
 
@@ -705,7 +706,8 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rmnu6")
 pattern_0 = SubResource("TileMapPattern_yfqiq")
 
-[node name="Node2D" type="Node2D"]
+[node name="PrototypeScene" type="Node2D"]
+script = ExtResource("1_rcay3")
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_6fvex")]
 position = Vector2(-632, 144)

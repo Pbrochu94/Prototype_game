@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgpp5im6ruon"]
+
+[ext_resource type="Script" path="res://UI/PlayerCombatUI.gd" id="1_3u6o4"]
+
+[node name="combatMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3u6o4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -85.0
+offset_top = 1.0
+offset_right = -45.0
+offset_bottom = 41.0
+scale = Vector2(6.88618, 3.45311)
+color = Color(0.215686, 0.215686, 0.215686, 0.662745)
+
+[node name="actionChoiceMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Attack" type="Button" parent="actionChoiceMenu"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 36.0
+offset_right = 80.0
+offset_bottom = 67.0
+text = "Attack"
+
+[node name="Inventory" type="Button" parent="actionChoiceMenu"]
+layout_mode = 0
+offset_left = -74.0
+offset_top = 97.0
+offset_right = 9.0
+offset_bottom = 128.0
+text = "Inventory"
+
+[node name="Abilities" type="Button" parent="actionChoiceMenu"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 98.0
+offset_right = 171.0
+offset_bottom = 129.0
+text = "Abilities"
+
+[node name="menuLabel" type="Label" parent="actionChoiceMenu"]
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 26.0
+text = "Make a choice
+"
