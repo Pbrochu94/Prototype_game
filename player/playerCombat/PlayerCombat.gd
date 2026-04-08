@@ -78,10 +78,7 @@ func updateAnimation():
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
 func chooseAction():
-	print(currentCombatScene)
-	print(currentCombatScene.playerActionBox)
-	currentCombatScene.playerActionBox.show()
-	print("VISIBLE:", currentCombatScene.playerActionBox.visible)
+	currentCombatScene.playerActionBox.visible = true
 	print("Player is choosing...")
 func walk(delta, destination:Vector2):
 	if not isWalking:
