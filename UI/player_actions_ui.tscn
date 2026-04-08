@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://UI/player_actions_ui.gd" id="1_j03no"]
 
-[node name="PlayerActionsUI" type="Control"]
+[node name="CanvasGroup" type="CanvasGroup"]
+
+[node name="PlayerActionsUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j03no")
 
-[node name="ChooseActionLabel" type="Label" parent="."]
+[node name="ChooseActionLabel" type="Label" parent="PlayerActionsUI"]
 layout_mode = 0
 offset_left = -52.0
 offset_top = -102.0
@@ -21,7 +23,7 @@ offset_right = 59.0
 offset_bottom = -76.0
 text = "Choose Action"
 
-[node name="Attack" type="Button" parent="."]
+[node name="Attack" type="Button" parent="PlayerActionsUI"]
 layout_mode = 0
 offset_left = -30.0
 offset_top = -73.0
@@ -29,7 +31,7 @@ offset_right = 28.0
 offset_bottom = -42.0
 text = "Attack"
 
-[node name="Items" type="Button" parent="."]
+[node name="Items" type="Button" parent="PlayerActionsUI"]
 layout_mode = 0
 offset_left = 54.0
 offset_top = -21.0
@@ -37,7 +39,7 @@ offset_right = 106.0
 offset_bottom = 10.0
 text = "Items"
 
-[node name="Abilities" type="Button" parent="."]
+[node name="Abilities" type="Button" parent="PlayerActionsUI"]
 layout_mode = 0
 offset_left = -116.0
 offset_top = -21.0
@@ -46,5 +48,5 @@ offset_bottom = 10.0
 text = "Abilities
 "
 
-[connection signal="pressed" from="Items" to="." method="ItemsPressed"]
-[connection signal="pressed" from="Abilities" to="." method="abilitiesPressed"]
+[connection signal="pressed" from="PlayerActionsUI/Items" to="PlayerActionsUI" method="ItemsPressed"]
+[connection signal="pressed" from="PlayerActionsUI/Abilities" to="PlayerActionsUI" method="abilitiesPressed"]
