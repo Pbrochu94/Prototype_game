@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 
 [autoload]
 
-PlayerActionsUi="res://UI/player_actions_ui.tscn"
+PlayerActionsUi="res://UI/playerChoiceMenu.tscn"
 
 [input]
 
