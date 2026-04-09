@@ -2,27 +2,41 @@ extends Node2D
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 
-#Stats
+#STATS
 @export var hp:int = 100
 @export var attackPower:int = 5
-#Properties
-signal introFinished
+
+#ENVIRONMENTS
+var turnManager:Node
 var currentCombatScene:Node2D
+
+#PROPERTIES
+@onready var area = $Area2D
+#@onready var arrow = $ArrowIndicator
 var isWalking = false
 var walkTarget:Vector2
 const walkSpeed = 80
 var currentState:State
+var canBeSelected = false
+
+#ENUMS
 enum State{
 	IDLE,
 	WALK_IN,
 	ATTACK
 }
 
+#SIGNALS
+signal introFinished
+signal enemySelected(enemy:Node2D)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	currentState = State.WALK_IN
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
+	turnManager = get_tree().get_first_node_in_group("turn manager")
+	turnManager.connect("selectionStarted", selectionStarted)
+	turnManager.connect("selectionEnded", selectionEnded)
 	$SpritePivot.scale.x = -1
 
 
@@ -80,6 +94,19 @@ func walk(delta, destination:Vector2):
 		isWalking = false
 		setState(State.IDLE)
 
+func selectionStarted():
+	canBeSelected = true
+	area.monitoring = true
+	print("selection started")
+
+func selectionEnded():
+	print("Selection ended")
 
 #CHECKS
 
+func onArea2DInputEvent(viewport, event, shape_idx):
+	if not canBeSelected:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("enemySelected",self)
+		print("enemy selected")

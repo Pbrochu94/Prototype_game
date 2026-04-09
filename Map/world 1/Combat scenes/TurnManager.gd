@@ -6,6 +6,9 @@ var currentCombatScene:Node2D
 var player:Node2D 
 var enemy:Node2D 
 var enemyAnchor:Node2D
+var isSelecting = false
+signal selectionStarted
+signal selectionEnded
 
 func _ready():
 	#Wait for all _ready() to complete
@@ -17,6 +20,7 @@ func _ready():
 	combatMenu.actionSelected.connect(onActionSelected)
 	playIntro()
 
+#INTRO---------
 func playIntro():
 	if player and enemy:
 		player.playIntroWalk(currentCombatScene.playerStartingPosition)
@@ -27,35 +31,44 @@ func playIntro():
 func startCombat():
 	startPlayerTurn()
 
+#TURN MANAGER
 func startPlayerTurn():
 	currentTurn = "player"
 	chooseAction()
 
-func chooseAction():
-	currentCombatScene.combatMenu.visible = true
-	print("Player is choosing...")
+func endPlayerTurn():
+	startEnemyTurn()
 
-func selectTarget():
-	pass
-
-func end_player_turn():
-	start_enemy_turn()
-
-func start_enemy_turn():
+func startEnemyTurn():
 	currentTurn = "enemy"
 	enemy.start_turn()
 
-func end_enemy_turn():
+func endEnemyTurn():
 	startPlayerTurn()
+
+#BEHAVIORS
+func chooseAction():
+	currentCombatScene.combatMenu.visible = true
+	print("Player is choosing...")
 
 func onActionSelected(action:String):
 	print("Action reçue:", action)
 
 	match action:
 		"attack":
-			pass
+			startSelection()
 #			player.attack(enemy)
 		"inventory":
 			pass
 		"ability":
 			pass
+
+func startSelection():
+	emit_signal("selectionStarted")
+	isSelecting = true
+
+func endSelection():
+	print("ended selection")
+
+func onEnemySelected():
+	print(enemy.name)

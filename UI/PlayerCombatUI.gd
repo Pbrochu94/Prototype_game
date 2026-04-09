@@ -3,6 +3,7 @@ extends Control
 @onready var inventoryBtn = $actionChoiceMenu/Inventory
 @onready var abilityBtn = $actionChoiceMenu/Abilities
 signal actionSelected(action:Signal)
+var turnManager:Node
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +12,7 @@ func _ready():
 	attackBtn.pressed.connect(openAttackMenu)
 	inventoryBtn.pressed.connect(openInventoryMenu)
 	abilityBtn.pressed.connect(openAbilityMenu)
+	turnManager = get_tree().get_first_node_in_group("turn manager")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

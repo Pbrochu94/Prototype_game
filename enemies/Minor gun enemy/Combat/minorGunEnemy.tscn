@@ -94,8 +94,10 @@ position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
 animation = &"walk"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_w3fm8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_2fn00")
+
+[connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
