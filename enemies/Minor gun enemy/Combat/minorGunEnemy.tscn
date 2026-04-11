@@ -101,3 +101,4 @@ script = ExtResource("4_w3fm8")
 shape = SubResource("RectangleShape2D_2fn00")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

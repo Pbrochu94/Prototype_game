@@ -20,6 +20,7 @@ func _input_event(viewport, event, shape_idx):
 				print(self)
 
 
+
 #CHECKS
 func checkIfSelectionPhase(CombatScene:Node2D):
 	pass

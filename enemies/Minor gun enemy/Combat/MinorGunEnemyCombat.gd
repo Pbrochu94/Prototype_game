@@ -110,3 +110,10 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("enemySelected",self)
 		print("enemy selected")
+
+
+func onMouseEntered():
+	if(canBeSelected):
+		print("Can be selected")
+	else:
+		return
