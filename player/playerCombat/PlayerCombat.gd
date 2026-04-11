@@ -75,7 +75,7 @@ func updateAnimation():
 			anim.play("idle")
 		State.ATTACK:
 			anim.play("attack")
-		State.WALK_IN:
+		State.WALK_IN,State.WALK_TO_TARGET:
 			anim.play("walk")
 
 
