@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwwlscsgltqfi"]
+[gd_scene load_steps=17 format=3 uid="uid://dwwlscsgltqfi"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://enemies/Minor gun enemy/sprites/idle 112x26.png" id="2_lcux3"]
 [ext_resource type="Texture2D" uid="uid://dm5wog2pdqapi" path="res://enemies/Minor gun enemy/sprites/move 112x26.png" id="3_ebq36"]
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/Hitbox.gd" id="4_w3fm8"]
+[ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow.tscn" id="5_majnp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fail"]
 atlas = ExtResource("2_lcux3")
@@ -99,6 +100,9 @@ script = ExtResource("4_w3fm8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_2fn00")
+
+[node name="SelectingArrow" parent="." instance=ExtResource("5_majnp")]
+position = Vector2(0, -30)
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

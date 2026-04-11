@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfkooghse2bid"
-path="res://.godot/imported/TargettingArr.png-1c40298383b0fdd5e27c43116d07829e.ctex"
+uid="uid://doxg5qgufkdrf"
+path="res://.godot/imported/TargettingArr34x34.png-c61633cc620ce2aa6fc7bc0dcae5567e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/CombatUI/TargettingArr.png"
-dest_files=["res://.godot/imported/TargettingArr.png-1c40298383b0fdd5e27c43116d07829e.ctex"]
+source_file="res://UI/CombatUI/TargettingArr34x34.png"
+dest_files=["res://.godot/imported/TargettingArr34x34.png-c61633cc620ce2aa6fc7bc0dcae5567e.ctex"]
 
 [params]
 

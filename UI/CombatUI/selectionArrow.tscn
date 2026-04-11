@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://nc73yqd3q8n2"]
+
+[ext_resource type="Texture2D" uid="uid://doxg5qgufkdrf" path="res://UI/CombatUI/TargettingArr34x34.png" id="1_7etiq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb32t"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3p8q"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7chfe"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg6ee"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(102, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8003h"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(136, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad8ju"]
+atlas = ExtResource("1_7etiq")
+region = Rect2(170, 0, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ygk3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb32t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3p8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7chfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg6ee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8003h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad8ju")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="SelectingArrow" type="Sprite2D"]
+
+[node name="selectionArrow" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ygk3y")
+animation = &"idle"
+autoplay = "default"
+frame = 2
+frame_progress = 0.520101
