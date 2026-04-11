@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://3cflsgnnkjg4"]
+[gd_scene load_steps=48 format=3 uid="uid://ceqtqoynsm8pp"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
@@ -335,7 +335,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_twnhf")
 }],
 "loop": true,
-"name": &"walk_in",
+"name": &"walk",
 "speed": 10.0
 }]
 
@@ -347,5 +347,4 @@ script = ExtResource("1_1xdif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"walk_in"
-frame_progress = 0.635481
+animation = &"walk"

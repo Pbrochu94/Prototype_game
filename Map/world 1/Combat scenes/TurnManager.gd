@@ -18,6 +18,7 @@ func _ready():
 	enemy = currentCombatScene.enemy
 	player.introFinished.connect(startCombat)
 	combatMenu.actionSelected.connect(onActionSelected)
+	enemy.enemySelected.connect(playerAttack)
 	playIntro()
 
 #INTRO---------
@@ -35,6 +36,11 @@ func startCombat():
 func startPlayerTurn():
 	currentTurn = "player"
 	chooseAction()
+
+func playerAttack(enemy:Node2D):
+	print("Player move to attack", enemy)
+	player.setState(player.State.WALK_TO_TARGET)
+	player.enemyTargeted = enemy
 
 func endPlayerTurn():
 	startEnemyTurn()

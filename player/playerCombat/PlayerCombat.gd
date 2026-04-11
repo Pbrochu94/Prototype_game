@@ -10,6 +10,7 @@ extends Node2D
 #PARAMETERS
 signal introFinished
 var currentCombatScene:Node2D
+var enemyTargeted:Node2D
 
 
 var isWalking = false
@@ -20,6 +21,7 @@ var direction
 enum State {
 	WALK_IN,
 	IDLE,
+	WALK_TO_TARGET,
 	ATTACK,
 	DAMAGE,
 	DEAD
@@ -38,6 +40,9 @@ func _process(delta):
 			walk(delta, currentCombatScene.playerStartingPosition)
 		State.IDLE:
 			pass
+		State.WALK_TO_TARGET:
+			isWalking = true
+			walk(delta, enemyTargeted.global_position)
 	updateAnimation()
 
 
@@ -71,7 +76,7 @@ func updateAnimation():
 		State.ATTACK:
 			anim.play("attack")
 		State.WALK_IN:
-			anim.play("walk_in")
+			anim.play("walk")
 
 
 #BEHAVIORS
