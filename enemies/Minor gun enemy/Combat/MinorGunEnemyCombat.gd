@@ -12,6 +12,7 @@ var currentCombatScene:Node2D
 
 #PROPERTIES
 @onready var area = $Area2D
+@onready var selectingArrow = $SelectingArrow
 #@onready var arrow = $ArrowIndicator
 var isWalking = false
 var walkTarget:Vector2
@@ -33,10 +34,15 @@ signal enemySelected(enemy:Node2D)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	currentState = State.WALK_IN
+	#Instanciate environments
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
 	turnManager = get_tree().get_first_node_in_group("turn manager")
+	#connecting signals
 	turnManager.connect("selectionStarted", selectionStarted)
 	turnManager.connect("selectionEnded", selectionEnded)
+	#Hidding UI
+	selectingArrow.visible = false
+	#Change his facing side
 	$SpritePivot.scale.x = -1
 
 
@@ -115,5 +121,13 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 func onMouseEntered():
 	if(canBeSelected):
 		print("Can be selected")
+		selectingArrow.visible = true
+	else:
+		return
+
+
+func onMouseExited():
+	if(canBeSelected):
+		selectingArrow.visible = false
 	else:
 		return

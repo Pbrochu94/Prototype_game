@@ -1,29 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://nc73yqd3q8n2"]
+[gd_scene load_steps=10 format=3 uid="uid://nc73yqd3q8n2"]
 
-[ext_resource type="Texture2D" uid="uid://doxg5qgufkdrf" path="res://UI/CombatUI/TargettingArr34x34.png" id="1_7etiq"]
+[ext_resource type="Script" path="res://UI/CombatUI/selectionArrow/selectionArrow.gd" id="1_8k7k1"]
+[ext_resource type="Texture2D" uid="uid://doxg5qgufkdrf" path="res://UI/CombatUI/selectionArrow/TargettingArr34x34.png" id="2_uf5vl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb32t"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(0, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3p8q"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(34, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7chfe"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(68, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rg6ee"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(102, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8003h"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(136, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ad8ju"]
-atlas = ExtResource("1_7etiq")
+atlas = ExtResource("2_uf5vl")
 region = Rect2(170, 0, 34, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygk3y"]
@@ -53,8 +54,9 @@ animations = [{
 }]
 
 [node name="SelectingArrow" type="Sprite2D"]
+script = ExtResource("1_8k7k1")
 
-[node name="selectionArrow" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ygk3y")
 animation = &"idle"
 autoplay = "default"
