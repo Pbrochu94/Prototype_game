@@ -21,8 +21,9 @@ var currentState:State = State.IDLE
 var direction
 enum State {
 	WALK_IN,
-	IDLE,
 	WALK_TO_TARGET,
+	WALK_BACK,
+	IDLE,
 	ATTACK,
 	DAMAGE,
 	DEAD
@@ -30,6 +31,7 @@ enum State {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	inPositionToAttack.connect(attack)
+	anim.animation_finished.connect(onAnimationFinished)
 
 
 
@@ -60,6 +62,10 @@ func enterState(newState:State):
 	match newState:
 		State.WALK_IN:
 			isWalking = true
+		State.WALK_TO_TARGET:
+			isWalking = true
+		State.WALK_BACK:
+			isWalking = true
 		State.IDLE:
 			pass
 		State.ATTACK:
@@ -75,7 +81,7 @@ func exitState(state:State):
 		State.WALK_TO_TARGET:
 			isWalking = false
 		State.ATTACK:
-			setState(State.WALK_IN)
+			pass
 
 
 #ANIMATIONS HANDLERS
@@ -115,3 +121,7 @@ func walkToTarget():
 func attack():
 	print("Attack: ", enemyTargeted.name)
 	setState(State.ATTACK)
+
+func onAnimationFinished():
+	if anim.animation == "attack":
+		setState(State.WALK_IN)
