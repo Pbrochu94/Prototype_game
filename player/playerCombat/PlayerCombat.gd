@@ -8,10 +8,11 @@ extends Node2D
 @export var attackPower = 10
 @export var weponEquipped = "sword"
 #PARAMETERS
-signal introFinished
 var currentCombatScene:Node2D
 var enemyTargeted:Node2D
-
+#SIGNALS
+signal introFinished
+signal inPositionToAttack(enemy:Node2D)
 
 var isWalking = false
 const walkSpeed = 80
@@ -28,7 +29,7 @@ enum State {
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	inPositionToAttack.connect(attack)
 
 
 
@@ -62,10 +63,17 @@ func enterState(newState:State):
 			isWalking = true
 		State.IDLE:
 			pass
+		State.ATTACK:
+			pass
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
 			emit_signal("introFinished")
+			isWalking = false
+		State.WALK_TO_TARGET:
+			isWalking = false
+		State.ATTACK:
+			pass
 
 
 #ANIMATIONS HANDLERS
@@ -92,13 +100,16 @@ func walk(delta, destination:Vector2):
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
-			setState(State.IDLE)
+			emit_signal("inPositionToAttack", enemyTargeted)
+			setState(State.ATTACK)
 	else:
 		if global_position == destination:
 			isWalking = false
 			setState(State.IDLE)
-func attack(enemy:Node2D):
-	enemyTargeted = enemy
+
+func walkToTarget():
 	setState(State.WALK_TO_TARGET)
-	print("ATTACK")
-#	chooseTarget()
+
+func attack():
+	print("Attack: ", enemyTargeted.name)
+	setState(State.ATTACK)

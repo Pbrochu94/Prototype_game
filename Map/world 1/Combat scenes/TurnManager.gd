@@ -39,7 +39,9 @@ func startPlayerTurn():
 
 func playerAttack(enemy:Node2D):
 	print("Player move to attack", enemy)
-	player.attack(enemy)
+	#Assign the enemy selected in player node
+	player.enemyTargeted = enemy
+	player.walkToTarget ()
 
 func endPlayerTurn():
 	startEnemyTurn()

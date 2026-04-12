@@ -347,4 +347,4 @@ script = ExtResource("1_1xdif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"walk"
+animation = &"attack"
