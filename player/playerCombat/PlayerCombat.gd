@@ -87,9 +87,18 @@ func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	if global_position == destination:
-		isWalking = false
-		setState(State.IDLE)
-func attack(weapon):
+	#Walk to enemy but leave spaces between
+	if currentState == State.WALK_TO_TARGET:
+		var stopDistance = 32
+		if global_position.distance_to(destination)<= stopDistance:
+			isWalking = false
+			setState(State.IDLE)
+	else:
+		if global_position == destination:
+			isWalking = false
+			setState(State.IDLE)
+func attack(enemy:Node2D):
+	enemyTargeted = enemy
+	setState(State.WALK_TO_TARGET)
 	print("ATTACK")
 #	chooseTarget()

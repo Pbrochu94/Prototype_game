@@ -17,7 +17,7 @@ func _process(delta):
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 			if playerIsSelectingTarget:
-				print(self)
+				print("Player clicked on enemy")
 
 
 

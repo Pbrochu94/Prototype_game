@@ -27,7 +27,7 @@ func playIntro():
 		player.playIntroWalk(currentCombatScene.playerStartingPosition)
 		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
 	else:
-		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER< ENEMY OR TURN MANAGER")
+		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER ENEMY OR TURN MANAGER")
 
 func startCombat():
 	startPlayerTurn()
@@ -39,8 +39,7 @@ func startPlayerTurn():
 
 func playerAttack(enemy:Node2D):
 	print("Player move to attack", enemy)
-	player.setState(player.State.WALK_TO_TARGET)
-	player.enemyTargeted = enemy
+	player.attack(enemy)
 
 func endPlayerTurn():
 	startEnemyTurn()
@@ -55,21 +54,21 @@ func endEnemyTurn():
 #BEHAVIORS
 func chooseAction():
 	currentCombatScene.combatMenu.visible = true
-	print("Player is choosing...")
+	print("Player is choosing what to do...")
 
 func onActionSelected(action:String):
-	print("Action reçue:", action)
+	print("Player chose:", action)
 
 	match action:
 		"attack":
 			startSelection()
-#			player.attack(enemy)
 		"inventory":
 			pass
 		"ability":
 			pass
 
 func startSelection():
+	print("Player is selecting a target")
 	emit_signal("selectionStarted")
 	isSelecting = true
 

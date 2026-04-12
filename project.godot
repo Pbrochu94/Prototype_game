@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Prototype_game"
-run/main_scene="res://prototype_scene.tscn"
+run/main_scene="res://PrototypeScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
 [input]
