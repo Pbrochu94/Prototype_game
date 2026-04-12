@@ -44,7 +44,6 @@ func _process(delta):
 		State.WALK_TO_TARGET:
 			isWalking = true
 			walk(delta, enemyTargeted.global_position)
-	updateAnimation()
 
 
 #CHECKS
@@ -65,6 +64,9 @@ func enterState(newState:State):
 			pass
 		State.ATTACK:
 			pass
+	#At the start of a state the animation play once (Or on loop if set to loop)
+	updateAnimation()
+
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
@@ -73,7 +75,7 @@ func exitState(state:State):
 		State.WALK_TO_TARGET:
 			isWalking = false
 		State.ATTACK:
-			pass
+			setState(State.WALK_IN)
 
 
 #ANIMATIONS HANDLERS

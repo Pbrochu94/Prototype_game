@@ -33,7 +33,7 @@ signal enemySelected(enemy:Node2D)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentState = State.WALK_IN
+	setState(State.WALK_IN)
 	#Instanciate environments
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
 	turnManager = get_tree().get_first_node_in_group("turn manager")
@@ -54,7 +54,6 @@ func _process(delta):
 			walk(delta, currentCombatScene.enemyStartingPosition)
 		State.IDLE:
 			pass
-	updateAnimation()
 
 
 #ANIMATIONS HANDLERS
@@ -76,12 +75,12 @@ func setState(newState:State):
 	#print(State.keys()[currentState])
 	enterState(newState)
 func enterState(newState:State):
-	setState(newState)
 	match newState:
 		State.WALK_IN:
 			isWalking = true
 		State.IDLE:
 			pass
+	updateAnimation()
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
