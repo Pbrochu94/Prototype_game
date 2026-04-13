@@ -4,6 +4,7 @@ extends Node2D
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var enemy = get_tree().get_nodes_in_group("enemy")
 #STATS
+@export var characterName = "Artorias"
 @export var hp = 100
 @export var attackPower = 10
 @export var weponEquipped = "sword"
@@ -14,7 +15,11 @@ var enemyTargeted:Node2D
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
 signal selectionEnded
+signal dealDamage(amount:int)
 
+var weapon = {
+	damage = 10,
+}
 var isWalking = false
 const walkSpeed = 80
 
@@ -117,7 +122,7 @@ func walk(delta, destination:Vector2):
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
 			emit_signal("inPositionToAttack", enemyTargeted)
-			attack()
+			attack(enemyTargeted, weapon)
 	else:
 		if global_position == destination:
 			isWalking = false
@@ -127,8 +132,9 @@ func walkToTarget():
 	setState(State.WALK_TO_TARGET)
 	emit_signal("selectionEnded")
 
-func attack():
+func attack(enemyTarget:Node2D,weapon):
 	setState(State.ATTACK)
+	emit_signal("dealDamage", weapon.damage)
 	print("Attack: ", enemyTargeted.name)
 
 
