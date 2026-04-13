@@ -1,6 +1,6 @@
 extends Node
 
-@onready var combatMenu = get_tree().get_first_node_in_group("combat menu")
+@onready var choiceMenu = get_tree().get_first_node_in_group("combat menu")
 var currentTurn = "player"
 var currentCombatScene:Node2D 
 var player:Node2D 
@@ -17,8 +17,10 @@ func _ready():
 	player = currentCombatScene.player
 	enemy = currentCombatScene.enemy
 	player.introFinished.connect(startCombat)
-	combatMenu.actionSelected.connect(onActionSelected)
+	choiceMenu.actionSelected.connect(onActionSelected)
 	enemy.enemySelected.connect(playerAttack)
+	selectionEnded.connect(endSelection)
+	player.selectionEnded.connect(endSelection)
 	playIntro()
 
 #INTRO---------
@@ -55,12 +57,11 @@ func endEnemyTurn():
 
 #BEHAVIORS
 func chooseAction():
-	currentCombatScene.combatMenu.visible = true
+	currentCombatScene.choiceMenu.visible = true
 	print("Player is choosing what to do...")
 
 func onActionSelected(action:String):
 	print("Player chose:", action)
-
 	match action:
 		"attack":
 			startSelection()
@@ -75,6 +76,7 @@ func startSelection():
 	isSelecting = true
 
 func endSelection():
+	currentCombatScene.choiceMenu.visible = false
 	print("ended selection")
 
 func onEnemySelected():

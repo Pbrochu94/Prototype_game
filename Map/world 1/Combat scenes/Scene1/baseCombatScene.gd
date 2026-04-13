@@ -3,7 +3,7 @@ extends Node2D
 @onready var combatScene = self
 @onready var playerAnchor = get_node("PlayerAnchor")
 @onready var enemyAnchor = get_node("EnemyAnchor")
-@onready var combatMenu = $combatMenu
+@onready var choiceMenu = $ChoiceMenu
 var player:Node2D 
 var enemy:Node2D 
 var turnManager:Node

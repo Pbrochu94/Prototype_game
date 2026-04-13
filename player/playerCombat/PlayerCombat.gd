@@ -13,6 +13,7 @@ var enemyTargeted:Node2D
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
+signal selectionEnded
 
 var isWalking = false
 const walkSpeed = 80
@@ -38,7 +39,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	match currentState:
-		State.WALK_IN:
+		State.WALK_IN,State.WALK_BACK:
 			isWalking = true
 			walk(delta, currentCombatScene.playerStartingPosition)
 		State.IDLE:
@@ -80,6 +81,8 @@ func exitState(state:State):
 			isWalking = false
 		State.WALK_TO_TARGET:
 			isWalking = false
+		State.WALK_BACK:
+			isWalking = false
 		State.ATTACK:
 			pass
 
@@ -89,9 +92,14 @@ func updateAnimation():
 	match currentState:
 		State.IDLE:
 			anim.play("idle")
+			anim.scale.x = 1
 		State.ATTACK:
 			anim.play("attack")
 		State.WALK_IN,State.WALK_TO_TARGET:
+			anim.play("walk")
+		State.WALK_BACK:
+			#Flip sprite when walking back
+			anim.scale.x = -1
 			anim.play("walk")
 
 
@@ -109,7 +117,7 @@ func walk(delta, destination:Vector2):
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
 			emit_signal("inPositionToAttack", enemyTargeted)
-			setState(State.ATTACK)
+			attack()
 	else:
 		if global_position == destination:
 			isWalking = false
@@ -117,11 +125,13 @@ func walk(delta, destination:Vector2):
 
 func walkToTarget():
 	setState(State.WALK_TO_TARGET)
+	emit_signal("selectionEnded")
 
 func attack():
-	print("Attack: ", enemyTargeted.name)
 	setState(State.ATTACK)
+	print("Attack: ", enemyTargeted.name)
+
 
 func onAnimationFinished():
 	if anim.animation == "attack":
-		setState(State.WALK_IN)
+		setState(State.WALK_BACK)
