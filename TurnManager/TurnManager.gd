@@ -23,6 +23,7 @@ func _ready():
 	enemy.enemySelected.connect(playerAttack)
 	enemy.donePreparing.connect(enemyMoveToAttack)
 	enemy.inPositionToAttack.connect(enemyAttack)
+	enemy.turnFinished.connect(endEnemyTurn)
 	selectionEnded.connect(endSelection)
 	playIntro()
 
@@ -39,7 +40,6 @@ func startCombat():
 
 #TURN MANAGER
 func startPlayerTurn():
-	currentTurn = "player"
 	chooseAction()
 
 func playerAttack(enemy:Node2D):
@@ -60,9 +60,10 @@ func enemyMoveToAttack():
 	enemy.getInPosition()
 
 func enemyAttack():
-	enemy.setState(enemy.State.ATTACK)
+	enemy.attack()
 
 func endEnemyTurn():
+	print("Enemy turn is oveer")
 	startPlayerTurn()
 
 #BEHAVIORS
@@ -87,7 +88,7 @@ func startSelection():
 
 func endSelection():
 	currentCombatScene.choiceMenu.visible = false
-	print("ended selection")
+	enemy.selectionEnded()
 
 func onEnemySelected():
 	print(enemy.name)

@@ -108,13 +108,13 @@ region = Rect2(0, 182, 112, 26)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ixlum"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_rcv27")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_1wl52")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_8ockf")
 }, {
 "duration": 1.0,
@@ -216,7 +216,9 @@ script = ExtResource("1_otu23")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
-animation = &"attack melee"
+animation = &"attack gun"
+frame = 7
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_w3fm8")
