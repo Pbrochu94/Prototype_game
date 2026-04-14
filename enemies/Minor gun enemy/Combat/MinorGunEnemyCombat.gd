@@ -7,6 +7,11 @@ extends Node2D
 @export var attackPower:int = 5
 @export var characterName = "Gunny"
 
+var attacks:Array[Attack] = [
+	Attack.new("melee hit", 10),
+	Attack.new("gun shot", 50),
+]
+
 #ENVIRONMENTS
 var turnManager:Node
 var currentCombatScene:Node2D
@@ -20,11 +25,14 @@ var walkTarget:Vector2
 const walkSpeed = 80
 var currentState:State
 var canBeSelected = false
+var characterTargeting:Node2D
+var attackUsed:Attack
 
 #ENUMS
 enum State{
 	IDLE,
 	WALK_IN,
+	WALK_TO_TARGET,
 	ATTACK,
 	HURT
 }
@@ -32,6 +40,8 @@ enum State{
 #SIGNALS
 signal introFinished
 signal enemySelected(enemy:Node2D)
+signal donePreparing
+signal inPositionToAttack
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,11 +64,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	match currentState:
-		State.WALK_IN:
-			isWalking = true
-			walk(delta, currentCombatScene.enemyStartingPosition)
 		State.IDLE:
 			pass
+		State.WALK_IN:
+			walk(delta, currentCombatScene.enemyStartingPosition)
+		State.WALK_TO_TARGET:
+			isWalking = true
+			walk(delta, characterTargeting.global_position)
+
 
 
 #ANIMATIONS HANDLERS
@@ -66,10 +79,13 @@ func updateAnimation():
 	match currentState:
 		State.IDLE:
 			anim.play("idle")
-		State.ATTACK:
-			anim.play("attack")
-		State.WALK_IN:
+		State.WALK_IN, State.WALK_TO_TARGET:
 			anim.play("walk")
+		State.ATTACK:
+			if attackUsed.name == "melee hit":
+				anim.play("attack melee")
+			if attackUsed.name == "gun shot":
+				anim.play("attack gun")
 		State.HURT:
 			anim.play("hurt")
 
@@ -87,11 +103,15 @@ func setState(newState:State):
 	enterState(newState)
 func enterState(newState:State):
 	match newState:
-		State.WALK_IN:
-			isWalking = true
 		State.IDLE:
 			pass
+		State.WALK_IN:
+			isWalking = true
+		State.WALK_TO_TARGET:
+			pass
 		State.HURT:
+			pass
+		State.ATTACK:
 			pass
 	updateAnimation()
 func exitState(state:State):
@@ -104,13 +124,42 @@ func exitState(state:State):
 func playIntroWalk(walkTarget:Vector2):
 	setState(State.WALK_IN)
 
+func startTurn():
+	print(characterName, " started his turn")
+	#Choose character to attack
+	characterTargeting = currentCombatScene.player
+	#Choose weapon to attack
+	attackUsed = attacks.pick_random()
+	emit_signal("donePreparing")
+
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	if global_position == destination:
-		isWalking = false
-		setState(State.IDLE)
+	#Walk to character but leave spaces between
+	if currentState == State.WALK_TO_TARGET:
+		var stopDistance = 32
+		if global_position.distance_to(destination)<= stopDistance:
+			isWalking = false
+			emit_signal("inPositionToAttack")
+	else:
+		if global_position == destination:
+			isWalking = false
+			setState(State.IDLE)
+
+func getInPosition():
+	print("Enemy gets in position")
+	print(attackUsed.name)
+	if attackUsed.name == "melee hit":
+		print("Attack used is melee")
+		setState(State.WALK_TO_TARGET)
+	if attackUsed.name == "gun shot":
+		print("Attack used is gun")
+		emit_signal("inPositionToAttack")
+
+func attack():
+	print("enemy attacks: ", characterTargeting.characterName, " with ", attackUsed.name, " for ", attackUsed.damage)
+	setState(State.ATTACK)
 
 func receiveDamage(amount:int):
 	setState(State.HURT)
@@ -126,6 +175,7 @@ func selectionStarted():
 
 func selectionEnded():
 	print("Selection ended")
+	canBeSelected = false
 
 #CHECKS
 
@@ -144,9 +194,10 @@ func onMouseEntered():
 
 
 func onMouseExited():
-	if(canBeSelected):
-		selectingArrow.visible = false
-	else:
-		return
+#	if(canBeSelected):
+#		selectingArrow.visible = false
+#	else:
+#		return
+	selectingArrow.visible = false
 
 

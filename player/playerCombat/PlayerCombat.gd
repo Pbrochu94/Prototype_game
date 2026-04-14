@@ -16,6 +16,7 @@ signal introFinished
 signal inPositionToAttack(enemy:Node2D)
 signal selectionEnded
 signal dealDamage(amount:int)
+signal turnFinished
 
 var weapon = {
 	damage = 10,
@@ -78,7 +79,6 @@ func enterState(newState:State):
 			pass
 	#At the start of a state the animation play once (Or on loop if set to loop)
 	updateAnimation()
-
 func exitState(state:State):
 	match state:
 		State.WALK_IN:
@@ -88,6 +88,7 @@ func exitState(state:State):
 			isWalking = false
 		State.WALK_BACK:
 			isWalking = false
+			emit_signal("turnFinished")
 		State.ATTACK:
 			pass
 
@@ -107,6 +108,9 @@ func updateAnimation():
 			anim.scale.x = -1
 			anim.play("walk")
 
+func onAnimationFinished():
+	if anim.animation == "attack":
+		setState(State.WALK_BACK)
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
@@ -138,6 +142,3 @@ func attack(enemyTarget:Node2D,weapon):
 	print("Attack: ", enemyTargeted.name)
 
 
-func onAnimationFinished():
-	if anim.animation == "attack":
-		setState(State.WALK_BACK)

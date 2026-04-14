@@ -13,14 +13,17 @@ signal selectionEnded
 func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
+	choiceMenu.actionSelected.connect(onActionSelected)
 	enemyAnchor = currentCombatScene.enemyAnchor
 	player = currentCombatScene.player
-	enemy = currentCombatScene.enemy
 	player.introFinished.connect(startCombat)
-	choiceMenu.actionSelected.connect(onActionSelected)
-	enemy.enemySelected.connect(playerAttack)
-	selectionEnded.connect(endSelection)
 	player.selectionEnded.connect(endSelection)
+	player.turnFinished.connect(endPlayerTurn)
+	enemy = currentCombatScene.enemy
+	enemy.enemySelected.connect(playerAttack)
+	enemy.donePreparing.connect(enemyMoveToAttack)
+	enemy.inPositionToAttack.connect(enemyAttack)
+	selectionEnded.connect(endSelection)
 	playIntro()
 
 #INTRO---------
@@ -40,6 +43,7 @@ func startPlayerTurn():
 	chooseAction()
 
 func playerAttack(enemy:Node2D):
+	enemy.canBeSelected = false
 	print("Player move to attack", enemy)
 	#Assign the enemy selected in player node
 	player.enemyTargeted = enemy
@@ -49,8 +53,14 @@ func endPlayerTurn():
 	startEnemyTurn()
 
 func startEnemyTurn():
-	currentTurn = "enemy"
-	enemy.start_turn()
+#	currentTurn = "enemy"
+	enemy.startTurn()
+
+func enemyMoveToAttack():
+	enemy.getInPosition()
+
+func enemyAttack():
+	enemy.setState(enemy.State.ATTACK)
 
 func endEnemyTurn():
 	startPlayerTurn()
