@@ -1,8 +1,10 @@
 extends Node2D
-
+class_name PlayerCombat
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
+@onready var stateMachine = $StateMachine
 @onready var enemy = get_tree().get_nodes_in_group("enemy")
+@onready var startingPosition:Vector2
 #STATS
 @export var characterName = "Artorias"
 @export var hp = 100
@@ -24,104 +26,93 @@ var weapon = {
 var isWalking = false
 const walkSpeed = 80
 
-var currentState:State = State.IDLE
+
 var direction
-enum State {
-	WALK_IN,
-	WALK_TO_TARGET,
-	WALK_BACK,
-	IDLE,
-	ATTACK,
-	DAMAGE,
-	DEAD
-}
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	inPositionToAttack.connect(attack)
-	anim.animation_finished.connect(onAnimationFinished)
+	#Initialize state machine on this character
+	stateMachine.init(self)
+#	inPositionToAttack.connect(attack)
+#	anim.animation_finished.connect(onAnimationFinished)
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	match currentState:
-		State.WALK_IN,State.WALK_BACK:
-			isWalking = true
-			walk(delta, currentCombatScene.playerStartingPosition)
-		State.IDLE:
-			pass
-		State.WALK_TO_TARGET:
-			isWalking = true
-			walk(delta, enemyTargeted.global_position)
+	pass
+#	match currentState:
+#		State.WALK_IN,State.WALK_BACK:
+#			isWalking = true
+#			walk(delta, currentCombatScene.playerStartingPosition)
+#		State.IDLE:
+#			pass
+#		State.WALK_TO_TARGET:
+#			isWalking = true
+#			walk(delta, enemyTargeted.global_position)
 
 
 #CHECKS
 
 
-#STATES HANDLERS
-func setState(newState:State):
-	if currentState == newState:
-		return
-	exitState(currentState)
-	currentState = newState
-	enterState(newState)
-func enterState(newState:State):
-	match newState:
-		State.WALK_IN:
-			isWalking = true
-		State.WALK_TO_TARGET:
-			isWalking = true
-		State.WALK_BACK:
-			isWalking = true
-		State.IDLE:
-			pass
-		State.ATTACK:
-			pass
+
+#func enterState(newState:State):
+#	match newState:
+#		State.WALK_IN:
+#			isWalking = true
+#		State.WALK_TO_TARGET:
+#			isWalking = true
+#		State.WALK_BACK:
+#			isWalking = true
+#		State.IDLE:
+#			pass
+#		State.ATTACK:
+#			pass
 	#At the start of a state the animation play once (Or on loop if set to loop)
-	updateAnimation()
-func exitState(state:State):
-	match state:
-		State.WALK_IN:
-			emit_signal("introFinished")
-			isWalking = false
-		State.WALK_TO_TARGET:
-			isWalking = false
-		State.WALK_BACK:
-			isWalking = false
-			emit_signal("turnFinished")
-		State.ATTACK:
-			pass
+#	updateAnimation()
+#func exitState(state:State):
+#	match state:
+#		State.WALK_IN:
+#			emit_signal("introFinished")
+#			isWalking = false
+#		State.WALK_TO_TARGET:
+#			isWalking = false
+#		State.WALK_BACK:
+#			isWalking = false
+#			emit_signal("turnFinished")
+#		State.ATTACK:
+#			pass
 
 
 #ANIMATIONS HANDLERS
-func updateAnimation():
-	match currentState:
-		State.IDLE:
-			anim.play("idle")
-			anim.scale.x = 1
-		State.ATTACK:
-			anim.play("attack")
-		State.WALK_IN,State.WALK_TO_TARGET:
-			anim.play("walk")
-		State.WALK_BACK:
-			#Flip sprite when walking back
-			anim.scale.x = -1
-			anim.play("walk")
+#func updateAnimation():
+#	match currentState:
+#		State.IDLE:
+#			anim.play("idle")
+#			anim.scale.x = 1
+#		State.ATTACK:
+#			anim.play("attack")
+#		State.WALK_IN,State.WALK_TO_TARGET:
+#			anim.play("walk")
+#		State.WALK_BACK:
+#			#Flip sprite when walking back
+#			anim.scale.x = -1
+#			anim.play("walk")
 
 func onAnimationFinished():
 	if anim.animation == "attack":
-		setState(State.WALK_BACK)
+		stateMachine.setState(WalkBack)
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
-	setState(State.WALK_IN)
+	stateMachine.setState(stateMachine.states["intro"])
+	
 
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to enemy but leave spaces between
-	if currentState == State.WALK_TO_TARGET:
+	if stateMachine.currentState == PlayerIntro:
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
@@ -130,14 +121,14 @@ func walk(delta, destination:Vector2):
 	else:
 		if global_position == destination:
 			isWalking = false
-			setState(State.IDLE)
+			stateMachine.setState(Idle)
 
 func walkToTarget():
-	setState(State.WALK_TO_TARGET)
+	stateMachine.setState(GetInPosition)
 	emit_signal("selectionEnded")
 
 func attack(enemyTarget:Node2D,weapon):
-	setState(State.ATTACK)
+	stateMachine.setState(Attack)
 	emit_signal("dealDamage", weapon.damage)
 	print("Attack: ", enemyTargeted.name)
 

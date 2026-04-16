@@ -16,24 +16,25 @@ func _ready():
 	choiceMenu.actionSelected.connect(onActionSelected)
 	enemyAnchor = currentCombatScene.enemyAnchor
 	player = currentCombatScene.player
+	player.startingPosition =  currentCombatScene.playerStartingPosition
 	player.introFinished.connect(startCombat)
 	player.selectionEnded.connect(endSelection)
 	player.turnFinished.connect(endPlayerTurn)
-	enemy = currentCombatScene.enemy
-	enemy.enemySelected.connect(playerAttack)
-	enemy.donePreparing.connect(enemyMoveToAttack)
-	enemy.inPositionToAttack.connect(enemyAttack)
-	enemy.turnFinished.connect(endEnemyTurn)
+#	enemy = currentCombatScene.enemy
+#	enemy.enemySelected.connect(playerAttack)
+#	enemy.donePreparing.connect(enemyMoveToAttack)
+#	enemy.inPositionToAttack.connect(enemyAttack)
+#	enemy.turnFinished.connect(endEnemyTurn)
 	selectionEnded.connect(endSelection)
 	playIntro()
 
 #INTRO---------
 func playIntro():
-	if player and enemy:
-		player.playIntroWalk(currentCombatScene.playerStartingPosition)
-		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
-	else:
-		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER ENEMY OR TURN MANAGER")
+#	if player and enemy:
+	player.playIntroWalk(currentCombatScene.playerStartingPosition)
+#		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
+#	else:
+#		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER ENEMY OR TURN MANAGER")
 
 func startCombat():
 	startPlayerTurn()
