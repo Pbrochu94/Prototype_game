@@ -18,7 +18,7 @@ func init(owner):
 		currentState = initialState
 
 func _process(delta):
-	pass
+	print(currentState.name)
 
 func _physics_process(delta):
 	pass

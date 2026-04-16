@@ -1,7 +1,8 @@
 extends State
-
 class_name PlayerIntro
+
 @export var player:Node2D
+signal introFinished
 
 func _onready():
 	pass
@@ -14,5 +15,4 @@ func _process(delta):
 	owner.walk(delta, player.startingPosition)
 
 func exit():
-	emit_signal("introFinished")
 	owner.isWalking = false

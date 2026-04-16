@@ -105,7 +105,6 @@ func onAnimationFinished():
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
 	stateMachine.setState(stateMachine.states["intro"])
-	
 
 func walk(delta, destination:Vector2):
 	if not isWalking:
@@ -121,7 +120,7 @@ func walk(delta, destination:Vector2):
 	else:
 		if global_position == destination:
 			isWalking = false
-			stateMachine.setState(Idle)
+			onIntroFinished()
 
 func walkToTarget():
 	stateMachine.setState(GetInPosition)
@@ -132,4 +131,6 @@ func attack(enemyTarget:Node2D,weapon):
 	emit_signal("dealDamage", weapon.damage)
 	print("Attack: ", enemyTargeted.name)
 
-
+func onIntroFinished():
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("introFinished")
