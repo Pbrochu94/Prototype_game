@@ -1,7 +1,6 @@
 extends State
-class_name PlayerIntro
+class_name Intro
 
-@export var player:Node2D
 signal introFinished
 
 func _onready():
@@ -10,9 +9,11 @@ func _onready():
 func enter():
 	owner.isWalking = true
 	owner.anim.play("walk")
+	if owner.is_in_group("enemy"):
+		owner.spriteOrientation.scale.x = -1
 
 func _process(delta):
-	owner.walk(delta, player.startingPosition)
+	owner.walk(delta, owner.startingPosition)
 
 func exit():
 	owner.isWalking = false

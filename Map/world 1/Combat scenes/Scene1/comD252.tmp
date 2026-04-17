@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=10 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://TurnManager/TurnManager.tscn" id="2_6240m"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="3_ab8et"]
 [ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://player/playerCombat/playerCombat.tscn" id="4_gq0cu"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
-[ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://enemies/Minor gun enemy/Combat/minorGunEnemy.tscn" id="6_mifdo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
 texture = ExtResource("3_ab8et")
@@ -533,6 +532,3 @@ offset_top = -79.0
 offset_right = -151.0
 offset_bottom = -79.0
 scale = Vector2(0.58, 0.58)
-
-[node name="Gunny" parent="." instance=ExtResource("6_mifdo")]
-position = Vector2(243, 53)

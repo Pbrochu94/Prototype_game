@@ -3,6 +3,7 @@ extends Node2D
 #NODES STORING
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var spriteOrientation = $SpritePivot
+@onready var stateMachine = $StateMachine
 
 #STATS
 @export var hp:int = 100
@@ -19,9 +20,12 @@ var turnManager:Node
 var currentCombatScene:Node2D
 
 
+
 #PROPERTIES
 @onready var area = $Area2D
 @onready var selectingArrow = $SelectingArrow
+
+var startingPosition
 var isWalking = false
 var walkTarget:Vector2
 const walkSpeed = 80
@@ -51,16 +55,16 @@ signal turnFinished
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await get_tree().process_frame
-	setState(State.WALK_IN)
+	#Initialize State machine
+	stateMachine.init(self)
 	#Instanciate environments
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	#connecting signals
 	anim.animation_finished.connect(onAnimationFinished)
-	turnManager.connect("selectionStarted", selectionStarted)
-	turnManager.connect("selectionEnded", selectionEnded)
-	currentCombatScene.player.connect("dealDamage", receiveDamage)
+#	turnManager.connect("selectionStarted", selectionStarted)
+#	turnManager.connect("selectionEnded", selectionEnded)
+#	currentCombatScene.player.connect("dealDamage", receiveDamage)
 	#Hidding UI
 	selectingArrow.visible = false
 
@@ -99,45 +103,45 @@ func updateAnimation():
 
 func onAnimationFinished():
 	if anim.animation == "hurt":
-		setState(State.IDLE)
+		stateMachine.setState(stateMachine.State["idle"])
 	if anim.animation == "attack melee":
-		setState(State.WALK_BACK)
+		stateMachine.setState(stateMachine.State["walkingback"])
 	if anim.animation == "attack gun":
-		setState(State.IDLE)
+		stateMachine.setState(stateMachine.State["idle"])
 
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
 #STATE HANDLERS
-func setState(newState:State):
-	if currentState == newState:
-		return
-	exitState(currentState)
-	currentState = newState
-	enterState(newState)
-func enterState(newState:State):
-	match newState:
-		State.IDLE:
-			pass
-		State.WALK_IN,State.WALK_TO_TARGET,State.WALK_BACK:
-			isWalking = true
-		State.HURT:
-			pass
-		State.ATTACK:
-			pass
-	updateAnimation()
-func exitState(state:State):
-	match state:
-		State.WALK_IN:
-			emit_signal("introFinished")
-		State.WALK_BACK:
-				orientSprite(facingPlayer)
-				emit_signal("turnFinished")
+#func setState(newState:State):
+#	if currentState == newState:
+#		return
+#	exitState(currentState)
+#	currentState = newState
+#	enterState(newState)
+#func enterState(newState:State):
+#	match newState:
+#		State.IDLE:
+#			pass
+#		State.WALK_IN,State.WALK_TO_TARGET,State.WALK_BACK:
+#			isWalking = true
+#		State.HURT:
+#			pass
+#		State.ATTACK:
+#			pass
+#	updateAnimation()
+#func exitState(state:State):
+#	match state:
+#		State.WALK_IN:
+#			emit_signal("introFinished")
+#		State.WALK_BACK:
+#				orientSprite(facingPlayer)
+#				emit_signal("turnFinished")
 
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
-	setState(State.WALK_IN)
+	stateMachine.setState(stateMachine.states["intro"])
 
 func startTurn():
 	print(characterName, " started his turn")
@@ -152,7 +156,7 @@ func walk(delta, destination:Vector2):
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to character but leave spaces between
-	if currentState == State.WALK_TO_TARGET:
+	if stateMachine.currentState == Intro:
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
@@ -160,27 +164,31 @@ func walk(delta, destination:Vector2):
 	else:
 		if global_position == destination:
 			isWalking = false
-			setState(State.IDLE)
+			onIntroFinished()
 
-func getInPosition():
-	print("Enemy gets in position")
-	if attackUsed.name == "melee hit":
-		setState(State.WALK_TO_TARGET)
-	if attackUsed.name == "gun shot":
-		emit_signal("inPositionToAttack")
+#func getInPosition():
+#	print("Enemy gets in position")
+#	if attackUsed.name == "melee hit":
+#		setState(State.WALK_TO_TARGET)
+#	if attackUsed.name == "gun shot":
+#		emit_signal("inPositionToAttack")
+
+func onIntroFinished():
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("introFinished")
 
 func endTurn():
 	emit_signal("turnFinished")
 
-func attack():
-	print("enemy attacks: ", characterTargeting.characterName, " with ", attackUsed.name, " for ", attackUsed.damage)
-	setState(State.ATTACK)
+#func attack():
+#	print("enemy attacks: ", characterTargeting.characterName, " with ", attackUsed.name, " for ", attackUsed.damage)
+#	setState(State.ATTACK)
 
-func receiveDamage(amount:int):
-	setState(State.HURT)
-	print("enemy", self, " receive ", amount, " of damage")
-	hp-= amount
-	print("After hit: ", hp)
+#func receiveDamage(amount:int):
+#	setState(State.HURT)
+#	print("enemy", self, " receive ", amount, " of damage")
+#	hp-= amount
+#	print("After hit: ", hp)
 
 func selectionStarted():
 	canBeSelected = true

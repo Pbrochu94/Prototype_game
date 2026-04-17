@@ -111,7 +111,7 @@ func walk(delta, destination:Vector2):
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to enemy but leave spaces between
-	if stateMachine.currentState == PlayerIntro:
+	if stateMachine.currentState == Intro:
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false

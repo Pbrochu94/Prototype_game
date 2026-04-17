@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/StateMachine.gd" id="3_5htkx"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/PlayerIntro.gd" id="4_bhxah"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/PlayerIdle.gd" id="5_xjwlv"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/GetInPosition.gd" id="6_tepkl"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/WalkBack.gd" id="7_wn4wk"]
-[ext_resource type="Script" path="res://utils/States/PlayerStates/Combat/Attack.gd" id="8_sla2a"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_qjglw"]
+[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_5tsa7"]
+[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="5_rur61"]
+[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_wrpjb"]
+[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_1svj7"]
+[ext_resource type="Script" path="res://utils/States/Combat/Attack.gd" id="8_btkg5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
 atlas = ExtResource("2_uhkjs")
@@ -356,25 +356,21 @@ sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"attack"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
-script = ExtResource("3_5htkx")
+script = ExtResource("3_qjglw")
 initialState = NodePath("Intro")
 
-[node name="Intro" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("4_bhxah")
-player = NodePath("../..")
+[node name="Intro" type="Node" parent="StateMachine"]
+script = ExtResource("4_5tsa7")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("5_xjwlv")
-player = NodePath("../..")
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_rur61")
 
 [node name="GetInPosition" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("6_tepkl")
+script = ExtResource("6_wrpjb")
 player = NodePath("../..")
 
-[node name="WalkBack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("7_wn4wk")
-player = NodePath("../..")
+[node name="WalkingBack" type="Node" parent="StateMachine"]
+script = ExtResource("7_1svj7")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("8_sla2a")
-player = NodePath("../..")
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("8_btkg5")

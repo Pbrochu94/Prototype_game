@@ -20,7 +20,8 @@ func _ready():
 	player.introFinished.connect(startCombat)
 	player.selectionEnded.connect(endSelection)
 	player.turnFinished.connect(endPlayerTurn)
-#	enemy = currentCombatScene.enemy
+	enemy = currentCombatScene.enemy
+	enemy.startingPosition = currentCombatScene.enemyStartingPosition
 #	enemy.enemySelected.connect(playerAttack)
 #	enemy.donePreparing.connect(enemyMoveToAttack)
 #	enemy.inPositionToAttack.connect(enemyAttack)
@@ -32,7 +33,7 @@ func _ready():
 func playIntro():
 #	if player and enemy:
 	player.playIntroWalk(currentCombatScene.playerStartingPosition)
-#		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
+	enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
 #	else:
 #		print("ERROR: COMBAT SCENE COULD NOT GET PLAYER ENEMY OR TURN MANAGER")
 
