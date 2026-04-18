@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://nv4f4n8qc6c4"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_viliv"]
+
+[resource]
+script = ExtResource("1_viliv")
+attackName = "gun shot"
+damage = 20
+range = false
+cooldown = 0

@@ -24,7 +24,7 @@ func _ready():
 	enemy = currentCombatScene.enemy
 	enemy.startingPosition = currentCombatScene.enemyStartingPosition
 	enemy.enemySelected.connect(playerAttack)
-#	enemy.donePreparing.connect(enemyMoveToAttack)
+	enemy.donePreparing.connect(enemyMoveToAttack)
 #	enemy.inPositionToAttack.connect(enemyAttack)
 #	enemy.turnFinished.connect(endEnemyTurn)
 	selectionEnded.connect(endSelection)

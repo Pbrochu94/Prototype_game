@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="5_rur61"]
 [ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_wrpjb"]
 [ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_1svj7"]
-[ext_resource type="Script" path="res://utils/States/Combat/Attack.gd" id="8_btkg5"]
+[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_yqimq"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_iyd1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
@@ -374,7 +374,7 @@ player = NodePath("../..")
 script = ExtResource("7_1svj7")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("8_btkg5")
+script = ExtResource("8_yqimq")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
 script = ExtResource("9_iyd1f")

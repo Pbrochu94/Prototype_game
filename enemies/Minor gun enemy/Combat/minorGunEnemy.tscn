@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://gmpl0rsq3yvg"]
+[gd_scene load_steps=40 format=3 uid="uid://gmpl0rsq3yvg"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://e3paqxtb0042" path="res://enemies/Minor gun enemy/sprites/charge 112x26.png" id="2_5x63x"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="9_75bjw"]
 [ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="9_gurxk"]
 [ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="10_700fa"]
+[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="12_tq5pg"]
+[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="13_sqf38"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rcv27"]
 atlas = ExtResource("2_5x63x")
@@ -240,6 +242,12 @@ script = ExtResource("9_gurxk")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_700fa")
+
+[node name="GetInPosition" type="Node" parent="StateMachine"]
+script = ExtResource("12_tq5pg")
+
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("13_sqf38")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

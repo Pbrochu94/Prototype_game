@@ -10,10 +10,14 @@ extends Node2D
 @export var attackPower:int = 5
 @export var characterName = "Gunny"
 
-#var attacks:Array[Attack] = [
-#	Attack.new("melee hit", 10),
-#	Attack.new("gun shot", 50),
-#]
+#PRELOAD ATTACKS
+const gunStrike = preload("res://utils/Attacks/Enemies/Gunny/GunStrike.tres")
+const gunShot = preload("res://utils/Attacks/Enemies/Gunny/GunShot.tres")
+
+var attacks:Dictionary = {
+	"gun strike" = gunStrike,
+	"gun shot" = gunShot
+}
 
 #ENVIRONMENTS
 var turnManager:Node
@@ -29,10 +33,10 @@ var startingPosition
 var isWalking = false
 var walkTarget:Vector2
 const walkSpeed = 80
-var currentState:State
+var currentState:Node2D
 var canBeSelected = false
-var characterTargeting:Node2D
-var attackUsed:Attack
+var target:Node2D
+var attackSelected:Attack
 var facingPlayer:int = -1
 var facingBackward:int = 1
 
@@ -71,35 +75,36 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	match currentState:
-		State.IDLE:
-			pass
-		State.WALK_IN,State.WALK_BACK:
-			walk(delta, currentCombatScene.enemyStartingPosition)
-		State.WALK_TO_TARGET:
-			walk(delta, characterTargeting.global_position)
+	pass
+#	match currentState:
+#		State.IDLE:
+#			pass
+#		State.WALK_IN,State.WALK_BACK:
+#			walk(delta, currentCombatScene.enemyStartingPosition)
+#		State.WALK_TO_TARGET:
+#			walk(delta, target.global_position)
 
 
 
 #ANIMATIONS HANDLERS
-func updateAnimation():
-	match currentState:
-		State.IDLE:
-			anim.play("idle")
-			orientSprite(facingPlayer)
-		State.WALK_IN, State.WALK_TO_TARGET:
-			orientSprite(facingPlayer)
-			anim.play("walk")
-		State.WALK_BACK:
-			anim.play("walk")
-			orientSprite(facingBackward)
-		State.ATTACK:
-			if attackUsed.name == "melee hit":
-				anim.play("attack melee")
-			if attackUsed.name == "gun shot":
-				anim.play("attack gun")
-		State.HURT:
-			anim.play("hurt")
+#func updateAnimation():
+#	match currentState:
+#		State.IDLE:
+#			anim.play("idle")
+#			orientSprite(facingPlayer)
+#		State.WALK_IN, State.WALK_TO_TARGET:
+#			orientSprite(facingPlayer)
+#			anim.play("walk")
+#		State.WALK_BACK:
+#			anim.play("walk")
+#			orientSprite(facingBackward)
+#		State.ATTACK:
+#			if attackUsed.name == "melee hit":
+#				anim.play("attack melee")
+#			if attackUsed.name == "gun shot":
+#				anim.play("attack gun")
+#		State.HURT:
+#			anim.play("hurt")
 
 func onAnimationFinished():
 	if anim.animation == "hurt":
@@ -146,9 +151,9 @@ func playIntroWalk(walkTarget:Vector2):
 func startTurn():
 	print(characterName, " started his turn")
 	#Choose character to attack
-	characterTargeting = currentCombatScene.player
 	#Choose weapon to attack
-#	attackUsed = attacks.pick_random()
+	attackSelected = getRandomAttack()
+	chooseTarget()
 	emit_signal("donePreparing")
 
 func walk(delta, destination:Vector2):
@@ -166,12 +171,12 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 			onIntroFinished()
 
-#func getInPosition():
-#	print("Enemy gets in position")
-#	if attackUsed.name == "melee hit":
-#		setState(State.WALK_TO_TARGET)
-#	if attackUsed.name == "gun shot":
-#		emit_signal("inPositionToAttack")
+func getInPosition():
+	print("Enemy gets in position")
+	if attackSelected.attackName == "gun strike":
+		stateMachine.setState(stateMachine.states["getinposition"])
+	if attackSelected.attackName == "gun shot":
+		stateMachine.setState(stateMachine.states["attacking"])
 
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])
@@ -189,6 +194,14 @@ func endTurn():
 #	print("enemy", self, " receive ", amount, " of damage")
 #	hp-= amount
 #	print("After hit: ", hp)
+
+func chooseTarget():
+	target = currentCombatScene.player
+
+func getRandomAttack() -> Attack:
+	var keys = attacks.keys()
+	var random_key = keys[randi() % keys.size()]
+	return attacks[random_key]
 
 func isSelectable():
 	canBeSelected = true
