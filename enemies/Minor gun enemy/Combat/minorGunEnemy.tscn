@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dfy3efl00rdav" path="res://enemies/Minor gun enemy/sprites/shoot 112x26.png" id="3_shcyo"]
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/Hitbox.gd" id="4_w3fm8"]
 [ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="5_majnp"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="9_75bjw"]
 [ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="9_gurxk"]
 [ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="10_700fa"]
 
@@ -210,43 +211,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fn00"]
 size = Vector2(20, 23)
 
-[sub_resource type="GDScript" id="GDScript_rcjh0"]
-script/source = "extends Node
-
-@export var initialState:State
-
-var currentState:State
-var states:Dictionary = {}
-
-func init(owner):
-	for child in get_children():
-		if child is State:
-			print(child.name.to_lower())
-			states[child.name.to_lower()] = child
-			child.owner = get_parent()
-			child.ChangingState.connect(setState)
-			
-	if initialState:
-		initialState.enter()
-		currentState = initialState
-
-func _process(delta):
-	print(currentState.name)
-
-func _physics_process(delta):
-	pass
-
-func setState(state:State):
-	if state == currentState:
-		return
-	if !State:
-		return
-	if currentState:
-		currentState.exit()
-	state.enter()
-	currentState = state
-"
-
 [node name="Gunny" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_otu23")
 
@@ -268,9 +232,8 @@ shape = SubResource("RectangleShape2D_2fn00")
 [node name="SelectingArrow" parent="." instance=ExtResource("5_majnp")]
 position = Vector2(0, -30)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
-script = SubResource("GDScript_rcjh0")
-initialState = NodePath("Intro")
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("9_75bjw")
 
 [node name="Intro" type="Node" parent="StateMachine"]
 script = ExtResource("9_gurxk")

@@ -13,6 +13,9 @@ func enter():
 		owner.spriteOrientation.scale.x = -1
 
 func _process(delta):
+	pass
+
+func update(delta):
 	owner.walk(delta, owner.startingPosition)
 
 func exit():

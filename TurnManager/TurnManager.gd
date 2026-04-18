@@ -7,7 +7,7 @@ var player:Node2D
 var enemy:Node2D 
 var enemyAnchor:Node2D
 var isSelecting = false
-signal selectionStarted
+signal targetSelectionStarted
 signal selectionEnded
 
 func _ready():
@@ -20,9 +20,10 @@ func _ready():
 	player.introFinished.connect(startCombat)
 	player.selectionEnded.connect(endSelection)
 	player.turnFinished.connect(endPlayerTurn)
+	player.attackChosen.connect(startSelectingTarget)
 	enemy = currentCombatScene.enemy
 	enemy.startingPosition = currentCombatScene.enemyStartingPosition
-#	enemy.enemySelected.connect(playerAttack)
+	enemy.enemySelected.connect(playerAttack)
 #	enemy.donePreparing.connect(enemyMoveToAttack)
 #	enemy.inPositionToAttack.connect(enemyAttack)
 #	enemy.turnFinished.connect(endEnemyTurn)
@@ -48,8 +49,8 @@ func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
 	print("Player move to attack", enemy)
 	#Assign the enemy selected in player node
-	player.enemyTargeted = enemy
-	player.walkToTarget ()
+	player.target = enemy
+	player.walkToTarget()
 
 func endPlayerTurn():
 	startEnemyTurn()
@@ -77,15 +78,15 @@ func onActionSelected(action:String):
 	print("Player chose:", action)
 	match action:
 		"attack":
-			startSelection()
+			player.chooseAttack()
 		"inventory":
 			pass
 		"ability":
 			pass
 
-func startSelection():
+func startSelectingTarget():
 	print("Player is selecting a target")
-	emit_signal("selectionStarted")
+	emit_signal("targetSelectionStarted")
 	isSelecting = true
 
 func endSelection():

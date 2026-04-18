@@ -21,7 +21,7 @@ func _physics_process(delta):
 	move_and_slide()
 	#Gravity
 	velocity.y += gravity * delta
-	#print(State.keys()[currentState])
+
 
 	#Direction
 	direction = Input.get_axis("move_left", "move_right")

@@ -18,7 +18,8 @@ func init(owner):
 		currentState = initialState
 
 func _process(delta):
-	print(currentState.name)
+	if currentState:
+		currentState.update(delta)
 
 func _physics_process(delta):
 	pass
@@ -32,3 +33,4 @@ func setState(state:State):
 		currentState.exit()
 	state.enter()
 	currentState = state
+	print(owner.name," enter state: ",currentState.name)

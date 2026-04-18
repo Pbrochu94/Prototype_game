@@ -8,23 +8,27 @@ class_name PlayerCombat
 #STATS
 @export var characterName = "Artorias"
 @export var hp = 100
-@export var attackPower = 10
-@export var weponEquipped = "sword"
+@export var attacks:Dictionary= {
+	"sword slash 1" : swordSlash1
+}
+@export var attackSelected:Attack
+
 #PARAMETERS
 var currentCombatScene:Node2D
-var enemyTargeted:Node2D
+var target:Node2D
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
 signal selectionEnded
 signal dealDamage(amount:int)
 signal turnFinished
+signal attackChosen()
 
-var weapon = {
-	damage = 10,
-}
 var isWalking = false
 const walkSpeed = 80
+
+#Preload attacks
+const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
 
 
 var direction
@@ -32,7 +36,7 @@ var direction
 func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
-#	inPositionToAttack.connect(attack)
+	inPositionToAttack.connect(attack)
 #	anim.animation_finished.connect(onAnimationFinished)
 
 
@@ -111,26 +115,44 @@ func walk(delta, destination:Vector2):
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to enemy but leave spaces between
-	if stateMachine.currentState == Intro:
+	if stateMachine.currentState == stateMachine.states["getinposition"]:
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
-			emit_signal("inPositionToAttack", enemyTargeted)
-			attack(enemyTargeted, weapon)
+			emit_signal("inPositionToAttack", target)
+			attack(target, attackSelected)
 	else:
 		if global_position == destination:
 			isWalking = false
 			onIntroFinished()
 
 func walkToTarget():
-	stateMachine.setState(GetInPosition)
 	emit_signal("selectionEnded")
+	stateMachine.setState(stateMachine.states["getinposition"])
+
+func chooseAttack():
+	print(attacks)
+	attackSelected = attacks["sword slash 1"]
+	print("Attack chosen: ", attackSelected)
+	#When we will actually choose
+#	if action == "attack":
+#		attackSelected = attacks["swordSlash1"]
+#	else:
+#		return
+	emit_signal("attackChosen")
 
 func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(Attack)
-	emit_signal("dealDamage", weapon.damage)
-	print("Attack: ", enemyTargeted.name)
+	stateMachine.setState(stateMachine.states["attack"])
+	emit_signal("dealDamage", attackSelected.damage)
+	print("Attack: ", target.name)
 
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("introFinished")
+
+func addNewWeapon(filePath:String):
+	var attack = load(filePath) as Attack
+	attacks[attack.attackName] = attack
+	if attack == null:
+		push_error("Failed to load attack: " + filePath)
+		return

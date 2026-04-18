@@ -9,3 +9,10 @@ func enter():
 
 func exit():
 	player.isWalking = false
+
+func _process(delta):
+	pass
+
+
+func update(delta):
+	owner.walk(delta, owner.target.global_position)

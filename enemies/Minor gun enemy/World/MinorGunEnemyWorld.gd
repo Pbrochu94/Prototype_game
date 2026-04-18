@@ -28,7 +28,6 @@ func _ready():
 	direction = 1
 	enterState(currentState)
 func _physics_process(delta):
-	#print(State.keys()[currentState])
 	if justSpawned:
 		justSpawned = false
 		return
@@ -79,7 +78,7 @@ func setState(newState):
 	currentState = newState
 	enterState(newState)
 func enterState(state):
-	#print(State.keys()[currentState])
+	print("Enter state: ",State.keys()[currentState])
 	match state:
 		State.IDLE:
 			updateAnim("idle")

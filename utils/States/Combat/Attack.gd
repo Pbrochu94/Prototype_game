@@ -1,13 +1,16 @@
 extends State
-class_name Attack
+class_name Attacking
 
 
-var attackName:String
-var damage:int
+func _onready():
+	pass
 
 func enter():
 	owner.anim.play("attack")
+#	owner.anim.scale.x = 1
 
-func _init(name:String,damage:int):
-	self.name = name
-	self.damage = damage
+func update(delta):
+	pass
+
+func exit():
+	pass

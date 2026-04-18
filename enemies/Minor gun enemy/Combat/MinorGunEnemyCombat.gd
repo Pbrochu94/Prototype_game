@@ -10,10 +10,10 @@ extends Node2D
 @export var attackPower:int = 5
 @export var characterName = "Gunny"
 
-var attacks:Array[Attack] = [
-	Attack.new("melee hit", 10),
-	Attack.new("gun shot", 50),
-]
+#var attacks:Array[Attack] = [
+#	Attack.new("melee hit", 10),
+#	Attack.new("gun shot", 50),
+#]
 
 #ENVIRONMENTS
 var turnManager:Node
@@ -62,7 +62,7 @@ func _ready():
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	#connecting signals
 	anim.animation_finished.connect(onAnimationFinished)
-#	turnManager.connect("selectionStarted", selectionStarted)
+	turnManager.targetSelectionStarted.connect(isSelectable)
 #	turnManager.connect("selectionEnded", selectionEnded)
 #	currentCombatScene.player.connect("dealDamage", receiveDamage)
 	#Hidding UI
@@ -148,7 +148,7 @@ func startTurn():
 	#Choose character to attack
 	characterTargeting = currentCombatScene.player
 	#Choose weapon to attack
-	attackUsed = attacks.pick_random()
+#	attackUsed = attacks.pick_random()
 	emit_signal("donePreparing")
 
 func walk(delta, destination:Vector2):
@@ -190,7 +190,7 @@ func endTurn():
 #	hp-= amount
 #	print("After hit: ", hp)
 
-func selectionStarted():
+func isSelectable():
 	canBeSelected = true
 	area.monitoring = true
 	print("Player selection started")
