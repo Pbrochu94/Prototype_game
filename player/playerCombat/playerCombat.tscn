@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=55 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_wrpjb"]
 [ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_1svj7"]
 [ext_resource type="Script" path="res://utils/States/Combat/Attack.gd" id="8_btkg5"]
+[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_iyd1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
 atlas = ExtResource("2_uhkjs")
@@ -372,5 +373,8 @@ player = NodePath("../..")
 [node name="WalkingBack" type="Node" parent="StateMachine"]
 script = ExtResource("7_1svj7")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_btkg5")
+
+[node name="EndingTurn" type="Node" parent="StateMachine"]
+script = ExtResource("9_iyd1f")

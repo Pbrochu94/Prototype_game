@@ -7,7 +7,7 @@ func _onready():
 
 func enter():
 	owner.anim.play("idle")
-#	owner.anim.scale.x = 1
+	owner.anim.scale.x = 1
 
 func update(delta):
 	pass

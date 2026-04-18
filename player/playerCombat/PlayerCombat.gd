@@ -22,7 +22,7 @@ signal inPositionToAttack(enemy:Node2D)
 signal selectionEnded
 signal dealDamage(amount:int)
 signal turnFinished
-signal attackChosen()
+signal attackChosen
 
 var isWalking = false
 const walkSpeed = 80
@@ -37,7 +37,7 @@ func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
 	inPositionToAttack.connect(attack)
-#	anim.animation_finished.connect(onAnimationFinished)
+	anim.animation_finished.connect(onAnimationFinished)
 
 
 
@@ -104,7 +104,7 @@ func _process(delta):
 
 func onAnimationFinished():
 	if anim.animation == "attack":
-		stateMachine.setState(WalkBack)
+		stateMachine.setState(stateMachine.states["walkingback"])
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
@@ -142,13 +142,16 @@ func chooseAttack():
 	emit_signal("attackChosen")
 
 func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(stateMachine.states["attack"])
-	emit_signal("dealDamage", attackSelected.damage)
-	print("Attack: ", target.name)
+	stateMachine.setState(stateMachine.states["attacking"])
+	print("Player Attacked: ", target.name)
 
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("introFinished")
+
+func endingTurn():
+	emit_signal("turnFinished")
+	stateMachine.setState(stateMachine.states["endingturn"])
 
 func addNewWeapon(filePath:String):
 	var attack = load(filePath) as Attack

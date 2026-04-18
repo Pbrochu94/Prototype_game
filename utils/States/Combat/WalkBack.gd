@@ -1,5 +1,5 @@
 extends State
-class_name WalkBack
+class_name WalkingBack
 
 
 func enter():
@@ -7,6 +7,9 @@ func enter():
 	owner.anim.play("walk")
 	owner.anim.scale.x = -1
 
+func update(delta):
+	owner.walk(delta, owner.startingPosition)
+
 func exit():
 	owner.isWalking = false
-	emit_signal("turnFinished")
+	owner.endingTurn()
