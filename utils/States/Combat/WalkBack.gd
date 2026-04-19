@@ -12,4 +12,4 @@ func update(delta):
 
 func exit():
 	owner.isWalking = false
-	owner.endingTurn()
+

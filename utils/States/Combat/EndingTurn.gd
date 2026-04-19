@@ -12,11 +12,12 @@ func enter():
 		owner.anim.scale.x = -1
 	else:
 		owner.anim.scale.x = 1
-	exit()
+	#CHeck if something affect (ex: poison etc)
 
 func update(delta):
-	pass
+	owner.endingTurn()
 
 func exit():
-	owner.stateMachine.setState(owner.stateMachine.states["idle"])
+	pass
+
 

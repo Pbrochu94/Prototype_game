@@ -6,9 +6,9 @@ func _onready():
 	pass
 
 func enter():
-	owner.anim.play("attack")
+	var attackName:String = owner.attackSelected.attackName
+	owner.anim.play(attackName)
 	owner.target.hp -= owner.attackSelected.damage
-#	owner.anim.scale.x = 1
 
 func update(delta):
 	pass

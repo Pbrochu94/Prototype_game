@@ -138,7 +138,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_pu8x5")
 }],
 "loop": false,
-"name": &"attack gun",
+"name": &"gun shot",
 "speed": 10.0
 }, {
 "frames": [{
@@ -158,7 +158,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2nsau")
 }],
 "loop": false,
-"name": &"attack melee",
+"name": &"gun strike",
 "speed": 10.0
 }, {
 "frames": [{
@@ -221,9 +221,7 @@ script = ExtResource("1_otu23")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
-animation = &"attack gun"
-frame = 7
-frame_progress = 1.0
+animation = &"gun shot"
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_w3fm8")

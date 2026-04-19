@@ -103,8 +103,16 @@ func _process(delta):
 #			anim.play("walk")
 
 func onAnimationFinished():
-	if anim.animation == "attack":
+	if anim.animation == attackSelected.attackName:
 		stateMachine.setState(stateMachine.states["walkingback"])
+
+func attackFinished():
+	print("Attack finished")
+	if self.global_position != self.startingPosition:
+		stateMachine.setState(stateMachine.states["walkingback"])
+	else:
+		stateMachine.setState(stateMachine.states["endingturn"])
+		
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
@@ -123,8 +131,13 @@ func walk(delta, destination:Vector2):
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
+			if stateMachine.currentState == stateMachine.states["intro"]:
+				onIntroFinished()
+			else:
+				stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
-			onIntroFinished()
+
+
 
 func walkToTarget():
 	emit_signal("selectionEnded")
@@ -150,8 +163,9 @@ func onIntroFinished():
 	emit_signal("introFinished")
 
 func endingTurn():
+	print("Player end turn")
+	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
-	stateMachine.setState(stateMachine.states["endingturn"])
 
 func addNewWeapon(filePath:String):
 	var attack = load(filePath) as Attack

@@ -10,38 +10,6 @@
 [ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_yqimq"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_iyd1f"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(620, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_25o7l"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(744, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h7nha"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(868, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kop7j"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(992, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6n1to"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(1116, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xaxup"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(2604, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ebqi"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(2728, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5iv08"]
-atlas = ExtResource("2_uhkjs")
-region = Rect2(2852, 294, 124, 49)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_afrxm"]
 atlas = ExtResource("2_uhkjs")
 region = Rect2(0, 196, 124, 49)
@@ -154,6 +122,38 @@ region = Rect2(248, 196, 124, 49)
 atlas = ExtResource("2_uhkjs")
 region = Rect2(372, 196, 124, 49)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3nns"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(620, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25o7l"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(744, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7nha"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(868, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kop7j"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(992, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n1to"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(1116, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaxup"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(2604, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ebqi"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(2728, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iv08"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(2852, 294, 124, 49)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ghigb"]
 atlas = ExtResource("2_uhkjs")
 region = Rect2(0, 49, 124, 49)
@@ -188,35 +188,6 @@ region = Rect2(868, 49, 124, 49)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nh23"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t3nns")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_25o7l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h7nha")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kop7j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6n1to")
-}, {
-"duration": 1.3,
-"texture": SubResource("AtlasTexture_xaxup")
-}, {
-"duration": 1.2,
-"texture": SubResource("AtlasTexture_0ebqi")
-}, {
-"duration": 1.2,
-"texture": SubResource("AtlasTexture_5iv08")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_afrxm")
@@ -318,6 +289,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_t3nns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25o7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7nha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kop7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n1to")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_xaxup")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_0ebqi")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_5iv08")
+}],
+"loop": false,
+"name": &"sword slash 1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ghigb")
 }, {
 "duration": 1.0,
@@ -354,7 +354,7 @@ script = ExtResource("1_1xdif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"attack"
+animation = &"sword slash 1"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_qjglw")
