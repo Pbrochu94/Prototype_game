@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://gmpl0rsq3yvg"]
+[gd_scene load_steps=43 format=3 uid="uid://gmpl0rsq3yvg"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://e3paqxtb0042" path="res://enemies/Minor gun enemy/sprites/charge 112x26.png" id="2_5x63x"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="13_sqf38"]
 [ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="14_pnls8"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="15_0dl55"]
+[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="16_eb1vu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rcv27"]
 atlas = ExtResource("2_5x63x")
@@ -256,6 +257,9 @@ script = ExtResource("14_pnls8")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
 script = ExtResource("15_0dl55")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("16_eb1vu")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

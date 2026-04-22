@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=60 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_1svj7"]
 [ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_yqimq"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_iyd1f"]
+[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="10_2tfla"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_afrxm"]
 atlas = ExtResource("2_uhkjs")
@@ -25,6 +26,22 @@ region = Rect2(248, 196, 124, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eymny"]
 atlas = ExtResource("2_uhkjs")
 region = Rect2(372, 196, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqq6y"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(0, 392, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4chx7"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(124, 392, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idv4a"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(248, 392, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pvr6"]
+atlas = ExtResource("2_uhkjs")
+region = Rect2(0, 392, 124, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ssga"]
 atlas = ExtResource("2_uhkjs")
@@ -207,6 +224,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xqq6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4chx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idv4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pvr6")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5ssga")
 }, {
 "duration": 1.0,
@@ -354,7 +388,9 @@ script = ExtResource("1_1xdif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"sword slash 1"
+animation = &"hurt"
+frame = 3
+frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_qjglw")
@@ -378,3 +414,6 @@ script = ExtResource("8_yqimq")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
 script = ExtResource("9_iyd1f")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("10_2tfla")

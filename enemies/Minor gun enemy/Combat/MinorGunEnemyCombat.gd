@@ -157,6 +157,7 @@ func startTurn():
 	#Choose character to attack
 	#Choose weapon to attack
 	attackSelected = getRandomAttack()
+	print(characterName, " chose the attack: ", attackSelected.attackName)
 	chooseTarget()
 	emit_signal("donePreparing")
 
@@ -192,7 +193,8 @@ func chooseTarget():
 	target = currentCombatScene.player
 
 func getRandomAttack() -> Attack:
-	return attacks["gun strike"]
+	print("choosing new attack")
+	return attacks["gun shot"]
 #	var keys = attacks.keys()
 #	var random_key = keys[randi() % keys.size()]
 #	return attacks[random_key]
@@ -216,11 +218,11 @@ func attackFinished():
 		stateMachine.setState(stateMachine.states["endingturn"])
 		
 
-#func receiveDamage(amount:int):
-#	setState(State.HURT)
-#	print("enemy", self, " receive ", amount, " of damage")
-#	hp-= amount
-#	print("After hit: ", hp)
+func receiveDamage(attack:Attack):
+	stateMachine.setState(stateMachine.states["hurt"])
+	print("enemy", self, " receive ", attack.damage, " of damage")
+	hp-= attack.damage
+	print("After hit: ", hp)
 
 
 

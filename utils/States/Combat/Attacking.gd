@@ -1,17 +1,18 @@
 extends State
 class_name Attacking
 
-
+var attack:Attack
 func _onready():
 	pass
 
 func enter():
-	var attackName:String = owner.attackSelected.attackName
+	attack = owner.attackSelected
+	var attackName:String = attack.attackName
 	owner.anim.play(attackName)
-	owner.target.hp -= owner.attackSelected.damage
+	owner.target.receiveDamage(attack)
 
 func update(delta):
 	pass
 
 func exit():
-	print("Enemy hp after hit: ", owner.target.hp)
+	pass

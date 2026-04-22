@@ -159,6 +159,12 @@ func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
 	print("Player Attacked: ", target.name)
 
+func receiveDamage(attack:Attack):
+	stateMachine.setState(stateMachine.states["hurt"])
+	print("enemy", self, " receive ", attack.damage, " of damage")
+	hp-= attack.damage
+	print("After hit: ", hp)
+
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("introFinished")
