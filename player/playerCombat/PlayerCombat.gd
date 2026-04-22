@@ -25,7 +25,8 @@ signal turnFinished
 signal attackChosen
 
 var isWalking = false
-const walkSpeed = 80
+# REAL SPEED -> const walkSpeed = 100
+const walkSpeed = 200
 
 #Preload attacks
 const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")

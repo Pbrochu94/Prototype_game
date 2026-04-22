@@ -26,7 +26,7 @@ func _ready():
 	enemy.enemySelected.connect(playerAttack)
 	enemy.donePreparing.connect(enemyMoveToAttack)
 #	enemy.inPositionToAttack.connect(enemyAttack)
-#	enemy.turnFinished.connect(endEnemyTurn)
+	enemy.turnFinished.connect(endEnemyTurn)
 	selectionEnded.connect(endSelection)
 	playIntro()
 

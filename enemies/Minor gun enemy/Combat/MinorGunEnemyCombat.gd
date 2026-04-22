@@ -32,7 +32,8 @@ var currentCombatScene:Node2D
 var startingPosition
 var isWalking = false
 var walkTarget:Vector2
-const walkSpeed = 80
+# REAL SPEED -> const walkSpeed = 100
+const walkSpeed = 200
 var currentState:Node2D
 var canBeSelected = false
 var target:Node2D
@@ -59,6 +60,7 @@ signal turnFinished
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	orientSprite(facingPlayer)
 	#Initialize State machine
 	stateMachine.init(self)
 	#Instanciate environments
@@ -108,11 +110,13 @@ func _process(delta):
 
 func onAnimationFinished():
 	if anim.animation == "hurt":
-		stateMachine.setState(stateMachine.State["idle"])
-	if anim.animation == "attack melee":
-		stateMachine.setState(stateMachine.State["walkingback"])
-	if anim.animation == "attack gun":
-		stateMachine.setState(stateMachine.State["idle"])
+		stateMachine.setState(stateMachine.states["idle"])
+	if anim.animation == "gun strike":
+		print("Entered onAnimationFinished melee")
+		attackFinished()
+	if anim.animation == "gun shot":
+		print("Entered onAnimationFinished shot")
+		attackFinished()
 
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
@@ -161,15 +165,37 @@ func walk(delta, destination:Vector2):
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to character but leave spaces between
-	if stateMachine.currentState == Intro:
+	if stateMachine.currentState == stateMachine.states["getinposition"]:
 		var stopDistance = 32
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
-			emit_signal("inPositionToAttack")
+			emit_signal("inPositionToAttack", target)
+			attack()
 	else:
 		if global_position == destination:
+			if stateMachine.currentState == stateMachine.states["intro"]:
+				onIntroFinished()
+			else:
+				stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
-			onIntroFinished()
+
+func onIntroFinished():
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("introFinished")
+
+func endingTurn():
+	print(characterName, "finished its turn")
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("turnFinished")
+
+func chooseTarget():
+	target = currentCombatScene.player
+
+func getRandomAttack() -> Attack:
+	return attacks["gun strike"]
+#	var keys = attacks.keys()
+#	var random_key = keys[randi() % keys.size()]
+#	return attacks[random_key]
 
 func getInPosition():
 	print("Enemy gets in position")
@@ -178,16 +204,17 @@ func getInPosition():
 	if attackSelected.attackName == "gun shot":
 		stateMachine.setState(stateMachine.states["attacking"])
 
-func onIntroFinished():
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("introFinished")
+func attack():
+	stateMachine.setState(stateMachine.states["attacking"])
+	print("Enemy Attacked: ", target.name)
 
-func endTurn():
-	emit_signal("turnFinished")
-
-#func attack():
-#	print("enemy attacks: ", characterTargeting.characterName, " with ", attackUsed.name, " for ", attackUsed.damage)
-#	setState(State.ATTACK)
+func attackFinished():
+	print("Attack finished")
+	if self.global_position != self.startingPosition:
+		stateMachine.setState(stateMachine.states["walkingback"])
+	else:
+		stateMachine.setState(stateMachine.states["endingturn"])
+		
 
 #func receiveDamage(amount:int):
 #	setState(State.HURT)
@@ -195,13 +222,7 @@ func endTurn():
 #	hp-= amount
 #	print("After hit: ", hp)
 
-func chooseTarget():
-	target = currentCombatScene.player
 
-func getRandomAttack() -> Attack:
-	var keys = attacks.keys()
-	var random_key = keys[randi() % keys.size()]
-	return attacks[random_key]
 
 func isSelectable():
 	canBeSelected = true
