@@ -536,33 +536,3 @@ scale = Vector2(0.58, 0.58)
 
 [node name="Gunny" parent="." instance=ExtResource("6_mifdo")]
 position = Vector2(243, 53)
-
-[node name="AllyContainerBox" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -228.0
-offset_top = 69.0
-offset_right = -40.0
-offset_bottom = 128.0
-
-[node name="Panel" type="Panel" parent="AllyContainerBox"]
-layout_mode = 0
-offset_top = 1.0
-offset_right = 219.0
-offset_bottom = 59.0
-
-[node name="Name" type="Label" parent="AllyContainerBox/Panel"]
-custom_minimum_size = Vector2(12, 12)
-offset_left = 3.0
-offset_top = -2.0
-offset_right = 66.0
-offset_bottom = 24.0
-text = "Artorias"
-
-[node name="Label" type="Label" parent="AllyContainerBox/Panel"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 24.0
-offset_right = 39.0
-offset_bottom = 47.0
-text = "100/100"

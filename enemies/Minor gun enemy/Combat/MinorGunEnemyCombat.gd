@@ -222,7 +222,7 @@ func attackFinished():
 
 func receiveDamage(attack:Attack):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print("enemy", self, " receive ", attack.damage, " of damage")
+	print(self.characterName, " receive ", attack.damage, " of damage")
 	currentHp-= attack.damage
 	emit_signal("hpChanged")
 	print("After hit: ", currentHp)

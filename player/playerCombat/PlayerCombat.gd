@@ -25,6 +25,7 @@ signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
+signal isDowned
 
 var isWalking = false
 # REAL SPEED -> const walkSpeed = 100
@@ -47,63 +48,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-#	match currentState:
-#		State.WALK_IN,State.WALK_BACK:
-#			isWalking = true
-#			walk(delta, currentCombatScene.playerStartingPosition)
-#		State.IDLE:
-#			pass
-#		State.WALK_TO_TARGET:
-#			isWalking = true
-#			walk(delta, enemyTargeted.global_position)
 
 
 #CHECKS
-
-
-
-#func enterState(newState:State):
-#	match newState:
-#		State.WALK_IN:
-#			isWalking = true
-#		State.WALK_TO_TARGET:
-#			isWalking = true
-#		State.WALK_BACK:
-#			isWalking = true
-#		State.IDLE:
-#			pass
-#		State.ATTACK:
-#			pass
-	#At the start of a state the animation play once (Or on loop if set to loop)
-#	updateAnimation()
-#func exitState(state:State):
-#	match state:
-#		State.WALK_IN:
-#			emit_signal("introFinished")
-#			isWalking = false
-#		State.WALK_TO_TARGET:
-#			isWalking = false
-#		State.WALK_BACK:
-#			isWalking = false
-#			emit_signal("turnFinished")
-#		State.ATTACK:
-#			pass
-
-
-#ANIMATIONS HANDLERS
-#func updateAnimation():
-#	match currentState:
-#		State.IDLE:
-#			anim.play("idle")
-#			anim.scale.x = 1
-#		State.ATTACK:
-#			anim.play("attack")
-#		State.WALK_IN,State.WALK_TO_TARGET:
-#			anim.play("walk")
-#		State.WALK_BACK:
-#			#Flip sprite when walking back
-#			anim.scale.x = -1
-#			anim.play("walk")
 
 func onAnimationFinished():
 	if anim.animation == attackSelected.attackName:
@@ -163,10 +110,10 @@ func attack(enemyTarget:Node2D,weapon):
 
 func receiveDamage(attack:Attack):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print("enemy", self, " receive ", attack.damage, " of damage")
+	print(self.characterName, " receive ", attack.damage, " of damage")
 	currentHp-= attack.damage
-	emit_signal("hpChanged")
 	print("After hit: ", currentHp)
+
 
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])
