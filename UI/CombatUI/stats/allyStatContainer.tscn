@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://5446e1mdji2l"]
+
+[ext_resource type="Script" path="res://UI/CombatUI/stats/allyStatContainer.gd" id="1_b4w5s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nicjk"]
+bg_color = Color(0.576471, 0.611765, 0.556863, 0.376471)
+
+[node name="AllyStatBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 40.0
+scale = Vector2(3.09923, 0.932398)
+script = ExtResource("1_b4w5s")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nicjk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

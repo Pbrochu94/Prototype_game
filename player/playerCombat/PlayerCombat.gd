@@ -7,7 +7,8 @@ class_name PlayerCombat
 @onready var startingPosition:Vector2
 #STATS
 @export var characterName = "Artorias"
-@export var hp = 100
+@export var maxHp = 100
+@export var currentHp = 100
 @export var attacks:Dictionary= {
 	"sword slash 1" : swordSlash1
 }
@@ -23,6 +24,7 @@ signal selectionEnded
 signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
+signal hpChanged(currentHp, maxHp)
 
 var isWalking = false
 # REAL SPEED -> const walkSpeed = 100
@@ -162,8 +164,9 @@ func attack(enemyTarget:Node2D,weapon):
 func receiveDamage(attack:Attack):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print("enemy", self, " receive ", attack.damage, " of damage")
-	hp-= attack.damage
-	print("After hit: ", hp)
+	currentHp-= attack.damage
+	emit_signal("hpChanged")
+	print("After hit: ", currentHp)
 
 func onIntroFinished():
 	stateMachine.setState(stateMachine.states["idle"])

@@ -6,7 +6,8 @@ extends Node2D
 @onready var stateMachine = $StateMachine
 
 #STATS
-@export var hp:int = 100
+@export var maxHp = 100
+@export var currentHp = 100
 @export var attackPower:int = 5
 @export var characterName = "Gunny"
 
@@ -57,6 +58,7 @@ signal enemySelected(enemy:Node2D)
 signal donePreparing
 signal inPositionToAttack
 signal turnFinished
+signal hpChanged(currentHp, maxHp)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -221,8 +223,9 @@ func attackFinished():
 func receiveDamage(attack:Attack):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print("enemy", self, " receive ", attack.damage, " of damage")
-	hp-= attack.damage
-	print("After hit: ", hp)
+	currentHp-= attack.damage
+	emit_signal("hpChanged")
+	print("After hit: ", currentHp)
 
 
 
