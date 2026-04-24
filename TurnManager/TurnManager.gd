@@ -3,6 +3,7 @@ extends Node
 @onready var choiceMenu = get_tree().get_first_node_in_group("combat menu")
 var currentTurn = "player"
 var currentCombatScene:Node2D 
+var playerPartyManager:Node
 var player:Node2D 
 var enemy:Node2D 
 var enemyAnchor:Node2D
@@ -15,6 +16,7 @@ func _ready():
 	await get_tree().process_frame
 	choiceMenu.actionSelected.connect(onActionSelected)
 	enemyAnchor = currentCombatScene.enemyAnchor
+	playerPartyManager = get_tree().get_first_node_in_group("player party manager")
 	player = currentCombatScene.player
 	player.startingPosition =  currentCombatScene.playerStartingPosition
 	player.introFinished.connect(startCombat)
@@ -27,6 +29,7 @@ func _ready():
 	enemy.donePreparing.connect(enemyMoveToAttack)
 #	enemy.inPositionToAttack.connect(enemyAttack)
 	enemy.turnFinished.connect(endEnemyTurn)
+	playerPartyManager.partyDead.connect(playerDefeated)
 	selectionEnded.connect(endSelection)
 	playIntro()
 
@@ -95,3 +98,6 @@ func endSelection():
 
 func onEnemySelected():
 	print(enemy.name)
+
+func playerDefeated():
+	print("Game over")

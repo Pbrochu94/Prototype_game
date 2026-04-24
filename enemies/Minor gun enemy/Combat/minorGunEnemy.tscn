@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="14_pnls8"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="15_0dl55"]
 [ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="16_eb1vu"]
-[ext_resource type="Script" path="res://utils/States/Combat/IsDowned.gd" id="17_64aay"]
+[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="18_m4dga"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wva4"]
 atlas = ExtResource("2_4rusl")
@@ -311,7 +311,7 @@ script = ExtResource("15_0dl55")
 script = ExtResource("16_eb1vu")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("17_64aay")
+script = ExtResource("18_m4dga")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

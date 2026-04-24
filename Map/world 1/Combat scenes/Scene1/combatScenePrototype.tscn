@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=12 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://TurnManager/TurnManager.tscn" id="2_6240m"]
+[ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/managers/partyManager.tscn" id="2_p8kcl"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="3_ab8et"]
 [ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://player/playerCombat/playerCombat.tscn" id="4_gq0cu"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
@@ -501,6 +502,8 @@ sources/0 = SubResource("TileSetAtlasSource_xnv3b")
 
 [node name="CombatScenePrototype" type="Node2D" groups=["combat scene"]]
 script = ExtResource("1_ob25n")
+
+[node name="PartyManager" parent="." instance=ExtResource("2_p8kcl")]
 
 [node name="TurnManager" parent="." instance=ExtResource("2_6240m")]
 

@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_yqimq"]
 [ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_iyd1f"]
 [ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="10_2tfla"]
-[ext_resource type="Script" path="res://utils/States/Combat/IsDowned.gd" id="11_vno4h"]
+[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="11_f8scy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87a3s"]
 atlas = ExtResource("2_uhkjs")
@@ -399,7 +399,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4chx7")
 }, {
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_idv4a")
 }],
 "loop": false,
@@ -547,7 +547,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerCombat" type="Node2D" groups=["character", "player"]]
+[node name="PlayerCombat" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_1xdif")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -584,4 +584,4 @@ script = ExtResource("9_iyd1f")
 script = ExtResource("10_2tfla")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("11_vno4h")
+script = ExtResource("11_f8scy")

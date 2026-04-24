@@ -17,3 +17,7 @@ func exit():
 func animFinished():
 	if owner.currentHp <= 0:
 		owner.stateMachine.setState(owner.stateMachine.states["downed"])
+	else:
+		print("AHHHHH")
+		owner.stateMachine.setState(owner.stateMachine.states["idle"])
+

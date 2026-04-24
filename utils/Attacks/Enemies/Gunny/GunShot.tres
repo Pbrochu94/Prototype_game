@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_viliv")
 attackName = "gun shot"
-damage = 20
+damage = 100
 range = false
 cooldown = 0

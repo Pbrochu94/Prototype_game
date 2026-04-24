@@ -195,11 +195,9 @@ func chooseTarget():
 	target = currentCombatScene.player
 
 func getRandomAttack() -> Attack:
-	print("choosing new attack")
-	return attacks["gun shot"]
-#	var keys = attacks.keys()
-#	var random_key = keys[randi() % keys.size()]
-#	return attacks[random_key]
+	var keys = attacks.keys()
+	var random_key = keys[randi() % keys.size()]
+	return attacks[random_key]
 
 func getInPosition():
 	print("Enemy gets in position")
