@@ -10,6 +10,7 @@ extends Node2D
 @export var currentHp = 100
 @export var attackPower:int = 5
 @export var characterName = "Gunny"
+@export var speed = 2
 
 #PRELOAD ATTACKS
 const gunStrike = preload("res://utils/Attacks/Enemies/Gunny/GunStrike.tres")

@@ -569,7 +569,7 @@ script = ExtResource("5_rur61")
 
 [node name="GetInPosition" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_wrpjb")
-player = NodePath("../..")
+player = NodePath("")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
 script = ExtResource("7_1svj7")

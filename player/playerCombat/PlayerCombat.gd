@@ -9,6 +9,7 @@ class_name PlayerCombat
 @export var characterName = "Artorias"
 @export var maxHp = 100
 @export var currentHp = 100
+@export var speed = 1
 @export var attacks:Dictionary= {
 	"sword slash 1" : swordSlash1
 }

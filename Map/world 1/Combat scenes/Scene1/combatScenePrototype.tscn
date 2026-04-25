@@ -537,5 +537,5 @@ offset_right = -151.0
 offset_bottom = -79.0
 scale = Vector2(0.58, 0.58)
 
-[node name="Gunny" parent="." instance=ExtResource("6_mifdo")]
+[node name="Gunny" parent="." groups=["character"] instance=ExtResource("6_mifdo")]
 position = Vector2(243, 53)
