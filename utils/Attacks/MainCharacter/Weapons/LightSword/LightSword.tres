@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://8l4ggpr23ha8"]
+
+[ext_resource type="Resource" uid="uid://be2smvdjxl7k3" path="res://utils/Attacks/MainCharacter/Weapons/LightSword/SwordSlash1.tres" id="1_7gt7b"]
+[ext_resource type="Script" path="res://utils/Attacks/MainCharacter/Weapon.gd" id="1_j7m5t"]
+
+[resource]
+script = ExtResource("1_j7m5t")
+name = "LightSword"
+element = "Light"
+attacks = [ExtResource("1_7gt7b")]

@@ -10,9 +10,10 @@ class_name PlayerCombat
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
-@export var attacks:Dictionary= {
-	"sword slash 1" : swordSlash1
-}
+#@export var attacks:Dictionary= {
+#	"sword slash 1" : swordSlash1
+#}
+@export var weapon: Weapon
 @export var attackSelected:Attack
 
 #PARAMETERS
@@ -33,8 +34,7 @@ var isWalking = false
 const walkSpeed = 200
 
 #Preload attacks
-const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
-
+#const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
 
 var direction
 # Called when the node enters the scene tree for the first time.
@@ -95,8 +95,8 @@ func walkToTarget():
 	stateMachine.setState(stateMachine.states["getinposition"])
 
 func chooseAttack():
-	print(attacks)
-	attackSelected = attacks["sword slash 1"]
+	print(weapon)
+	attackSelected = weapon.attacks.get("sword slash 1")
 	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":
@@ -109,9 +109,9 @@ func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
 	print("Player Attacked: ", target.name)
 
-func receiveDamage(attack:Attack):
+func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print(self.characterName, " receive ", attack.damage, " of damage")
+	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
 	print("After hit: ", currentHp)
 
@@ -125,9 +125,9 @@ func endingTurn():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
 
-func addNewWeapon(filePath:String):
-	var attack = load(filePath) as Attack
-	attacks[attack.attackName] = attack
-	if attack == null:
-		push_error("Failed to load attack: " + filePath)
-		return
+#func addNewWeapon(filePath:String):
+#	var attack = load(filePath) as Attack
+#	attacks[attack.attackName] = attack
+#	if attack == null:
+#		push_error("Failed to load attack: " + filePath)
+#		return

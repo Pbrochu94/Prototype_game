@@ -1,6 +1,7 @@
-[gd_scene load_steps=84 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=85 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
+[ext_resource type="Resource" uid="uid://8l4ggpr23ha8" path="res://utils/Attacks/MainCharacter/Weapons/LightSword/LightSword.tres" id="2_pi5dy"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_qjglw"]
 [ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_5tsa7"]
@@ -550,6 +551,7 @@ animations = [{
 [node name="PlayerCombat" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_1xdif")
 speed = 2
+weapon = ExtResource("2_pi5dy")
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
@@ -568,9 +570,8 @@ script = ExtResource("4_5tsa7")
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("5_rur61")
 
-[node name="GetInPosition" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="GetInPosition" type="Node" parent="StateMachine"]
 script = ExtResource("6_wrpjb")
-player = NodePath("")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
 script = ExtResource("7_1svj7")

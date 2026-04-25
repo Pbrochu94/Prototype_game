@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://dgrbluicauhn3"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_3j6o7"]
+[ext_resource type="Script" path="res://utils/Attacks/Enemies/Attack.gd" id="1_35tu7"]
 
 [resource]
-script = ExtResource("1_3j6o7")
+script = ExtResource("1_35tu7")
 attackName = "gun strike"
 damage = 10
 range = false
 cooldown = 0
+element = "light"

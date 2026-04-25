@@ -82,35 +82,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-#	match currentState:
-#		State.IDLE:
-#			pass
-#		State.WALK_IN,State.WALK_BACK:
-#			walk(delta, currentCombatScene.enemyStartingPosition)
-#		State.WALK_TO_TARGET:
-#			walk(delta, target.global_position)
-
-
-
-#ANIMATIONS HANDLERS
-#func updateAnimation():
-#	match currentState:
-#		State.IDLE:
-#			anim.play("idle")
-#			orientSprite(facingPlayer)
-#		State.WALK_IN, State.WALK_TO_TARGET:
-#			orientSprite(facingPlayer)
-#			anim.play("walk")
-#		State.WALK_BACK:
-#			anim.play("walk")
-#			orientSprite(facingBackward)
-#		State.ATTACK:
-#			if attackUsed.name == "melee hit":
-#				anim.play("attack melee")
-#			if attackUsed.name == "gun shot":
-#				anim.play("attack gun")
-#		State.HURT:
-#			anim.play("hurt")
 
 func onAnimationFinished():
 	if anim.animation == "hurt":
@@ -124,33 +95,6 @@ func onAnimationFinished():
 
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
-
-#STATE HANDLERS
-#func setState(newState:State):
-#	if currentState == newState:
-#		return
-#	exitState(currentState)
-#	currentState = newState
-#	enterState(newState)
-#func enterState(newState:State):
-#	match newState:
-#		State.IDLE:
-#			pass
-#		State.WALK_IN,State.WALK_TO_TARGET,State.WALK_BACK:
-#			isWalking = true
-#		State.HURT:
-#			pass
-#		State.ATTACK:
-#			pass
-#	updateAnimation()
-#func exitState(state:State):
-#	match state:
-#		State.WALK_IN:
-#			emit_signal("introFinished")
-#		State.WALK_BACK:
-#				orientSprite(facingPlayer)
-#				emit_signal("turnFinished")
-
 
 #BEHAVIORS
 func playIntroWalk(walkTarget:Vector2):
@@ -220,9 +164,9 @@ func attackFinished():
 		stateMachine.setState(stateMachine.states["endingturn"])
 		
 
-func receiveDamage(attack:Attack):
+func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print(self.characterName, " receive ", attack.damage, " of damage")
+	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
 	emit_signal("hpChanged")
 	print("After hit: ", currentHp)
