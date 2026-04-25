@@ -506,7 +506,7 @@ script = ExtResource("1_ob25n")
 
 [node name="PartyManager" parent="." instance=ExtResource("2_p8kcl")]
 
-[node name="EnemyPartyManager" parent="." groups=["enemy party manager"] instance=ExtResource("3_bwdlj")]
+[node name="EnemyPartyManager" parent="." instance=ExtResource("3_bwdlj")]
 
 [node name="TurnManager" parent="." instance=ExtResource("2_6240m")]
 

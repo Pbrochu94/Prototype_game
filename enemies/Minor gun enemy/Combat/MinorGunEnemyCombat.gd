@@ -60,6 +60,7 @@ signal donePreparing
 signal inPositionToAttack
 signal turnFinished
 signal hpChanged(currentHp, maxHp)
+signal isDowned
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

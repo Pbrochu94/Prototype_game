@@ -549,6 +549,7 @@ animations = [{
 
 [node name="PlayerCombat" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_1xdif")
+speed = 2
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
