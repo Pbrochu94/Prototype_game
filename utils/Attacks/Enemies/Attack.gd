@@ -6,6 +6,8 @@ class_name Attack
 @export var range: bool
 @export var cooldown: int
 @export var element: String
+@export var hitboxName:String
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

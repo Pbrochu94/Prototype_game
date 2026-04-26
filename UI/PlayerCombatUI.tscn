@@ -55,3 +55,26 @@ offset_right = 110.0
 offset_bottom = 26.0
 text = "Make a choice
 "
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+offset_left = -169.0
+offset_top = 129.0
+offset_right = -148.0
+offset_bottom = 169.0
+scale = Vector2(6.88618, 3.45311)
+color = Color(0.215686, 0.215686, 0.215686, 0.662745)
+
+[node name="Label" type="Label" parent="Control/ColorRect"]
+layout_mode = 0
+offset_left = 5.37308
+offset_top = 0.579189
+offset_right = 49.3731
+offset_bottom = 26.5792
+scale = Vector2(0.239056, 0.351309)
+text = "items"

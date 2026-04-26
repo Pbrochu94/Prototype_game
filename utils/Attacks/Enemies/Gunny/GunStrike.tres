@@ -9,3 +9,4 @@ damage = 10
 range = false
 cooldown = 0
 element = "light"
+hitboxName = "GunStrike"

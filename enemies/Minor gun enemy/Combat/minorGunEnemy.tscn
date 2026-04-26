@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://gmpl0rsq3yvg"]
+[gd_scene load_steps=52 format=3 uid="uid://gmpl0rsq3yvg"]
 
 [ext_resource type="Script" path="res://enemies/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://du4gqws4qwe8h" path="res://enemies/Minor gun enemy/sprites/death 112x26.png" id="2_4rusl"]
@@ -265,6 +265,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fn00"]
 size = Vector2(20, 23)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtngj"]
+size = Vector2(36, 23)
+
 [node name="Gunny" type="Node2D" groups=["enemy", "enemy party member"]]
 script = ExtResource("1_otu23")
 speed = 1
@@ -274,9 +277,8 @@ speed = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(38, 0)
 sprite_frames = SubResource("SpriteFrames_ixlum")
-animation = &"downed"
-frame = 5
-frame_progress = 1.0
+animation = &"gun strike"
+frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_w3fm8")
@@ -313,6 +315,13 @@ script = ExtResource("16_eb1vu")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("18_m4dga")
+
+[node name="Hitboxes" type="Area2D" parent="."]
+
+[node name="GunStrike" type="CollisionShape2D" parent="Hitboxes"]
+position = Vector2(10, 0.5)
+shape = SubResource("RectangleShape2D_jtngj")
+debug_color = Color(0.956863, 0.129412, 0.411765, 0.419608)
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]

@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://be2smvdjxl7k3"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Enemies/Attack.gd" id="1_js1g1"]
+[ext_resource type="Script" path="res://utils/Attacks/Enemies/Attack.gd" id="1_gxcq5"]
 
 [resource]
-script = ExtResource("1_js1g1")
+script = ExtResource("1_gxcq5")
 attackName = "sword slash 1"
 damage = 100
 range = false
 cooldown = 0
 element = "light"
+hitboxName = "LightSlash1"

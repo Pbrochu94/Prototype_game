@@ -5,14 +5,12 @@ class_name PlayerCombat
 @onready var stateMachine = $StateMachine
 @onready var enemy = get_tree().get_nodes_in_group("enemy")
 @onready var startingPosition:Vector2
+@onready var hitboxShape = $Hitbox/CollisionShape2D
 #STATS
 @export var characterName = "Artorias"
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
-#@export var attacks:Dictionary= {
-#	"sword slash 1" : swordSlash1
-#}
 @export var weapon: Weapon
 @export var attackSelected:Attack
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=86 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
 [ext_resource type="Resource" uid="uid://8l4ggpr23ha8" path="res://utils/Attacks/MainCharacter/Weapons/LightSword/LightSword.tres" id="2_pi5dy"]
@@ -548,6 +548,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh7qf"]
+size = Vector2(45, 24)
+
 [node name="PlayerCombat" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_1xdif")
 speed = 2
@@ -558,7 +561,7 @@ weapon = ExtResource("2_pi5dy")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"hurt"
+animation = &"sword slash 1"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_qjglw")
@@ -587,3 +590,12 @@ script = ExtResource("10_2tfla")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("11_f8scy")
+
+[node name="Weapons" type="Node" parent="."]
+
+[node name="Hitboxes" type="Area2D" parent="."]
+
+[node name="LightSlash1" type="CollisionShape2D" parent="Hitboxes"]
+position = Vector2(14.5, 2)
+shape = SubResource("RectangleShape2D_lh7qf")
+debug_color = Color(0.956863, 0.129412, 0.411765, 0.419608)
