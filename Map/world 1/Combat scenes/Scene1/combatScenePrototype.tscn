@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=14 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://TurnManager/TurnManager.tscn" id="2_6240m"]
 [ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/managers/partyManager.tscn" id="2_p8kcl"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="3_ab8et"]
 [ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/managers/enemyPartyManager.tscn" id="3_bwdlj"]
-[ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://player/playerCombat/playerCombat.tscn" id="4_gq0cu"]
+[ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://Invocations/Samurai/SamuraiScene.tscn" id="4_gq0cu"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
-[ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://enemies/Minor gun enemy/Combat/minorGunEnemy.tscn" id="6_mifdo"]
+[ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://CharacterSprite/Minor gun enemy/Combat/minorGunEnemy.tscn" id="6_mifdo"]
+[ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruid.tscn" id="9_16ksc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
 texture = ExtResource("3_ab8et")
@@ -527,17 +528,23 @@ position = Vector2(-243, 53)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.515, 2.515)
 
+[node name="PlayerAnchor2" type="Node2D" parent="."]
+position = Vector2(-123, 3)
+
 [node name="PlayerAnchor1" type="Node2D" parent="."]
 position = Vector2(-123, 53)
 
-[node name="PlayerAnchor2" type="Node2D" parent="."]
-position = Vector2(-123, 14)
-
 [node name="PlayerAnchor3" type="Node2D" parent="."]
-position = Vector2(-123, 87.885)
+position = Vector2(-123, 103)
 
-[node name="EnemyAnchor" type="Node2D" parent="."]
+[node name="EnemyAnchor2" type="Node2D" parent="."]
+position = Vector2(123, 3)
+
+[node name="EnemyAnchor1" type="Node2D" parent="."]
 position = Vector2(123, 53)
+
+[node name="EnemyAnchor3" type="Node2D" parent="."]
+position = Vector2(123, 103)
 
 [node name="ChoiceMenu" parent="." groups=["combat menu"] instance=ExtResource("6_3vrbe")]
 offset_left = -151.0
@@ -548,3 +555,6 @@ scale = Vector2(0.58, 0.58)
 
 [node name="Gunny" parent="." groups=["character"] instance=ExtResource("6_mifdo")]
 position = Vector2(243, 53)
+
+[node name="BlasterDruid" parent="." instance=ExtResource("9_16ksc")]
+position = Vector2(-254, 53)
