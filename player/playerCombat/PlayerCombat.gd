@@ -11,7 +11,9 @@ class_name PlayerCombat
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
-@export var weapon: Weapon
+@export var attacks = [
+	preload("res://utils/Attacks/Characters/Samurai/SwordSlash.tres")
+]
 @export var attackSelected:Attack
 
 #PARAMETERS
@@ -93,8 +95,8 @@ func walkToTarget():
 	stateMachine.setState(stateMachine.states["getinposition"])
 
 func chooseAttack():
-	print(weapon)
-	attackSelected = weapon.attacks.get("sword slash 1")
+#	print(weapon)
+	attackSelected = attacks[0]
 	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":

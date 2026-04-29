@@ -100,7 +100,7 @@ func onActionSelected(action:String):
 	print("Player chose:", action)
 	match action:
 		"attack":
-			player.chooseAttack()
+			currentlyPlaying.chooseAttack()
 		"inventory":
 			pass
 		"ability":
@@ -115,8 +115,8 @@ func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
 	print("Player move to attack", enemy)
 	#Assign the enemy selected in player node
-	player.target = enemy
-	player.walkToTarget()
+	currentlyPlaying.target = enemy
+	currentlyPlaying.walkToTarget()
 
 func endSelection():
 	currentCombatScene.choiceMenu.visible = false

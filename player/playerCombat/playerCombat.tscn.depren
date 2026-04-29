@@ -1,6 +1,7 @@
-[gd_scene load_steps=85 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=86 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://player/playerCombat/PlayerCombat.gd" id="1_1xdif"]
+[ext_resource type="Resource" uid="uid://8l4ggpr23ha8" path="res://utils/Attacks/Characters/Samurai/LightSword/LightSword.tres" id="2_pi5dy"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_uhkjs"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_qjglw"]
 [ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_5tsa7"]
@@ -553,6 +554,7 @@ size = Vector2(45, 24)
 [node name="PlayerCombat" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_1xdif")
 speed = 2
+weapon = ExtResource("2_pi5dy")
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
