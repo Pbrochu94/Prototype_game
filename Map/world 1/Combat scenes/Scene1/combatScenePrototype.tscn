@@ -527,8 +527,14 @@ position = Vector2(-243, 53)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.515, 2.515)
 
-[node name="PlayerAnchor" type="Node2D" parent="."]
+[node name="PlayerAnchor1" type="Node2D" parent="."]
 position = Vector2(-123, 53)
+
+[node name="PlayerAnchor2" type="Node2D" parent="."]
+position = Vector2(-123, 14)
+
+[node name="PlayerAnchor3" type="Node2D" parent="."]
+position = Vector2(-123, 87.885)
 
 [node name="EnemyAnchor" type="Node2D" parent="."]
 position = Vector2(123, 53)

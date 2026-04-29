@@ -26,11 +26,12 @@ func _ready():
 
 #INIT
 func connectSignals():
+	for invocation in playerPartyManager.party:
+		invocation.introFinished.connect(startCombat)
+		invocation.selectionEnded.connect(endSelection)
+		invocation.turnFinished.connect(endTurn)
+		invocation.attackChosen.connect(startSelectingTarget)
 	choiceMenu.actionSelected.connect(onActionSelected)
-	player.introFinished.connect(startCombat)
-	player.selectionEnded.connect(endSelection)
-	player.turnFinished.connect(endTurn)
-	player.attackChosen.connect(startSelectingTarget)
 	enemy = currentCombatScene.enemy
 	enemy.startingPosition = currentCombatScene.enemyStartingPosition
 	enemy.enemySelected.connect(playerAttack)
@@ -42,7 +43,7 @@ func connectSignals():
 
 func initVariables():
 	player = currentCombatScene.player
-	player.startingPosition =  currentCombatScene.playerStartingPosition
+#	player.startingPosition =  currentCombatScene.playerStartingPosition
 	playerPartyManager = get_tree().get_first_node_in_group("player party manager")
 	enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")	
 	enemyAnchor = currentCombatScene.enemyAnchor
@@ -69,7 +70,8 @@ func updateCurrentlyPlaying():
 
 #INTRO---------
 func playIntro():
-	player.playIntroWalk(currentCombatScene.playerStartingPosition)
+	for invocation in playerPartyManager.party:
+		invocation.playIntroWalk(currentCombatScene.playerStartingPosition)
 	enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
 
 func startCombat():
