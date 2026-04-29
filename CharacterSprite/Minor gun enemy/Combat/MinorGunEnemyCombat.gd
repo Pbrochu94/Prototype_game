@@ -138,7 +138,7 @@ func endingTurn():
 	emit_signal("turnFinished")
 
 func chooseTarget():
-	target = currentCombatScene.player
+	target = currentCombatScene.playerPartyManager.party.pick_random()
 
 func getRandomAttack() -> Attack:
 	var keys = attacks.keys()

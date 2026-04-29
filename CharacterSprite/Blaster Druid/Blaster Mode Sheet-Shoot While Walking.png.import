@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://34ql5jlv7n2p"
-path="res://.godot/imported/Blaster Mode Sheet-Double Jump.png-76df2f145a9cb186deb568de5c94893e.ctex"
+uid="uid://bfnnua0riu5ei"
+path="res://.godot/imported/Blaster Mode Sheet-Shoot While Walking.png-9bd15ffabdbb606f4931e8b12cb8f2d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Double Jump.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Double Jump.png-76df2f145a9cb186deb568de5c94893e.ctex"]
+source_file="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot While Walking.png"
+dest_files=["res://.godot/imported/Blaster Mode Sheet-Shoot While Walking.png-9bd15ffabdbb606f4931e8b12cb8f2d1.ctex"]
 
 [params]
 

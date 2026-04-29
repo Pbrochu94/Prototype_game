@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfnnua0riu5ei"
-path="res://.godot/imported/Blaster Mode Sheet-Shoot While Walking.png-29110a22700b372d7561596af443d66f.ctex"
+uid="uid://3vseu4jvnovf"
+path="res://.godot/imported/Cannon Mode Sheet-Inventory DOwn.png-1261f630a52890d6ba232891a44e83f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Shoot While Walking.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Shoot While Walking.png-29110a22700b372d7561596af443d66f.ctex"]
+source_file="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png"
+dest_files=["res://.godot/imported/Cannon Mode Sheet-Inventory DOwn.png-1261f630a52890d6ba232891a44e83f0.ctex"]
 
 [params]
 

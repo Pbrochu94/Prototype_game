@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cajtr0g2gpt2w"
-path="res://.godot/imported/Blaster Mode Sheet-Inventory DOwn.png-38873d71d8b2e805f5af979b41cf099a.ctex"
+uid="uid://b2tw7ka81nxvb"
+path="res://.godot/imported/Cannon Mode Sprite Sheet 135x38.png-00334ec9bbd89f294fee64a0a3ec69b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Inventory DOwn.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Inventory DOwn.png-38873d71d8b2e805f5af979b41cf099a.ctex"]
+source_file="res://CharacterSprite/Cannon Druid/Cannon Mode Sprite Sheet 135x38.png"
+dest_files=["res://.godot/imported/Cannon Mode Sprite Sheet 135x38.png-00334ec9bbd89f294fee64a0a3ec69b9.ctex"]
 
 [params]
 

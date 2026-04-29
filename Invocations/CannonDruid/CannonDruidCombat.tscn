@@ -1,0 +1,144 @@
+[gd_scene load_steps=23 format=3 uid="uid://67avdf4jdwg3"]
+
+[ext_resource type="Script" path="res://Invocations/CannonDruid/CannonDruid.gd" id="1_fhrl2"]
+[ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_gj5uk"]
+[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_kxdvg"]
+[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="5_cwm44"]
+[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_5tigt"]
+[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_qh5tj"]
+[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_sjma3"]
+[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_k2unr"]
+[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="10_hn4rw"]
+[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="11_wdrlj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boni8"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(675, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rret0"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(810, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqurw"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(945, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt1ss"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1080, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6bhj"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1215, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2siuu"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1350, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyhoh"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1485, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ismbf"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1620, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxeb6"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(1755, 0, 135, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1271l"]
+atlas = ExtResource("2_pg1n1")
+region = Rect2(540, 0, 135, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwixa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boni8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rret0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqurw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt1ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6bhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2siuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyhoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ismbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxeb6")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ismbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyhoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2siuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6bhj")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_1271l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="CannonDruid" type="Node2D" groups=["character", "main character", "party member", "player"]]
+script = ExtResource("1_fhrl2")
+
+[node name="SpritePivot" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(31, -8)
+sprite_frames = SubResource("SpriteFrames_lwixa")
+animation = &"idle"
+frame_progress = 0.861126
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_gj5uk")
+
+[node name="Intro" type="Node" parent="StateMachine"]
+script = ExtResource("4_kxdvg")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_cwm44")
+
+[node name="GetInPosition" type="Node" parent="StateMachine"]
+script = ExtResource("6_5tigt")
+
+[node name="WalkingBack" type="Node" parent="StateMachine"]
+script = ExtResource("7_qh5tj")
+
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("8_sjma3")
+
+[node name="EndingTurn" type="Node" parent="StateMachine"]
+script = ExtResource("9_k2unr")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("10_hn4rw")
+
+[node name="Downed" type="Node" parent="StateMachine"]
+script = ExtResource("11_wdrlj")
+
+[node name="Hitboxes" type="Area2D" parent="."]
+visible = false

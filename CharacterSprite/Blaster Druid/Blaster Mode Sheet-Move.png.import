@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsogrn8dhskfh"
-path="res://.godot/imported/Blaster Mode Sheet-Heal.png-69c15d6bb5b1763f6e1d839d0df61dac.ctex"
+uid="uid://wv1dg5clr7yo"
+path="res://.godot/imported/Blaster Mode Sheet-Move.png-3de3ebfbacc2ee8272e99b4ed01673fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Heal.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Heal.png-69c15d6bb5b1763f6e1d839d0df61dac.ctex"]
+source_file="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png"
+dest_files=["res://.godot/imported/Blaster Mode Sheet-Move.png-3de3ebfbacc2ee8272e99b4ed01673fc.ctex"]
 
 [params]
 

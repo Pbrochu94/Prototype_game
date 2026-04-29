@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boqw3ey4u0wll"
-path="res://.godot/imported/Blaster Mode Sheet-Jump.png-1badfa4e6ff2ea84e985b0b8579daebf.ctex"
+uid="uid://blf21jxd0ecle"
+path="res://.godot/imported/Blaster Mode Sheet-Death.png-fc88a0b0671f5551ff9ffe97d5e5e668.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Jump.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Jump.png-1badfa4e6ff2ea84e985b0b8579daebf.ctex"]
+source_file="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Death.png"
+dest_files=["res://.godot/imported/Blaster Mode Sheet-Death.png-fc88a0b0671f5551ff9ffe97d5e5e668.ctex"]
 
 [params]
 

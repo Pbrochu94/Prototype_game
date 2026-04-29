@@ -15,6 +15,7 @@ class_name BlasterDruidCombat
 	preload("res://Invocations/BlasterDruid/GunShot.tres")
 ]
 @export var attackSelected:Attack
+@export var walkSpeed = 80
 
 #PARAMETERS
 var currentCombatScene:Node2D
@@ -31,7 +32,7 @@ signal isDowned
 
 var isWalking = false
 # REAL SPEED -> const walkSpeed = 100
-const walkSpeed = 200
+
 
 #Preload attacks
 #const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
@@ -75,7 +76,7 @@ func walk(delta, destination:Vector2):
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to enemy but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 32
+		var stopDistance = 200
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)

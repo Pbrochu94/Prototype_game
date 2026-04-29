@@ -588,8 +588,6 @@ script = ExtResource("10_aewk8")
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("11_2t004")
 
-[node name="Weapons" type="Node" parent="."]
-
 [node name="Hitboxes" type="Area2D" parent="."]
 
 [node name="LightSlash1" type="CollisionShape2D" parent="Hitboxes"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cud07t3svom8n"
-path="res://.godot/imported/Blaster Mode Sheet 81x32.png-006ffd4e6f98f05cc5b073b1f02572d7.ctex"
+uid="uid://rka6oq2er58a"
+path="res://.godot/imported/Cannon Mode Sheet-Jump.png-f5ad19e3c2f8e793637bc3742c0e3193.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet 81x32.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet 81x32.png-006ffd4e6f98f05cc5b073b1f02572d7.ctex"]
+source_file="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Jump.png"
+dest_files=["res://.godot/imported/Cannon Mode Sheet-Jump.png-f5ad19e3c2f8e793637bc3742c0e3193.ctex"]
 
 [params]
 

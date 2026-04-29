@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byk11bj5k8758"
-path="res://.godot/imported/Blaster Mode Sheet-Shoot Start.png-2a66caf39b233aa15bfacb72018a0b34.ctex"
+uid="uid://6s28kiyswxid"
+path="res://.godot/imported/Cannon Mode Sheet-Heal.png-03a9300175191d96adf0fdeee6e57a27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Shoot Start.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Shoot Start.png-2a66caf39b233aa15bfacb72018a0b34.ctex"]
+source_file="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Heal.png"
+dest_files=["res://.godot/imported/Cannon Mode Sheet-Heal.png-03a9300175191d96adf0fdeee6e57a27.ctex"]
 
 [params]
 

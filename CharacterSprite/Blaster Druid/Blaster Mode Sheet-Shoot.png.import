@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wmuj72rv8s4e"
-path="res://.godot/imported/Blaster Mode Sheet-Idle.png-bcc8f3bb198a98a3492395aa0364cb6b.ctex"
+uid="uid://cvn0j37sy1k3k"
+path="res://.godot/imported/Blaster Mode Sheet-Shoot.png-bac4a225442aba662b3d71449d35f6e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Blaster Mode Sprites/Blaster Mode Sheet-Idle.png"
-dest_files=["res://.godot/imported/Blaster Mode Sheet-Idle.png-bcc8f3bb198a98a3492395aa0364cb6b.ctex"]
+source_file="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot.png"
+dest_files=["res://.godot/imported/Blaster Mode Sheet-Shoot.png-bac4a225442aba662b3d71449d35f6e9.ctex"]
 
 [params]
 

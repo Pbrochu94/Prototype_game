@@ -1,5 +1,5 @@
 extends Node2D
-class_name SamuraiCombat
+class_name CannonDruidCombat
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var stateMachine = $StateMachine
@@ -7,13 +7,11 @@ class_name SamuraiCombat
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
 #STATS
-@export var characterName = "Samurai"
+@export var characterName = "Artorias"
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
-@onready var attacks = [
-	preload("res://Invocations/Samurai/SwordSlash.tres")
-]
+@export var attacks = []
 @export var attackSelected:Attack
 
 #PARAMETERS

@@ -132,7 +132,7 @@ func endSelection():
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
-	enemy.getInPosition()
+	currentlyPlaying.getInPosition()
 
 func enemyAttack():
 	enemy.attack()
