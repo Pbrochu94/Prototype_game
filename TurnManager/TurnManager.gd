@@ -126,7 +126,9 @@ func playerAttack(enemy:Node2D):
 
 func endSelection():
 	currentCombatScene.choiceMenu.visible = false
-	enemy.selectionEnded()
+	for enemy in enemyPartyManager.party:
+		enemy.selectionEnded()
+
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
