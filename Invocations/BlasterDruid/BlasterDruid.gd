@@ -6,6 +6,7 @@ class_name BlasterDruidCombat
 @onready var enemy = get_tree().get_nodes_in_group("enemy")
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
+@onready var spriteOrientation = $SpritePivot
 #STATS
 @export var characterName = "Blaster druid"
 @export var maxHp = 100
@@ -56,11 +57,13 @@ func _process(delta):
 
 func onAnimationFinished():
 	if anim.animation == attackSelected.attackName:
-		stateMachine.setState(stateMachine.states["walkingback"])
+		attackFinished()
 
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
+		print(self.global_position)
+		print(self.startingPosition)
 		stateMachine.setState(stateMachine.states["walkingback"])
 	else:
 		stateMachine.setState(stateMachine.states["endingturn"])
@@ -76,17 +79,14 @@ func walk(delta, destination:Vector2):
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to enemy but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 200
+		var stopDistance = 160
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
-			if stateMachine.currentState == stateMachine.states["intro"]:
-				onIntroFinished()
-			else:
-				stateMachine.setState(stateMachine.states["endingturn"])
+			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
 
 
@@ -126,9 +126,5 @@ func endingTurn():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
 
-#func addNewWeapon(filePath:String):
-#	var attack = load(filePath) as Attack
-#	attacks[attack.attackName] = attack
-#	if attack == null:
-#		push_error("Failed to load attack: " + filePath)
-#		return
+func orientSprite(direction:int):
+	spriteOrientation.scale.x = direction

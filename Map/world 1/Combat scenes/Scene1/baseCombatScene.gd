@@ -28,9 +28,6 @@ func _ready():
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	initPlayerPartyData()
 	initEnemyPartyData()
-#	playerStartingPosition = playerAnchor.global_position
-#	enemyStartingPosition = enemyAnchor.global_position
-#	player.currentCombatScene = combatScene
 	turnManager.currentCombatScene = combatScene
 
 

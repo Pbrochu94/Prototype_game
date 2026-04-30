@@ -34,7 +34,6 @@ var isWalking = false
 const walkSpeed = 200
 
 #Preload attacks
-#const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
 
 var direction
 # Called when the node enters the scene tree for the first time.
@@ -82,10 +81,7 @@ func walk(delta, destination:Vector2):
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
-			if stateMachine.currentState == stateMachine.states["intro"]:
-				onIntroFinished()
-			else:
-				stateMachine.setState(stateMachine.states["endingturn"])
+			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
 
 
@@ -125,9 +121,3 @@ func endingTurn():
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
 
-#func addNewWeapon(filePath:String):
-#	var attack = load(filePath) as Attack
-#	attacks[attack.attackName] = attack
-#	if attack == null:
-#		push_error("Failed to load attack: " + filePath)
-#		return

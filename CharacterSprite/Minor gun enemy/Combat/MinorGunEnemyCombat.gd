@@ -122,10 +122,7 @@ func walk(delta, destination:Vector2):
 			attack()
 	else:
 		if global_position == destination:
-			if stateMachine.currentState == stateMachine.states["intro"]:
-				onIntroFinished()
-			else:
-				stateMachine.setState(stateMachine.states["endingturn"])
+			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
 
 func onIntroFinished():

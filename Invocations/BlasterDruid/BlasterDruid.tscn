@@ -1,20 +1,19 @@
-[gd_scene load_steps=50 format=3 uid="uid://b4ujsi8dfa3g"]
+[gd_scene load_steps=49 format=3 uid="uid://b4ujsi8dfa3g"]
 
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/BlasterDruid.gd" id="1_b5ocs"]
 [ext_resource type="Texture2D" uid="uid://wv1dg5clr7yo" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png" id="2_jq4id"]
 [ext_resource type="Texture2D" uid="uid://byk11bj5k8758" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot Start.png" id="3_dfm8k"]
 [ext_resource type="Texture2D" uid="uid://cvn0j37sy1k3k" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot.png" id="4_357ha"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="4_mltf0"]
-[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="5_i71ec"]
 [ext_resource type="Texture2D" uid="uid://di4avdftyeusw" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot End.png" id="5_mdkwm"]
 [ext_resource type="Texture2D" uid="uid://cud07t3svom8n" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet 81x32.png" id="6_37l4i"]
-[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="6_ll4ip"]
-[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="7_d6bwl"]
-[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="8_suwuy"]
-[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="9_lt5pm"]
-[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="10_kv266"]
-[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="11_0xf6w"]
-[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="12_5m6t4"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/IdleBlasterDruid.gd" id="9_b84jj"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/GetInPositionBlasterDruid.gd" id="10_bpku6"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/WalkingBackBlasterDruid.gd" id="11_53a64"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/AttackingBlasterDruid.gd" id="12_3rj2a"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/EndingTurnBlasterDruid.gd" id="13_0wno0"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/HurtBlasterDruid.gd" id="14_jldtt"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/DownedBlasterDruid.gd" id="15_6gwic"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ng47"]
 atlas = ExtResource("2_jq4id")
@@ -276,39 +275,39 @@ animations = [{
 
 [node name="BlasterDruid" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_b5ocs")
+speed = 1
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(-8, 0)
 sprite_frames = SubResource("SpriteFrames_ou3ms")
-animation = &"gun shot"
+animation = &"walk"
+frame = 7
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_mltf0")
 
-[node name="Intro" type="Node" parent="StateMachine"]
-script = ExtResource("5_i71ec")
-
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("6_ll4ip")
+script = ExtResource("9_b84jj")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("7_d6bwl")
+script = ExtResource("10_bpku6")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("8_suwuy")
+script = ExtResource("11_53a64")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("9_lt5pm")
+script = ExtResource("12_3rj2a")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("10_kv266")
+script = ExtResource("13_0wno0")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("11_0xf6w")
+script = ExtResource("14_jldtt")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("12_5m6t4")
+script = ExtResource("15_6gwic")
 
 [node name="Weapons" type="Node" parent="."]
 

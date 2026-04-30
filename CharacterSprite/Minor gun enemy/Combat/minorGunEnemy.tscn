@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://gmpl0rsq3yvg"]
+[gd_scene load_steps=50 format=3 uid="uid://gmpl0rsq3yvg"]
 
 [ext_resource type="Script" path="res://CharacterSprite/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_otu23"]
 [ext_resource type="Texture2D" uid="uid://du4gqws4qwe8h" path="res://CharacterSprite/Minor gun enemy/sprites/death 112x26.png" id="2_4rusl"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://CharacterSprite/Minor gun enemy/Combat/Hitbox.gd" id="4_w3fm8"]
 [ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="5_majnp"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="9_75bjw"]
-[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="9_gurxk"]
 [ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="10_700fa"]
 [ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="12_tq5pg"]
 [ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="13_sqf38"]
@@ -287,9 +286,6 @@ position = Vector2(0, -30)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("9_75bjw")
-
-[node name="Intro" type="Node" parent="StateMachine"]
-script = ExtResource("9_gurxk")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_700fa")

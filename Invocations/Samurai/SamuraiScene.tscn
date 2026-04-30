@@ -1,16 +1,15 @@
-[gd_scene load_steps=85 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=84 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_d153k"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
-[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_lttp6"]
-[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="5_enak1"]
-[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_kkite"]
-[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_m773k"]
-[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_louuc"]
-[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_lee35"]
-[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="10_aewk8"]
-[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="11_2t004"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/IdleSamurai.gd" id="5_5jnhc"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/GetInPositionSamurai.gd" id="6_ok88i"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/WalkingBackSamurai.gd" id="7_8a64a"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/AttackingSamurai.gd" id="8_3r8eu"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/EndingTurnSamurai.gd" id="8_obadw"]
+[ext_resource type="Script" path="res://Invocations/Samurai/HurtSamurai.gd" id="10_wj2v1"]
+[ext_resource type="Script" path="res://Invocations/Samurai/DownedSamurai.gd" id="11_sw6l4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87a3s"]
 atlas = ExtResource("2_d153k")
@@ -558,35 +557,32 @@ script = ExtResource("1_xubua")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"sword slash 1"
+animation = &"walk"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_mtelm")
-initialState = NodePath("Intro")
-
-[node name="Intro" type="Node" parent="StateMachine"]
-script = ExtResource("4_lttp6")
+initialState = NodePath("")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("5_enak1")
+script = ExtResource("5_5jnhc")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("6_kkite")
+script = ExtResource("6_ok88i")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("7_m773k")
+script = ExtResource("7_8a64a")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("8_louuc")
+script = ExtResource("8_3r8eu")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("9_lee35")
+script = ExtResource("8_obadw")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("10_aewk8")
+script = ExtResource("10_wj2v1")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("11_2t004")
+script = ExtResource("11_sw6l4")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 

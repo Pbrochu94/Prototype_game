@@ -23,6 +23,7 @@ func _ready():
 	initVariables()
 	connectSignals()
 	playIntro()
+	startCombat()
 
 #INIT
 func connectSignals():
@@ -42,10 +43,11 @@ func initVariables():
 
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
-		invocation.introFinished.connect(startCombat)
 		invocation.selectionEnded.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
 		invocation.attackChosen.connect(startSelectingTarget)
+	print("ORDER",playOrder)
+#	playOrder[-1].introFinished.connect(startCombat)
 
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
@@ -54,11 +56,12 @@ func connectEachEnemy():
 		enemy.turnFinished.connect(endTurn)
 
 func initPlayOrder():
-	for character in get_tree().get_nodes_in_group("character"):
+	for character in get_tree().get_nodes_in_group("unit"):
 		playOrder.append(character)
 		playOrder.sort_custom(func(a, b):
 			return a.speed > b.speed
 		)
+	currentlyPlaying = playOrder[0]
 
 func updateCurrentlyPlaying():
 	if playerLost:
@@ -76,19 +79,19 @@ func updateCurrentlyPlaying():
 #INTRO---------
 func playIntro():
 	for invocation in playerPartyManager.party:
-		invocation.playIntroWalk(currentCombatScene.playerStartingPosition)
+		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
 	for enemy in enemyPartyManager.party:
-		enemy.playIntroWalk(currentCombatScene.enemyStartingPosition)
+		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
 
 func startCombat():
-	updateCurrentlyPlaying()
 	startTurn()
+	print("FIGHT START")
 
 #TURN MANAGER
 func startTurn():
 	if not currentlyPlaying:
 		return
-	if currentlyPlaying.is_in_group("player"):
+	if currentlyPlaying.is_in_group("invocation"):
 		chooseAction()
 	else:
 		currentlyPlaying.startTurn()
