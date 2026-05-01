@@ -1,8 +1,11 @@
 extends Node
 
+#VARIABLES
 var party:Array[Node2D]
 var aliveCount:int
 var currentlyAliveCharacters:Array[Node2D]
+
+#SIGNALS
 signal partyDead
 
 # Called when the node enters the scene tree for the first time.
@@ -14,13 +17,7 @@ func _ready():
 		print(party, aliveCount)
 	currentlyAliveCharacters = party
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
+#PARTY HANDLERS
 func onCharacterDeath(character:Node2D):
 	aliveCount -= 1
 	currentlyAliveCharacters = party.filter(
