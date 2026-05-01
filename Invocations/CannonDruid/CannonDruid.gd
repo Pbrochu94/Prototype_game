@@ -15,18 +15,20 @@ class_name CannonDruidCombat
 @export var attackPower:int = 5
 @export var characterName = "Cannon Druid"
 @export var speed = 2
+@export var walkSpeed = 200
 #ATTACKS & SPELLS
 @export var attacks:Dictionary = {
+	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/Cannonshot.tres")
 }
 #STATUS
 var isDead = false
 
+#VARIABLES
 var startingPosition
 var isWalking = false
 var walkTarget:Vector2
-# REAL SPEED -> const walkSpeed = 100
-const walkSpeed = 200
-var currentState:Node2D
+
+var currentState:String
 var canBeSelected = false
 var target:Node2D
 var attackSelected:Attack
@@ -69,17 +71,16 @@ func connectSignals():
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
-	if anim.animation == "hurt":
-		if currentHp <= 0:
-			stateMachine.setState(stateMachine.states["downed"])
-		else:
-			stateMachine.setState(stateMachine.states["idle"])
-	if anim.animation == "gun strike":
-		print("Entered onAnimationFinished melee")
-		attackFinished()
-	if anim.animation == "gun shot":
-		print("Entered onAnimationFinished shot")
-		attackFinished()
+	match currentState:
+		"attacking":
+			if anim.animation == attackSelected.attackName:
+				stateMachine.setState(stateMachine.states["walkingback"])
+		"hurt":
+			if anim.animation == "hurt":
+				if currentHp <= 0:
+					stateMachine.setState(stateMachine.states["downed"])
+				else:
+					stateMachine.setState(stateMachine.states["idle"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
@@ -122,10 +123,10 @@ func getRandomAttack() -> Attack:
 	return attacks[random_key]
 func getInPosition():
 	print("Enemy gets in position")
-	if attackSelected.attackName == "gun strike":
+	if attackSelected.attackName == "cannon shot":
 		stateMachine.setState(stateMachine.states["getinposition"])
-	if attackSelected.attackName == "gun shot":
-		stateMachine.setState(stateMachine.states["attacking"])
+#	if attackSelected.attackName == "gun shot":
+#		stateMachine.setState(stateMachine.states["attacking"])
 func attack():
 	stateMachine.setState(stateMachine.states["attacking"])
 	print("Enemy Attacked: ", target.name)

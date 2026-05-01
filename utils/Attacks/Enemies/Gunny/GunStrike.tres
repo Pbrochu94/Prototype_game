@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_35tu7")
 attackName = "gun strike"
-damage = 100
+damage = 1
 range = false
 cooldown = 0
 element = "light"

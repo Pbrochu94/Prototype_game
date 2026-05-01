@@ -30,4 +30,5 @@ func setState(state:State):
 		currentState.exit()
 	state.enter()
 	currentState = state
+	owner.currentState = state.name.to_lower()
 	print(owner.name," enter state: ",currentState.name)

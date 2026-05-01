@@ -28,8 +28,6 @@ var isDead = false
 var turnManager:Node
 var currentCombatScene:Node2D
 
-
-
 #PROPERTIES
 @onready var area = $Area2D
 @onready var selectingArrow = $SelectingArrow
@@ -39,7 +37,7 @@ var isWalking = false
 var walkTarget:Vector2
 # REAL SPEED -> const walkSpeed = 100
 const walkSpeed = 200
-var currentState:Node2D
+var currentState:String
 var canBeSelected = false
 var target:Node2D
 var attackSelected:Attack
@@ -87,17 +85,16 @@ func _process(delta):
 	pass
 
 func onAnimationFinished():
-	if anim.animation == "hurt":
-		if currentHp <= 0:
-			stateMachine.setState(stateMachine.states["downed"])
-		else:
-			stateMachine.setState(stateMachine.states["idle"])
-	if anim.animation == "gun strike":
-		print("Entered onAnimationFinished melee")
-		attackFinished()
-	if anim.animation == "gun shot":
-		print("Entered onAnimationFinished shot")
-		attackFinished()
+	match currentState:
+		"attacking":
+			if anim.animation == attackSelected.attackName:
+				stateMachine.setState(stateMachine.states["walkingback"])
+		"hurt":
+			if anim.animation == "hurt":
+				if currentHp <= 0:
+					stateMachine.setState(stateMachine.states["downed"])
+				else:
+					stateMachine.setState(stateMachine.states["idle"])
 
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction

@@ -14,6 +14,7 @@ var target:Node2D
 #VARIABLES
 var isWalking:bool = false
 var direction:int
+var currentState:String
 
 #STATS
 @export var characterName:String = ""
@@ -48,13 +49,16 @@ func _ready():
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
-	if anim.animation == attackSelected.attackName:
-		stateMachine.setState(stateMachine.states["walkingback"])
-	if anim.animation == "hurt":
-		if currentHp <= 0:
-			stateMachine.setState(stateMachine.states["downed"])
-		else:
-			stateMachine.setState(stateMachine.states["idle"])
+	match currentState:
+		"attacking":
+			if anim.animation == attackSelected.attackName:
+				stateMachine.setState(stateMachine.states["walkingback"])
+		"hurt":
+			if anim.animation == "hurt":
+				if currentHp <= 0:
+					stateMachine.setState(stateMachine.states["downed"])
+				else:
+					stateMachine.setState(stateMachine.states["idle"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
