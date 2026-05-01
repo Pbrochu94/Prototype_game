@@ -18,9 +18,14 @@ class_name BlasterDruidCombat
 @export var attackSelected:Attack
 @export var walkSpeed = 80
 
+#BOOLEANS
+var isWalking = false
+
 #PARAMETERS
 var currentCombatScene:Node2D
 var target:Node2D
+
+
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
@@ -31,12 +36,7 @@ signal attackChosen
 signal hpChanged(currentHp, maxHp)
 signal isDowned
 
-var isWalking = false
-# REAL SPEED -> const walkSpeed = 100
 
-
-#Preload attacks
-#const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
 
 var direction
 # Called when the node enters the scene tree for the first time.
@@ -53,48 +53,24 @@ func _process(delta):
 	pass
 
 
-#CHECKS
-
+#ANIMATIONS & SPRITES
 func onAnimationFinished():
 	if anim.animation == attackSelected.attackName:
-		attackFinished()
+		stateMachine.setState(stateMachine.states["walkingback"])
+	if anim.animation == "hurt":
+		if currentHp <= 0:
+			stateMachine.setState(owner.stateMachine.states["downed"])
+		else:
+			stateMachine.setState(owner.stateMachine.states["idle"])
 
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
-		print(self.global_position)
-		print(self.startingPosition)
 		stateMachine.setState(stateMachine.states["walkingback"])
 	else:
 		stateMachine.setState(stateMachine.states["endingturn"])
-		
 
-#BEHAVIORS
-func playIntroWalk(walkTarget:Vector2):
-	stateMachine.setState(stateMachine.states["intro"])
-
-func walk(delta, destination:Vector2):
-	if not isWalking:
-		return
-	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	#Walk to enemy but leave spaces between
-	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 160
-		if global_position.distance_to(destination)<= stopDistance:
-			isWalking = false
-			emit_signal("inPositionToAttack", target)
-			attack(target, attackSelected)
-	else:
-		if global_position == destination:
-			stateMachine.setState(stateMachine.states["endingturn"])
-			isWalking = false
-
-
-
-func walkToTarget():
-	emit_signal("selectionEnded")
-	stateMachine.setState(stateMachine.states["getinposition"])
-
+#TURN FLOW
 func chooseAttack():
 #	print(weapon)
 	attackSelected = attacks[0]
@@ -105,26 +81,38 @@ func chooseAttack():
 #	else:
 #		return
 	emit_signal("attackChosen")
-
+func walkToTarget():
+	emit_signal("selectionEnded")
+	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
 	print("Player Attacked: ", target.name)
+func endingTurn():
+	print("Player end turn")
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("turnFinished")
 
+#BEHAVIORS
+#func playIntroWalk(walkTarget:Vector2):
+#	stateMachine.setState(stateMachine.states["intro"])
+func walk(delta, destination:Vector2):
+	if not isWalking:
+		return
+	global_position = global_position.move_toward(destination, walkSpeed*delta)
+	#Walk to enemy but leave spaces between
+	if stateMachine.currentState == stateMachine.states["getinposition"]:
+		var stopDistance = 200
+		if global_position.distance_to(destination)<= stopDistance:
+			isWalking = false
+			emit_signal("inPositionToAttack", target)
+			attack(target, attackSelected)
+	else:
+		if global_position == destination:
+			stateMachine.setState(stateMachine.states["endingturn"])
+			isWalking = false
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
 	print("After hit: ", currentHp)
 
-
-func onIntroFinished():
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("introFinished")
-
-func endingTurn():
-	print("Player end turn")
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("turnFinished")
-
-func orientSprite(direction:int):
-	spriteOrientation.scale.x = direction

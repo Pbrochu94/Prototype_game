@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_wovhx")
 attackName = "sword slash 1"
-damage = 20
+damage = 1
 range = false
 cooldown = 0
 element = "light"

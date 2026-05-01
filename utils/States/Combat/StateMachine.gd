@@ -21,9 +21,6 @@ func _process(delta):
 	if currentState:
 		currentState.update(delta)
 
-func _physics_process(delta):
-	pass
-
 func setState(state:State):
 	if state == currentState:
 		return

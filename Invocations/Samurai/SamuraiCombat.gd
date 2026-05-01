@@ -11,7 +11,7 @@ class_name SamuraiCombat
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
-@onready var attacks = [
+@export var attacks = [
 	preload("res://Invocations/Samurai/SwordSlash.tres")
 ]
 @export var attackSelected:Attack
@@ -50,11 +50,15 @@ func _process(delta):
 	pass
 
 
-#CHECKS
-
+#ANIMATIONS & SPRITES
 func onAnimationFinished():
 	if anim.animation == attackSelected.attackName:
 		stateMachine.setState(stateMachine.states["walkingback"])
+	if anim.animation == "hurt":
+		if currentHp <= 0:
+			stateMachine.setState(owner.stateMachine.states["downed"])
+		else:
+			stateMachine.setState(owner.stateMachine.states["idle"])
 
 func attackFinished():
 	print("Attack finished")
@@ -62,12 +66,32 @@ func attackFinished():
 		stateMachine.setState(stateMachine.states["walkingback"])
 	else:
 		stateMachine.setState(stateMachine.states["endingturn"])
-		
+
+#TURN FLOW
+func chooseAttack():
+#	print(weapon)
+	attackSelected = attacks[0]
+	print("Attack chosen: ", attackSelected)
+	#When we will actually choose
+#	if action == "attack":
+#		attackSelected = attacks["swordSlash1"]
+#	else:
+#		return
+	emit_signal("attackChosen")
+func walkToTarget():
+	emit_signal("selectionEnded")
+	stateMachine.setState(stateMachine.states["getinposition"])
+func attack(enemyTarget:Node2D,weapon):
+	stateMachine.setState(stateMachine.states["attacking"])
+	print("Player Attacked: ", target.name)
+func endingTurn():
+	print("Player end turn")
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("turnFinished")
 
 #BEHAVIORS
-func playIntroWalk(walkTarget:Vector2):
-	stateMachine.setState(stateMachine.states["intro"])
-
+#func playIntroWalk(walkTarget:Vector2):
+#	stateMachine.setState(stateMachine.states["intro"])
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
@@ -83,28 +107,6 @@ func walk(delta, destination:Vector2):
 		if global_position == destination:
 			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
-
-
-
-func walkToTarget():
-	emit_signal("selectionEnded")
-	stateMachine.setState(stateMachine.states["getinposition"])
-
-func chooseAttack():
-#	print(weapon)
-	attackSelected = attacks[0]
-	print("Attack chosen: ", attackSelected)
-	#When we will actually choose
-#	if action == "attack":
-#		attackSelected = attacks["swordSlash1"]
-#	else:
-#		return
-	emit_signal("attackChosen")
-
-func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(stateMachine.states["attacking"])
-	print("Player Attacked: ", target.name)
-
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
@@ -112,12 +114,9 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 
-func onIntroFinished():
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("introFinished")
+#func onIntroFinished():
+#	stateMachine.setState(stateMachine.states["idle"])
+#	emit_signal("introFinished")
 
-func endingTurn():
-	print("Player end turn")
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("turnFinished")
+
 

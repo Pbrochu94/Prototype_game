@@ -559,9 +559,8 @@ position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"walk"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_mtelm")
-initialState = NodePath("")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("5_5jnhc")

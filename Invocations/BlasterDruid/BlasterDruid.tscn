@@ -273,7 +273,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlasterDruid" type="Node2D" groups=["character", "main character", "party member", "player"]]
+[node name="BlasterDruid" type="Node2D" groups=["character", "party member"]]
 script = ExtResource("1_b5ocs")
 speed = 1
 
@@ -308,8 +308,6 @@ script = ExtResource("14_jldtt")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("15_6gwic")
-
-[node name="Weapons" type="Node" parent="."]
 
 [node name="Hitboxes" type="Area2D" parent="."]
 visible = false
