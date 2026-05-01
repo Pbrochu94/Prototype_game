@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Invocations/CannonDruid/HurtCannonDruid.gd" id="9_trbhq"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/DownedCannonDruid.gd" id="10_3udme"]
 [ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="11_wx0jw"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/Area2DCannonDruid.gd" id="12_6uneb"]
+[ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="12_iknec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boni8"]
 atlas = ExtResource("2_pg1n1")
@@ -141,14 +141,16 @@ script = ExtResource("9_trbhq")
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("10_3udme")
 
-[node name="Hitboxes" type="Area2D" parent="."]
-visible = false
-
 [node name="SelectingArrow" parent="." instance=ExtResource("11_wx0jw")]
 position = Vector2(0, -30)
 
 [node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("12_6uneb")
+position = Vector2(0, -2)
+script = ExtResource("12_iknec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_q5kkd")
+
+[connection signal="input_event" from="Area2D" to="." method="onArea2dInputEvent"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExited"]

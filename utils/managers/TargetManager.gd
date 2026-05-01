@@ -25,6 +25,7 @@ func selectNext():
 func startSelection():
 	for enemy in enemies:
 		enemy.canBeSelected = true
+		print(enemy, enemy.canBeSelected)
 
 
 func updateArrow(target):
@@ -32,7 +33,7 @@ func updateArrow(target):
 		selectingArrow.global_position = target.global_position + Vector2(0, -50)
 
 func _input(event):
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed("uiDown"):
 		var target = selectNext()
 		updateArrow(target)
 

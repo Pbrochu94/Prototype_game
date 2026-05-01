@@ -197,7 +197,6 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 
 
 func onMouseEntered():
-	print(isDead, canBeSelected)
 	if not isDead and canBeSelected:
 		emit_signal("hovered", self)
 	else:
@@ -205,6 +204,7 @@ func onMouseEntered():
 
 
 func onMouseExited():
-	emit_signal("unhovered", self)
+	if not isDead and canBeSelected:
+		emit_signal("unhovered", self)
 
 

@@ -197,13 +197,13 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 
 
 func onMouseEntered():
-	if(canBeSelected):
-		selectingArrow.visible = true
+	print("AHHHHH")
+	if not isDead and canBeSelected:
+		emit_signal("hovered", self)
 	else:
 		return
 
 
 func onMouseExited():
-	selectingArrow.visible = false
-
+	emit_signal("unhovered", self)
 
