@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwnvamofd53b"]
+[gd_scene load_steps=16 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://utils/Managers/TurnManager.tscn" id="2_6240m"]
 [ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/partyManager.tscn" id="2_p8kcl"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="3_ab8et"]
 [ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/enemyPartyManager.tscn" id="3_bwdlj"]
+[ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_066ix"]
 [ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://Invocations/Samurai/SamuraiScene.tscn" id="4_gq0cu"]
-[ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_upn1l"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
 [ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://CharacterSprite/Minor gun enemy/Combat/minorGunEnemy.tscn" id="6_mifdo"]
 [ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruid.tscn" id="9_16ksc"]
@@ -511,7 +511,7 @@ script = ExtResource("1_ob25n")
 
 [node name="EnemyPartyManager" parent="." groups=["enemy party manager"] instance=ExtResource("3_bwdlj")]
 
-[node name="TargetManager" parent="." groups=["target manager"] instance=ExtResource("4_upn1l")]
+[node name="TargetManager" parent="." instance=ExtResource("4_066ix")]
 
 [node name="TurnManager" parent="." instance=ExtResource("2_6240m")]
 

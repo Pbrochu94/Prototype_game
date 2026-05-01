@@ -13,33 +13,36 @@ var playOrder:Array
 var currentlyPlaying:Node2D
 var playerLost = false
 var playerWon = false
+var targetManager:Node
 signal targetSelectionStarted
 signal selectionEnded
 
 func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
-	initPlayOrder()
 	initVariables()
+	initPlayOrder()
 	connectSignals()
 	playIntro()
 	startCombat()
 
 #INIT
+func initVariables():
+	player = currentCombatScene.player
+	playerPartyManager = get_tree().get_first_node_in_group("player party manager")
+	enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")
+	targetManager = get_tree().get_first_node_in_group("target manager")
+	enemyAnchor = currentCombatScene.enemyAnchor
 func connectSignals():
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.actionSelected.connect(onActionSelected)
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)	
+	targetSelectionStarted.connect(targetManager.startSelection)
 	selectionEnded.connect(endSelection)
 
-func initVariables():
-	player = currentCombatScene.player
-#	player.startingPosition =  currentCombatScene.playerStartingPosition
-	playerPartyManager = get_tree().get_first_node_in_group("player party manager")
-	enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")	
-	enemyAnchor = currentCombatScene.enemyAnchor
+
 
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:

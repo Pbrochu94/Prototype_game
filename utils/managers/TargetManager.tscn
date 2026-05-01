@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqafjc6iqlfqe"]
+
+[ext_resource type="Script" path="res://utils/Managers/TargetManager.gd" id="1_c48h3"]
+[ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="2_j37xr"]
+
+[node name="TargetManager" type="Node"]
+script = ExtResource("1_c48h3")
+
+[node name="SelectingArrow" parent="." instance=ExtResource("2_j37xr")]
+position = Vector2(0, -30)

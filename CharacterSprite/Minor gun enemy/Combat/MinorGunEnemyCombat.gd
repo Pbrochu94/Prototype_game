@@ -75,11 +75,9 @@ func _ready():
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	#connecting signals
 	anim.animation_finished.connect(onAnimationFinished)
-	turnManager.targetSelectionStarted.connect(isSelectable)
 #	turnManager.connect("selectionEnded", selectionEnded)
 #	currentCombatScene.player.connect("dealDamage", receiveDamage)
 	#Hidding UI
-	selectingArrow.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -198,12 +196,12 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 
 func onMouseEntered():
 	if(canBeSelected):
-		selectingArrow.visible = true
+		print("Can be targeted")
 	else:
 		return
 
 
 func onMouseExited():
-	selectingArrow.visible = false
+	pass
 
 
