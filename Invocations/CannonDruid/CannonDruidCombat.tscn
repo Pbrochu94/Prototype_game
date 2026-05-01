@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://67avdf4jdwg3"]
+[gd_scene load_steps=24 format=3 uid="uid://67avdf4jdwg3"]
 
 [ext_resource type="Script" path="res://Invocations/CannonDruid/CannonDruid.gd" id="1_fhrl2"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://Invocations/CannonDruid/EndingTurnCannonDruid.gd" id="8_hs8ay"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/HurtCannonDruid.gd" id="9_trbhq"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/DownedCannonDruid.gd" id="10_3udme"]
-[ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="11_wx0jw"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="12_iknec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boni8"]
@@ -140,9 +139,6 @@ script = ExtResource("9_trbhq")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("10_3udme")
-
-[node name="SelectingArrow" parent="." instance=ExtResource("11_wx0jw")]
-position = Vector2(0, -30)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -2)
