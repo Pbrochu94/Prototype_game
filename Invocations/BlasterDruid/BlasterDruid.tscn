@@ -8,13 +8,13 @@
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="4_mltf0"]
 [ext_resource type="Texture2D" uid="uid://di4avdftyeusw" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot End.png" id="5_mdkwm"]
 [ext_resource type="Texture2D" uid="uid://cud07t3svom8n" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet 81x32.png" id="6_37l4i"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/IdleBlasterDruid.gd" id="9_b84jj"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/GetInPositionBlasterDruid.gd" id="10_bpku6"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/WalkingBackBlasterDruid.gd" id="11_53a64"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/AttackingBlasterDruid.gd" id="12_3rj2a"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/EndingTurnBlasterDruid.gd" id="13_0wno0"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/HurtBlasterDruid.gd" id="14_jldtt"]
-[ext_resource type="Script" path="res://Invocations/BlasterDruid/DownedBlasterDruid.gd" id="15_6gwic"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/IdleBlasterDruid.gd" id="9_m1cor"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/GetInPositionBlasterDruid.gd" id="10_qc61i"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/WalkingBackBlasterDruid.gd" id="11_v7n0i"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/AttackingBlasterDruid.gd" id="12_ofbjp"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/EndingTurnBlasterDruid.gd" id="13_rme14"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/HurtBlasterDruid.gd" id="14_s10cu"]
+[ext_resource type="Script" path="res://Invocations/BlasterDruid/States/DownedBlasterDruid.gd" id="15_0kp7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oguey"]
 atlas = ExtResource("2_n71qu")
@@ -413,25 +413,25 @@ frame_progress = 1.0
 script = ExtResource("4_mltf0")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("9_b84jj")
+script = ExtResource("9_m1cor")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("10_bpku6")
+script = ExtResource("10_qc61i")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("11_53a64")
+script = ExtResource("11_v7n0i")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("12_3rj2a")
+script = ExtResource("12_ofbjp")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("13_0wno0")
+script = ExtResource("13_rme14")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("14_jldtt")
+script = ExtResource("14_s10cu")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("15_6gwic")
+script = ExtResource("15_0kp7g")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 visible = false

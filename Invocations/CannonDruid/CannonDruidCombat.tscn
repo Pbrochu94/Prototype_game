@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://Invocations/CannonDruid/CannonDruid.gd" id="1_fhrl2"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_gj5uk"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/IdleCannonDruid.gd" id="4_tptuu"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/GetInPositionCannonDruid.gd" id="5_ja7r3"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/WalkingBackCannonDruid.gd" id="6_msp5q"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/AttackingCannonDruid.gd" id="7_twxrt"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/EndingTurnCannonDruid.gd" id="8_hs8ay"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/HurtCannonDruid.gd" id="9_trbhq"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/DownedCannonDruid.gd" id="10_3udme"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/IdleCannonDruid.gd" id="4_nmjvr"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/GetInPositionCannonDruid.gd" id="5_bdbqv"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/WalkingBackCannonDruid.gd" id="6_knvd5"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/AttackingCannonDruid.gd" id="7_i06e5"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/EndingTurnCannonDruid.gd" id="8_0oehg"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/HurtCannonDruid.gd" id="9_lg4l2"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/States/DownedCannonDruid.gd" id="10_i6gay"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="12_iknec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boni8"]
@@ -120,25 +120,25 @@ frame_progress = 0.861126
 script = ExtResource("3_gj5uk")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("4_tptuu")
+script = ExtResource("4_nmjvr")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("5_ja7r3")
+script = ExtResource("5_bdbqv")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("6_msp5q")
+script = ExtResource("6_knvd5")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("7_twxrt")
+script = ExtResource("7_i06e5")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("8_hs8ay")
+script = ExtResource("8_0oehg")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("9_trbhq")
+script = ExtResource("9_lg4l2")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("10_3udme")
+script = ExtResource("10_i6gay")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -2)
