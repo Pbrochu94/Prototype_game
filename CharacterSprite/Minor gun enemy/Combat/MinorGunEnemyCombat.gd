@@ -64,6 +64,8 @@ signal inPositionToAttack
 signal turnFinished
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
+signal hovered(character)
+signal unhovered(character)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -177,8 +179,8 @@ func receiveDamage(attack:Attack, element:String):
 
 func isSelectable():
 	canBeSelected = true
-	area.monitoring = true
-	print("Player selection started")
+#	area.monitoring = true
+#	print("Player selection started")
 
 func selectionEnded():
 	print("Player selection ended")
@@ -195,13 +197,14 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 
 
 func onMouseEntered():
-	if(canBeSelected):
-		print("Can be targeted")
+	print(isDead, canBeSelected)
+	if not isDead and canBeSelected:
+		emit_signal("hovered", self)
 	else:
 		return
 
 
 func onMouseExited():
-	pass
+	emit_signal("unhovered", self)
 
 
