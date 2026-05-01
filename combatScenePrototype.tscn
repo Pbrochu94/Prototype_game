@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=16 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_iiaha"]
 [ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/partyManager.tscn" id="2_v0xhm"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://CharacterSprite/Minor gun enemy/Combat/minorGunEnemy.tscn" id="8_8xsu6"]
 [ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruid.tscn" id="9_o2wet"]
 [ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="10_c1ji5"]
+[ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherEnemy.tscn" id="11_3ihha"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
 texture = ExtResource("5_x5feo")
@@ -565,3 +566,6 @@ speed = 10
 
 [node name="CannonDruid" parent="." instance=ExtResource("10_c1ji5")]
 position = Vector2(123, 3)
+
+[node name="Archer" parent="." instance=ExtResource("11_3ihha")]
+position = Vector2(123, 103)

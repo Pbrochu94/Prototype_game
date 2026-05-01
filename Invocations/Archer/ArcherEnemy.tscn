@@ -579,4 +579,4 @@ animations = [{
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_fax0j")
 animation = &"bow power shot"
-frame_progress = 0.434487
+frame_progress = 0.139096
