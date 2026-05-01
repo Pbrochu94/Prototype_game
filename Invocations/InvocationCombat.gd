@@ -3,11 +3,11 @@ class_name InvocationCombat
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var stateMachine = $StateMachine
-@onready var enemy = get_tree().get_nodes_in_group("enemy")
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
 #STATS
-@export var characterName = "Artorias"
+@export var walkSpeed = 200
+@export var characterName = ""
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 1
@@ -17,6 +17,12 @@ class_name InvocationCombat
 #PARAMETERS
 var currentCombatScene:Node2D
 var target:Node2D
+
+#STATUS
+var isDead = false
+
+#BOLLEANS
+var isWalking = false
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
@@ -25,16 +31,8 @@ signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
-signal isDowned
+signal isDowned(character)
 
-var isWalking = false
-# REAL SPEED -> const walkSpeed = 100
-const walkSpeed = 200
-
-#Preload attacks
-#const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
-
-var direction
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Initialize state machine on this character
@@ -49,24 +47,45 @@ func _process(delta):
 	pass
 
 
-#CHECKS
-
+#ANIMATIONS & SPRITES
 func onAnimationFinished():
 	if anim.animation == attackSelected.attackName:
 		stateMachine.setState(stateMachine.states["walkingback"])
+	if anim.animation == "hurt":
+		if currentHp <= 0:
+			stateMachine.setState(stateMachine.states["downed"])
+		else:
+			stateMachine.setState(stateMachine.states["idle"])
 
+#TURN FLOW
+func chooseAttack():
+#	print(weapon)
+	attackSelected = attacks[0]
+	print("Attack chosen: ", attackSelected)
+	#When we will actually choose
+#	if action == "attack":
+#		attackSelected = attacks["swordSlash1"]
+#	else:
+#		return
+	emit_signal("attackChosen")
+func walkToTarget():
+	emit_signal("selectionEnded")
+	stateMachine.setState(stateMachine.states["getinposition"])
+func attack(enemyTarget:Node2D,weapon):
+	stateMachine.setState(stateMachine.states["attacking"])
+	print("Player Attacked: ", target.name)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
 		stateMachine.setState(stateMachine.states["walkingback"])
 	else:
 		stateMachine.setState(stateMachine.states["endingturn"])
-		
+func endingTurn():
+	print("Player end turn")
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("turnFinished")
 
 #BEHAVIORS
-func playIntroWalk(walkTarget:Vector2):
-	stateMachine.setState(stateMachine.states["intro"])
-
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
@@ -80,33 +99,8 @@ func walk(delta, destination:Vector2):
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
-			if stateMachine.currentState == stateMachine.states["intro"]:
-				onIntroFinished()
-			else:
-				stateMachine.setState(stateMachine.states["endingturn"])
+			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
-
-
-
-func walkToTarget():
-	emit_signal("selectionEnded")
-	stateMachine.setState(stateMachine.states["getinposition"])
-
-func chooseAttack():
-#	print(weapon)
-	attackSelected = attacks[0]
-	print("Attack chosen: ", attackSelected)
-	#When we will actually choose
-#	if action == "attack":
-#		attackSelected = attacks["swordSlash1"]
-#	else:
-#		return
-	emit_signal("attackChosen")
-
-func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(stateMachine.states["attacking"])
-	print("Player Attacked: ", target.name)
-
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
@@ -114,18 +108,6 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 
-func onIntroFinished():
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("introFinished")
 
-func endingTurn():
-	print("Player end turn")
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("turnFinished")
 
-#func addNewWeapon(filePath:String):
-#	var attack = load(filePath) as Attack
-#	attacks[attack.attackName] = attack
-#	if attack == null:
-#		push_error("Failed to load attack: " + filePath)
-#		return
+

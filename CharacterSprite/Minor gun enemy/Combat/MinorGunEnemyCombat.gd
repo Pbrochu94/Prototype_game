@@ -12,14 +12,17 @@ extends Node2D
 @export var characterName = "Gunny"
 @export var speed = 2
 
+#ATTACKS & SPELLS
+@export var attacks:Dictionary = {
+	"gun strike" = gunStrike,
+	"gun shot" = gunShot
+}
 #PRELOAD ATTACKS
 const gunStrike = preload("res://utils/Attacks/Enemies/Gunny/GunStrike.tres")
 const gunShot = preload("res://utils/Attacks/Enemies/Gunny/GunShot.tres")
 
-var attacks:Dictionary = {
-	"gun strike" = gunStrike,
-	"gun shot" = gunShot
-}
+#STATUS
+var isDead = false
 
 #ENVIRONMENTS
 var turnManager:Node
@@ -60,7 +63,7 @@ signal donePreparing
 signal inPositionToAttack
 signal turnFinished
 signal hpChanged(currentHp, maxHp)
-signal isDowned
+signal isDowned(character)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -85,7 +88,10 @@ func _process(delta):
 
 func onAnimationFinished():
 	if anim.animation == "hurt":
-		stateMachine.setState(stateMachine.states["idle"])
+		if currentHp <= 0:
+			stateMachine.setState(stateMachine.states["downed"])
+		else:
+			stateMachine.setState(stateMachine.states["idle"])
 	if anim.animation == "gun strike":
 		print("Entered onAnimationFinished melee")
 		attackFinished()
@@ -135,7 +141,8 @@ func endingTurn():
 	emit_signal("turnFinished")
 
 func chooseTarget():
-	target = currentCombatScene.playerPartyManager.party.pick_random()
+	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
+	print("Chosen target: ", target)
 
 func getRandomAttack() -> Attack:
 	var keys = attacks.keys()

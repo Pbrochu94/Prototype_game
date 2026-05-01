@@ -1,5 +1,5 @@
 extends State
-class_name DownedBlasterDruid
+class_name DownedCannonDruid
 
 func _onready():
 	pass
@@ -17,4 +17,3 @@ func update(delta):
 
 func exit():
 	pass
-

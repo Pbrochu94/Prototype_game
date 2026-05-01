@@ -1,16 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://67avdf4jdwg3"]
+[gd_scene load_steps=25 format=3 uid="uid://67avdf4jdwg3"]
 
 [ext_resource type="Script" path="res://Invocations/CannonDruid/CannonDruid.gd" id="1_fhrl2"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_gj5uk"]
-[ext_resource type="Script" path="res://utils/States/Combat/Intro.gd" id="4_kxdvg"]
-[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="5_cwm44"]
-[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="6_5tigt"]
-[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="7_qh5tj"]
-[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="8_sjma3"]
-[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="9_k2unr"]
-[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="10_hn4rw"]
-[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="11_wdrlj"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/IdleCannonDruid.gd" id="4_tptuu"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/GetInPositionCannonDruid.gd" id="5_ja7r3"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/WalkingBackCannonDruid.gd" id="6_msp5q"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/AttackingCannonDruid.gd" id="7_twxrt"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/EndingTurnCannonDruid.gd" id="8_hs8ay"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/HurtCannonDruid.gd" id="9_trbhq"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/DownedCannonDruid.gd" id="10_3udme"]
+[ext_resource type="PackedScene" uid="uid://nc73yqd3q8n2" path="res://UI/CombatUI/selectionArrow/selectionArrow.tscn" id="11_wx0jw"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/Area2DCannonDruid.gd" id="12_6uneb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_boni8"]
 atlas = ExtResource("2_pg1n1")
@@ -102,7 +103,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="CannonDruid" type="Node2D" groups=["character", "main character", "party member", "player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5kkd"]
+size = Vector2(20, 23)
+
+[node name="CannonDruid" type="Node2D" groups=["character", "enemy"]]
 script = ExtResource("1_fhrl2")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -116,29 +120,35 @@ frame_progress = 0.861126
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_gj5uk")
 
-[node name="Intro" type="Node" parent="StateMachine"]
-script = ExtResource("4_kxdvg")
-
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("5_cwm44")
+script = ExtResource("4_tptuu")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("6_5tigt")
+script = ExtResource("5_ja7r3")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("7_qh5tj")
+script = ExtResource("6_msp5q")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("8_sjma3")
+script = ExtResource("7_twxrt")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("9_k2unr")
+script = ExtResource("8_hs8ay")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("10_hn4rw")
+script = ExtResource("9_trbhq")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("11_wdrlj")
+script = ExtResource("10_3udme")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 visible = false
+
+[node name="SelectingArrow" parent="." instance=ExtResource("11_wx0jw")]
+position = Vector2(0, -30)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("12_6uneb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_q5kkd")

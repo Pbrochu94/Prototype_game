@@ -1,59 +1,162 @@
 extends Node2D
 class_name CannonDruidCombat
 
+#NODES STORING
 @onready var anim = $SpritePivot/AnimatedSprite2D
+@onready var spriteOrientation = $SpritePivot
 @onready var stateMachine = $StateMachine
-@onready var enemy = get_tree().get_nodes_in_group("enemy")
-@onready var startingPosition:Vector2
-@onready var hitboxShape = $Hitbox/CollisionShape2D
+
 #STATS
-@export var characterName = "Artorias"
 @export var maxHp = 100
 @export var currentHp = 100
-@export var speed = 1
-@export var attacks = []
-@export var attackSelected:Attack
+@export var attackPower:int = 5
+@export var characterName = "Cannon Druid"
+@export var speed = 2
 
-#PARAMETERS
+#ATTACKS & SPELLS
+@export var attacks:Dictionary = {
+}
+#PRELOAD ATTACKS
+
+
+#STATUS
+var isDead = false
+
+#ENVIRONMENTS
+var turnManager:Node
 var currentCombatScene:Node2D
-var target:Node2D
-#SIGNALS
-signal introFinished
-signal inPositionToAttack(enemy:Node2D)
-signal selectionEnded
-signal dealDamage(amount:int)
-signal turnFinished
-signal attackChosen
-signal hpChanged(currentHp, maxHp)
-signal isDowned
 
+
+
+#PROPERTIES
+@onready var area = $Area2D
+@onready var selectingArrow = $SelectingArrow
+
+var startingPosition
 var isWalking = false
+var walkTarget:Vector2
 # REAL SPEED -> const walkSpeed = 100
 const walkSpeed = 200
+var currentState:Node2D
+var canBeSelected = false
+var target:Node2D
+var attackSelected:Attack
+var facingPlayer:int = -1
+var facingBackward:int = 1
 
-#Preload attacks
-#const swordSlash1 = preload("res://utils/Attacks/MainCharacter/SwordSlash1.tres")
+#ENUMS
+enum State{
+	IDLE,
+	WALK_IN,
+	WALK_TO_TARGET,
+	WALK_BACK,
+	ATTACK,
+	HURT
+}
 
-var direction
+#SIGNALS
+signal introFinished
+signal enemySelected(enemy:Node2D)
+signal donePreparing
+signal inPositionToAttack
+signal turnFinished
+signal hpChanged(currentHp, maxHp)
+signal isDowned(character)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#Initialize state machine on this character
+	orientSprite(facingPlayer)
+	#Initialize State machine
 	stateMachine.init(self)
-	inPositionToAttack.connect(attack)
+	#Instanciate environments
+	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
+	turnManager = get_tree().get_first_node_in_group("turn manager")
+	#connecting signals
 	anim.animation_finished.connect(onAnimationFinished)
-
+	turnManager.targetSelectionStarted.connect(isSelectable)
+#	turnManager.connect("selectionEnded", selectionEnded)
+#	currentCombatScene.player.connect("dealDamage", receiveDamage)
+	#Hidding UI
+	selectingArrow.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
-#CHECKS
-
 func onAnimationFinished():
-	if anim.animation == attackSelected.attackName:
-		stateMachine.setState(stateMachine.states["walkingback"])
+	if anim.animation == "hurt":
+		if currentHp <= 0:
+			stateMachine.setState(stateMachine.states["downed"])
+		else:
+			stateMachine.setState(stateMachine.states["idle"])
+	if anim.animation == "gun strike":
+		print("Entered onAnimationFinished melee")
+		attackFinished()
+	if anim.animation == "gun shot":
+		print("Entered onAnimationFinished shot")
+		attackFinished()
+
+func orientSprite(direction:int):
+	spriteOrientation.scale.x = direction
+
+#BEHAVIORS
+func playIntroWalk(walkTarget:Vector2):
+	stateMachine.setState(stateMachine.states["intro"])
+
+func startTurn():
+	print(characterName, " started his turn")
+	#Choose character to attack
+	#Choose weapon to attack
+	attackSelected = getRandomAttack()
+	print(characterName, " chose the attack: ", attackSelected.attackName)
+	chooseTarget()
+	emit_signal("donePreparing")
+
+func walk(delta, destination:Vector2):
+	if not isWalking:
+		return
+	global_position = global_position.move_toward(destination, walkSpeed*delta)
+	#Walk to character but leave spaces between
+	if stateMachine.currentState == stateMachine.states["getinposition"]:
+		var stopDistance = 32
+		if global_position.distance_to(destination)<= stopDistance:
+			isWalking = false
+			emit_signal("inPositionToAttack", target)
+			attack()
+	else:
+		if global_position == destination:
+			stateMachine.setState(stateMachine.states["endingturn"])
+			isWalking = false
+
+func onIntroFinished():
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("introFinished")
+
+func endingTurn():
+	print(characterName, "finished its turn")
+	stateMachine.setState(stateMachine.states["idle"])
+	emit_signal("turnFinished")
+
+func chooseTarget():
+	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
+	print("Chosen target: ", target)
+
+func getRandomAttack() -> Attack:
+	var keys = attacks.keys()
+	var random_key = keys[randi() % keys.size()]
+	return attacks[random_key]
+
+func getInPosition():
+	print("Enemy gets in position")
+	if attackSelected.attackName == "gun strike":
+		stateMachine.setState(stateMachine.states["getinposition"])
+	if attackSelected.attackName == "gun shot":
+		stateMachine.setState(stateMachine.states["attacking"])
+
+func attack():
+	stateMachine.setState(stateMachine.states["attacking"])
+	print("Enemy Attacked: ", target.name)
 
 func attackFinished():
 	print("Attack finished")
@@ -63,69 +166,42 @@ func attackFinished():
 		stateMachine.setState(stateMachine.states["endingturn"])
 		
 
-#BEHAVIORS
-func playIntroWalk(walkTarget:Vector2):
-	stateMachine.setState(stateMachine.states["intro"])
-
-func walk(delta, destination:Vector2):
-	if not isWalking:
-		return
-	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	#Walk to enemy but leave spaces between
-	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 32
-		if global_position.distance_to(destination)<= stopDistance:
-			isWalking = false
-			emit_signal("inPositionToAttack", target)
-			attack(target, attackSelected)
-	else:
-		if global_position == destination:
-			if stateMachine.currentState == stateMachine.states["intro"]:
-				onIntroFinished()
-			else:
-				stateMachine.setState(stateMachine.states["endingturn"])
-			isWalking = false
-
-
-
-func walkToTarget():
-	emit_signal("selectionEnded")
-	stateMachine.setState(stateMachine.states["getinposition"])
-
-func chooseAttack():
-#	print(weapon)
-	attackSelected = attacks[0]
-	print("Attack chosen: ", attackSelected)
-	#When we will actually choose
-#	if action == "attack":
-#		attackSelected = attacks["swordSlash1"]
-#	else:
-#		return
-	emit_signal("attackChosen")
-
-func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(stateMachine.states["attacking"])
-	print("Player Attacked: ", target.name)
-
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
 	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
+	emit_signal("hpChanged")
 	print("After hit: ", currentHp)
 
 
-func onIntroFinished():
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("introFinished")
 
-func endingTurn():
-	print("Player end turn")
-	stateMachine.setState(stateMachine.states["idle"])
-	emit_signal("turnFinished")
+func isSelectable():
+	canBeSelected = true
+	area.monitoring = true
+	print("Player selection started")
 
-#func addNewWeapon(filePath:String):
-#	var attack = load(filePath) as Attack
-#	attacks[attack.attackName] = attack
-#	if attack == null:
-#		push_error("Failed to load attack: " + filePath)
-#		return
+func selectionEnded():
+	print("Player selection ended")
+	selectingArrow.visible = false
+	canBeSelected = false
+
+#CHECKS
+
+func onArea2DInputEvent(viewport, event, shape_idx):
+	if not canBeSelected:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("enemySelected",self)
+
+
+func onMouseEntered():
+	if(canBeSelected):
+		selectingArrow.visible = true
+	else:
+		return
+
+
+func onMouseExited():
+	selectingArrow.visible = false
+
+

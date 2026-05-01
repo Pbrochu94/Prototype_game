@@ -1,5 +1,5 @@
 extends State
-class_name Attacking
+class_name AttackingCannonDruid
 
 var attack:Attack
 var element:String

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=83 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_d153k"]
@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://Invocations/Samurai/States/WalkingBackSamurai.gd" id="7_8a64a"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/AttackingSamurai.gd" id="8_3r8eu"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/EndingTurnSamurai.gd" id="8_obadw"]
-[ext_resource type="Script" path="res://Invocations/Samurai/HurtSamurai.gd" id="10_wj2v1"]
-[ext_resource type="Script" path="res://Invocations/Samurai/DownedSamurai.gd" id="11_sw6l4"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/HurtSamurai.gd" id="9_impai"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/DownedSamurai.gd" id="10_jb3k4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87a3s"]
 atlas = ExtResource("2_d153k")
@@ -123,17 +123,13 @@ region = Rect2(248, 196, 124, 49)
 atlas = ExtResource("2_d153k")
 region = Rect2(372, 196, 124, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqq6y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6leg"]
 atlas = ExtResource("2_d153k")
-region = Rect2(0, 392, 124, 49)
+region = Rect2(0, 343, 124, 49)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4chx7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hriu"]
 atlas = ExtResource("2_d153k")
-region = Rect2(124, 392, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idv4a"]
-atlas = ExtResource("2_d153k")
-region = Rect2(248, 392, 124, 49)
+region = Rect2(124, 343, 124, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ssga"]
 atlas = ExtResource("2_d153k")
@@ -393,17 +389,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xqq6y")
+"texture": SubResource("AtlasTexture_e6leg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4chx7")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_idv4a")
+"texture": SubResource("AtlasTexture_5hriu")
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -557,7 +550,7 @@ script = ExtResource("1_xubua")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"walk"
+animation = &"hurt"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_mtelm")
@@ -578,10 +571,10 @@ script = ExtResource("8_3r8eu")
 script = ExtResource("8_obadw")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("10_wj2v1")
+script = ExtResource("9_impai")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("11_sw6l4")
+script = ExtResource("10_jb3k4")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 

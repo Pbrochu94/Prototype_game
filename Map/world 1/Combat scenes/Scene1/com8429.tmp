@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ch2prna5yfto8"]
+[gd_scene load_steps=16 format=3 uid="uid://ch2prna5yfto8"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://TurnManager/TurnManager.tscn" id="2_6240m"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
 [ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://CharacterSprite/Minor gun enemy/Combat/minorGunEnemy.tscn" id="6_mifdo"]
 [ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruid.tscn" id="9_16ksc"]
-[ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="10_2pldu"]
+[ext_resource type="Resource" uid="uid://dgrbluicauhn3" path="res://utils/Attacks/Enemies/Gunny/GunStrike.tres" id="9_h22ox"]
+[ext_resource type="Resource" uid="uid://nv4f4n8qc6c4" path="res://utils/Attacks/Enemies/Gunny/GunShot.tres" id="10_dsgck"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
 texture = ExtResource("3_ab8et")
@@ -557,11 +558,16 @@ scale = Vector2(0.58, 0.58)
 
 [node name="Gunny" parent="." groups=["character", "unit"] instance=ExtResource("6_mifdo")]
 position = Vector2(123, 53)
+maxHp = 100
+currentHp = 100
+attackPower = 5
+characterName = "Gunny"
 speed = 4
+attacks = {
+"gun shot": ExtResource("10_dsgck"),
+"gun strike": ExtResource("9_h22ox")
+}
 
 [node name="BlasterDruid" parent="." groups=["invocation", "unit"] instance=ExtResource("9_16ksc")]
 position = Vector2(-123, 3)
 speed = 10
-
-[node name="CannonDruid" parent="." instance=ExtResource("10_2pldu")]
-position = Vector2(123, 3)

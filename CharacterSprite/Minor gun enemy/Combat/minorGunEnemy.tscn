@@ -264,7 +264,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fn00"]
 size = Vector2(20, 23)
 
-[node name="Gunny" type="Node2D" groups=["enemy", "enemy party member"]]
+[node name="Gunny" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_otu23")
 speed = 1
 
@@ -273,7 +273,7 @@ speed = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(39, -1)
 sprite_frames = SubResource("SpriteFrames_ixlum")
-animation = &"idle"
+animation = &"hurt"
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_w3fm8")

@@ -12,6 +12,7 @@ func enter():
 	element = attack.element
 	var attackName:String = attack.attackName
 	owner.anim.play(attackName)
+	print("Character: ", owner, "attacks :", owner.target, " for ", attack.damage, " ", attack.element)
 	owner.target.receiveDamage(attack, element)
 
 func update(delta):

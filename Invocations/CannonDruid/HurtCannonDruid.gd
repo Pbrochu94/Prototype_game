@@ -1,5 +1,5 @@
 extends State
-class_name Hurt
+class_name HurtCannonDruid
 
 func _onready():
 	pass

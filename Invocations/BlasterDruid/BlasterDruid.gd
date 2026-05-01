@@ -3,7 +3,6 @@ class_name BlasterDruidCombat
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var stateMachine = $StateMachine
-@onready var enemy = get_tree().get_nodes_in_group("enemy")
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
 @onready var spriteOrientation = $SpritePivot
@@ -12,11 +11,17 @@ class_name BlasterDruidCombat
 @export var maxHp = 100
 @export var currentHp = 100
 @export var speed = 3
+
+@export var attackSelected:Attack
+@export var walkSpeed = 80
+
+#ATTACKS & SPELLS
 @export var attacks = [
 	preload("res://Invocations/BlasterDruid/GunShot.tres")
 ]
-@export var attackSelected:Attack
-@export var walkSpeed = 80
+
+#STATUS
+var isDead = false
 
 #BOOLEANS
 var isWalking = false
@@ -34,7 +39,7 @@ signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
-signal isDowned
+signal isDowned(character)
 
 
 
@@ -59,9 +64,9 @@ func onAnimationFinished():
 		stateMachine.setState(stateMachine.states["walkingback"])
 	if anim.animation == "hurt":
 		if currentHp <= 0:
-			stateMachine.setState(owner.stateMachine.states["downed"])
+			stateMachine.setState(stateMachine.states["downed"])
 		else:
-			stateMachine.setState(owner.stateMachine.states["idle"])
+			stateMachine.setState(stateMachine.states["idle"])
 
 func attackFinished():
 	print("Attack finished")

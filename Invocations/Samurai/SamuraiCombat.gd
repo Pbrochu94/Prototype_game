@@ -3,7 +3,6 @@ class_name SamuraiCombat
 
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var stateMachine = $StateMachine
-@onready var enemy = get_tree().get_nodes_in_group("enemy")
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
 #STATS
@@ -19,6 +18,9 @@ class_name SamuraiCombat
 #PARAMETERS
 var currentCombatScene:Node2D
 var target:Node2D
+
+#STATUS
+var isDead = false
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
@@ -27,7 +29,7 @@ signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
-signal isDowned
+signal isDowned(character)
 
 var isWalking = false
 # REAL SPEED -> const walkSpeed = 100
@@ -56,9 +58,9 @@ func onAnimationFinished():
 		stateMachine.setState(stateMachine.states["walkingback"])
 	if anim.animation == "hurt":
 		if currentHp <= 0:
-			stateMachine.setState(owner.stateMachine.states["downed"])
+			stateMachine.setState(stateMachine.states["downed"])
 		else:
-			stateMachine.setState(owner.stateMachine.states["idle"])
+			stateMachine.setState(stateMachine.states["idle"])
 
 func attackFinished():
 	print("Attack finished")

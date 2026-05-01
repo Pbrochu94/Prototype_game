@@ -74,7 +74,11 @@ func updateCurrentlyPlaying():
 	if index >= playOrder.size():
 		index = 0
 	currentlyPlaying = playOrder[index]
-	print("Beginning :", currentlyPlaying, "'s turn")
+	if currentlyPlaying.isDead:
+		print("Character :", currentlyPlaying, " is downed")
+		updateCurrentlyPlaying()
+	else:
+		print("Beginning :", currentlyPlaying, "'s turn")
 
 #INTRO---------
 func playIntro():

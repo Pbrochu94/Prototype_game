@@ -1,5 +1,5 @@
 extends State
-class_name WalkingBackBlasterDruid
+class_name WalkingBackCannonDruid
 
 
 func enter():
@@ -15,3 +15,4 @@ func update(delta):
 
 func exit():
 	owner.isWalking = false
+

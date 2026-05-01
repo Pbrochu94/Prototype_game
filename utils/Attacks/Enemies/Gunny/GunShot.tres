@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_kay38")
 attackName = "gun shot"
-damage = 20
+damage = 100
 range = false
 cooldown = 0
 element = "light"
+hitboxName = ""
