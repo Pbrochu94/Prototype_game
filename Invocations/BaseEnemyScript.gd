@@ -14,10 +14,12 @@ class_name BaseEnemyScript
 @export var maxHp = 100
 @export var currentHp = 100
 @export var attackPower:int = 5
-@export var characterName = ""
-@export var speed = 2
+@export var characterName = "Archer"
+@export var speed = 10
 #ATTACKS & SPELLS
 @export var attacks:Dictionary = {
+	"bow shot" : preload("res://Invocations/Archer/Attacks/BowShot.tres"),
+	"bow power shot": preload("res://Invocations/Archer/Attacks/BowPowerShot.tres")
 }
 #STATUS
 var isDead = false
