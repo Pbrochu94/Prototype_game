@@ -1,63 +1,64 @@
 extends Node
 
+#NODES
 @onready var choiceMenu = get_tree().get_first_node_in_group("combat menu")
+@onready var playerPartyManager:Node = get_tree().get_first_node_in_group("player party manager")
+@onready var enemyPartyManager:Node = get_tree().get_first_node_in_group("enemy party manager")
+@onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
 var currentTurn = "player"
 var currentCombatScene:Node2D 
-var playerPartyManager:Node
-var enemyPartyManager:Node
-var player:Node2D 
 var enemy:Node2D 
-var enemyAnchor:Node2D
 var isSelecting = false
 var playOrder:Array
 var currentlyPlaying:Node2D
 var playerLost = false
 var playerWon = false
-var targetManager:Node
+#SIGNALS
+signal turnEnded
 signal targetSelectionStarted
 signal selectionEnded
 
 func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
-	initVariables()
 	initPlayOrder()
 	connectSignals()
 	playIntro()
 	startCombat()
 
-#INIT
-func initVariables():
-	player = currentCombatScene.player
-	playerPartyManager = get_tree().get_first_node_in_group("player party manager")
-	enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")
-	targetManager = get_tree().get_first_node_in_group("target manager")
-	enemyAnchor = currentCombatScene.enemyAnchor
+#CONNECTIONS
 func connectSignals():
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.actionSelected.connect(onActionSelected)
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
-	enemyPartyManager.partyDead.connect(enemyPartyDefeated)	
+	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	targetSelectionStarted.connect(targetManager.startSelection)
 	selectionEnded.connect(endSelection)
-
-
-
+	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
 		invocation.selectionEnded.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
 		invocation.attackChosen.connect(startSelectingTarget)
-	print("ORDER",playOrder)
-#	playOrder[-1].introFinished.connect(startCombat)
-
+	print("Play order: ",playOrder)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
 		enemy.enemySelected.connect(playerAttack)
 		enemy.donePreparing.connect(enemyMoveToAttack)
 		enemy.turnFinished.connect(endTurn)
 
+#FIGHT INIT
+func playIntro():
+	for invocation in playerPartyManager.party:
+		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
+	for enemy in enemyPartyManager.party:
+		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
+func startCombat():
+	startTurn()
+	print("FIGHT START")
+
+#ORDER HANDLERS
 func initPlayOrder():
 	for character in get_tree().get_nodes_in_group("unit"):
 		playOrder.append(character)
@@ -65,7 +66,6 @@ func initPlayOrder():
 			return a.speed > b.speed
 		)
 	currentlyPlaying = playOrder[0]
-
 func updateCurrentlyPlaying():
 	if playerLost:
 		return
@@ -83,18 +83,7 @@ func updateCurrentlyPlaying():
 	else:
 		print("Beginning :", currentlyPlaying, "'s turn")
 
-#INTRO---------
-func playIntro():
-	for invocation in playerPartyManager.party:
-		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
-	for enemy in enemyPartyManager.party:
-		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
-
-func startCombat():
-	startTurn()
-	print("FIGHT START")
-
-#TURN MANAGER
+#TURN FLOW
 func startTurn():
 	if not currentlyPlaying:
 		return
@@ -102,16 +91,9 @@ func startTurn():
 		chooseAction()
 	else:
 		currentlyPlaying.startTurn()
-
-func endTurn():
-	updateCurrentlyPlaying()
-	startTurn()
-
-#PLAYER BEHAVIORS
 func chooseAction():
 	currentCombatScene.choiceMenu.visible = true
 	print("Player is choosing what to do...")
-
 func onActionSelected(action:String):
 	print("Player chose:", action)
 	match action:
@@ -121,24 +103,31 @@ func onActionSelected(action:String):
 			pass
 		"ability":
 			pass
-
 func startSelectingTarget():
 	print("Player is selecting a target")
 	emit_signal("targetSelectionStarted")
 	isSelecting = true
-
 func endSelection():
 	currentCombatScene.choiceMenu.visible = false
 	for enemy in enemyPartyManager.party:
 		targetManager.selectionEnded()
 #		enemy.selectionEnded()
-
 func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
 	print("Player move to attack", enemy)
 	#Assign the enemy selected in player node
 	currentlyPlaying.target = enemy
 	currentlyPlaying.walkToTarget()
+func endTurn():
+	updateCurrentlyPlaying()
+	emit_signal("turnEnded")
+
+
+
+
+
+
+
 
 
 
