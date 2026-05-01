@@ -9,17 +9,13 @@ extends Node2D
 @export var maxHp = 100
 @export var currentHp = 100
 @export var attackPower:int = 5
-@export var characterName = "Gunny"
+@export var characterName:String = ""
 @export var speed = 2
 
 #ATTACKS & SPELLS
 @export var attacks:Dictionary = {
-	"gun strike" = gunStrike,
-	"gun shot" = gunShot
+#	preload("res://utils/Attacks/Enemies/Gunny/GunStrike.tres")
 }
-#PRELOAD ATTACKS
-const gunStrike = preload("res://utils/Attacks/Enemies/Gunny/GunStrike.tres")
-const gunShot = preload("res://utils/Attacks/Enemies/Gunny/GunShot.tres")
 
 #STATUS
 var isDead = false
@@ -73,13 +69,9 @@ func _ready():
 	#Initialize State machine
 	stateMachine.init(self)
 	#Instanciate environments
-	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
-	turnManager = get_tree().get_first_node_in_group("turn manager")
+	initVariables()
 	#connecting signals
-	anim.animation_finished.connect(onAnimationFinished)
-#	turnManager.connect("selectionEnded", selectionEnded)
-#	currentCombatScene.player.connect("dealDamage", receiveDamage)
-	#Hidding UI
+	connectSignals()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -184,6 +176,7 @@ func isSelectable():
 
 func selectionEnded():
 	print("Player selection ended")
+	selectingArrow.visible = false
 	canBeSelected = false
 
 #CHECKS
@@ -206,4 +199,9 @@ func onMouseExited():
 	if not isDead and canBeSelected:
 		emit_signal("unhovered", self)
 
+func initVariables():
+	currentCombatScene = get_tree().get_first_node_in_group("combat scene") 
+	turnManager = get_tree().get_first_node_in_group("turn manager")
 
+func connectSignals():
+	anim.animation_finished.connect(onAnimationFinished)

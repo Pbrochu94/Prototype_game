@@ -183,8 +183,6 @@ func isSelectable():
 	print("Player selection started")
 
 func selectionEnded():
-	print("Player selection ended")
-	selectingArrow.visible = false
 	canBeSelected = false
 
 #CHECKS

@@ -27,6 +27,10 @@ func startSelection():
 		enemy.canBeSelected = true
 		print(enemy, enemy.canBeSelected)
 
+func selectionEnded():
+	for enemy in enemies:
+		enemy.canBeSelected = false
+	selectingArrow.visible = false
 
 func updateArrow(target):
 	if target:

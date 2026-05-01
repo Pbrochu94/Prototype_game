@@ -127,6 +127,12 @@ func startSelectingTarget():
 	emit_signal("targetSelectionStarted")
 	isSelecting = true
 
+func endSelection():
+	currentCombatScene.choiceMenu.visible = false
+	for enemy in enemyPartyManager.party:
+		targetManager.selectionEnded()
+#		enemy.selectionEnded()
+
 func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
 	print("Player move to attack", enemy)
@@ -134,10 +140,6 @@ func playerAttack(enemy:Node2D):
 	currentlyPlaying.target = enemy
 	currentlyPlaying.walkToTarget()
 
-func endSelection():
-	currentCombatScene.choiceMenu.visible = false
-	for enemy in enemyPartyManager.party:
-		enemy.selectionEnded()
 
 
 #ENEMY BEHAVIORS
