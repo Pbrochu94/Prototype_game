@@ -16,4 +16,14 @@ func _process(delta):
 
 
 func update(delta):
-	owner.walk(delta, owner.target.global_position)
+	var targetPosition = owner.target.global_position
+	var offset:float
+	if owner.global_position.x < targetPosition.x:
+		offset = -32
+	else:
+		offset = 32
+	var desiredPosition = Vector2(
+		targetPosition.x + offset,
+		targetPosition.y
+	)
+	owner.walk(delta, desiredPosition)

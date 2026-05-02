@@ -90,7 +90,6 @@ func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	#Walk to character but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
 		if global_position == destination:
 			isWalking = false

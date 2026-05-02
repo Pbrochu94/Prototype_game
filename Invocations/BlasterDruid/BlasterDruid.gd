@@ -27,7 +27,7 @@ var currentState:String
 
 #ATTACKS & SPELLS
 @export var attacks:Dictionary = {
-	"gun shot" : preload("res://Invocations/BlasterDruid/GunShot.tres")
+	"gun shot" : preload("res://Invocations/BlasterDruid/Attacks/GunShot.tres")
 }
 
 #STATUS
@@ -71,10 +71,8 @@ func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	#Walk to enemy but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 200
-		if global_position.distance_to(destination)<= stopDistance:
+		if global_position == destination:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
