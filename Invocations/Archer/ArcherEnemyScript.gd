@@ -92,8 +92,7 @@ func walk(delta, destination:Vector2):
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to character but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 64
-		if global_position.distance_to(destination)<= stopDistance:
+		if global_position == destination:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack()
