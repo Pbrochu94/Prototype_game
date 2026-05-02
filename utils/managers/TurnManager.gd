@@ -55,8 +55,9 @@ func playIntro():
 	for enemy in enemyPartyManager.party:
 		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
 func startCombat():
-	startTurn()
 	print("FIGHT START")
+	startTurn()
+	
 
 #ORDER HANDLERS
 func initPlayOrder():
@@ -133,6 +134,7 @@ func endTurn():
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
+	print(currentlyPlaying, " GETS IN POSITION TUNR MANAGER")
 	currentlyPlaying.getInPosition()
 
 func enemyAttack():

@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BaseEnemyScript
+class_name ArcherScript
 
 #NODES STORING
 @onready var anim = $SpritePivot/AnimatedSprite2D
@@ -92,7 +92,7 @@ func walk(delta, destination:Vector2):
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	#Walk to character but leave spaces between
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var stopDistance = 32
+		var stopDistance = 64
 		if global_position.distance_to(destination)<= stopDistance:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
@@ -122,10 +122,11 @@ func getRandomAttack() -> Attack:
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]
 func getInPosition():
-	if attackSelected.attackName == "":
+	print(attackSelected.attackName)
+	if attackSelected.attackName in ["bow shot", "bow power shot"]:
 		stateMachine.setState(stateMachine.states["getinposition"])
-	if attackSelected.attackName == "":
-		stateMachine.setState(stateMachine.states["attacking"])
+#	if attackSelected.attackName == "bow power shot":
+#		stateMachine.setState(stateMachine.states["attacking"])
 func attack():
 	stateMachine.setState(stateMachine.states["attacking"])
 	print("Enemy Attacked: ", target.name)

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_oru6a")
-attackName = ""
-damage = 0
+attackName = "bow shot"
+damage = 10
 range = false
 cooldown = 0
-element = ""
+element = "light"
 hitboxName = ""

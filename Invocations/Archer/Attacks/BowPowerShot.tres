@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_kgshg")
-attackName = ""
-damage = 0
+attackName = "bow power shot"
+damage = 50
 range = false
 cooldown = 0
-element = ""
+element = "light"
 hitboxName = ""

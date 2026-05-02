@@ -14,7 +14,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fn00"]
 size = Vector2(20, 23)
 
-[node name="BaseEnemy" type="Node2D" groups=["enemy"]]
+[node name="BaseEnemy" type="Node2D" groups=["enemy", "unit"]]
 script = ExtResource("1_l7cwa")
 
 [node name="SpritePivot" type="Node2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=64 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_d153k"]
@@ -158,22 +158,6 @@ region = Rect2(1240, 0, 124, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqcve"]
 atlas = ExtResource("2_d153k")
 region = Rect2(1364, 0, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_piq60"]
-atlas = ExtResource("2_d153k")
-region = Rect2(0, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gg5gd"]
-atlas = ExtResource("2_d153k")
-region = Rect2(124, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mh5yt"]
-atlas = ExtResource("2_d153k")
-region = Rect2(248, 294, 124, 49)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aivtu"]
-atlas = ExtResource("2_d153k")
-region = Rect2(372, 294, 124, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4uy2t"]
 atlas = ExtResource("2_d153k")
@@ -361,18 +345,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_piq60")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gg5gd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mh5yt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aivtu")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_4uy2t")
 }, {
 "duration": 1.0,
@@ -390,7 +362,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mmjw6")
 }],
-"loop": true,
+"loop": false,
 "name": &"sword slash",
 "speed": 12.0
 }, {
@@ -435,7 +407,9 @@ script = ExtResource("1_xubua")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_0nh23")
-animation = &"downed"
+animation = &"sword slash"
+frame = 5
+frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_mtelm")

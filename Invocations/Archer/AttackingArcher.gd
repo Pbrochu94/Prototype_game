@@ -1,5 +1,5 @@
 extends State
-class_name AttackingSamurai
+class_name AttackingArcher
 
 var attack:Attack
 var element:String
@@ -11,7 +11,6 @@ func enter():
 	attack = owner.attackSelected
 	element = attack.element
 	var attackName:String = attack.attackName
-	print("ATTACK NAME: ", attackName)
 	owner.anim.play(attackName)
 	print("Character: ", owner, "attacks :", owner.target, " for ", attack.damage, " ", attack.element)
 	owner.target.receiveDamage(attack, element)

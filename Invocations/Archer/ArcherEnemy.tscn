@@ -1,12 +1,20 @@
-[gd_scene load_steps=85 format=3 uid="uid://c1glvlmpjolmj"]
+[gd_scene load_steps=93 format=3 uid="uid://c1glvlmpjolmj"]
 
 [ext_resource type="PackedScene" uid="uid://tdt4g0y53wm3" path="res://Invocations/BaseEnemyScene.tscn" id="1_vj8ky"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
+[ext_resource type="Script" path="res://Invocations/Archer/ArcherEnemyScript.gd" id="2_b37ql"]
 [ext_resource type="Texture2D" uid="uid://6yqussp8i6yn" path="res://CharacterSprite/Archer/special attack.png" id="2_wfhkc"]
 [ext_resource type="Texture2D" uid="uid://ysii3y6piowq" path="res://CharacterSprite/Archer/All.png" id="2_ysouo"]
 [ext_resource type="Texture2D" uid="uid://baklk4ax615bp" path="res://CharacterSprite/Archer/run.png" id="3_eds7e"]
 [ext_resource type="Texture2D" uid="uid://d3wppwh7g11dr" path="res://CharacterSprite/Archer/attack.png" id="3_k7a1k"]
 [ext_resource type="Texture2D" uid="uid://dhk5pcueunifg" path="res://CharacterSprite/Archer/damaged.png" id="3_lshxq"]
+[ext_resource type="Script" path="res://Invocations/Archer/IdleArcher.gd" id="9_bpx28"]
+[ext_resource type="Script" path="res://Invocations/Archer/GetInPositionArcher.gd" id="9_s4rdq"]
+[ext_resource type="Script" path="res://Invocations/Archer/AttackingArcher.gd" id="10_qr1n0"]
+[ext_resource type="Script" path="res://Invocations/Archer/WalkingBackArcher.gd" id="11_ollgq"]
+[ext_resource type="Script" path="res://Invocations/Archer/EndingTurnArcher.gd" id="12_ma5gy"]
+[ext_resource type="Script" path="res://Invocations/Archer/HurtArcher.gd" id="13_wwaju"]
+[ext_resource type="Script" path="res://Invocations/Archer/DownedArcher.gd" id="14_6mlwk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2jmv"]
 atlas = ExtResource("2_wfhkc")
@@ -393,7 +401,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fkkdt")
 }],
-"loop": true,
+"loop": false,
 "name": &"bow power shot",
 "speed": 12.0
 }, {
@@ -440,7 +448,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_65nf0")
 }],
-"loop": true,
+"loop": false,
 "name": &"bow shot",
 "speed": 12.0
 }, {
@@ -463,7 +471,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsd2n")
 }],
-"loop": true,
+"loop": false,
 "name": &"downed",
 "speed": 10.0
 }, {
@@ -474,7 +482,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rv8dg")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 8.0
 }, {
@@ -574,9 +582,30 @@ animations = [{
 }]
 
 [node name="Archer" instance=ExtResource("1_vj8ky")]
+script = ExtResource("2_b37ql")
 
 [node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_fax0j")
-animation = &"bow power shot"
-frame_progress = 0.139096
+animation = &"walk"
+
+[node name="Idle" parent="StateMachine" index="0"]
+script = ExtResource("9_bpx28")
+
+[node name="GetInPosition" parent="StateMachine" index="1"]
+script = ExtResource("9_s4rdq")
+
+[node name="Attacking" parent="StateMachine" index="2"]
+script = ExtResource("10_qr1n0")
+
+[node name="WalkingBack" parent="StateMachine" index="3"]
+script = ExtResource("11_ollgq")
+
+[node name="EndingTurn" parent="StateMachine" index="4"]
+script = ExtResource("12_ma5gy")
+
+[node name="Hurt" parent="StateMachine" index="5"]
+script = ExtResource("13_wwaju")
+
+[node name="Downed" parent="StateMachine" index="6"]
+script = ExtResource("14_6mlwk")
