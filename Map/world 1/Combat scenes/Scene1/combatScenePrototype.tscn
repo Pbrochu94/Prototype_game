@@ -565,7 +565,7 @@ speed = 3
 
 [node name="BlasterDruid" parent="." groups=["invocation", "unit"] instance=ExtResource("9_16ksc")]
 position = Vector2(-123, 3)
-speed = 2
+speed = 11
 
 [node name="CannonDruid" parent="." groups=["unit"] instance=ExtResource("10_2pldu")]
 position = Vector2(123, 3)

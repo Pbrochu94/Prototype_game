@@ -72,7 +72,8 @@ func walk(delta, destination:Vector2):
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		if global_position == destination:
+		var distance = global_position.distance_to(destination)
+		if distance <= 200:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
