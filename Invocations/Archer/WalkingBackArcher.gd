@@ -5,10 +5,10 @@ class_name WalkingBackArcher
 func enter():
 	owner.isWalking = true
 	owner.anim.play("walk")
-	if owner.is_in_group("enemy"):
-		owner.orientSprite(owner.facingBackward)
+	if owner.faction == owner.Faction.SUMMON:
+		owner.orientSprite(-1)
 	else:
-		owner.anim.scale.x = -1
+		owner.orientSprite(1)
 
 func update(delta):
 	owner.walk(delta, owner.startingPosition)

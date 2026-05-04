@@ -1,6 +1,6 @@
-[gd_scene load_steps=93 format=3 uid="uid://c1glvlmpjolmj"]
+[gd_scene load_steps=94 format=3 uid="uid://c1glvlmpjolmj"]
 
-[ext_resource type="PackedScene" uid="uid://tdt4g0y53wm3" path="res://Invocations/BaseEnemyScene.tscn" id="1_vj8ky"]
+[ext_resource type="PackedScene" uid="uid://ciex58lq7ka3x" path="res://Invocations/BaseEnemyScene.tscn" id="1_vj8ky"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
 [ext_resource type="Script" path="res://Invocations/Archer/ArcherEnemyScript.gd" id="2_b37ql"]
 [ext_resource type="Texture2D" uid="uid://6yqussp8i6yn" path="res://CharacterSprite/Archer/special attack.png" id="2_wfhkc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d3wppwh7g11dr" path="res://CharacterSprite/Archer/attack.png" id="3_k7a1k"]
 [ext_resource type="Texture2D" uid="uid://dhk5pcueunifg" path="res://CharacterSprite/Archer/damaged.png" id="3_lshxq"]
 [ext_resource type="Script" path="res://Invocations/Archer/IdleArcher.gd" id="9_bpx28"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="9_exffj"]
 [ext_resource type="Script" path="res://Invocations/Archer/GetInPositionArcher.gd" id="9_s4rdq"]
 [ext_resource type="Script" path="res://Invocations/Archer/AttackingArcher.gd" id="10_qr1n0"]
 [ext_resource type="Script" path="res://Invocations/Archer/WalkingBackArcher.gd" id="11_ollgq"]
@@ -588,6 +589,9 @@ script = ExtResource("2_b37ql")
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_fax0j")
 animation = &"walk"
+
+[node name="StateMachine" parent="." index="2"]
+script = ExtResource("9_exffj")
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource("9_bpx28")
