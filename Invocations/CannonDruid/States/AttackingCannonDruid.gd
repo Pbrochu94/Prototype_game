@@ -9,6 +9,7 @@ func _onready():
 
 func enter():
 	attack = owner.attackSelected
+	print(attack)
 	element = attack.element
 	var attackName:String = attack.attackName
 	owner.anim.play(attackName)

@@ -89,7 +89,7 @@ func receiveDamage(attack:Attack, element:String):
 
 #TURN FLOW
 func chooseAttack():
-	attackSelected = attacks.get("gun shot")
+	attackSelected = attacks.get("cannon shot")
 	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":

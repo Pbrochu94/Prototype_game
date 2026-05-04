@@ -32,9 +32,10 @@ func onCharacterDeath(character:Node2D):
 #TEST DATA
 var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/Samurai/SamuraiScene.tscn"),
+	preload("res://Invocations/CannonDruid/CannonDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	for i in range(1):
+	for i in range(2):
 		var character = allCharacters.pick_random().instantiate()
 		character.faction = character.Faction.ENEMY
 		character.isDowned.connect(onCharacterDeath)

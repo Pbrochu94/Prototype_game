@@ -457,7 +457,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5kkd"]
 size = Vector2(20, 23)
 
-[node name="CannonDruid" type="Node2D" groups=["character", "enemy"]]
+[node name="CannonDruid" type="Node2D" groups=["character", "enemy", "unit"]]
 script = ExtResource("1_fhrl2")
 
 [node name="SpritePivot" type="Node2D" parent="."]
