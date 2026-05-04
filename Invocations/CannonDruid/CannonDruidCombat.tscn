@@ -1,6 +1,6 @@
 [gd_scene load_steps=74 format=3 uid="uid://67avdf4jdwg3"]
 
-[ext_resource type="Script" path="res://Invocations/BaseUnitScript.gd" id="1_2jw84"]
+[ext_resource type="Script" path="res://Invocations/CannonDruid/CannonDruid.gd" id="1_fhrl2"]
 [ext_resource type="Texture2D" uid="uid://cu68ygnjp41d" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Shoot.png" id="2_njyno"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
 [ext_resource type="Texture2D" uid="uid://b2tw7ka81nxvb" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sprite Sheet 135x38.png" id="3_gf0hk"]
@@ -458,7 +458,7 @@ animations = [{
 size = Vector2(20, 23)
 
 [node name="CannonDruid" type="Node2D" groups=["character", "enemy"]]
-script = ExtResource("1_2jw84")
+script = ExtResource("1_fhrl2")
 
 [node name="SpritePivot" type="Node2D" parent="."]
 

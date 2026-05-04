@@ -57,10 +57,6 @@ signal donePreparing
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Initialize state machine on this character
-	if faction == Faction.SUMMON:
-		orientSprite(1)
-	else:
-		orientSprite(-1)
 	stateMachine.init(self)
 	connectSignals()
 

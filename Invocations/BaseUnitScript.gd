@@ -48,13 +48,17 @@ signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
+signal hovered(character)
+signal unhovered(character)
+signal enemySelected(enemy:Node2D)
+signal donePreparing
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
-	inPositionToAttack.connect(attack)
-	anim.animation_finished.connect(onAnimationFinished)
+	connectSignals()
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
@@ -70,6 +74,12 @@ func onAnimationFinished():
 					stateMachine.setState(stateMachine.states["idle"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
+
+#INIT
+func connectSignals():
+	turnManager.targetSelectionStarted.connect(isSelectable)
+	inPositionToAttack.connect(attack)
+	anim.animation_finished.connect(onAnimationFinished)
 
 #BEHAVIORS
 func walk(delta, destination:Vector2):
@@ -92,6 +102,12 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 #TURN FLOW
+func enemyStartTurn():
+	print(characterName, " started his turn")
+	attackSelected = getRandomAttack()
+	print(characterName, " chose the attack: ", attackSelected.attackName)
+	chooseTarget()
+	emit_signal("donePreparing")
 func chooseAttack():
 	attackSelected = attacks.get("sword slash")
 	print("Attack chosen: ", attackSelected)
@@ -108,8 +124,9 @@ func getRandomAttack() -> Attack:
 	var keys = attacks.keys()
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]
-func walkToTarget():
-	emit_signal("selectionCompleted")
+func getInPosition():
+	if faction == Faction.SUMMON:
+		emit_signal("selectionCompleted")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
@@ -132,3 +149,16 @@ func isSelectable():
 	print("Player selection started")
 func selectionEnded():
 	canBeSelected = false
+
+func onMouseEntered():
+	if not isDead and canBeSelected:
+		emit_signal("hovered", self)
+	else:
+		return
+func onMouseExited():
+	emit_signal("unhovered", self)
+func onArea2DInputEvent(viewport, event, shape_idx):
+	if not canBeSelected:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("enemySelected",self)
