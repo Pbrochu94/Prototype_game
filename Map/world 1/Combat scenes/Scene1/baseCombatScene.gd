@@ -25,9 +25,9 @@ var enemyStartingPosition:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	turnManager = get_tree().get_first_node_in_group("turn manager")
 	initPlayerPartyData()
 	initEnemyPartyData()
+	turnManager = get_tree().get_first_node_in_group("turn manager")
 	turnManager.currentCombatScene = combatScene
 
 
@@ -36,15 +36,20 @@ func _process(delta):
 	pass
 
 func initPlayerPartyData():
+	print("AHHHH")
 	for i in range(playerPartyManager.party.size()):
 		var invocation = playerPartyManager.party[i]
+		combatScene.add_child(invocation)
 		invocation.currentCombatScene = self
 		if i < playerAnchors.size():
+			invocation.global_position = playerAnchors[i].global_position
 			invocation.startingPosition = playerAnchors[i].global_position
 
 func initEnemyPartyData():
 	for i in range(enemyPartyManager.party.size()):
-		var invocation = enemyPartyManager.party[i]
-		invocation.currentCombatScene = self
-		if i < playerAnchors.size():
-			invocation.startingPosition = enemyAnchors[i].global_position
+		var enemy = enemyPartyManager.party[i]
+		combatScene.add_child(enemy)
+		enemy.currentCombatScene = self
+		if i < enemyAnchors.size():
+			enemy.global_position = enemyAnchors[i].global_position
+			enemy.startingPosition = enemyAnchors[i].global_position

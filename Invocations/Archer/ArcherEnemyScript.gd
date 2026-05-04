@@ -107,7 +107,7 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 #TURN FLOW
-func startTurn():
+func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	chooseTarget()

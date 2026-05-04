@@ -62,6 +62,7 @@ func startCombat():
 #ORDER HANDLERS
 func initPlayOrder():
 	for character in get_tree().get_nodes_in_group("unit"):
+		print(character)
 		playOrder.append(character)
 		playOrder.sort_custom(func(a, b):
 			return a.speed > b.speed
@@ -88,7 +89,7 @@ func updateCurrentlyPlaying():
 func startTurn():
 	if not currentlyPlaying:
 		return
-	if currentlyPlaying.is_in_group("invocation"):
+	if currentlyPlaying.faction == currentlyPlaying.Faction.SUMMON:
 		chooseAction()
 	else:
 		currentlyPlaying.startTurn()
@@ -105,7 +106,7 @@ func onActionSelected(action:String):
 		"ability":
 			pass
 func startSelectingTarget():
-	print("Player is selecting a target")
+	print(currentlyPlaying.characterName," is selecting a target")
 	emit_signal("targetSelectionStarted")
 	isSelecting = true
 func endSelection():

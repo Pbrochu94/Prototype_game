@@ -10,11 +10,12 @@ signal partyDead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for partyMember in get_tree().get_nodes_in_group("enemy"):
-		party.append(partyMember)
-		partyMember.isDowned.connect(onCharacterDeath)
-		aliveCount += 1
-		print(party, aliveCount)
+#	for partyMember in get_tree().get_nodes_in_group("enemy"):
+#		party.append(partyMember)
+#		partyMember.isDowned.connect(onCharacterDeath)
+#		aliveCount += 1
+#		print(party, aliveCount)
+	loadRandomTeam()
 	currentlyAliveCharacters = party
 
 #PARTY HANDLERS
@@ -27,3 +28,13 @@ func onCharacterDeath(character:Node2D):
 	print("Currently alive enemies: ", currentlyAliveCharacters)
 	if aliveCount <= 0:
 		emit_signal("partyDead")
+
+#TEST DATA
+var allCharacters:Array[PackedScene] = [
+	preload("res://Invocations/Samurai/SamuraiScene.tscn"),
+]
+func loadRandomTeam():
+	for i in range(1):
+		var character = allCharacters.pick_random().instantiate()
+		character.faction = character.Faction.ENEMY
+		party.append(character)

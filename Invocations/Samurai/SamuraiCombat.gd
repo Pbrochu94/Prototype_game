@@ -17,7 +17,7 @@ var canBeSelected = false
 var currentState:String
 var isWalking = false
 var direction:int
-@export var type:Type
+@export var faction:Faction
 
 #STATS
 @export var characterName:String = "Samurai"
@@ -31,7 +31,7 @@ var direction:int
 @export var attackSelected:Attack
 
 #ENUMS
-enum Type {
+enum Faction {
 	ENEMY,
 	SUMMON
 }
@@ -48,13 +48,21 @@ signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
+signal hovered(character)
+signal unhovered(character)
+signal enemySelected(enemy:Node2D)
+signal donePreparing
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Initialize state machine on this character
+	if faction == Faction.SUMMON:
+		orientSprite(1)
+	else:
+		orientSprite(-1)
 	stateMachine.init(self)
-	inPositionToAttack.connect(attack)
-	anim.animation_finished.connect(onAnimationFinished)
+	connectSignals()
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
@@ -70,6 +78,12 @@ func onAnimationFinished():
 					stateMachine.setState(stateMachine.states["idle"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
+
+#INIT
+func connectSignals():
+	turnManager.targetSelectionStarted.connect(isSelectable)
+	inPositionToAttack.connect(attack)
+	anim.animation_finished.connect(onAnimationFinished)
 
 #BEHAVIORS
 func walk(delta, destination:Vector2):
@@ -132,3 +146,16 @@ func isSelectable():
 	print("Player selection started")
 func selectionEnded():
 	canBeSelected = false
+
+func onMouseEntered():
+	if not isDead and canBeSelected:
+		emit_signal("hovered", self)
+	else:
+		return
+func onMouseExited():
+	emit_signal("unhovered", self)
+func onArea2DInputEvent(viewport, event, shape_idx):
+	if not canBeSelected:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("enemySelected",self)

@@ -403,7 +403,7 @@ size = Vector2(45, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g353p"]
 size = Vector2(20, 23)
 
-[node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player"]]
+[node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
 script = ExtResource("1_xubua")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -452,3 +452,7 @@ script = ExtResource("11_4b2fb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_g353p")
+
+[connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExited"]
