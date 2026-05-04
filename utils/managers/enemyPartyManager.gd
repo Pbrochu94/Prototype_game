@@ -35,7 +35,7 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/CannonDruid/CannonDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	for i in range(2):
+	for i in range(3):
 		var character = allCharacters.pick_random().instantiate()
 		character.faction = character.Faction.ENEMY
 		character.isDowned.connect(onCharacterDeath)
