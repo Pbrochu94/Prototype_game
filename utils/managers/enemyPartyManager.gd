@@ -37,4 +37,7 @@ func loadRandomTeam():
 	for i in range(1):
 		var character = allCharacters.pick_random().instantiate()
 		character.faction = character.Faction.ENEMY
+		character.isDowned.connect(onCharacterDeath)
+		aliveCount += 1
+		print(party, aliveCount)
 		party.append(character)

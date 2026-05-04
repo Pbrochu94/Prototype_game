@@ -15,11 +15,6 @@ signal partyDead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	for partyMember in get_tree().get_nodes_in_group("party member"):
-#		party.append(partyMember)
-#		partyMember.isDowned.connect(onCharacterDeath)
-#		aliveCount += 1
-#		print(party, aliveCount)
 	loadRandomTeam()
 	currentlyAliveCharacters = party
 
@@ -39,4 +34,7 @@ func loadRandomTeam():
 	for i in range(1):
 		var character = allCharacters.pick_random().instantiate()
 		character.faction = character.Faction.SUMMON
+		character.isDowned.connect(onCharacterDeath)
+		aliveCount += 1
+		print(party, aliveCount)
 		party.append(character)
