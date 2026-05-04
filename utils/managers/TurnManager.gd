@@ -92,7 +92,7 @@ func startTurn():
 	if currentlyPlaying.faction == currentlyPlaying.Faction.SUMMON:
 		chooseAction()
 	else:
-		currentlyPlaying.startTurn()
+		currentlyPlaying.enemyStartTurn()
 func chooseAction():
 	currentCombatScene.choiceMenu.visible = true
 	print("Player is choosing what to do...")
@@ -119,7 +119,7 @@ func playerAttack(enemy:Node2D):
 	print("Player move to attack", enemy)
 	#Assign the enemy selected in player node
 	currentlyPlaying.target = enemy
-	currentlyPlaying.walkToTarget()
+	currentlyPlaying.getInPosition()
 func endTurn():
 	updateCurrentlyPlaying()
 	emit_signal("turnEnded")

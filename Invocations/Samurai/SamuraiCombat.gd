@@ -106,6 +106,12 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 #TURN FLOW
+func enemyStartTurn():
+	print(characterName, " started his turn")
+	attackSelected = getRandomAttack()
+	print(characterName, " chose the attack: ", attackSelected.attackName)
+	chooseTarget()
+	emit_signal("donePreparing")
 func chooseAttack():
 	attackSelected = attacks.get("sword slash")
 	print("Attack chosen: ", attackSelected)
@@ -122,8 +128,9 @@ func getRandomAttack() -> Attack:
 	var keys = attacks.keys()
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]
-func walkToTarget():
-	emit_signal("selectionCompleted")
+func getInPosition():
+	if faction == Faction.SUMMON:
+		emit_signal("selectionCompleted")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
