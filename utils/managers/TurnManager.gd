@@ -16,7 +16,7 @@ var playerWon = false
 #SIGNALS
 signal turnEnded
 signal targetSelectionStarted
-signal selectionEnded
+signal selectionCompleted
 
 func _ready():
 	#Wait for all _ready() to complete
@@ -34,11 +34,11 @@ func connectSignals():
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	targetSelectionStarted.connect(targetManager.startSelection)
-	selectionEnded.connect(endSelection)
+	selectionCompleted.connect(endSelection)
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
-		invocation.selectionEnded.connect(endSelection)
+		invocation.selectionCompleted.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
 		invocation.attackChosen.connect(startSelectingTarget)
 	print("Play order: ",playOrder)

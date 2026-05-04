@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://b6eu8gs55c5b1"]
 
-[ext_resource type="Script" path="res://CharacterSprite/Minor gun enemy/World/MinorGunEnemyWorld.gd" id="1_7y7rn"]
-[ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://CharacterSprite/Minor gun enemy/sprites/idle 112x26.png" id="1_ka2h7"]
-[ext_resource type="Texture2D" uid="uid://dm5wog2pdqapi" path="res://CharacterSprite/Minor gun enemy/sprites/move 112x26.png" id="2_0e26n"]
+[ext_resource type="Script" path="res://Invocations/Minor gun enemy/World/MinorGunEnemyWorld.gd" id="1_7y7rn"]
+[ext_resource type="Texture2D" uid="uid://c5n7omj872k4c" path="res://Invocations/Minor gun enemy/sprites/idle 112x26.png" id="1_ka2h7"]
+[ext_resource type="Texture2D" uid="uid://dm5wog2pdqapi" path="res://Invocations/Minor gun enemy/sprites/move 112x26.png" id="2_0e26n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fail"]
 atlas = ExtResource("1_ka2h7")

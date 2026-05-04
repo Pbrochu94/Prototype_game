@@ -33,7 +33,7 @@ var isDead:bool = false
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
-signal selectionEnded
+signal selectionCompleted
 signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen

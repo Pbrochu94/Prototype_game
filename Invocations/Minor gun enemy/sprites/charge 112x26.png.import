@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://e3paqxtb0042"
-path="res://.godot/imported/charge 112x26.png-7c7d2c695dd2666afdf9801e7429b741.ctex"
+path="res://.godot/imported/charge 112x26.png-bcc91ab0e7c0e0c555058d59c21af336.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Minor gun enemy/sprites/charge 112x26.png"
-dest_files=["res://.godot/imported/charge 112x26.png-7c7d2c695dd2666afdf9801e7429b741.ctex"]
+source_file="res://Invocations/Minor gun enemy/sprites/charge 112x26.png"
+dest_files=["res://.godot/imported/charge 112x26.png-bcc91ab0e7c0e0c555058d59c21af336.ctex"]
 
 [params]
 

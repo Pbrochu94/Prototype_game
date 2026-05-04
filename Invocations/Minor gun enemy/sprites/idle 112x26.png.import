@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0tp807c3642w"
-path="res://.godot/imported/damaged 112x26.png-ad5d48e458c294872c84db941a160bab.ctex"
+uid="uid://c5n7omj872k4c"
+path="res://.godot/imported/idle 112x26.png-39c63a558bba1d154bbe21eb82274983.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Minor gun enemy/sprites/damaged 112x26.png"
-dest_files=["res://.godot/imported/damaged 112x26.png-ad5d48e458c294872c84db941a160bab.ctex"]
+source_file="res://Invocations/Minor gun enemy/sprites/idle 112x26.png"
+dest_files=["res://.godot/imported/idle 112x26.png-39c63a558bba1d154bbe21eb82274983.ctex"]
 
 [params]
 

@@ -37,7 +37,7 @@ var isDead = false
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
-signal selectionEnded
+signal selectionCompleted
 signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
@@ -98,7 +98,7 @@ func chooseAttack():
 #		return
 	emit_signal("attackChosen")
 func walkToTarget():
-	emit_signal("selectionEnded")
+	emit_signal("selectionCompleted")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])

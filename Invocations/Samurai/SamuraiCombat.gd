@@ -9,12 +9,15 @@ class_name SamuraiCombat
 @onready var turnManager:Node = get_tree().get_first_node_in_group("turn manager")
 @onready var currentCombatScene:Node2D = get_tree().get_first_node_in_group("combat scene") 
 @onready var spriteOrientation:Node2D = $SpritePivot
+@onready var area = $Area2D
 var target:Node2D
 
 #VARIABLES
+var canBeSelected = false
 var currentState:String
 var isWalking = false
 var direction:int
+@export var type:Type
 
 #STATS
 @export var characterName:String = "Samurai"
@@ -27,13 +30,19 @@ var direction:int
 }
 @export var attackSelected:Attack
 
+#ENUMS
+enum Type {
+	ENEMY,
+	SUMMON
+}
+
 #STATUS
 var isDead:bool = false
 
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
-signal selectionEnded
+signal selectionCompleted
 signal dealDamage(amount:int)
 signal turnFinished
 signal attackChosen
@@ -92,8 +101,15 @@ func chooseAttack():
 #	else:
 #		return
 	emit_signal("attackChosen")
+func chooseTarget():
+	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
+	print("Chosen target: ", target)
+func getRandomAttack() -> Attack:
+	var keys = attacks.keys()
+	var random_key = keys[randi() % keys.size()]
+	return attacks[random_key]
 func walkToTarget():
-	emit_signal("selectionEnded")
+	emit_signal("selectionCompleted")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
@@ -108,3 +124,11 @@ func endingTurn():
 	print("Player end turn")
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
+
+#UI & SELECTION
+func isSelectable():
+	canBeSelected = true
+	area.monitoring = true
+	print("Player selection started")
+func selectionEnded():
+	canBeSelected = false

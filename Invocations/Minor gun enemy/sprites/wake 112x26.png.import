@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du4gqws4qwe8h"
-path="res://.godot/imported/death 112x26.png-61f9ce3e5fc94e0a6aa5a9aa5eef6648.ctex"
+uid="uid://p7jo1ccieknb"
+path="res://.godot/imported/wake 112x26.png-d711b955914a7fa616bd06d9bc4ae5d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Minor gun enemy/sprites/death 112x26.png"
-dest_files=["res://.godot/imported/death 112x26.png-61f9ce3e5fc94e0a6aa5a9aa5eef6648.ctex"]
+source_file="res://Invocations/Minor gun enemy/sprites/wake 112x26.png"
+dest_files=["res://.godot/imported/wake 112x26.png-d711b955914a7fa616bd06d9bc4ae5d7.ctex"]
 
 [params]
 

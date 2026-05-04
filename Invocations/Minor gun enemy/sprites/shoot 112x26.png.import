@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm5wog2pdqapi"
-path="res://.godot/imported/move 112x26.png-5a70dfc1306f6c2bfb85bb5674c31646.ctex"
+uid="uid://dfy3efl00rdav"
+path="res://.godot/imported/shoot 112x26.png-267e14c66d719596e5d64bdc7a2ab2ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterSprite/Minor gun enemy/sprites/move 112x26.png"
-dest_files=["res://.godot/imported/move 112x26.png-5a70dfc1306f6c2bfb85bb5674c31646.ctex"]
+source_file="res://Invocations/Minor gun enemy/sprites/shoot 112x26.png"
+dest_files=["res://.godot/imported/shoot 112x26.png-267e14c66d719596e5d64bdc7a2ab2ff.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=66 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_d153k"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Invocations/Samurai/States/EndingTurnSamurai.gd" id="8_obadw"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/HurtSamurai.gd" id="9_impai"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/DownedSamurai.gd" id="10_jb3k4"]
+[ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="11_4b2fb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42xaq"]
 atlas = ExtResource("2_d153k")
@@ -399,6 +400,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh7qf"]
 size = Vector2(45, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g353p"]
+size = Vector2(20, 23)
+
 [node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player"]]
 script = ExtResource("1_xubua")
 
@@ -441,3 +445,10 @@ script = ExtResource("10_jb3k4")
 position = Vector2(14.5, 2)
 shape = SubResource("RectangleShape2D_lh7qf")
 debug_color = Color(0.956863, 0.129412, 0.411765, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 2)
+script = ExtResource("11_4b2fb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_g353p")
