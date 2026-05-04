@@ -1,7 +1,7 @@
 [gd_scene load_steps=41 format=3 uid="uid://c0pg8a4xs3ao4"]
 
 [ext_resource type="Script" path="res://player/playerWorld/playerWorld.gd" id="1_4cw6l"]
-[ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://player/sprites/Sci-fi Samurai with Sword 124x49.png" id="2_d6inq"]
+[ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_d6inq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_afrxm"]
 atlas = ExtResource("2_d6inq")

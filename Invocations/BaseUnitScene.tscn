@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://o3pk3ttlbnmm"]
+
+[ext_resource type="Script" path="res://Invocations/BaseUnitScript.gd" id="1_p2nje"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="2_htypr"]
+[ext_resource type="Script" path="res://utils/States/Combat/Idle.gd" id="3_6yy4f"]
+[ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="3_aqr6i"]
+[ext_resource type="Script" path="res://utils/States/Combat/GetInPosition.gd" id="4_is84p"]
+[ext_resource type="Script" path="res://utils/States/Combat/WalkBack.gd" id="5_yvnro"]
+[ext_resource type="Script" path="res://utils/States/Combat/Attacking.gd" id="6_c5nkb"]
+[ext_resource type="Script" path="res://utils/States/Combat/EndingTurn.gd" id="7_f3dq0"]
+[ext_resource type="Script" path="res://utils/States/Combat/Hurt.gd" id="8_a5i55"]
+[ext_resource type="Script" path="res://utils/States/Combat/Downed.gd" id="9_5qy5y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nh23"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"downed",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"hurt",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh7qf"]
+size = Vector2(45, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g353p"]
+size = Vector2(20, 23)
+
+[node name="Character" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
+script = ExtResource("1_p2nje")
+
+[node name="SpritePivot" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(1, -9.5)
+sprite_frames = SubResource("SpriteFrames_0nh23")
+animation = &"walk"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_htypr")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_6yy4f")
+
+[node name="GetInPosition" type="Node" parent="StateMachine"]
+script = ExtResource("4_is84p")
+
+[node name="WalkingBack" type="Node" parent="StateMachine"]
+script = ExtResource("5_yvnro")
+
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("6_c5nkb")
+
+[node name="EndingTurn" type="Node" parent="StateMachine"]
+script = ExtResource("7_f3dq0")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("8_a5i55")
+
+[node name="Downed" type="Node" parent="StateMachine"]
+script = ExtResource("9_5qy5y")
+
+[node name="Hitboxes" type="Area2D" parent="."]
+
+[node name="LightSlash1" type="CollisionShape2D" parent="Hitboxes"]
+position = Vector2(14.5, 2)
+shape = SubResource("RectangleShape2D_lh7qf")
+debug_color = Color(0.956863, 0.129412, 0.411765, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 2)
+script = ExtResource("3_aqr6i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_g353p")
+
+[connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent" flags=18]
+[connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered" flags=18]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExited" flags=18]
