@@ -405,6 +405,7 @@ size = Vector2(20, 23)
 
 [node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
 script = ExtResource("1_xubua")
+speed = 5
 
 [node name="SpritePivot" type="Node2D" parent="."]
 

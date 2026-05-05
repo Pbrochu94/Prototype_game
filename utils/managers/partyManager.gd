@@ -32,8 +32,10 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/Archer/ArcherCombat.tscn")
 ]
 func loadRandomTeam():
+	print(allCharacters)
 	for i in range(3):
 		var character = allCharacters.pick_random().instantiate()
+		print(character)
 		character.faction = character.Faction.SUMMON
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
