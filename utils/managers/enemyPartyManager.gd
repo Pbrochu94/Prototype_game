@@ -33,7 +33,8 @@ func onCharacterDeath(character:Node2D):
 var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/Samurai/SamuraiScene.tscn"),
 	preload("res://Invocations/CannonDruid/CannonDruidCombat.tscn"),
-	preload("res://Invocations/Archer/ArcherCombat.tscn")
+	preload("res://Invocations/Archer/ArcherCombat.tscn"),
+	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
 func loadRandomTeam():
 	for i in range(3):

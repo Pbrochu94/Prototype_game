@@ -1,5 +1,5 @@
 extends Node2D
-class_name BlasterDruidCombat
+class_name BaseBlasterDruidScript
 
 #NODES
 @onready var anim = $SpritePivot/AnimatedSprite2D
@@ -9,30 +9,35 @@ class_name BlasterDruidCombat
 @onready var turnManager:Node = get_tree().get_first_node_in_group("turn manager")
 @onready var currentCombatScene:Node2D = get_tree().get_first_node_in_group("combat scene") 
 @onready var spriteOrientation:Node2D = $SpritePivot
+@onready var area = $Area2D
 var target:Node2D
 
 #VARIABLES
-var isWalking = false
-var direction
+var canBeSelected = false
 var currentState:String
+var isWalking = false
+var direction:int
+@export var faction:Faction
 
 #STATS
-@export var characterName = "Blaster druid"
-@export var maxHp = 100
-@export var currentHp = 100
-@export var speed = 3
-
-@export var attackSelected:Attack
-@export var walkSpeed = 80
-
-#ATTACKS & SPELLS
+@export var characterName:String = "Blaster Druid"
+@export var walkSpeed:int = 200
+@export var maxHp:int = 100
+@export var currentHp:int = 100
+@export var speed:int = 1
 @export var attacks:Dictionary = {
 	"gun shot" : preload("res://Invocations/BlasterDruid/Attacks/GunShot.tres")
 }
+@export var attackSelected:Attack
+
+#ENUMS
+enum Faction {
+	ENEMY,
+	SUMMON
+}
 
 #STATUS
-var isDead = false
-
+var isDead:bool = false
 
 #SIGNALS
 signal introFinished
@@ -43,13 +48,17 @@ signal turnFinished
 signal attackChosen
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
+signal hovered(character)
+signal unhovered(character)
+signal enemySelected(enemy:Node2D)
+signal donePreparing
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
-	inPositionToAttack.connect(attack)
-	anim.animation_finished.connect(onAnimationFinished)
+	connectSignals()
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
@@ -66,14 +75,19 @@ func onAnimationFinished():
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
+#INIT
+func connectSignals():
+	turnManager.targetSelectionStarted.connect(isSelectable)
+	inPositionToAttack.connect(attack)
+	anim.animation_finished.connect(onAnimationFinished)
+
 #BEHAVIORS
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	if stateMachine.currentState == stateMachine.states["getinposition"]:
-		var distance = global_position.distance_to(destination)
-		if distance <= 200:
+		if global_position == destination:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
@@ -88,17 +102,32 @@ func receiveDamage(attack:Attack, element:String):
 	print("After hit: ", currentHp)
 
 #TURN FLOW
+func enemyStartTurn():
+	print(characterName, " started his turn")
+	attackSelected = getRandomAttack()
+	print(characterName, " chose the attack: ", attackSelected.attackName)
+	chooseTarget()
+	emit_signal("donePreparing")
 func chooseAttack():
-	attackSelected = attacks.get("cannon shot")
-	print("Attack chosen: ", attackSelected)
+	attackSelected = getRandomAttack()
+#	attackSelected = attacks.get("sword slash")
+#	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":
 #		attackSelected = attacks["swordSlash1"]
 #	else:
 #		return
 	emit_signal("attackChosen")
-func walkToTarget():
-	emit_signal("selectionCompleted")
+func chooseTarget():
+	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
+	print("Chosen target: ", target)
+func getRandomAttack() -> Attack:
+	var keys = attacks.keys()
+	var random_key = keys[randi() % keys.size()]
+	return attacks[random_key]
+func getInPosition():
+	if faction == Faction.SUMMON:
+		emit_signal("selectionCompleted")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
@@ -113,3 +142,24 @@ func endingTurn():
 	print("Player end turn")
 	stateMachine.setState(stateMachine.states["idle"])
 	emit_signal("turnFinished")
+
+#UI & SELECTION
+func isSelectable():
+	canBeSelected = true
+	area.monitoring = true
+	print("Player selection started")
+func selectionEnded():
+	canBeSelected = false
+
+func onMouseEntered():
+	if not isDead and canBeSelected:
+		emit_signal("hovered", self)
+	else:
+		return
+func onMouseExited():
+	emit_signal("unhovered", self)
+func onArea2DInputEvent(viewport, event, shape_idx):
+	if not canBeSelected:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("enemySelected",self)

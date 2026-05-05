@@ -8,8 +8,10 @@ func _onready():
 func enter():
 	owner.scale.x = 1
 	owner.anim.play("idle")
-	if owner.is_in_group("enemy"):
-		owner.orientSprite(owner.facingPlayer)
+	if owner.faction == owner.Faction.SUMMON:
+		owner.orientSprite(1)
+	else:
+		owner.orientSprite(-1)
 
 func update(delta):
 	pass

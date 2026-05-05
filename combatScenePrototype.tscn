@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://Invocations/Samurai/SamuraiScene.tscn" id="6_cuq7g"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="7_cdfdc"]
 [ext_resource type="PackedScene" uid="uid://gmpl0rsq3yvg" path="res://Invocations/Minor gun enemy/MinorGun.tscn" id="8_8xsu6"]
-[ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruid.tscn" id="9_o2wet"]
+[ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruidCombat.tscn" id="9_o2wet"]
 [ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="10_c1ji5"]
 [ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="11_3ihha"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b4ujsi8dfa3g"]
+[gd_scene load_steps=68 format=3 uid="uid://b4ujsi8dfa3g"]
 
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/BlasterDruid.gd" id="1_b5ocs"]
 [ext_resource type="Texture2D" uid="uid://wv1dg5clr7yo" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png" id="2_jq4id"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/States/EndingTurnBlasterDruid.gd" id="13_rme14"]
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/States/HurtBlasterDruid.gd" id="14_s10cu"]
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/States/DownedBlasterDruid.gd" id="15_0kp7g"]
+[ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="16_fa1gc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oguey"]
 atlas = ExtResource("2_n71qu")
@@ -396,9 +397,11 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlasterDruid" type="Node2D" groups=["character", "party member"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy3tv"]
+size = Vector2(20, 23)
+
+[node name="BlasterDruid" type="Node2D" groups=["character", "party member", "unit"]]
 script = ExtResource("1_b5ocs")
-speed = 1
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
@@ -435,3 +438,10 @@ script = ExtResource("15_0kp7g")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 2)
+script = ExtResource("16_fa1gc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wy3tv")

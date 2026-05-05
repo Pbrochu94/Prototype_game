@@ -8,10 +8,10 @@ func _onready():
 func enter():
 	owner.anim.play("idle")
 	#Make the enemy face left and the player face right
-	if owner.is_in_group("enemy"):
-		owner.orientSprite(owner.facingPlayer)
+	if owner.faction == owner.Faction.SUMMON:
+		owner.orientSprite(1)
 	else:
-		owner.anim.scale.x = 1
+		owner.orientSprite(-1)
 	#CHeck if something affect (ex: poison etc)
 
 func update(delta):

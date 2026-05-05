@@ -17,13 +17,13 @@ func _process(delta):
 
 func update(delta):
 	var targetPosition = owner.target.global_position
-#	var offset:float
-#	if owner.global_position.x < targetPosition.x:
-#		offset = -64
-#	else:
-#		offset = 120
-#	var desiredPosition = Vector2(
-#		targetPosition.x + offset,
-#		targetPosition.y + offset
-#	)
-	owner.walk(delta, targetPosition)
+	var offset:float
+	if owner.global_position.x < targetPosition.x:
+		offset = -64
+	else:
+		offset = 64
+	var desiredPosition = Vector2(
+		targetPosition.x + offset,
+		targetPosition.y
+	)
+	owner.walk(delta, desiredPosition)
