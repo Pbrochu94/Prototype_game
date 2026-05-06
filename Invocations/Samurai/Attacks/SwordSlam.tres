@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://pfc40xh5h7jg"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_j7hnm"]
+
+[resource]
+script = ExtResource("1_j7hnm")
+attackName = "sword slam"
+damage = 30
+range = false
+cooldown = 0
+element = "light"
+hitboxName = ""

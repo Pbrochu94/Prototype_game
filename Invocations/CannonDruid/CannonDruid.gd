@@ -26,7 +26,8 @@ var direction:int
 @export var currentHp:int = 100
 @export var speed:int = 1
 @export var attacks:Dictionary = {
-	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/Cannonshot.tres")
+	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/Cannonshot.tres"),
+	"rebuild": preload("res://Invocations/CannonDruid/Attacks/DruidHeal.tres")
 }
 @export var attackSelected:Attack
 

@@ -1,11 +1,13 @@
 extends Resource
-class_name Weapon
+class_name Heal
 
-@export var name: String
-@export var element:String
-@export var attacks:Dictionary= {
-	"sword slash 1" : preload("res://utils/Attacks/Characters/Samurai/SwordSlash.tres"),
-}
+
+@export var attackName: String
+@export var healAmount:int
+@export var cooldown: int
+@export var element: String
+@export var hitboxName:String
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

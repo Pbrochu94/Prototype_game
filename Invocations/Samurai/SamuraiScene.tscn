@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=82 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
@@ -159,6 +159,70 @@ region = Rect2(1240, 0, 124, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_oufip"]
 atlas = ExtResource("2_3jdm4")
 region = Rect2(1364, 0, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fafok"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(992, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htmql"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1116, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj856"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1240, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s1r0"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1364, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mid2r"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1488, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj20v"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1612, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi34f"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1736, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8msf"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1860, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv1mc"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(1984, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmvdg"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2108, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkabk"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2232, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajkol"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2356, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4an23"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2480, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm433"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2604, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykfcj"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2728, 294, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj2l3"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(2852, 294, 124, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n1rj"]
 atlas = ExtResource("2_3jdm4")
@@ -345,6 +409,59 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fafok")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_htmql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj856")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1r0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mid2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj20v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi34f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8msf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv1mc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmvdg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkabk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajkol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4an23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm433")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykfcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj2l3")
+}],
+"loop": false,
+"name": &"sword slam",
+"speed": 12.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8n1rj")
 }, {
@@ -412,8 +529,8 @@ speed = 5
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_fxuqu")
-animation = &"downed"
-frame = 22
+animation = &"sword slam"
+frame = 15
 frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="."]

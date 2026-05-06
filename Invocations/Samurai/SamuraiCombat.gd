@@ -26,7 +26,8 @@ var direction:int
 @export var currentHp:int = 100
 @export var speed:int = 1
 @export var attacks:Dictionary = {
-	"sword slash" : preload("res://Invocations/Samurai/Attacks/SwordSlash.tres")
+	"sword slash" : preload("res://Invocations/Samurai/Attacks/SwordSlash.tres"),
+	"sword slam" : preload("res://Invocations/Samurai/Attacks/SwordSlam.tres")
 }
 @export var attackSelected:Attack
 
