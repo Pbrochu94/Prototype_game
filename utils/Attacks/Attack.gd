@@ -2,6 +2,7 @@ extends Resource
 class_name Attack
 
 @export var attackName: String
+@export var type:String = "attack"
 @export var damage: int
 @export var range: bool
 @export var cooldown: int

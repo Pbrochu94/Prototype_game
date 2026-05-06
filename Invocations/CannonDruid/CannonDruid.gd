@@ -110,13 +110,15 @@ func enemyStartTurn():
 	chooseTarget()
 	emit_signal("donePreparing")
 func chooseAttack():
-	attackSelected = attacks.get("cannon shot")
+	attackSelected = getRandomAttack()
 	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":
 #		attackSelected = attacks["swordSlash1"]
 #	else:
 #		return
+	match attackSelected.type:
+		
 	emit_signal("attackChosen")
 func chooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()

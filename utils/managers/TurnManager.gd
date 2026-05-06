@@ -124,15 +124,6 @@ func endTurn():
 	updateCurrentlyPlaying()
 	emit_signal("turnEnded")
 
-
-
-
-
-
-
-
-
-
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
 	print(currentlyPlaying, " GETS IN POSITION TUNR MANAGER")
