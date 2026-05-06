@@ -109,7 +109,7 @@ func enemyStartTurn():
 	chooseTarget()
 	emit_signal("donePreparing")
 func chooseAttack():
-	attackSelected = attacks.get("sword slash")
+	attackSelected = getRandomAttack()
 	print("Attack chosen: ", attackSelected)
 	#When we will actually choose
 #	if action == "attack":

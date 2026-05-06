@@ -402,6 +402,7 @@ size = Vector2(20, 23)
 
 [node name="BlasterDruid" type="Node2D" groups=["character", "party member", "unit"]]
 script = ExtResource("1_b5ocs")
+speed = 3
 
 [node name="SpritePivot" type="Node2D" parent="."]
 
@@ -445,3 +446,7 @@ script = ExtResource("16_fa1gc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_wy3tv")
+
+[connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExited"]

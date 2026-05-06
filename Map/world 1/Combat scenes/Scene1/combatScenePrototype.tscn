@@ -530,22 +530,22 @@ layer_0/tile_data = PackedInt32Array(-262152, 327680, 14, -196616, 0, 1, -131080
 zoom = Vector2(2.515, 2.515)
 
 [node name="PlayerAnchor2" type="Node2D" parent="."]
-position = Vector2(-123, 3)
+position = Vector2(-146, 16)
 
 [node name="PlayerAnchor1" type="Node2D" parent="."]
-position = Vector2(-123, 53)
+position = Vector2(-123, 58)
 
 [node name="PlayerAnchor3" type="Node2D" parent="."]
-position = Vector2(-123, 103)
+position = Vector2(-146, 101)
 
 [node name="EnemyAnchor2" type="Node2D" parent="."]
-position = Vector2(123, 3)
+position = Vector2(146, 16)
 
 [node name="EnemyAnchor1" type="Node2D" parent="."]
 position = Vector2(123, 53)
 
 [node name="EnemyAnchor3" type="Node2D" parent="."]
-position = Vector2(123, 103)
+position = Vector2(146, 103)
 
 [node name="ChoiceMenu" parent="." groups=["combat menu"] instance=ExtResource("6_3vrbe")]
 offset_left = -151.0

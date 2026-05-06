@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://gmpl0rsq3yvg"]
+[gd_scene load_steps=49 format=3 uid="uid://du8tm0i0hg5mv"]
 
 [ext_resource type="Script" path="res://Invocations/Minor gun enemy/Combat/MinorGunEnemyCombat.gd" id="1_qoccc"]
 [ext_resource type="Texture2D" uid="uid://du4gqws4qwe8h" path="res://Invocations/Minor gun enemy/sprites/death 112x26.png" id="2_lajmn"]
