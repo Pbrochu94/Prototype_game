@@ -29,7 +29,7 @@ var direction:int
 	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/Cannonshot.tres"),
 	"rebuild": preload("res://Invocations/CannonDruid/Attacks/DruidHeal.tres")
 }
-@export var attackSelected:Attack
+@export var attackSelected:Ability
 
 #ENUMS
 enum Faction {
@@ -117,13 +117,13 @@ func chooseAttack():
 #		attackSelected = attacks["swordSlash1"]
 #	else:
 #		return
-	match attackSelected.type:
-		
+#	match attackSelected.type:   <-----------------A CORRIGER
+#
 	emit_signal("attackChosen")
 func chooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
 	print("Chosen target: ", target)
-func getRandomAttack() -> Attack:
+func getRandomAttack() -> Ability:
 	var keys = attacks.keys()
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]

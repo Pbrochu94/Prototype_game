@@ -32,7 +32,7 @@ const walkSpeed = 200
 var currentState:String
 var canBeSelected = false
 var target:Node2D
-var attackSelected:Attack
+var attackSelected:Ability
 var facingPlayer:int = -1
 var facingBackward:int = 1
 

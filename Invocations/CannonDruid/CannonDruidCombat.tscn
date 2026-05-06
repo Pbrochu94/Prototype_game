@@ -731,13 +731,7 @@ size = Vector2(20, 23)
 
 [node name="CannonDruid" type="Node2D" groups=["character", "enemy", "unit"]]
 script = ExtResource("1_fhrl2")
-faction = null
-characterName = null
-walkSpeed = null
-maxHp = null
-currentHp = null
 speed = 2
-attacks = null
 
 [node name="SpritePivot" type="Node2D" parent="."]
 

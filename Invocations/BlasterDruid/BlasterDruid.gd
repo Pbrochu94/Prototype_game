@@ -28,7 +28,7 @@ var direction:int
 @export var attacks:Dictionary = {
 	"gun shot" : preload("res://Invocations/BlasterDruid/Attacks/GunShot.tres")
 }
-@export var attackSelected:Attack
+@export var attackSelected:Ability
 
 #ENUMS
 enum Faction {
@@ -121,7 +121,7 @@ func chooseAttack():
 func chooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
 	print("Chosen target: ", target)
-func getRandomAttack() -> Attack:
+func getRandomAttack() -> Ability:
 	var keys = attacks.keys()
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]

@@ -1,13 +1,5 @@
-extends Resource
+extends Ability
 class_name Attack
-
-@export var attackName: String
-@export var type:String = "attack"
-@export var damage: int
-@export var range: bool
-@export var cooldown: int
-@export var element: String
-@export var hitboxName:String
 
 
 # Called when the node enters the scene tree for the first time.
