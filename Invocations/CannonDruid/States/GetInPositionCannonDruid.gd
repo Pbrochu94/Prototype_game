@@ -1,18 +1,5 @@
-extends State
-class_name GetInPositionCannonDruid
-
-@export var player:Node2D
-
-func enter():
-	owner.isWalking = true
-	owner.anim.play("walk")
-
-func exit():
-	owner.isWalking = false
-	owner.anim.stop()
-
-func _process(delta):
-	pass
+extends GetInPositionState
+class_name CannonDroidGetInPositionState
 
 
 func update(delta):

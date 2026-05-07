@@ -1,5 +1,5 @@
-extends State
-class_name WalkingBackCannonDruid
+extends WalkingBackState
+class_name CannonDroidWalkingBackState
 
 
 func enter():

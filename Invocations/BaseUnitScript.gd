@@ -99,7 +99,7 @@ func walk(delta, destination:Vector2):
 		if global_position == destination:
 			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
-func receiveDamage(attack:Attack, element:String):
+func receiveDamage(attack:Ability, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
 	currentHp-= attack.damage
 	print(characterName," now have ", currentHp, " hp ")

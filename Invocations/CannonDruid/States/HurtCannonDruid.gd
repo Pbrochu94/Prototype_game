@@ -1,5 +1,5 @@
-extends State
-class_name HurtCannonDruid
+extends HurtState
+class_name CannonDroidHurtState
 
 func _onready():
 	pass
