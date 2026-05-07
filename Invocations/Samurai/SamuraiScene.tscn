@@ -1,6 +1,6 @@
 [gd_scene load_steps=82 format=3 uid="uid://0gmygfaywn0b"]
 
-[ext_resource type="Script" path="res://Invocations/Samurai/SamuraiCombat.gd" id="1_xubua"]
+[ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/IdleSamurai.gd" id="5_5jnhc"]
@@ -521,7 +521,7 @@ size = Vector2(45, 24)
 size = Vector2(20, 23)
 
 [node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
-script = ExtResource("1_xubua")
+script = ExtResource("1_sps1a")
 speed = 5
 
 [node name="SpritePivot" type="Node2D" parent="."]

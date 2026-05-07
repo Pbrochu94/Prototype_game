@@ -82,12 +82,13 @@ func updateCurrentlyPlaying():
 		print("Character :", currentlyPlaying, " is downed")
 		updateCurrentlyPlaying()
 	else:
-		print("Now playing :", currentlyPlaying.getUnitInfo())
+		pass
 
 #TURN FLOW
 func startTurn():
 	if not currentlyPlaying:
 		return
+	print("Now playing :", currentlyPlaying.getUnitInfo())
 	if currentlyPlaying.faction == currentlyPlaying.Faction.SUMMON:
 		chooseAction()
 	else:

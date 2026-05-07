@@ -1,5 +1,5 @@
 extends BaseUnitScript
-class_name SamuraiCombat
+class_name BaseSamuraiScript
 
 func _ready():
 	super()
@@ -17,4 +17,4 @@ func initStats():
 	walkSpeed = 200
 	maxHp = 100
 	currentHp = 100
-	speed = 1
+	speed = 5
