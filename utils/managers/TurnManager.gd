@@ -30,7 +30,7 @@ func _ready():
 func connectSignals():
 	connectEachInvocations()
 	connectEachEnemy()
-	choiceMenu.actionSelected.connect(onActionSelected)
+	choiceMenu.attackMenu.actionSelected.connect(onActionSelected)
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	targetSelectionStarted.connect(targetManager.startSelection)
@@ -38,9 +38,9 @@ func connectSignals():
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
-		invocation.selectionCompleted.connect(endSelection)
+		invocation.stopSelectingTarget.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
-		invocation.attackChosen.connect(startSelectingTarget)
+		invocation.startSelectingTarget.connect(unitIsSelectingTarget)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
 		enemy.enemySelected.connect(playerAttack)
@@ -94,23 +94,21 @@ func startTurn():
 	else:
 		currentlyPlaying.enemyStartTurn()
 func chooseAction():
-	currentCombatScene.choiceMenu.visible = true
+	currentCombatScene.choiceMenu.open()
 	print("Player is choosing what to do...")
-func onActionSelected(action:String):
-	print("Player chose:", action)
-	match action:
-		"attack":
-			currentlyPlaying.chooseAttack()
-		"inventory":
-			pass
-		"ability":
-			pass
-func startSelectingTarget():
-	print(currentlyPlaying.characterName," is selecting a target")
-	emit_signal("targetSelectionStarted")
+func onActionSelected(attackIndex:int):
+	currentlyPlaying.onChosenAttack(attackIndex)
+func unitIsSelectingTarget():
+	match currentlyPlaying.attackSelected.type:
+		currentlyPlaying.AttackType.ATTACK:
+			print(currentlyPlaying.characterName," is selecting a target")
+			emit_signal("targetSelectionStarted")
+		currentlyPlaying.AttackType.SELFHEAL:
+			emit_signal("selectionCompleted")
+
 	isSelecting = true
 func endSelection():
-	currentCombatScene.choiceMenu.visible = false
+	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.selectionEnded()
 #		enemy.selectionEnded()

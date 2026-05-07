@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgpp5im6ruon"]
+[gd_scene load_steps=3 format=3 uid="uid://cgpp5im6ruon"]
 
-[ext_resource type="Script" path="res://UI/PlayerCombatUI.gd" id="1_3u6o4"]
+[ext_resource type="Script" path="res://UI/Menu/ChoiceMenuScript.gd" id="1_hmvf8"]
+[ext_resource type="Script" path="res://UI/Menu/AttackMenuScript.gd" id="2_l8onr"]
 
 [node name="combatMenu" type="Control"]
 layout_mode = 3
@@ -9,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_3u6o4")
+script = ExtResource("1_hmvf8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -20,12 +21,12 @@ offset_bottom = 41.0
 scale = Vector2(6.88618, 3.45311)
 color = Color(0.215686, 0.215686, 0.215686, 0.662745)
 
-[node name="actionChoiceMenu" type="Control" parent="."]
+[node name="ChoiceMenu" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Attack" type="Button" parent="actionChoiceMenu"]
+[node name="Attack" type="Button" parent="ChoiceMenu"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 36.0
@@ -33,7 +34,7 @@ offset_right = 80.0
 offset_bottom = 67.0
 text = "Attack"
 
-[node name="Inventory" type="Button" parent="actionChoiceMenu"]
+[node name="Inventory" type="Button" parent="ChoiceMenu"]
 layout_mode = 0
 offset_left = -74.0
 offset_top = 97.0
@@ -41,7 +42,7 @@ offset_right = 9.0
 offset_bottom = 128.0
 text = "Inventory"
 
-[node name="Abilities" type="Button" parent="actionChoiceMenu"]
+[node name="Abilities" type="Button" parent="ChoiceMenu"]
 layout_mode = 0
 offset_left = 101.0
 offset_top = 98.0
@@ -49,20 +50,78 @@ offset_right = 171.0
 offset_bottom = 129.0
 text = "Abilities"
 
-[node name="menuLabel" type="Label" parent="actionChoiceMenu"]
+[node name="menuLabel" type="Label" parent="ChoiceMenu"]
 layout_mode = 0
 offset_right = 110.0
 offset_bottom = 26.0
 text = "Make a choice
 "
 
-[node name="Control" type="Control" parent="."]
-visible = false
+[node name="SubMenus" type="Control" parent="ChoiceMenu"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="AttackMenu" type="Control" parent="ChoiceMenu/SubMenus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 245.0
+offset_top = -201.0
+offset_right = 245.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_l8onr")
+
+[node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/AttackMenu"]
+layout_mode = 0
+offset_left = -169.0
+offset_top = 129.0
+offset_right = -148.0
+offset_bottom = 169.0
+scale = Vector2(6.88618, 3.45311)
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="AttackLabel" type="Label" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 0
+offset_left = 3.63046
+offset_top = 0.868786
+offset_right = 61.6305
+offset_bottom = 26.8688
+scale = Vector2(0.239056, 0.351309)
+text = "Attacks"
+
+[node name="Attack" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+offset_left = 1.30696
+offset_top = 9.5566
+offset_right = 93.307
+offset_bottom = 40.5566
+scale = Vector2(0.200978, 0.33713)
+text = "Base move"
+
+[node name="Skill" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+offset_left = 3.77568
+offset_top = 23.7467
+offset_right = 61.7757
+offset_bottom = 54.7467
+scale = Vector2(0.239056, 0.281807)
+text = "Skill"
+
+[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.186777, 0.223888)
+text = "X"
+
+[node name="ItemMenu" type="Control" parent="ChoiceMenu/SubMenus"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/ItemMenu"]
 layout_mode = 0
 offset_left = -169.0
 offset_top = 129.0
@@ -71,7 +130,7 @@ offset_bottom = 169.0
 scale = Vector2(6.88618, 3.45311)
 color = Color(0.215686, 0.215686, 0.215686, 0.662745)
 
-[node name="Label" type="Label" parent="Control/ColorRect"]
+[node name="ItemLabel" type="Label" parent="ChoiceMenu/SubMenus/ItemMenu/ColorRect"]
 layout_mode = 0
 offset_left = 5.37308
 offset_top = 0.579189

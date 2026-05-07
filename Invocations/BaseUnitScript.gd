@@ -47,10 +47,10 @@ var isDead:bool = false
 #SIGNALS
 signal introFinished
 signal inPositionToAttack(enemy:Node2D)
-signal selectionCompleted
+signal stopSelectingTarget
 signal dealDamage(amount:int)
 signal turnFinished
-signal attackChosen
+signal startSelectingTarget
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
 signal hovered(character)
@@ -120,19 +120,14 @@ func enemyStartTurn():
 		AttackType.SELFHEAL:
 			stateMachine.setState(stateMachine.states["heal"])
 
-func chooseAttack():
-	attackSelected = getRandomAttack()
-	print("Attack chosen: ", attackSelected.attackName)
-	#When we will actually choose
-#	if action == "attack":
-#		attackSelected = attacks["swordSlash1"]
-#	else:
-#		return
+func onChosenAttack(index:int):
+	attackSelected = attacks.values()[index]
 	match attackSelected.type:
 		AttackType.ATTACK:
-			emit_signal("attackChosen")
+			emit_signal("startSelectingTarget")
 		AttackType.SELFHEAL:
 			stateMachine.setState(stateMachine.states["heal"])
+			emit_signal("startSelectingTarget")
 
 func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
@@ -143,7 +138,7 @@ func getRandomAttack() -> Ability:
 	return attacks[random_key]
 func getInPosition():
 	if faction == Faction.SUMMON:
-		emit_signal("selectionCompleted")
+		emit_signal("stopSelectingTarget")
 	stateMachine.setState(stateMachine.states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
 	stateMachine.setState(stateMachine.states["attacking"])
