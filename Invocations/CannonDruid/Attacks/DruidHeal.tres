@@ -6,7 +6,7 @@
 script = ExtResource("1_n40nt")
 attackName = "rebuild"
 damage = 0
-type = 1
+type = 2
 healAmount = 50
 cooldown = 0
 element = ""

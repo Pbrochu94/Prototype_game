@@ -522,6 +522,10 @@ size = Vector2(20, 23)
 
 [node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
 script = ExtResource("1_sps1a")
+characterName = "Samurai"
+walkSpeed = 200
+maxHp = 120
+currentHp = 120
 speed = 5
 
 [node name="SpritePivot" type="Node2D" parent="."]

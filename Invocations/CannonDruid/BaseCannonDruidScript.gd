@@ -16,6 +16,6 @@ func initAttacks():
 func initStats():
 	characterName = "Cannon droid"
 	walkSpeed = 200
-	maxHp = 50
-	currentHp = 50
+	maxHp = 100
+	currentHp = maxHp
 	speed = 1

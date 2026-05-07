@@ -36,6 +36,7 @@ enum Faction {
 enum AttackType{
 	ATTACK,
 	HEAL,
+	SELFHEAL,
 	BUFF,
 	DEBUFF
 }
@@ -76,6 +77,9 @@ func onAnimationFinished():
 					stateMachine.setState(stateMachine.states["downed"])
 				else:
 					stateMachine.setState(stateMachine.states["idle"])
+		"heal":
+			if anim.animation == attackSelected.attackName:
+				stateMachine.setState(stateMachine.states["endingturn"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
@@ -109,18 +113,28 @@ func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
-	chooseTarget()
-	emit_signal("donePreparing")
+	match attackSelected.type:
+		AttackType.ATTACK:
+			enemyChooseTarget()
+			emit_signal("donePreparing")
+		AttackType.SELFHEAL:
+			stateMachine.setState(stateMachine.states["heal"])
+
 func chooseAttack():
 	attackSelected = getRandomAttack()
-	print("Attack chosen: ", attackSelected)
+	print("Attack chosen: ", attackSelected.attackName)
 	#When we will actually choose
 #	if action == "attack":
 #		attackSelected = attacks["swordSlash1"]
 #	else:
 #		return
-	emit_signal("attackChosen")
-func chooseTarget():
+	match attackSelected.type:
+		AttackType.ATTACK:
+			emit_signal("attackChosen")
+		AttackType.SELFHEAL:
+			stateMachine.setState(stateMachine.states["heal"])
+
+func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
 	print("Chosen target: ", target)
 func getRandomAttack() -> Ability:

@@ -12,6 +12,7 @@ class_name Ability
 enum AbilityType {
 	ATTACK,
 	HEAL,
+	SELFHEAL,
 	BUFF,
 	DEBUFF
 }
