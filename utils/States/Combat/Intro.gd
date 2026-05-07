@@ -1,5 +1,5 @@
 extends State
-class_name Intro
+class_name IntroState
 
 signal introFinished
 

@@ -7,14 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://baklk4ax615bp" path="res://CharacterSprite/Archer/run.png" id="3_eds7e"]
 [ext_resource type="Texture2D" uid="uid://d3wppwh7g11dr" path="res://CharacterSprite/Archer/attack.png" id="3_k7a1k"]
 [ext_resource type="Texture2D" uid="uid://dhk5pcueunifg" path="res://CharacterSprite/Archer/damaged.png" id="3_lshxq"]
-[ext_resource type="Script" path="res://Invocations/Archer/IdleArcher.gd" id="9_bpx28"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="9_exffj"]
-[ext_resource type="Script" path="res://Invocations/Archer/GetInPositionArcher.gd" id="9_s4rdq"]
-[ext_resource type="Script" path="res://Invocations/Archer/AttackingArcher.gd" id="10_qr1n0"]
-[ext_resource type="Script" path="res://Invocations/Archer/WalkingBackArcher.gd" id="11_ollgq"]
-[ext_resource type="Script" path="res://Invocations/Archer/EndingTurnArcher.gd" id="12_ma5gy"]
-[ext_resource type="Script" path="res://Invocations/Archer/HurtArcher.gd" id="13_wwaju"]
-[ext_resource type="Script" path="res://Invocations/Archer/DownedArcher.gd" id="14_6mlwk"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/IdleArcher.gd" id="9_hq3d3"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/GetInPositionArcher.gd" id="10_fue5l"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/AttackingArcher.gd" id="11_i413p"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/WalkingBackArcher.gd" id="12_84rx0"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/EndingTurnArcher.gd" id="13_turxm"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/HurtArcher.gd" id="14_jb0mt"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/DownedArcher.gd" id="15_ylls3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2jmv"]
 atlas = ExtResource("2_wfhkc")
@@ -604,25 +604,25 @@ shape = SubResource("RectangleShape2D_2fn00")
 script = ExtResource("9_exffj")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("9_bpx28")
+script = ExtResource("9_hq3d3")
 
 [node name="GetInPosition" type="Node" parent="StateMachine"]
-script = ExtResource("9_s4rdq")
+script = ExtResource("10_fue5l")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
-script = ExtResource("10_qr1n0")
+script = ExtResource("11_i413p")
 
 [node name="WalkingBack" type="Node" parent="StateMachine"]
-script = ExtResource("11_ollgq")
+script = ExtResource("12_84rx0")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
-script = ExtResource("12_ma5gy")
+script = ExtResource("13_turxm")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("13_wwaju")
+script = ExtResource("14_jb0mt")
 
 [node name="Downed" type="Node" parent="StateMachine"]
-script = ExtResource("14_6mlwk")
+script = ExtResource("15_ylls3")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent" flags=18]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered" flags=18]

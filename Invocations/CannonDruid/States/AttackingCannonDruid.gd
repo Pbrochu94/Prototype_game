@@ -1,8 +1,6 @@
-extends State
+extends AttackingState
 class_name AttackingCannonDruid
 
-var attack:Attack
-var element:String
 
 func _onready():
 	pass

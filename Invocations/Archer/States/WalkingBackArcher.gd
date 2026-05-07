@@ -1,5 +1,5 @@
-extends State
-class_name WalkingBackArcher
+extends WalkingBackState
+class_name ArcherWalkingBackState
 
 
 func enter():

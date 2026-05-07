@@ -1,5 +1,5 @@
 extends State
-class_name Downed
+class_name DownedState
 
 func _onready():
 	pass

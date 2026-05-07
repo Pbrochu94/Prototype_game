@@ -1,5 +1,5 @@
 extends State
-class_name WalkingBack
+class_name WalkingBackState
 
 
 func enter():

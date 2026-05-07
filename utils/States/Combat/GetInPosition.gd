@@ -1,5 +1,5 @@
 extends State
-class_name GetInPosition
+class_name GetInPositionState
 
 @export var player:Node2D
 

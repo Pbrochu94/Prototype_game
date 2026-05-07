@@ -1,7 +1,7 @@
 extends State
-class_name Attacking
+class_name AttackingState
 
-var attack:Attack
+var attack:Ability
 var element:String
 
 func _onready():

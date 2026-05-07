@@ -1,5 +1,5 @@
 extends State
-class_name EndingTurn
+class_name EndingTurnState
 
 
 func _onready():

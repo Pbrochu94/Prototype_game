@@ -1,0 +1,3 @@
+extends DownedState
+class_name ArcherDownedState
+

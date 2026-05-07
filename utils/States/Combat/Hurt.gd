@@ -1,5 +1,5 @@
 extends State
-class_name Hurt
+class_name HurtState
 
 func _onready():
 	pass
