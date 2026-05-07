@@ -71,16 +71,16 @@ func onAnimationFinished():
 	match currentState:
 		"attacking":
 			if anim.animation == attackSelected.attackName:
-				stateMachine.setState(stateMachine.states["walkingback"])
+				stateMachine.setState(states["walkingback"])
 		"hurt":
 			if anim.animation == "hurt":
 				if currentHp <= 0:
-					stateMachine.setState(stateMachine.states["downed"])
+					stateMachine.setState(states["downed"])
 				else:
-					stateMachine.setState(stateMachine.states["idle"])
+					stateMachine.setState(states["idle"])
 		"heal":
 			if anim.animation == attackSelected.attackName:
-				stateMachine.setState(stateMachine.states["endingturn"])
+				stateMachine.setState(states["endingturn"])
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
@@ -95,17 +95,17 @@ func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	if stateMachine.currentState == stateMachine.states["getinposition"]:
+	if stateMachine.currentState == states["getinposition"]:
 		if global_position == destination:
 			isWalking = false
 			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
-			stateMachine.setState(stateMachine.states["endingturn"])
+			stateMachine.setState(states["endingturn"])
 			isWalking = false
 func receiveDamage(attack:Ability, element:String):
-	stateMachine.setState(stateMachine.states["hurt"])
+	stateMachine.setState(states["hurt"])
 	currentHp-= attack.damage
 	print(characterName," now have ", currentHp, " hp ")
 
@@ -119,7 +119,7 @@ func enemyStartTurn():
 			enemyChooseTarget()
 			emit_signal("donePreparing")
 		AttackType.SELFHEAL:
-			stateMachine.setState(stateMachine.states["heal"])
+			stateMachine.setState(states["heal"])
 
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
@@ -127,7 +127,7 @@ func onChosenAttack(index:int):
 		AttackType.ATTACK:
 			emit_signal("startSelectingTarget")
 		AttackType.SELFHEAL:
-			stateMachine.setState(stateMachine.states["heal"])
+			stateMachine.setState(states["heal"])
 			emit_signal("startSelectingTarget")
 
 func enemyChooseTarget():
@@ -140,19 +140,19 @@ func getRandomAttack() -> Ability:
 func getInPosition():
 	if faction == Faction.SUMMON:
 		emit_signal("stopSelectingTarget")
-	stateMachine.setState(stateMachine.states["getinposition"])
+	stateMachine.setState(states["getinposition"])
 func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(stateMachine.states["attacking"])
+	stateMachine.setState(states["attacking"])
 	print("Player Attacked: ", target.name)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
-		stateMachine.setState(stateMachine.states["walkingback"])
+		stateMachine.setState(states["walkingback"])
 	else:
-		stateMachine.setState(stateMachine.states["endingturn"])
+		stateMachine.setState(states["endingturn"])
 func endingTurn():
 	print("Player end turn")
-	stateMachine.setState(stateMachine.states["idle"])
+	stateMachine.setState(states["idle"])
 	emit_signal("turnFinished")
 
 #UI & SELECTION

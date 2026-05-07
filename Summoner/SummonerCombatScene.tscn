@@ -65,7 +65,7 @@ script = ExtResource("1_uhcc1")
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_sosxi")
 animation = &"idle"
-frame_progress = 0.83193
+frame_progress = 0.964778
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_wtsqx")
