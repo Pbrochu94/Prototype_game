@@ -94,6 +94,7 @@ scale = Vector2(0.239056, 0.351309)
 text = "Attacks"
 
 [node name="Attack" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 0
 offset_left = 1.30696
 offset_top = 9.5566
 offset_right = 93.307
@@ -102,6 +103,7 @@ scale = Vector2(0.200978, 0.33713)
 text = "Base move"
 
 [node name="Skill" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 0
 offset_left = 3.77568
 offset_top = 23.7467
 offset_right = 61.7757

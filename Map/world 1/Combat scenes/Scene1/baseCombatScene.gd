@@ -6,6 +6,7 @@ extends Node2D
 @onready var choiceMenu = $ChoiceMenu
 @onready var playerPartyManager = $PartyManager
 @onready var enemyPartyManager = $EnemyPartyManager
+@onready var summonerAnchor = $SummonerAnchor
 @onready var playerAnchors = [
 	$PlayerAnchor1,
 	$PlayerAnchor2,
@@ -16,6 +17,7 @@ extends Node2D
 	$EnemyAnchor2,
 	$EnemyAnchor3
 ]
+@onready var summoner:Node2D = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
 var player:Node2D 
 var enemy:Node2D 
 var turnManager:Node
@@ -25,6 +27,7 @@ var enemyStartingPosition:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	initSummoner()
 	initPlayerPartyData()
 	initEnemyPartyData()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
@@ -52,3 +55,7 @@ func initEnemyPartyData():
 		if i < enemyAnchors.size():
 			enemy.global_position = enemyAnchors[i].global_position
 			enemy.startingPosition = enemyAnchors[i].global_position
+
+func initSummoner():
+	combatScene.add_child(summoner)
+	summoner.global_position = summonerAnchor.global_position
