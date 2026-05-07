@@ -13,8 +13,4 @@ func initAttacks():
 	}
 
 func initStats():
-	characterName = "Archer"
-	walkSpeed = 200
-	maxHp = 100
-	currentHp = 100
-	speed = 4
+	pass

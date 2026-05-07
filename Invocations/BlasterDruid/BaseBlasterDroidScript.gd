@@ -13,9 +13,5 @@ func initAttacks():
 	}
 
 func initStats():
-	characterName = "Blaster Droid"
-	walkSpeed = 200
-	maxHp = 100
-	currentHp = 100
-	speed = 2
+	pass
 
