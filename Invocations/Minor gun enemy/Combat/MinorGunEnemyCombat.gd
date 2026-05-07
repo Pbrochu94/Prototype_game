@@ -101,10 +101,9 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
 	emit_signal("hpChanged")
-	print("After hit: ", currentHp)
+	print(characterName," now have ", currentHp, " hp ")
 
 #TURN FLOW
 func enemyStartTurn():
@@ -154,7 +153,6 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("enemySelected",self)
 func onMouseEntered():
-	print("AHHHHH")
 	if not isDead and canBeSelected:
 		emit_signal("hovered", self)
 	else:

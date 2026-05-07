@@ -7,7 +7,6 @@ extends Control
 var character:Node2D
 
 func setup(char):
-	print(hpBar)
 	character = char  
 	nameLabel.text = char.characterName
 	hpBar.max_value = char.maxHp

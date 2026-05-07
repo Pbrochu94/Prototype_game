@@ -21,7 +21,7 @@ func onCharacterDeath(character:Node2D):
 		func(character):
 			return not character.isDead
 	)
-	print("Currently alive characters: ", currentlyAliveCharacters)
+	print("Remaining party characters alive : ", currentlyAliveCharacters)
 	if aliveCount <= 0:
 		emit_signal("partyDead")
 
@@ -33,12 +33,9 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	print(allCharacters)
 	for i in range(3):
 		var character = allCharacters.pick_random().instantiate()
-		print(character)
 		character.faction = character.Faction.SUMMON
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
-		print(party, aliveCount)
 		party.append(character)

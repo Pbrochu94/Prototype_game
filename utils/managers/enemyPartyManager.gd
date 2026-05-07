@@ -42,5 +42,4 @@ func loadRandomTeam():
 		character.faction = character.Faction.ENEMY
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
-		print(party, aliveCount)
 		party.append(character)

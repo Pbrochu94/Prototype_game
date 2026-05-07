@@ -36,7 +36,6 @@ func _process(delta):
 	pass
 
 func initPlayerPartyData():
-	print("AHHHH")
 	for i in range(playerPartyManager.party.size()):
 		var invocation = playerPartyManager.party[i]
 		combatScene.add_child(invocation)

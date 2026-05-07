@@ -36,12 +36,10 @@ func getValidTargets():
 
 #MOUSE HANDLING
 func enemyHovered(enemy):
-	print("Hovered ", enemy)
 	currentHovered = enemy
 	updateArrow(enemy)
 	selectingArrow.visible = true
 func enemyUnhovered(enemy):
-	print("Unhovered ", enemy)
 	if currentHovered == enemy:
 		currentHovered = null
 		selectingArrow.visible = false

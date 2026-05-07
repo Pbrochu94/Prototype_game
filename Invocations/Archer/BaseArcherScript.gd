@@ -98,9 +98,8 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
-	print("After hit: ", currentHp)
+	print(characterName," now have ", currentHp, " hp ")
 
 #TURN FLOW
 func enemyStartTurn():

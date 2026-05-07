@@ -41,7 +41,6 @@ func connectEachInvocations():
 		invocation.selectionCompleted.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
 		invocation.attackChosen.connect(startSelectingTarget)
-	print("Play order: ",playOrder)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
 		enemy.enemySelected.connect(playerAttack)
@@ -62,11 +61,11 @@ func startCombat():
 #ORDER HANDLERS
 func initPlayOrder():
 	for character in get_tree().get_nodes_in_group("unit"):
-		print(character)
 		playOrder.append(character)
 		playOrder.sort_custom(func(a, b):
 			return a.speed > b.speed
 		)
+	print("Play order: ",playOrder)
 	currentlyPlaying = playOrder[0]
 func updateCurrentlyPlaying():
 	if playerLost:
@@ -83,7 +82,7 @@ func updateCurrentlyPlaying():
 		print("Character :", currentlyPlaying, " is downed")
 		updateCurrentlyPlaying()
 	else:
-		print("Beginning :", currentlyPlaying, "'s turn")
+		print("Now playing :", currentlyPlaying.getUnitInfo())
 
 #TURN FLOW
 func startTurn():
@@ -126,7 +125,6 @@ func endTurn():
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
-	print(currentlyPlaying, " GETS IN POSITION TUNR MANAGER")
 	currentlyPlaying.getInPosition()
 
 func enemyAttack():

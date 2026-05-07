@@ -20,20 +20,24 @@ var direction:int
 @export var faction:Faction
 
 #STATS
-@export var characterName:String = "Samurai"
-@export var walkSpeed:int = 200
-@export var maxHp:int = 100
-@export var currentHp:int = 100
-@export var speed:int = 1
-@export var attacks:Dictionary = {
-	"sword slash" : preload("res://Invocations/Samurai/Attacks/SwordSlash.tres")
-}
+@export var characterName:String 
+@export var walkSpeed:int
+@export var maxHp:int 
+@export var currentHp:int 
+@export var speed:int 
+@export var attacks:Dictionary = {}
 @export var attackSelected:Ability
 
 #ENUMS
 enum Faction {
 	ENEMY,
-	SUMMON
+	SUMMON,
+}
+enum AttackType{
+	ATTACK,
+	HEAL,
+	BUFF,
+	DEBUFF
 }
 
 #STATUS
@@ -97,9 +101,8 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attack:Attack, element:String):
 	stateMachine.setState(stateMachine.states["hurt"])
-	print(self.characterName, " receive ", attack.damage, " of ", element," damage")
 	currentHp-= attack.damage
-	print("After hit: ", currentHp)
+	print(characterName," now have ", currentHp, " hp ")
 
 #TURN FLOW
 func enemyStartTurn():
@@ -162,3 +165,13 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 		return
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("enemySelected",self)
+
+#INFO
+func getUnitInfo():
+	return {
+		"Name": characterName,
+		"Walk speed" : walkSpeed,
+		"Max HP": maxHp,
+		"Current HP": currentHp,
+		"Speed": speed
+	}
