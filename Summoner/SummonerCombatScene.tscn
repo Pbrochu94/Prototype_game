@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg8rrat4c5hxv"]
+[gd_scene load_steps=13 format=3 uid="uid://dg8rrat4c5hxv"]
 
 [ext_resource type="Script" path="res://Summoner/SummonerCombatScript.gd" id="1_uhcc1"]
 [ext_resource type="Texture2D" uid="uid://cr72agvt4ky0c" path="res://CharacterSprite/Summoner/PlaceholderSummonerSpriteSheet(76x50).png" id="1_voc0o"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="1_wtsqx"]
 [ext_resource type="Script" path="res://Summoner/States/IdleState.gd" id="2_57jk0"]
+[ext_resource type="Script" path="res://Summoner/States/IntroState.gd" id="5_j7rn3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0bjn"]
 atlas = ExtResource("1_voc0o")
@@ -64,10 +65,13 @@ script = ExtResource("1_uhcc1")
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_sosxi")
 animation = &"idle"
-frame_progress = 0.532367
+frame_progress = 0.83193
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_wtsqx")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("2_57jk0")
+
+[node name="Intro" type="Node" parent="StateMachine"]
+script = ExtResource("5_j7rn3")

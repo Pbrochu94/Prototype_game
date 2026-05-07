@@ -9,6 +9,7 @@ func init(owner):
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
+			owner.states[child.name.to_lower()] = child
 			child.owner = get_parent()
 			child.ChangingState.connect(setState)
 			

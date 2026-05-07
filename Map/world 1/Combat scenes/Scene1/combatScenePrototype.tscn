@@ -555,4 +555,7 @@ offset_bottom = -79.0
 scale = Vector2(0.58, 0.58)
 
 [node name="SummonerAnchor" type="Node2D" parent="."]
-position = Vector2(-205, 58)
+position = Vector2(-194, 58)
+
+[node name="SummonerIntroStart" type="Node2D" parent="."]
+position = Vector2(-252, 58)

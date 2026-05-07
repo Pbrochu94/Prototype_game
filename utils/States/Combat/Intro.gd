@@ -9,8 +9,6 @@ func _onready():
 func enter():
 	owner.isWalking = true
 	owner.anim.play("walk")
-	if owner.is_in_group("enemy"):
-		owner.spriteOrientation.scale.x = -1
 
 func _process(delta):
 	pass

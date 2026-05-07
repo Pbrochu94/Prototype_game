@@ -17,6 +17,7 @@ var canBeSelected = false
 var currentState:String
 var isWalking = false
 var direction:int
+var states:Dictionary
 @export var faction:Faction
 
 #STATS

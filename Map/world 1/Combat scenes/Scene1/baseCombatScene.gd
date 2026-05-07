@@ -7,6 +7,7 @@ extends Node2D
 @onready var playerPartyManager = $PartyManager
 @onready var enemyPartyManager = $EnemyPartyManager
 @onready var summonerAnchor = $SummonerAnchor
+@onready var summonerIntroStartingPoint = $SummonerIntroStart
 @onready var playerAnchors = [
 	$PlayerAnchor1,
 	$PlayerAnchor2,
@@ -58,4 +59,6 @@ func initEnemyPartyData():
 
 func initSummoner():
 	combatScene.add_child(summoner)
-	summoner.global_position = summonerAnchor.global_position
+	summoner.global_position = summonerIntroStartingPoint.global_position
+	summoner.startingPosition = summonerAnchor.global_position
+	summoner.playIntro()
