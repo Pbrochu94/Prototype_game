@@ -37,7 +37,7 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	for i in range(3):
+	for i in range(1):
 		#Random characters
 		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test

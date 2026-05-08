@@ -12,8 +12,9 @@ var enemy:Node2D
 var isSelecting = false
 var playOrder:Array
 var currentlyPlaying:Node2D
-var playerLost = false
-var playerWon = false
+var playerLost:bool = false
+var playerWon:bool = false
+var turnTracker:int = 0
 
 #SIGNALS
 signal turnEnded
@@ -65,11 +66,13 @@ func startCombat():
 func initPlayOrder():
 	for character in get_tree().get_nodes_in_group("unit"):
 		playOrder.append(character)
-		playOrder.sort_custom(func(a, b):
-			return a.speed > b.speed
-		)
-	print("Play order: ",playOrder)
+	updatePlayOrder()
 	currentlyPlaying = playOrder[0]
+func updatePlayOrder():
+	playOrder.sort_custom(func(a, b):
+		return a.speed > b.speed
+	)
+	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
 	if playerLost:
 		return
@@ -128,6 +131,10 @@ func playerAttack(enemy:Node2D):
 	currentlyPlaying.target = enemy
 	currentlyPlaying.getInPosition()
 func endTurn():
+	if currentlyPlaying == playOrder[-1]:
+		turnTracker += 1
+		print("turn ", turnTracker, " completed")
+		updatePlayOrder()
 	updateCurrentlyPlaying()
 	emit_signal("turnEnded")
 
