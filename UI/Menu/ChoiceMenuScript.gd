@@ -5,9 +5,10 @@ extends Control
 @onready var subMenuParent = $ChoiceMenu/SubMenus
 @onready var attackBtn = $ChoiceMenu/Attack
 @onready var inventoryBtn = $ChoiceMenu/Inventory
-@onready var abilityBtn = $ChoiceMenu/Abilities
+@onready var spellBtn = $ChoiceMenu/Spells
 @onready var attackMenu = $ChoiceMenu/SubMenus/AttackMenu
 @onready var itemMenu = $ChoiceMenu/SubMenus/ItemMenu
+@onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
 
 var turnManager:Node
 
@@ -29,6 +30,7 @@ func _process(delta):
 func openAttackMenu():
 	subMenuParent.visible = true
 	itemMenu.visible = false
+	spellMenu.visible = false
 	attackMenu.open()
 
 
@@ -36,13 +38,17 @@ func openInventoryMenu():
 	emit_signal("actionSelected", "inventory")
 
 
-func openAbilityMenu():
-	emit_signal("actionSelected", "ability")
+func openSpellMenu():
+	subMenuParent.visible = true
+	itemMenu.visible = false
+	attackMenu.visible = false
+	spellMenu.open()
+#	emit_signal("actionSelected", "ability")
 
 func connectSignals():
 	attackBtn.pressed.connect(openAttackMenu)
 	inventoryBtn.pressed.connect(openInventoryMenu)
-	abilityBtn.pressed.connect(openAbilityMenu)
+	spellBtn.pressed.connect(openSpellMenu)
 
 func open():
 	self.visible = true

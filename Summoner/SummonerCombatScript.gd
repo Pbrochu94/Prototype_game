@@ -35,6 +35,7 @@ func walk(delta, destination:Vector2):
 	global_position = global_position.move_toward(destination, walkSpeed*delta)
 	if global_position == destination:
 		isWalking = false
+		onFinishedIntro()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 

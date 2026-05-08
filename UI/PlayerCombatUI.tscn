@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgpp5im6ruon"]
+[gd_scene load_steps=4 format=3 uid="uid://cgpp5im6ruon"]
 
 [ext_resource type="Script" path="res://UI/Menu/ChoiceMenuScript.gd" id="1_hmvf8"]
 [ext_resource type="Script" path="res://UI/Menu/AttackMenuScript.gd" id="2_l8onr"]
+[ext_resource type="Script" path="res://UI/Menu/SpellMenuScript.gd" id="3_tcxpq"]
 
 [node name="combatMenu" type="Control"]
 layout_mode = 3
@@ -42,13 +43,14 @@ offset_right = 9.0
 offset_bottom = 128.0
 text = "Inventory"
 
-[node name="Abilities" type="Button" parent="ChoiceMenu"]
+[node name="Spells" type="Button" parent="ChoiceMenu"]
 layout_mode = 0
 offset_left = 101.0
 offset_top = 98.0
 offset_right = 171.0
 offset_bottom = 129.0
-text = "Abilities"
+text = "Spells
+"
 
 [node name="menuLabel" type="Label" parent="ChoiceMenu"]
 layout_mode = 0
@@ -125,12 +127,12 @@ offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/ItemMenu"]
 layout_mode = 0
-offset_left = -169.0
-offset_top = 129.0
-offset_right = -148.0
-offset_bottom = 169.0
+offset_left = 10.0
+offset_top = -25.0
+offset_right = 31.0
+offset_bottom = 15.0
 scale = Vector2(6.88618, 3.45311)
-color = Color(0.215686, 0.215686, 0.215686, 0.662745)
+color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [node name="ItemLabel" type="Label" parent="ChoiceMenu/SubMenus/ItemMenu/ColorRect"]
 layout_mode = 0
@@ -140,3 +142,52 @@ offset_right = 49.3731
 offset_bottom = 26.5792
 scale = Vector2(0.239056, 0.351309)
 text = "items"
+
+[node name="SpellMenu" type="Control" parent="ChoiceMenu/SubMenus"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_tcxpq")
+
+[node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/SpellMenu"]
+offset_left = 172.0
+offset_top = -24.0
+offset_right = 193.0
+offset_bottom = 16.0
+scale = Vector2(6.88618, 3.45311)
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="SpellLabel" type="Label" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+layout_mode = 0
+offset_left = 5.37308
+offset_top = 0.579189
+offset_right = 49.3731
+offset_bottom = 26.5792
+scale = Vector2(0.239056, 0.351309)
+text = "Spells
+"
+
+[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.186777, 0.223888)
+text = "X"
+
+[node name="ShieldBtn" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+layout_mode = 0
+offset_left = 2.16177
+offset_top = 10.0
+offset_right = 84.1618
+offset_bottom = 41.0
+scale = Vector2(0.215821, 0.328142)
+text = "Shield lv1
+"
+
+[node name="FireballBtn" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+layout_mode = 0
+offset_left = 1.5974
+offset_top = 24.0363
+offset_right = 93.5974
+offset_bottom = 55.0363
+scale = Vector2(0.194748, 0.334465)
+text = "Fireball lv1"
