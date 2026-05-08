@@ -28,11 +28,9 @@ var enemyStartingPosition:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	initSummoner()
-	initPlayerPartyData()
-	initEnemyPartyData()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	turnManager.currentCombatScene = combatScene
+	initSummoner()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,6 +57,7 @@ func initEnemyPartyData():
 
 func initSummoner():
 	combatScene.add_child(summoner)
+	turnManager.summoner = summoner
 	summoner.global_position = summonerIntroStartingPoint.global_position
 	summoner.startingPosition = summonerAnchor.global_position
 	summoner.playIntro()

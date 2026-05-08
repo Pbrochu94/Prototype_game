@@ -64,6 +64,7 @@ signal donePreparing
 func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
+	stateMachine.setState(states["idle"])
 	connectSignals()
 
 #ANIMATIONS & SPRITES

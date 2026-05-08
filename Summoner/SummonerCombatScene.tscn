@@ -117,7 +117,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Summoner" type="Node2D"]
+[node name="Summoner" type="Node2D" groups=["main character", "summoner"]]
 script = ExtResource("1_uhcc1")
 
 [node name="SpritePivot" type="Node2D" parent="."]
@@ -126,7 +126,7 @@ script = ExtResource("1_uhcc1")
 position = Vector2(-3, -15)
 sprite_frames = SubResource("SpriteFrames_sosxi")
 animation = &"walk"
-frame_progress = 0.144016
+frame_progress = 0.417597
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_wtsqx")

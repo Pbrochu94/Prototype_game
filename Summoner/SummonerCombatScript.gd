@@ -19,6 +19,9 @@ var states:Dictionary
 #BOOLEANS
 var isWalking = false
 
+#SIGNALS
+signal introAnimCompleted
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	stateMachine.init(self)
@@ -44,3 +47,4 @@ func playIntro():
 
 func onFinishedIntro():
 	stateMachine.setState(states["idle"])
+	emit_signal("introAnimCompleted")

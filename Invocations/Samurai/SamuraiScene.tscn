@@ -520,7 +520,7 @@ size = Vector2(45, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g353p"]
 size = Vector2(20, 23)
 
-[node name="Samurai" type="Node2D" groups=["character", "main character", "party member", "player", "unit"]]
+[node name="Samurai" type="Node2D" groups=["party member", "unit"]]
 script = ExtResource("1_sps1a")
 characterName = "Samurai"
 walkSpeed = 200

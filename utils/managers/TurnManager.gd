@@ -5,6 +5,7 @@ extends Node
 @onready var playerPartyManager:Node = get_tree().get_first_node_in_group("player party manager")
 @onready var enemyPartyManager:Node = get_tree().get_first_node_in_group("enemy party manager")
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
+var summoner:Node2D 
 var currentTurn = "player"
 var currentCombatScene:Node2D 
 var enemy:Node2D 
@@ -13,6 +14,7 @@ var playOrder:Array
 var currentlyPlaying:Node2D
 var playerLost = false
 var playerWon = false
+
 #SIGNALS
 signal turnEnded
 signal targetSelectionStarted
@@ -21,13 +23,12 @@ signal selectionCompleted
 func _ready():
 	#Wait for all _ready() to complete
 	await get_tree().process_frame
-	initPlayOrder()
 	connectSignals()
 	playIntro()
-	startCombat()
 
 #CONNECTIONS
 func connectSignals():
+	summoner.introAnimCompleted.connect(startCombat)
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.attackMenu.actionSelected.connect(onActionSelected)
@@ -49,14 +50,17 @@ func connectEachEnemy():
 
 #FIGHT INIT
 func playIntro():
-	for invocation in playerPartyManager.party:
-		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
-	for enemy in enemyPartyManager.party:
-		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
+	summoner.playIntro()
+#	for invocation in playerPartyManager.party:
+#		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
+#	for enemy in enemyPartyManager.party:
+#		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
+
 func startCombat():
-	print("FIGHT START")
+	currentCombatScene.initPlayerPartyData()
+	currentCombatScene.initEnemyPartyData()
+	initPlayOrder()
 	startTurn()
-	
 
 #ORDER HANDLERS
 func initPlayOrder():
