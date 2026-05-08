@@ -13,7 +13,7 @@ extends Control
 var turnManager:Node
 
 #SINGALS
-#signal actionSelected(action:Signal)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

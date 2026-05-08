@@ -6,6 +6,9 @@ extends Control
 @onready var fireballBtn = $ColorRect/FireballBtn
 @onready var closeBtn = $ColorRect/Close
 
+#SIGNALS
+signal spellSelected(spellIndex:int)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connectSignals()
@@ -16,10 +19,12 @@ func connectSignals():
 	closeBtn.pressed.connect(close)
 
 func onShieldSelected():
-	pass
+	print("selected shield spell")
+	emit_signal("spellSelected", 0)
 
 func onFireballSelected():
-	pass
+	print("selected shield fireball spell")
+	emit_signal("spellSelected", 1)
 
 func open():
 	self.visible = true

@@ -31,7 +31,8 @@ func connectSignals():
 	summoner.introAnimCompleted.connect(startCombat)
 	connectEachInvocations()
 	connectEachEnemy()
-	choiceMenu.attackMenu.actionSelected.connect(onActionSelected)
+	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
+	choiceMenu.spellMenu.spellSelected.connect(onSpellSelected)
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	targetSelectionStarted.connect(targetManager.startSelection)
@@ -41,7 +42,7 @@ func connectEachInvocations():
 	for invocation in playerPartyManager.party:
 		invocation.stopSelectingTarget.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
-		invocation.startSelectingTarget.connect(unitIsSelectingTarget)
+		invocation.startSelectingTarget.connect(unitSelectingEnemyTarget)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
 		enemy.enemySelected.connect(playerAttack)
@@ -100,17 +101,20 @@ func startTurn():
 func chooseAction():
 	currentCombatScene.choiceMenu.open()
 	print("Player is choosing what to do...")
-func onActionSelected(attackIndex:int):
+func onSpellSelected(spellIndex:int):
+	print("ENDDD")
+func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
-func unitIsSelectingTarget():
+func unitSelectingEnemyTarget():
 	match currentlyPlaying.attackSelected.type:
 		currentlyPlaying.AttackType.ATTACK:
 			print(currentlyPlaying.characterName," is selecting a target")
 			emit_signal("targetSelectionStarted")
 		currentlyPlaying.AttackType.SELFHEAL:
 			emit_signal("selectionCompleted")
-
 	isSelecting = true
+func unitSelectingAllyTarget():
+	pass
 func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:

@@ -160,7 +160,6 @@ func endingTurn():
 func isSelectable():
 	canBeSelected = true
 	area.monitoring = true
-	print("Player selection started")
 func selectionEnded():
 	canBeSelected = false
 

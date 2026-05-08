@@ -7,7 +7,7 @@ extends Control
 @onready var closeBtn = $ColorRect/Close
 
 #SINGALS
-signal actionSelected(attackIndex:int)
+signal attackSelected(attackIndex:int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +34,7 @@ func close():
 		child.visible = false
 
 func onAttackSelected():
-	emit_signal("actionSelected", 0)
+	emit_signal("attackSelected", 0)
 
 func onSkillSelected():
-	emit_signal("actionSelected", 1)
+	emit_signal("attackSelected", 1)
