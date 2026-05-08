@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bt77piknigplf"]
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://bt77piknigplf"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_8a5ey"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_rhbfw"]
 
 [resource]
-script = ExtResource("1_8a5ey")
+script = ExtResource("1_rhbfw")
 attackName = "gun shot"
 damage = 20
-range = false
+type = 0
+focus = 1
+healAmount = 0
 cooldown = 0
 element = "light"
 hitboxName = ""

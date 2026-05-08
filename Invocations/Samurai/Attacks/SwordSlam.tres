@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://pfc40xh5h7jg"]
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://pfc40xh5h7jg"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_j7hnm"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_thvpo"]
 
 [resource]
-script = ExtResource("1_j7hnm")
+script = ExtResource("1_thvpo")
 attackName = "sword slam"
 damage = 30
-range = false
+type = 0
+focus = 5
+healAmount = 0
 cooldown = 0
 element = "light"
 hitboxName = ""

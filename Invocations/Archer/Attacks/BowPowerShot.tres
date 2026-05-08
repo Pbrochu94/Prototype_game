@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://lg6qfiatta5s"]
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://lg6qfiatta5s"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_kgshg"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_w5gkt"]
 
 [resource]
-script = ExtResource("1_kgshg")
+script = ExtResource("1_w5gkt")
 attackName = "bow power shot"
 damage = 50
-range = false
+type = 0
+focus = 1
+healAmount = 0
 cooldown = 0
 element = "light"
 hitboxName = ""

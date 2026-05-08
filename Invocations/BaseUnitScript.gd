@@ -34,12 +34,20 @@ enum Faction {
 	ENEMY,
 	SUMMON,
 }
-enum AttackType{
+enum AbilityType{
 	ATTACK,
 	HEAL,
 	SELFHEAL,
 	BUFF,
 	DEBUFF
+}
+enum FocusType {
+	SELF,
+	ENEMY,
+	ENEMY_MULTIPLE,
+	ALLY,
+	ALLY_MULTIPLE,
+	AOE
 }
 
 #STATUS
@@ -51,7 +59,8 @@ signal inPositionToAttack(enemy:Node2D)
 signal stopSelectingTarget
 signal dealDamage(amount:int)
 signal turnFinished
-signal startSelectingTarget
+signal startSelectingEnemyTarget
+signal selectedSelf(unit:Node2D)
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
 signal hovered(character)
@@ -115,21 +124,53 @@ func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
-	match attackSelected.type:
-		AttackType.ATTACK:
-			enemyChooseTarget()
+	match attackSelected.focus:
+		FocusType.ENEMY, FocusType.AOE:
 			emit_signal("donePreparing")
-		AttackType.SELFHEAL:
-			stateMachine.setState(states["heal"])
+			enemyChooseTarget()
+		FocusType.ENEMY_MULTIPLE:
+			pass
+		FocusType.ALLY:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		FocusType.ALLY_MULTIPLE:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		FocusType.SELF:
+			target = self
+			if attackSelected.type == AbilityType.HEAL:
+				stateMachine.setState(states["heal"])
+			elif attackSelected.type == AbilityType.BUFF:
+				pass
+#	match attackSelected.type:
+#		AbilityType.ATTACK:
+#			enemyChooseTarget()
+#			emit_signal("donePreparing")
+#		AbilityType.HEAL:
+#			stateMachine.setState(states["heal"])
 
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
-	match attackSelected.type:
-		AttackType.ATTACK:
-			emit_signal("startSelectingTarget")
-		AttackType.SELFHEAL:
-			stateMachine.setState(states["heal"])
-			emit_signal("startSelectingTarget")
+	print("Attack selected: ", attackSelected)
+	print("Focus type : ",attackSelected.FocusType.keys()[attackSelected.focus])
+	match attackSelected.focus:
+		FocusType.ENEMY, FocusType.AOE:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
+		FocusType.ENEMY_MULTIPLE:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
+		FocusType.ALLY:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		FocusType.ALLY_MULTIPLE:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		FocusType.SELF:
+			target = self
+			if attackSelected.type == AbilityType.HEAL:
+				stateMachine.setState(states["heal"])
+			elif attackSelected.type == AbilityType.BUFF:
+				pass
+			emit_signal("selectedSelf", self)
 
 func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()

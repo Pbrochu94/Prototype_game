@@ -42,7 +42,8 @@ func connectEachInvocations():
 	for invocation in playerPartyManager.party:
 		invocation.stopSelectingTarget.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
-		invocation.startSelectingTarget.connect(unitSelectingEnemyTarget)
+		invocation.startSelectingEnemyTarget.connect(unitSelectingEnemyTarget)
+		invocation.selectedSelf.connect(endSelection)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
 		enemy.enemySelected.connect(playerAttack)
@@ -105,12 +106,13 @@ func onSpellSelected(spellIndex:int):
 	print("ENDDD")
 func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
-func unitSelectingEnemyTarget():
-	match currentlyPlaying.attackSelected.type:
-		currentlyPlaying.AttackType.ATTACK:
+func unitSelectingEnemyTarget(focusType):
+	print("mmh")
+	match focusType:
+		currentlyPlaying.FocusType.ENEMY, currentlyPlaying.FocusType.AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
 			emit_signal("targetSelectionStarted")
-		currentlyPlaying.AttackType.SELFHEAL:
+		currentlyPlaying.FocusType.SELF:
 			emit_signal("selectionCompleted")
 	isSelecting = true
 func unitSelectingAllyTarget():

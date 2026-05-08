@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://be2smvdjxl7k3"]
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://be2smvdjxl7k3"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_cukac"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_06ylf"]
 
 [resource]
-script = ExtResource("1_cukac")
+script = ExtResource("1_06ylf")
 attackName = "sword slash"
 damage = 20
-range = false
+type = 0
+focus = 1
+healAmount = 0
 cooldown = 0
 element = "light"
-hitboxName = "LightSlash1"
+hitboxName = ""

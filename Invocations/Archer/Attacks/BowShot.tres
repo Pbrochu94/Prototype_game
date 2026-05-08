@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bna5nscetmrgr"]
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://bna5nscetmrgr"]
 
-[ext_resource type="Script" path="res://utils/Attacks/Attack.gd" id="1_oru6a"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_rhp2c"]
 
 [resource]
-script = ExtResource("1_oru6a")
+script = ExtResource("1_rhp2c")
 attackName = "bow shot"
-damage = 10
-range = false
+damage = 20
+type = 0
+focus = 1
+healAmount = 0
 cooldown = 0
 element = "light"
 hitboxName = ""
