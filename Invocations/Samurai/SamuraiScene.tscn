@@ -527,6 +527,8 @@ walkSpeed = 200
 maxHp = 120
 currentHp = 120
 speed = 5
+deff = 10
+atk = 20
 
 [node name="SpritePivot" type="Node2D" parent="."]
 

@@ -9,6 +9,12 @@ class_name Ability
 @export var cooldown: int
 @export var element: String
 @export var hitboxName:String
+@export var atkDebuff:int
+@export var deffDebuff:int
+@export var spdDebuff:int
+
+
+
 
 #ENUMS
 enum AbilityType {

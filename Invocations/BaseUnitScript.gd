@@ -28,6 +28,9 @@ var states:Dictionary
 @export var speed:int 
 @export var attacks:Dictionary = {}
 @export var attackSelected:Ability
+@export var deff:int
+@export var atk:int
+
 
 #ENUMS
 enum Faction {
@@ -114,9 +117,9 @@ func walk(delta, destination:Vector2):
 		if global_position == destination:
 			stateMachine.setState(states["endingturn"])
 			isWalking = false
-func receiveDamage(attack:Ability, element:String):
+func receiveDamage(damage:int, element:String):
 	stateMachine.setState(states["hurt"])
-	currentHp-= attack.damage
+	currentHp-= (damage - deff)
 	print(characterName," now have ", currentHp, " hp ")
 
 #TURN FLOW
@@ -224,5 +227,7 @@ func getUnitInfo():
 		"Walk speed" : walkSpeed,
 		"Max HP": maxHp,
 		"Current HP": currentHp,
-		"Speed": speed
+		"Speed": speed,
+		"Deff": deff,
+		"Attack": atk
 	}

@@ -150,6 +150,7 @@ offset_bottom = 40.0
 script = ExtResource("3_tcxpq")
 
 [node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/SpellMenu"]
+layout_mode = 0
 offset_left = 172.0
 offset_top = -24.0
 offset_right = 193.0
@@ -168,6 +169,7 @@ text = "Spells
 "
 
 [node name="Close" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 scale = Vector2(0.186777, 0.223888)

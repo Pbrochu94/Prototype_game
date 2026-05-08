@@ -39,9 +39,9 @@ var allCharacters:Array[PackedScene] = [
 func loadRandomTeam():
 	for i in range(3):
 		#Random characters
-#		var character = allCharacters.pick_random().instantiate()
+		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
-		var character = allCharacters[1].instantiate()
+#		var character = allCharacters[1].instantiate()
 		character.faction = character.Faction.ENEMY
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
