@@ -53,10 +53,6 @@ func connectEachEnemy():
 #FIGHT INIT
 func playIntro():
 	summoner.playIntro()
-#	for invocation in playerPartyManager.party:
-#		invocation.stateMachine.setState(invocation.stateMachine.states["idle"])
-#	for enemy in enemyPartyManager.party:
-#		enemy.stateMachine.setState(enemy.stateMachine.states["idle"])
 
 func startCombat():
 	currentCombatScene.initPlayerPartyData()
@@ -121,7 +117,6 @@ func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.selectionEnded()
-#		enemy.selectionEnded()
 func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
 	print("Player move to attack", enemy)

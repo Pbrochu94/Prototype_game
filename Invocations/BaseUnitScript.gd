@@ -60,7 +60,7 @@ signal stopSelectingTarget
 signal dealDamage(amount:int)
 signal turnFinished
 signal startSelectingEnemyTarget
-signal selectedSelf(unit:Node2D)
+signal selectedSelf()
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
 signal hovered(character)
@@ -170,7 +170,7 @@ func onChosenAttack(index:int):
 				stateMachine.setState(states["heal"])
 			elif attackSelected.type == AbilityType.BUFF:
 				pass
-			emit_signal("selectedSelf", self)
+			emit_signal("selectedSelf")
 
 func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
