@@ -107,7 +107,6 @@ func onSpellSelected(spellIndex:int):
 func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
 func unitSelectingEnemyTarget(focusType):
-	print("mmh")
 	match focusType:
 		currentlyPlaying.FocusType.ENEMY, currentlyPlaying.FocusType.AOE:
 			print(currentlyPlaying.characterName," is selecting a target")

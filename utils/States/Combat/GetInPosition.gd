@@ -1,9 +1,14 @@
 extends State
 class_name GetInPositionState
 
-@export var player:Node2D
+var player:Node2D
+var target:Node2D
+var attackSelected:Ability
 
 func enter():
+	player = owner
+	target = player.target
+	attackSelected = player.attackSelected
 	owner.isWalking = true
 	owner.anim.play("walk")
 
@@ -16,6 +21,8 @@ func _process(delta):
 
 
 func update(delta):
+	if not owner.attackSelected.needToMove:
+		owner.attack()
 	var targetPosition = owner.target.global_position
 	var offset:float
 	if owner.global_position.x < targetPosition.x:

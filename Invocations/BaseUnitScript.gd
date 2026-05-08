@@ -83,6 +83,7 @@ func _ready():
 func onAnimationFinished():
 	match currentState:
 		"attacking":
+			print(attackSelected.attackName)
 			if anim.animation == attackSelected.attackName:
 				stateMachine.setState(states["walkingback"])
 		"hurt":
@@ -145,12 +146,6 @@ func enemyStartTurn():
 				stateMachine.setState(states["heal"])
 			elif attackSelected.type == AbilityType.BUFF:
 				pass
-#	match attackSelected.type:
-#		AbilityType.ATTACK:
-#			enemyChooseTarget()
-#			emit_signal("donePreparing")
-#		AbilityType.HEAL:
-#			stateMachine.setState(states["heal"])
 
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
