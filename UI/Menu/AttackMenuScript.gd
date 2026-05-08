@@ -8,6 +8,7 @@ extends Control
 
 #SINGALS
 signal attackSelected(attackIndex:int)
+signal cancelSelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,7 @@ func _process(delta):
 	pass
 
 func connectSignals():
+	
 	attackBtn.pressed.connect(onAttackSelected)
 	skillBtn.pressed.connect(onSkillSelected)
 	closeBtn.pressed.connect(close)
@@ -32,6 +34,7 @@ func close():
 	self.visible = false
 	for child in attackMenu.get_children():
 		child.visible = false
+	emit_signal("cancelSelection")
 
 func onAttackSelected():
 	emit_signal("attackSelected", 0)

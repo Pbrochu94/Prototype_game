@@ -8,6 +8,7 @@ extends Control
 
 #SIGNALS
 signal spellSelected(spellIndex:int)
+signal cancelSelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +33,7 @@ func open():
 		child.visible = true
 
 func close():
-	print("CLOSE")
 	self.visible = false
 	for child in spellMenu.get_children():
 		child.visible = false
+	emit_signal("cancelSelection")

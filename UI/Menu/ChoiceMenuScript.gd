@@ -12,8 +12,8 @@ extends Control
 
 var turnManager:Node
 
-#SINGALS
-
+#SIGNALS
+signal selectionCancelled
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,6 +49,8 @@ func connectSignals():
 	attackBtn.pressed.connect(openAttackMenu)
 	inventoryBtn.pressed.connect(openInventoryMenu)
 	spellBtn.pressed.connect(openSpellMenu)
+	attackMenu.cancelSelection.connect(cancelSelection)
+	spellMenu.cancelSelection.connect(cancelSelection)
 
 func open():
 	self.visible = true
@@ -57,3 +59,7 @@ func open():
 func close():
 	self.visible = false
 	subMenuParent.visible = false
+
+func cancelSelection():
+	subMenuParent.visible = false
+	emit_signal("selectionCancelled")

@@ -37,6 +37,7 @@ func connectSignals():
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	targetSelectionStarted.connect(targetManager.startSelection)
 	selectionCompleted.connect(endSelection)
+	choiceMenu.selectionCancelled.connect(cancelSelection)
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
@@ -113,6 +114,9 @@ func unitSelectingEnemyTarget(focusType):
 	isSelecting = true
 func unitSelectingAllyTarget():
 	pass
+func cancelSelection():
+	for enemy in enemyPartyManager.party:
+		targetManager.selectionEnded()
 func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
