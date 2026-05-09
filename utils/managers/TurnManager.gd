@@ -134,7 +134,7 @@ func playerAttack(enemy:Node2D):
 	currentlyPlaying.getInPosition()
 func endTurn():
 	if fightIsOver:
-		emit_signal("playOutroAnim")
+		endFight()
 	else:
 		currentlyPlaying == playOrder[-1]
 		turnTracker += 1
@@ -142,7 +142,13 @@ func endTurn():
 		updatePlayOrder()
 		updateCurrentlyPlaying()
 		emit_signal("turnEnded")
-
+func endFight():
+	emit_signal("playOutroAnim")
+	if playerWon:
+		print("You won !!")
+	else:
+		print(playerWon)
+		print("GAME OVER")
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():

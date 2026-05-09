@@ -30,7 +30,7 @@ func onCharacterDeath(character:Node2D):
 	print("Currently alive enemies: ", currentlyAliveCharacters)
 	if aliveCount <= 0:
 		turnManager.fightIsOver = true
-#		emit_signal("partyDead")
+		turnManager.playerWon = true
 func outroAnim():
 	for character in currentlyAliveCharacters:
 		character.stateMachine.setState(character.states["hurt"])
@@ -43,7 +43,7 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	for i in range(3):
+	for i in range(1):
 		#Random characters
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
