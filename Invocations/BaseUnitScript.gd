@@ -273,7 +273,6 @@ func getUnitInfo():
 	}
 func reduceTimers():
 	for effect in activeEffects:
-		print("AAAAAA", effect["duration"])
 		if effect["duration"] > 0:
 			effect["duration"] -= 1
 		else: 
@@ -281,5 +280,10 @@ func reduceTimers():
 			activeEffects.erase(effect)
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100
-	return baseStat * amountInPercent
+	var value:float = baseStat * amountInPercent
+	if value > 0:
+		return ceil(value)
+	else:
+		return floor(value)
+
 

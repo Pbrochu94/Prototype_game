@@ -542,10 +542,10 @@ position = Vector2(-146, 101)
 position = Vector2(146, 16)
 
 [node name="EnemyAnchor1" type="Node2D" parent="."]
-position = Vector2(123, 53)
+position = Vector2(123, 58)
 
 [node name="EnemyAnchor3" type="Node2D" parent="."]
-position = Vector2(146, 103)
+position = Vector2(146, 101)
 
 [node name="ChoiceMenu" parent="." groups=["combat menu"] instance=ExtResource("6_3vrbe")]
 offset_left = -151.0
