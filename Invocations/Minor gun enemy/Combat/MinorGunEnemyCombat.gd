@@ -100,10 +100,12 @@ func walk(delta, destination:Vector2):
 			stateMachine.setState(stateMachine.states["endingturn"])
 			isWalking = false
 func receiveDamage(attack:Attack, element:String):
+	print(characterName," has ", currentHp, " hp before attack ")
+	print(characterName, " receive ", attack.damage, " mitigated by deff: ", stats["deff"])
 	stateMachine.setState(stateMachine.states["hurt"])
 	currentHp-= attack.damage
 	emit_signal("hpChanged")
-	print(characterName," now have ", currentHp, " hp ")
+	print(characterName," now have ", currentHp, " hp after attack ")
 
 #TURN FLOW
 func enemyStartTurn():

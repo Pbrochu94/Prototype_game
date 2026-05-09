@@ -15,11 +15,13 @@ var currentlyPlaying:Node2D
 var playerLost:bool = false
 var playerWon:bool = false
 var turnTracker:int = 0
+var fightIsOver:bool = false
 
 #SIGNALS
 signal turnEnded
 signal targetSelectionStarted
 signal selectionCompleted
+signal playOutroAnim
 
 func _ready():
 	#Wait for all _ready() to complete
@@ -131,26 +133,31 @@ func playerAttack(enemy:Node2D):
 	currentlyPlaying.target = enemy
 	currentlyPlaying.getInPosition()
 func endTurn():
-	if currentlyPlaying == playOrder[-1]:
+	if fightIsOver:
+		emit_signal("playOutroAnim")
+	else:
+		currentlyPlaying == playOrder[-1]
 		turnTracker += 1
 		print("turn ", turnTracker, " completed")
 		updatePlayOrder()
-	updateCurrentlyPlaying()
-	emit_signal("turnEnded")
+		updateCurrentlyPlaying()
+		emit_signal("turnEnded")
+
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack():
 	currentlyPlaying.getInPosition()
-
 func enemyAttack():
 	enemy.attack()
 
+#PARTY BEHAVIORS
 func playerPartyDefeated():
 	currentlyPlaying = null
 	playerLost = true
+#	emit_signal("playOutroAnim")
 	print("GAME OVER")
-
 func enemyPartyDefeated():
 	currentlyPlaying = null
 	playerLost = true
+#	emit_signal("playOutroAnim")
 	print("You won !!")

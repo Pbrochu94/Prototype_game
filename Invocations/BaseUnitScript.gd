@@ -123,7 +123,7 @@ func onAnimationFinished():
 				stateMachine.setState(states["endingturn"])
 		"hurt":
 			if anim.animation == "hurt":
-				if currentHp <= 0:
+				if stats["currentHp"] <= 0:
 					stateMachine.setState(states["downed"])
 				else:
 					stateMachine.setState(states["idle"])
@@ -154,9 +154,12 @@ func walk(delta, destination:Vector2):
 			stateMachine.setState(states["endingturn"])
 			isWalking = false
 func receiveDamage(damage:int, element:String):
-	stateMachine.setState(states["hurt"])
-	stats["currentHp"]-= (damage - stats["deff"])
-	print(characterName," now have ", stats["currentHp"], " hp ")
+	print(characterName," has ", currentHp, " hp before attack ")
+	print(characterName, " receive ", damage, " mitigated by deff: ", stats["deff"])
+	stateMachine.setState(stateMachine.states["hurt"])
+	stats["currentHp"]-= damage - stats["deff"]
+	emit_signal("hpChanged")
+	print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack:Ability):
 	for statAffected in attack.statsAffected:
 		var effectApplied = {
