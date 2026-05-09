@@ -25,7 +25,7 @@ signal introAnimCompleted
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	stateMachine.init(self)
-	stateMachine.setState(states["intro"])
+	setState("intro")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,9 +42,13 @@ func walk(delta, destination:Vector2):
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
+#TURN FLOW
 func playIntro():
-	stateMachine.setState(states["intro"])
-
+	setState("intro")
 func onFinishedIntro():
-	stateMachine.setState(states["idle"])
+	setState("idle")
 	emit_signal("introAnimCompleted")
+
+#UTILS
+func setState(newState:String):
+	stateMachine.setState(states[newState])

@@ -107,7 +107,7 @@ signal donePreparing
 func _ready():
 	#Initialize state machine on this character
 	stateMachine.init(self)
-	stateMachine.setState(states["idle"])
+	setState("idle")
 	connectSignals()
 
 #ANIMATIONS & SPRITES
@@ -117,19 +117,19 @@ func onAnimationFinished():
 			print(attackSelected.attackName)
 #			if anim.animation == attackSelected.attackName:
 			if attackSelected.needToMove:
-				stateMachine.setState(states["walkingback"])
+				setState("walkingback")
 			else:
-				stateMachine.setState(states["idle"])
-				stateMachine.setState(states["endingturn"])
+				setState("idle")
+				setState("endingturn")
 		"hurt":
 			if anim.animation == "hurt":
 				if stats["currentHp"] <= 0:
-					stateMachine.setState(states["downed"])
+					setState("downed")
 				else:
-					stateMachine.setState(states["idle"])
+					setState("idle")
 		"heal":
 			if anim.animation == attackSelected.attackName:
-				stateMachine.setState(states["endingturn"])
+				setState("endingturn")
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 
@@ -151,7 +151,7 @@ func walk(delta, destination:Vector2):
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
-			stateMachine.setState(states["endingturn"])
+			setState("endingturn")
 			isWalking = false
 func receiveDamage(damage:int, element:String):
 	print(characterName," has ", currentHp, " hp before attack ")
@@ -198,7 +198,7 @@ func enemyStartTurn():
 		FocusType.SELF:
 			target = self
 			if attackSelected.type == AbilityType.HEAL:
-				stateMachine.setState(states["heal"])
+				setState("heal")
 			elif attackSelected.type == AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
@@ -219,7 +219,7 @@ func onChosenAttack(index:int):
 		FocusType.SELF:
 			target = self
 			if attackSelected.type == AbilityType.HEAL:
-				stateMachine.setState(states["heal"])
+				setState("heal")
 			elif attackSelected.type == AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
@@ -233,19 +233,19 @@ func getRandomAttack() -> Ability:
 func getInPosition():
 	if faction == Faction.SUMMON:
 		emit_signal("stopSelectingTarget")
-	stateMachine.setState(states["getinposition"])
+	setState("getinposition")
 func attack(enemyTarget:Node2D,weapon):
-	stateMachine.setState(states["attacking"])
+	setState("attacking")
 	print("Player Attacked: ", target.name)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
-		stateMachine.setState(states["walkingback"])
+		setState("walkingback")
 	else:
-		stateMachine.setState(states["endingturn"])
+		setState("endingturn")
 func endingTurn():
 	print("Player end turn")
-	stateMachine.setState(states["idle"])
+	setState("idle")
 	emit_signal("turnFinished")
 
 #UI & SELECTION
@@ -268,6 +268,8 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 		emit_signal("enemySelected",self)
 
 #UTILS
+func setState(newState:String):
+	stateMachine.setState(states[newState])
 func getUnitInfo():
 	return {
 		"Name": characterName,
