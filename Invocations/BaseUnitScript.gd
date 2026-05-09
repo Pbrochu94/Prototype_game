@@ -65,12 +65,10 @@ enum Faction {
 	ENEMY,
 	SUMMON,
 }
-enum AbilityType{
+enum AbilityType {
 	ATTACK,
 	HEAL,
-	SELFHEAL,
-	BUFF,
-	DEBUFF
+	EFFECT
 }
 enum FocusType {
 	SELF,
@@ -161,9 +159,14 @@ func receiveDamage(damage:int, element:String):
 	stateMachine.setState(states["hurt"])
 	currentHp-= (damage - deff)
 	print(characterName," now have ", currentHp, " hp ")
-func applyEffect(type:StatusEffect,duration:int):
-	
-	deff -= convertPourcentage(deff,attack.deffDebuff)
+func applyEffect(attack:Ability):
+	match attack.statusEffect:
+		StatusEffect.DEBUFF:
+			print(attack.statsAffected)
+			for statAffected in attack.statsAffected:
+				print(statAffected)
+#			deff -= convertPourcentage(deff,attack.deffDebuff)
+
 #TURN FLOW
 func enemyStartTurn():
 	print(characterName, " started his turn")
@@ -185,7 +188,7 @@ func enemyStartTurn():
 			target = self
 			if attackSelected.type == AbilityType.HEAL:
 				stateMachine.setState(states["heal"])
-			elif attackSelected.type == AbilityType.BUFF:
+			elif attackSelected.type == AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
@@ -206,7 +209,7 @@ func onChosenAttack(index:int):
 			target = self
 			if attackSelected.type == AbilityType.HEAL:
 				stateMachine.setState(states["heal"])
-			elif attackSelected.type == AbilityType.BUFF:
+			elif attackSelected.type == AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
 func enemyChooseTarget():
@@ -267,11 +270,11 @@ func getUnitInfo():
 	}
 func reduceTimers():
 	for type in timers:
-		print(type)
+#		print(type)
 		for effect in timers[type]:
 			if timers[type][effect] != 0:
 				timers[type][effect] -= 1
-			print(timers[type][effect])
+#			print(timers[type][effect])
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100
 	return baseStat * amountInPercent

@@ -41,7 +41,7 @@ func enter():
 			target.receiveDamage(damageOutput, element)
 		AbilityType.DEBUFF:
 			print("Target: ", target.characterName, " deffense is ", target.deff)
-			target.applyEffect(StatusEffect.DEBUFF, attack.duration)
+			target.applyEffect(attack)
 			print(attack.attackName)
 			player.anim.play(attack.attackName)
 			print("Target: ", target.characterName, " after debuff ", target.deff, " for ", attack.duration, " turn")
