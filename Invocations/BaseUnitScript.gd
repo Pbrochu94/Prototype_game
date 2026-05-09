@@ -21,6 +21,13 @@ var states:Dictionary
 @export var faction:Faction
 
 #STATS
+@onready var stats:Dictionary = {
+	"maxHp": maxHp,
+	"currentHp": currentHp,
+	"atk": atk,
+	"deff":deff,
+	"speed":speed
+}
 @export var characterName:String 
 @export var walkSpeed:int
 @export var maxHp:int 
@@ -30,6 +37,7 @@ var states:Dictionary
 @export var attackSelected:Ability
 @export var deff:int
 @export var atk:int
+var activeEffects:Array[Dictionary] = []
 
 #TIMERS
 var timers:Dictionary = {
@@ -49,16 +57,6 @@ var timers:Dictionary = {
 		"freeze":0,
 		}
 }
-var debuffTimers:Dictionary ={
-	"deff" : 0,
-	"atk" : 0,
-	"speed" : 0,
-} 
-var buffTimers:Dictionary ={
-	"deff" : 0,
-	"atk" : 0,
-	"speed" : 0,
-} 
 
 #ENUMS
 enum Faction {
@@ -157,15 +155,25 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(damage:int, element:String):
 	stateMachine.setState(states["hurt"])
-	currentHp-= (damage - deff)
-	print(characterName," now have ", currentHp, " hp ")
+	stats["currentHp"]-= (damage - stats["deff"])
+	print(characterName," now have ", stats["currentHp"], " hp ")
 func applyEffect(attack:Ability):
-	match attack.statusEffect:
-		StatusEffect.DEBUFF:
-			print(attack.statsAffected)
-			for statAffected in attack.statsAffected:
-				print(statAffected)
-#			deff -= convertPourcentage(deff,attack.deffDebuff)
+	for statAffected in attack.statsAffected:
+		var effectApplied = {
+			"stat":statAffected,
+			"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
+			"duration": attack.effectDuration
+		}
+		stats[effectApplied["stat"]] += effectApplied["amount"]
+		activeEffects.append(effectApplied)
+#	match attack.statusEffect:
+#		StatusEffect.DEBUFF:
+#			print(attack.statsAffected)
+#			for statAffected in attack.statsAffected:
+#				stats[statAffected] -= convertPourcentage(stats[statAffected],attack.effectAmount)
+#				timers["debuffs"][statAffected] += attack.effectDuration
+#				print("Target: ", characterName, " after debuff ", stats[statAffected], " for ", attack.effectDuration, " turn")
+
 
 #TURN FLOW
 func enemyStartTurn():
@@ -260,21 +268,17 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 func getUnitInfo():
 	return {
 		"Name": characterName,
-		"Walk speed" : walkSpeed,
-		"Max HP": maxHp,
-		"Current HP": currentHp,
-		"Speed": speed,
-		"Deff": deff,
-		"Attack": atk,
-		"timers": timers
+		"Stats": stats,
+		"Active effects": activeEffects
 	}
 func reduceTimers():
-	for type in timers:
-#		print(type)
-		for effect in timers[type]:
-			if timers[type][effect] != 0:
-				timers[type][effect] -= 1
-#			print(timers[type][effect])
+	for effect in activeEffects:
+		print("AAAAAA", effect["duration"])
+		if effect["duration"] > 0:
+			effect["duration"] -= 1
+		else: 
+			stats[effect["stat"]] -= effect["amount"]
+			activeEffects.erase(effect)
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100
 	return baseStat * amountInPercent

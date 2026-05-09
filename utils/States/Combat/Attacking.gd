@@ -33,18 +33,16 @@ func enter():
 	element = attack.element
 	match attack.type:
 		AbilityType.ATTACK:
-			atkStat = owner.atk
+			atkStat = owner.stats["atk"]
 			var damageOutput:int = atkStat + attack.damage
 			var attackName:String = attack.attackName
 			owner.anim.play(attackName)
 			print("Character: ", owner, "attacks :", target, " for ", damageOutput, " ", attack.element)
 			target.receiveDamage(damageOutput, element)
 		AbilityType.DEBUFF:
-			print("Target: ", target.characterName, " deffense is ", target.deff)
 			target.applyEffect(attack)
 			print(attack.attackName)
 			player.anim.play(attack.attackName)
-			print("Target: ", target.characterName, " after debuff ", target.deff, " for ", attack.duration, " turn")
 
 
 func update(delta):

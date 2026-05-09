@@ -18,7 +18,7 @@ class_name Ability
 #@export var deffDebuff:int
 #@export var spdDebuff:int
 @export var needToMove:bool
-@export var duration:int
+@export var effectDuration:int
 @export var statusEffect:StatusEffect
 enum StatusEffect {
 	BUFF,
