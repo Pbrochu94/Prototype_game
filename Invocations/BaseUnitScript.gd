@@ -31,6 +31,34 @@ var states:Dictionary
 @export var deff:int
 @export var atk:int
 
+#TIMERS
+var timers:Dictionary = {
+	"debuffs" : {
+		"deff" : 0,
+		"atk" : 0,
+		"speed" : 0,
+		},
+	"buffs" : {
+		"deff" : 0,
+		"atk" : 0,
+		"speed" : 0,
+		},
+	"status": {
+		"poisonned":0,
+		"burn":0,
+		"freeze":0,
+		}
+}
+var debuffTimers:Dictionary ={
+	"deff" : 0,
+	"atk" : 0,
+	"speed" : 0,
+} 
+var buffTimers:Dictionary ={
+	"deff" : 0,
+	"atk" : 0,
+	"speed" : 0,
+} 
 
 #ENUMS
 enum Faction {
@@ -51,6 +79,13 @@ enum FocusType {
 	ALLY,
 	ALLY_MULTIPLE,
 	AOE
+}
+enum StatusEffect {
+	BUFF,
+	DEBUFF,
+	POISON,
+	BURN,
+	FREEZE
 }
 
 #STATUS
@@ -84,8 +119,12 @@ func onAnimationFinished():
 	match currentState:
 		"attacking":
 			print(attackSelected.attackName)
-			if anim.animation == attackSelected.attackName:
+#			if anim.animation == attackSelected.attackName:
+			if attackSelected.needToMove:
 				stateMachine.setState(states["walkingback"])
+			else:
+				stateMachine.setState(states["idle"])
+				stateMachine.setState(states["endingturn"])
 		"hurt":
 			if anim.animation == "hurt":
 				if currentHp <= 0:
@@ -122,7 +161,9 @@ func receiveDamage(damage:int, element:String):
 	stateMachine.setState(states["hurt"])
 	currentHp-= (damage - deff)
 	print(characterName," now have ", currentHp, " hp ")
-
+func applyEffect(type:StatusEffect,duration:int):
+	
+	deff -= convertPourcentage(deff,attack.deffDebuff)
 #TURN FLOW
 func enemyStartTurn():
 	print(characterName, " started his turn")
@@ -146,7 +187,6 @@ func enemyStartTurn():
 				stateMachine.setState(states["heal"])
 			elif attackSelected.type == AbilityType.BUFF:
 				pass
-
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
 	print("Attack selected: ", attackSelected)
@@ -169,7 +209,6 @@ func onChosenAttack(index:int):
 			elif attackSelected.type == AbilityType.BUFF:
 				pass
 			emit_signal("selectedSelf")
-
 func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
 	print("Chosen target: ", target)
@@ -201,7 +240,6 @@ func isSelectable():
 	area.monitoring = true
 func selectionEnded():
 	canBeSelected = false
-
 func onMouseEntered():
 	if not isDead and canBeSelected:
 		emit_signal("hovered", self)
@@ -215,7 +253,7 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("enemySelected",self)
 
-#INFO
+#UTILS
 func getUnitInfo():
 	return {
 		"Name": characterName,
@@ -224,5 +262,17 @@ func getUnitInfo():
 		"Current HP": currentHp,
 		"Speed": speed,
 		"Deff": deff,
-		"Attack": atk
+		"Attack": atk,
+		"timers": timers
 	}
+func reduceTimers():
+	for type in timers:
+		print(type)
+		for effect in timers[type]:
+			if timers[type][effect] != 0:
+				timers[type][effect] -= 1
+			print(timers[type][effect])
+func convertPourcentage(baseStat:int, amount:int):
+	var amountInPercent:float = float(amount)/100
+	return baseStat * amountInPercent
+

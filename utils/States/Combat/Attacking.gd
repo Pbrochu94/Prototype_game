@@ -16,6 +16,13 @@ enum AbilityType{
 	BUFF,
 	DEBUFF
 }
+enum StatusEffect {
+	BUFF,
+	DEBUFF,
+	POISON,
+	BURN,
+	FREEZE
+}
 
 func _onready():
 	pass
@@ -33,11 +40,11 @@ func enter():
 			print("Character: ", owner, "attacks :", target, " for ", damageOutput, " ", attack.element)
 			target.receiveDamage(damageOutput, element)
 		AbilityType.DEBUFF:
+			print("Target: ", target.characterName, " deffense is ", target.deff)
+			target.applyEffect(StatusEffect.DEBUFF, attack.duration)
 			print(attack.attackName)
 			player.anim.play(attack.attackName)
-			print("Target: ", target.characterName, " deffense is ", target.deff)
-			target.deff -= convertPourcentage(target.deff,attack.deffDebuff)
-			print("Target: ", target.characterName, " after debuff ", target.deff)
+			print("Target: ", target.characterName, " after debuff ", target.deff, " for ", attack.duration, " turn")
 
 
 func update(delta):
@@ -46,6 +53,4 @@ func update(delta):
 func exit():
 	pass
 
-func convertPourcentage(baseStat:int, amount:int):
-	var amountInPercent:float = float(amount)/100
-	return baseStat * amountInPercent
+

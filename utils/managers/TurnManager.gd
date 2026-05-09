@@ -95,6 +95,7 @@ func startTurn():
 	if not currentlyPlaying:
 		return
 	print("Now playing :", currentlyPlaying.getUnitInfo())
+	currentlyPlaying.reduceTimers()
 	if currentlyPlaying.faction == currentlyPlaying.Faction.SUMMON:
 		chooseAction()
 	else:

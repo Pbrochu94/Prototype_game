@@ -19,3 +19,4 @@ atkDebuff = 0
 deffDebuff = 20
 spdDebuff = 0
 needToMove = false
+duration = 3
