@@ -16,9 +16,6 @@ func exit():
 	owner.isWalking = false
 	owner.anim.stop()
 
-func _process(delta):
-	pass
-
 
 func update(delta):
 	if not owner.attackSelected.needToMove:

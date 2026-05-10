@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://c1glvlmpjolmj"]
+[gd_scene load_steps=101 format=3 uid="uid://c1glvlmpjolmj"]
 
 [ext_resource type="Script" path="res://Invocations/Archer/BaseArcherScript.gd" id="1_owjqr"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Invocations/Archer/States/EndingTurnArcher.gd" id="13_turxm"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/HurtArcher.gd" id="14_jb0mt"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/DownedArcher.gd" id="15_ylls3"]
+[ext_resource type="Script" path="res://Invocations/Archer/States/OutroArcher.gd" id="16_o5jyx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2jmv"]
 atlas = ExtResource("2_wfhkc")
@@ -288,6 +289,30 @@ region = Rect2(0, 450, 174, 25)
 atlas = ExtResource("2_ysouo")
 region = Rect2(0, 475, 174, 25)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7o77"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 75, 174, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i244v"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 100, 174, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y34b"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 125, 174, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5slg"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 50, 174, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqo0y"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 25, 174, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3obuk"]
+atlas = ExtResource("2_ysouo")
+region = Rect2(522, 0, 174, 25)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uwri8"]
 atlas = ExtResource("3_eds7e")
 region = Rect2(0, 0, 174, 25)
@@ -553,6 +578,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_n7o77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i244v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y34b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i244v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7o77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5slg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqo0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3obuk")
+}],
+"loop": false,
+"name": &"outro",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uwri8")
 }, {
 "duration": 1.0,
@@ -599,7 +653,7 @@ atk = 20
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_fax0j")
-animation = &"walk"
+animation = &"outro"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -629,6 +683,9 @@ script = ExtResource("14_jb0mt")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("15_ylls3")
+
+[node name="Outro" type="Node" parent="StateMachine"]
+script = ExtResource("16_o5jyx")
 
 [connection signal="input_event" from="Area2D" to="." method="onArea2DInputEvent" flags=18]
 [connection signal="mouse_entered" from="Area2D" to="." method="onMouseEntered" flags=18]

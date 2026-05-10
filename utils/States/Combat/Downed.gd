@@ -9,9 +9,6 @@ func enter():
 	owner.isDead = true
 	owner.emit_signal("isDowned", owner)
 
-func _process(delta):
-	pass
-
 func update(delta):
 	pass
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=101 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Invocations/Samurai/States/HurtSamurai.gd" id="9_impai"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/DownedSamurai.gd" id="10_jb3k4"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="11_4b2fb"]
+[ext_resource type="Script" path="res://Invocations/Samurai/States/OutroSamurai.gd" id="11_rrmkh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kn0ci"]
 atlas = ExtResource("2_3jdm4")
@@ -159,6 +160,78 @@ region = Rect2(1240, 0, 124, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_oufip"]
 atlas = ExtResource("2_3jdm4")
 region = Rect2(1364, 0, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydxbr"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(0, 98, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w0n2"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(124, 98, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrab8"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(248, 98, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_530yd"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(372, 98, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e27q1"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(0, 147, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftm0i"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(124, 147, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffo6b"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(248, 147, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8qud"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(372, 147, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8yh6"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(0, 196, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o4xa"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(124, 196, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2uy4"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(248, 196, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h573j"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(372, 196, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoi4t"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(0, 245, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xrhw"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(124, 245, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roboo"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(248, 245, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjab4"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(372, 245, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7buy5"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(496, 245, 124, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj25l"]
+atlas = ExtResource("2_3jdm4")
+region = Rect2(620, 245, 124, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fafok"]
 atlas = ExtResource("2_3jdm4")
@@ -409,6 +482,65 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydxbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w0n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrab8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_530yd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e27q1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftm0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffo6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8qud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8yh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o4xa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2uy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h573j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoi4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xrhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roboo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjab4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7buy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj25l")
+}],
+"loop": false,
+"name": &"outro",
+"speed": 12.0
+}, {
+"frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_fafok")
 }, {
@@ -535,9 +667,7 @@ atk = 20
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_fxuqu")
-animation = &"sword slam"
-frame = 15
-frame_progress = 1.0
+animation = &"outro"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_mtelm")
@@ -562,6 +692,9 @@ script = ExtResource("9_impai")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("10_jb3k4")
+
+[node name="Outro" type="Node" parent="StateMachine"]
+script = ExtResource("11_rrmkh")
 
 [node name="Hitboxes" type="Area2D" parent="."]
 

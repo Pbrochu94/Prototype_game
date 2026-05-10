@@ -33,7 +33,7 @@ func onCharacterDeath(character:Node2D):
 		turnManager.playerLost = true
 func outroAnim():
 	for character in currentlyAliveCharacters:
-		character.stateMachine.setState(character.states["hurt"])
+		character.setState("outro")
 #TEST DATA
 var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/Samurai/SamuraiScene.tscn"),
@@ -46,7 +46,7 @@ func loadRandomTeam():
 		#Random characters
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
-		var character = allCharacters[2].instantiate()
+		var character = allCharacters[3].instantiate()
 		character.faction = character.Faction.SUMMON
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
