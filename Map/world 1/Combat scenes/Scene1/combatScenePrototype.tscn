@@ -503,9 +503,9 @@ sources/0 = SubResource("TileSetAtlasSource_xnv3b")
 [node name="CombatScenePrototype" type="Node2D" groups=["combat scene"]]
 script = ExtResource("1_ob25n")
 
-[node name="PlayerPartyManager" parent="." instance=ExtResource("2_1ji77")]
-
 [node name="EnemyPartyManager" parent="." instance=ExtResource("3_ejwsf")]
+
+[node name="PlayerPartyManager" parent="." instance=ExtResource("2_1ji77")]
 
 [node name="TargetManager" parent="." groups=["target manager"] instance=ExtResource("4_upn1l")]
 

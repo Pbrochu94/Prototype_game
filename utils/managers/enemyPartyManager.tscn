@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dii0fpe0rdidt"]
 
-[ext_resource type="Script" path="res://utils/Managers/enemyPartyManager.gd" id="1_3a0fj"]
+[ext_resource type="Script" path="res://utils/Managers/EnemyPartyManager.gd" id="1_pnopq"]
 
 [node name="EnemyPartyManager" type="Node" groups=["enemy party manager"]]
-script = ExtResource("1_3a0fj")
+script = ExtResource("1_pnopq")
