@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwnvamofd53b"]
+[gd_scene load_steps=12 format=3 uid="uid://dwnvamofd53b"]
 
 [ext_resource type="Script" path="res://Map/world 1/Combat scenes/Scene1/baseCombatScene.gd" id="1_ob25n"]
+[ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/PlayerPartyManager.tscn" id="2_1ji77"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://utils/Managers/TurnManager.tscn" id="2_6240m"]
-[ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/partyManager.tscn" id="2_p8kcl"]
 [ext_resource type="Texture2D" uid="uid://cg4gp8t0q34hr" path="res://Map/world 1/Combat scenes/Environments/top down tileset.png" id="3_ab8et"]
-[ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/enemyPartyManager.tscn" id="3_bwdlj"]
-[ext_resource type="Script" path="res://utils/Managers/partyManager.gd" id="3_vna2a"]
+[ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/EnemyPartyManager.tscn" id="3_ejwsf"]
 [ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_upn1l"]
-[ext_resource type="Script" path="res://utils/Managers/enemyPartyManager.gd" id="5_g5jdf"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_3vrbe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lctde"]
@@ -505,11 +503,9 @@ sources/0 = SubResource("TileSetAtlasSource_xnv3b")
 [node name="CombatScenePrototype" type="Node2D" groups=["combat scene"]]
 script = ExtResource("1_ob25n")
 
-[node name="PartyManager" parent="." instance=ExtResource("2_p8kcl")]
-script = ExtResource("3_vna2a")
+[node name="PlayerPartyManager" parent="." instance=ExtResource("2_1ji77")]
 
-[node name="EnemyPartyManager" parent="." groups=["enemy party manager"] instance=ExtResource("3_bwdlj")]
-script = ExtResource("5_g5jdf")
+[node name="EnemyPartyManager" parent="." instance=ExtResource("3_ejwsf")]
 
 [node name="TargetManager" parent="." groups=["target manager"] instance=ExtResource("4_upn1l")]
 

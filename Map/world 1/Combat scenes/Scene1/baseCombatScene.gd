@@ -4,7 +4,7 @@ extends Node2D
 @onready var playerAnchor = get_node("PlayerAnchor")
 @onready var enemyAnchor = get_node("EnemyAnchor")
 @onready var choiceMenu = $ChoiceMenu
-@onready var playerPartyManager = $PartyManager
+@onready var playerPartyManager = $PlayerPartyManager
 @onready var enemyPartyManager = $EnemyPartyManager
 @onready var summonerAnchor = $SummonerAnchor
 @onready var summonerIntroStartingPoint = $SummonerIntroStart

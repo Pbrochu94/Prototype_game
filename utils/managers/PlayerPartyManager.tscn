@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxu53skii7dxs"]
+
+[ext_resource type="Script" path="res://utils/Managers/PlayerPartyManager.gd" id="1_542gl"]
+
+[node name="PlayerPartyManager" type="Node" groups=["player party manager"]]
+script = ExtResource("1_542gl")
