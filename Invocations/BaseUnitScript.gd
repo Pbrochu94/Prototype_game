@@ -18,7 +18,7 @@ var currentState:String
 var isWalking = false
 var direction:int
 var states:Dictionary
-@export var faction:Faction
+@export var faction:Enum.Faction
 
 #STATS
 @onready var stats:Dictionary = {
@@ -59,10 +59,6 @@ var timers:Dictionary = {
 }
 
 #ENUMS
-enum Faction {
-	ENEMY,
-	SUMMON,
-}
 enum AbilityType {
 	ATTACK,
 	HEAL,
@@ -231,7 +227,7 @@ func getRandomAttack() -> Ability:
 	var random_key = keys[randi() % keys.size()]
 	return attacks[random_key]
 func getInPosition():
-	if faction == Faction.SUMMON:
+	if faction == Enum.Faction.PLAYER:
 		emit_signal("stopSelectingTarget")
 	setState("getinposition")
 func attack(enemyTarget:Node2D,weapon):

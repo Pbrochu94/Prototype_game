@@ -14,6 +14,10 @@ config/name="Prototype_game"
 run/main_scene="res://PrototypeScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
+[autoload]
+
+Enum="*res://utils/Enums/Enum.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

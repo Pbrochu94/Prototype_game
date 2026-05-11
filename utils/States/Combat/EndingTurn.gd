@@ -8,7 +8,7 @@ func _onready():
 func enter():
 	owner.anim.play("idle")
 	#Make the enemy face left and the player face right
-	if owner.faction == owner.Faction.SUMMON:
+	if owner.faction == Enum.Faction.PLAYER:
 		owner.orientSprite(-1)
 	else:
 		owner.orientSprite(1)

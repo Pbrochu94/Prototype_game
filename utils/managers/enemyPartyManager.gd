@@ -48,7 +48,7 @@ func loadRandomTeam():
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
 		var character = allCharacters[3].instantiate()
-		character.faction = character.Faction.ENEMY
+		character.faction = Enum.Faction.ENEMY
 		character.isDowned.connect(onCharacterDeath)
 		aliveCount += 1
 		party.append(character)

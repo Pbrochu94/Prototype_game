@@ -98,7 +98,7 @@ func startTurn():
 		return
 	print("Now playing :", currentlyPlaying.getUnitInfo())
 	currentlyPlaying.reduceTimers()
-	if currentlyPlaying.faction == currentlyPlaying.Faction.SUMMON:
+	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()
 	else:
 		currentlyPlaying.enemyStartTurn()

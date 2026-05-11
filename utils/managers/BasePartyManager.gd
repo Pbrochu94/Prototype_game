@@ -8,13 +8,14 @@ class_name BasePartyManager
 var party:Array[Node2D]
 var aliveCount:int
 var currentlyAliveCharacters:Array[Node2D]
+var partyFaction
 
 #SIGNALS
 signal partyDead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	loadRandomTeam()
+	print(turnManager)
 	connectSignals()
 	currentlyAliveCharacters = party
 
@@ -48,7 +49,16 @@ func loadRandomTeam():
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
 		var character = allCharacters[3].instantiate()
-		character.faction = character.Faction.SUMMON
-		character.isDowned.connect(onCharacterDeath)
-		aliveCount += 1
-		party.append(character)
+		assignUnitFaction(character)
+		addUnitToParty(character)
+		addUnitConnections(character)
+
+func assignUnitFaction(character:Node2D):
+	character.faction = partyFaction
+
+func addUnitToParty(character:Node2D):
+	aliveCount += 1
+	party.append(character)
+
+func addUnitConnections(character:Node2D):
+	character.isDowned.connect(onCharacterDeath)

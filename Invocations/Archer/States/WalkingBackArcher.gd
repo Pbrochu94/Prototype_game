@@ -5,7 +5,7 @@ class_name ArcherWalkingBackState
 func enter():
 	owner.isWalking = true
 	owner.anim.play("walk")
-	if owner.faction == owner.Faction.SUMMON:
+	if owner.faction == Enum.Faction.PLAYER:
 		owner.orientSprite(-1)
 	else:
 		owner.orientSprite(1)
