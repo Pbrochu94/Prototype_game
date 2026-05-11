@@ -58,27 +58,7 @@ var timers:Dictionary = {
 		}
 }
 
-#ENUMS
-enum AbilityType {
-	ATTACK,
-	HEAL,
-	EFFECT
-}
-enum FocusType {
-	SELF,
-	ENEMY,
-	ENEMY_MULTIPLE,
-	ALLY,
-	ALLY_MULTIPLE,
-	AOE
-}
-enum StatusEffect {
-	BUFF,
-	DEBUFF,
-	POISON,
-	BURN,
-	FREEZE
-}
+
 
 #STATUS
 var isDead:bool = false
@@ -180,43 +160,43 @@ func enemyStartTurn():
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
 	match attackSelected.focus:
-		FocusType.ENEMY, FocusType.AOE:
+		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
 			emit_signal("donePreparing")
 			enemyChooseTarget()
-		FocusType.ENEMY_MULTIPLE:
+		Enum.FocusType.ENEMY_MULTIPLE:
 			pass
-		FocusType.ALLY:
+		Enum.FocusType.ALLY:
 			#emit_signal(startSelectingAllyTarget)
 			pass
-		FocusType.ALLY_MULTIPLE:
+		Enum.FocusType.ALLY_MULTIPLE:
 			#emit_signal(startSelectingAllyTarget)
 			pass
-		FocusType.SELF:
+		Enum.FocusType.SELF:
 			target = self
-			if attackSelected.type == AbilityType.HEAL:
+			if attackSelected.type == Enum.AbilityType.HEAL:
 				setState("heal")
-			elif attackSelected.type == AbilityType.EFFECT:
+			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
 	print("Attack selected: ", attackSelected)
-	print("Focus type : ",attackSelected.FocusType.keys()[attackSelected.focus])
+	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focus])
 	match attackSelected.focus:
-		FocusType.ENEMY, FocusType.AOE:
+		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
 			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
-		FocusType.ENEMY_MULTIPLE:
+		Enum.FocusType.ENEMY_MULTIPLE:
 			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
-		FocusType.ALLY:
+		Enum.FocusType.ALLY:
 			#emit_signal(startSelectingAllyTarget)
 			pass
-		FocusType.ALLY_MULTIPLE:
+		Enum.FocusType.ALLY_MULTIPLE:
 			#emit_signal(startSelectingAllyTarget)
 			pass
-		FocusType.SELF:
+		Enum.FocusType.SELF:
 			target = self
-			if attackSelected.type == AbilityType.HEAL:
+			if attackSelected.type == Enum.AbilityType.HEAL:
 				setState("heal")
-			elif attackSelected.type == AbilityType.EFFECT:
+			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
 func enemyChooseTarget():

@@ -32,7 +32,10 @@ func onCharacterDeath(character:Node2D):
 	print("Remaining party characters alive : ", currentlyAliveCharacters)
 	if aliveCount <= 0:
 		turnManager.fightIsOver = true
-		turnManager.playerLost = true
+		if partyFaction == Enum.Faction.PLAYER:
+			turnManager.playerLost = true
+		else:
+			turnManager.playerWon = true
 func outroAnim():
 	for character in currentlyAliveCharacters:
 		character.setState("outro")
@@ -48,7 +51,7 @@ func loadRandomTeam():
 		#Random characters
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
-		var character = allCharacters[3].instantiate()
+		var character = allCharacters[0].instantiate()
 		assignUnitFaction(character)
 		addUnitToParty(character)
 		addUnitConnections(character)

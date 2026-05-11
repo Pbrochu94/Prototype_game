@@ -8,7 +8,7 @@ var target:Node2D
 
 func enter():
 	attackSelected = owner.attackSelected
-	if attackSelected.focus == attackSelected.FocusType.SELF:
+	if attackSelected.focus == Enum.FocusType.SELF:
 		target = owner
 		target.anim.play(attackSelected.attackName.to_lower())
 	else:

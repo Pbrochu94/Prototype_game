@@ -111,10 +111,10 @@ func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
 func unitSelectingEnemyTarget(focusType):
 	match focusType:
-		currentlyPlaying.FocusType.ENEMY, currentlyPlaying.FocusType.AOE:
+		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
 			emit_signal("targetSelectionStarted")
-		currentlyPlaying.FocusType.SELF:
+		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
 	isSelecting = true
 func unitSelectingAllyTarget():

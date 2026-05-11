@@ -8,14 +8,7 @@ var attack:Ability
 var element:String
 var target:Node2D
 
-#ENUMS
-enum AbilityType{
-	ATTACK,
-	HEAL,
-	SELFHEAL,
-	BUFF,
-	DEBUFF
-}
+
 enum StatusEffect {
 	BUFF,
 	DEBUFF,
@@ -32,14 +25,14 @@ func enter():
 	attack = owner.attackSelected
 	element = attack.element
 	match attack.type:
-		AbilityType.ATTACK:
+		Enum.AbilityType.ATTACK:
 			atkStat = owner.stats["atk"]
 			var damageOutput:int = atkStat + attack.damage
 			var attackName:String = attack.attackName
 			owner.anim.play(attackName)
 			print("Character: ", owner, "attacks :", target, " for ", damageOutput, " ", attack.element)
 			target.receiveDamage(damageOutput, element)
-		AbilityType.DEBUFF:
+		Enum.AbilityType.EFFECT:
 			target.applyEffect(attack)
 			print(attack.attackName)
 			player.anim.play(attack.attackName)

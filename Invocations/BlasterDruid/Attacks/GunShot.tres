@@ -5,15 +5,15 @@
 [resource]
 script = ExtResource("1_rhbfw")
 attackName = "gun shot"
-damage = 300
-type = 0
+damage = 20
+type = null
 focus = 1
-healAmount = 0
-cooldown = 0
+healAmount = null
+cooldown = null
 element = "light"
-hitboxName = ""
-statsAffected = Array[String]([])
-effectAmount = 0
+hitboxName = null
+statsAffected = null
+effectAmount = null
 needToMove = true
-effectDuration = 0
-statusEffect = 0
+effectDuration = null
+statusEffect = null

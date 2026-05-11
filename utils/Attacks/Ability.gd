@@ -3,8 +3,8 @@ class_name Ability
 
 @export var attackName: String
 @export var damage: int
-@export var type:AbilityType
-@export var focus:FocusType
+@export var type:Enum.AbilityType
+@export var focus:Enum.FocusType
 @export var healAmount:int
 @export var cooldown: int
 @export var element: String
@@ -19,31 +19,7 @@ class_name Ability
 #@export var spdDebuff:int
 @export var needToMove:bool
 @export var effectDuration:int
-@export var statusEffect:StatusEffect
-enum StatusEffect {
-	BUFF,
-	DEBUFF,
-	POISON,
-	BURN,
-	FREEZE
-}
+@export var statusEffect:Enum.StatusEffect
 
 
-
-
-#ENUMS
-enum AbilityType {
-	ATTACK,
-	HEAL,
-	EFFECT
-}
-
-enum FocusType {
-	SELF,
-	ENEMY,
-	ENEMY_MULTIPLE,
-	ALLY,
-	ALLY_MULTIPLE,
-	AOE
-}
 
