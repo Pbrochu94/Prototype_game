@@ -10,9 +10,11 @@ class_name BaseUnitScript
 @onready var currentCombatScene:Node2D = get_tree().get_first_node_in_group("combat scene") 
 @onready var spriteOrientation:Node2D = $SpritePivot
 @onready var area = $Area2D
-var target:Node2D
+var partyManager:Node
 
 #VARIABLES
+var target:Node2D
+var collateralTargets:Array[Node2D]
 var canBeSelected = false
 var currentState:String
 var isWalking = false
@@ -85,6 +87,7 @@ func _ready():
 	stateMachine.init(self)
 	setState("idle")
 	connectSignals()
+	linkToFactionParty()
 
 #ANIMATIONS & SPRITES
 func onAnimationFinished():
@@ -129,13 +132,14 @@ func walk(delta, destination:Vector2):
 		if global_position == destination:
 			setState("endingturn")
 			isWalking = false
-func receiveDamage(damage:int, element:String):
-	print(characterName," has ", currentHp, " hp before attack ")
-	print(characterName, " receive ", damage, " mitigated by deff: ", stats["deff"])
-	stateMachine.setState(stateMachine.states["hurt"])
-	stats["currentHp"]-= damage - stats["deff"]
-	emit_signal("hpChanged")
-	print(characterName," now have ", stats["currentHp"], " hp after attack ")
+func receiveDamage(attacker,attack, damage):
+		var trueDamage:int = damage - stats["deff"]
+		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage(",attack.damage,")+atk(",attacker.stats["atk"],")) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
+		print(characterName," has ", currentHp, " hp before attack ")
+		stateMachine.setState(stateMachine.states["hurt"])
+		stats["currentHp"]-= trueDamage
+		emit_signal("hpChanged")
+		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack:Ability):
 	for statAffected in attack.statsAffected:
 		var effectApplied = {
@@ -159,17 +163,19 @@ func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
-	match attackSelected.focus:
-		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
+	match attackSelected.focusType:
+		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			emit_signal("donePreparing")
 			enemyChooseTarget()
 		Enum.FocusType.ENEMY_MULTIPLE:
 			pass
-		Enum.FocusType.ALLY:
+		Enum.FocusType.ALLY_SINGLE:
 			#emit_signal(startSelectingAllyTarget)
 			pass
 		Enum.FocusType.ALLY_MULTIPLE:
 			#emit_signal(startSelectingAllyTarget)
+			pass
+		Enum.FocusType.ENEMY_AOE:
 			pass
 		Enum.FocusType.SELF:
 			target = self
@@ -179,14 +185,14 @@ func enemyStartTurn():
 				pass
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
-	print("Attack selected: ", attackSelected)
-	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focus])
-	match attackSelected.focus:
-		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
+	print("Attack selected: ", attackSelected.attackName)
+	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
+	match attackSelected.focusType:
+		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType)
 		Enum.FocusType.ENEMY_MULTIPLE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focus)
-		Enum.FocusType.ALLY:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType)
+		Enum.FocusType.ALLY_SINGLE:
 			#emit_signal(startSelectingAllyTarget)
 			pass
 		Enum.FocusType.ALLY_MULTIPLE:
@@ -266,5 +272,9 @@ func convertPourcentage(baseStat:int, amount:int):
 		return ceil(value)
 	else:
 		return floor(value)
-
+func linkToFactionParty():
+	if faction == Enum.Faction.PLAYER:
+		partyManager = get_tree().get_first_node_in_group("player party manager")
+	else:
+		partyManager = get_tree().get_first_node_in_group("enemy party manager")
 

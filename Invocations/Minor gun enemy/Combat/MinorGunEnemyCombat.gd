@@ -101,7 +101,7 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attack:Attack, element:String):
 	print(characterName," has ", currentHp, " hp before attack ")
-	print(characterName, " receive ", attack.damage, " mitigated by deff: ", stats["deff"])
+#	print(characterName, " receive ", attack.damage, " mitigated by deff: ", stats["deff"])
 	stateMachine.setState(stateMachine.states["hurt"])
 	currentHp-= attack.damage
 	emit_signal("hpChanged")

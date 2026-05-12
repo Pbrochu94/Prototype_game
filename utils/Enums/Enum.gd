@@ -18,9 +18,10 @@ enum StatusEffect {
 }
 enum FocusType {
 	SELF,
-	ENEMY,
+	ENEMY_SINGLE,
 	ENEMY_MULTIPLE,
-	ALLY,
+	ALLY_SINGLE,
 	ALLY_MULTIPLE,
-	AOE
+	ENEMY_AOE,
+	ALLY_AOE
 }

@@ -6,7 +6,15 @@
 script = ExtResource("1_kay38")
 attackName = "gun shot"
 damage = 1
-range = false
+type = 0
+focus = null
+healAmount = 0
 cooldown = 0
 element = "light"
 hitboxName = ""
+statsAffected = Array[String]([])
+effectAmount = 0
+needToMove = false
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0

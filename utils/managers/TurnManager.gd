@@ -87,7 +87,7 @@ func updateCurrentlyPlaying():
 		index = 0
 	currentlyPlaying = playOrder[index]
 	if currentlyPlaying.isDead:
-		print("Character :", currentlyPlaying, " is downed")
+		print("Character :", currentlyPlaying.characterName, " is downed")
 		updateCurrentlyPlaying()
 	else:
 		pass
@@ -111,7 +111,7 @@ func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
 func unitSelectingEnemyTarget(focusType):
 	match focusType:
-		Enum.FocusType.ENEMY, Enum.FocusType.AOE:
+		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
 			emit_signal("targetSelectionStarted")
 		Enum.FocusType.SELF:
@@ -128,9 +128,12 @@ func endSelection():
 		targetManager.selectionEnded()
 func playerAttack(enemy:Node2D):
 	enemy.canBeSelected = false
-	print("Player move to attack", enemy)
+	print("Player move to attack", enemy.characterName)
 	#Assign the enemy selected in player node
 	currentlyPlaying.target = enemy
+#	if currentlyPlaying.attackSelected.focus == Enum.FocusType.ENEMY_AOE:
+#		for teamate in currentlyPlaying.party:
+#			currentlyPlaying.collateralTargets.append(teamate)
 	currentlyPlaying.getInPosition()
 func endTurn():
 	if fightIsOver:

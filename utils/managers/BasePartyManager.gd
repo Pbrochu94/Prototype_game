@@ -17,7 +17,7 @@ signal partyDead
 func _ready():
 	print(turnManager)
 	connectSignals()
-	currentlyAliveCharacters = party
+
 
 #INIT
 func connectSignals():
@@ -47,7 +47,9 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
 func loadRandomTeam():
-	for i in range(1):
+	var characterCount = 0
+	for i in range(3):
+		characterCount += 1
 		#Random characters
 #		var character = allCharacters.pick_random().instantiate()
 		#Specific character to test
@@ -55,6 +57,11 @@ func loadRandomTeam():
 		assignUnitFaction(character)
 		addUnitToParty(character)
 		addUnitConnections(character)
+		if character.faction == Enum.Faction.PLAYER:
+			character.characterName += " summon "
+		else:
+			character.characterName += " enemy "
+		character.characterName += str(characterCount)
 
 func assignUnitFaction(character:Node2D):
 	character.faction = partyFaction
@@ -62,6 +69,13 @@ func assignUnitFaction(character:Node2D):
 func addUnitToParty(character:Node2D):
 	aliveCount += 1
 	party.append(character)
+	currentlyAliveCharacters.append(character)
 
 func addUnitConnections(character:Node2D):
 	character.isDowned.connect(onCharacterDeath)
+
+func getPartyInfo():
+	var infoArray:Array
+	for unit in party:
+		infoArray.append(unit.getUnitInfo)
+	return infoArray

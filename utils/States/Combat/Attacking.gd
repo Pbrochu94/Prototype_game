@@ -2,20 +2,11 @@ extends State
 class_name AttackingState
 
 #VARIABLES
-@onready var player = owner
+@onready var unit = owner
 var atkStat:int
 var attack:Ability
 var element:String
 var target:Node2D
-
-
-enum StatusEffect {
-	BUFF,
-	DEBUFF,
-	POISON,
-	BURN,
-	FREEZE
-}
 
 func _onready():
 	pass
@@ -24,18 +15,27 @@ func enter():
 	target = owner.target
 	attack = owner.attackSelected
 	element = attack.element
+	var attackName:String = attack.attackName
 	match attack.type:
+		#IF ATTACK
 		Enum.AbilityType.ATTACK:
-			atkStat = owner.stats["atk"]
+			var atkStat = owner.stats["atk"]
 			var damageOutput:int = atkStat + attack.damage
-			var attackName:String = attack.attackName
 			owner.anim.play(attackName)
-			print("Character: ", owner, "attacks :", target, " for ", damageOutput, " ", attack.element)
-			target.receiveDamage(damageOutput, element)
+			target.receiveDamage(owner,attack,damageOutput)
+			#IF ATTACK HAS AOE SPLASH DAMAGE
+			if attack.focusType == Enum.FocusType.ENEMY_AOE:
+				print("SPLASH DAMAGE")
+				for ally in target.partyManager.currentlyAliveCharacters:
+					if ally != target:
+						var splashDamage = attack.splashDamage + atkStat
+						ally.receiveDamage(owner,attack,splashDamage)
+						print(ally.characterName, " received ", attack.splashDamage, " of splash damage")
+						print(ally, " stats after AOE: ", ally.getUnitInfo())
 		Enum.AbilityType.EFFECT:
 			target.applyEffect(attack)
 			print(attack.attackName)
-			player.anim.play(attack.attackName)
+			unit.anim.play(attack.attackName)
 
 
 func update(delta):
