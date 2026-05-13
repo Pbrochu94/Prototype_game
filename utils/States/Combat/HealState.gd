@@ -5,9 +5,19 @@ var attackSelected:Ability
 var characterMaxHp:int
 var characterCurrentHp:int
 var target:Node2D
+var attackName:String
+var attacksDict:Dictionary
 
 func enter():
 	attackSelected = owner.attackSelected
+	attackName = attackSelected.attackName
+	attacksDict = owner.attacks
+	if attacksDict[attackName]["cooldown"] >  0:
+		var cooldown:int = attacksDict[attackName]["cooldown"]
+		print(attackName, " goes on a ", cooldown, " turn cooldown")
+		attacksDict[attackName]["currentCooldown"] = cooldown
+		attacksDict[attackName]["justUsed"] = true
+		print(attacksDict[attackName])
 	if attackSelected.focusType == Enum.FocusType.SELF:
 		target = owner
 		target.anim.play(attackSelected.attackName.to_lower())

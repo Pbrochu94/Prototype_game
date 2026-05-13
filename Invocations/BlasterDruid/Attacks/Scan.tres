@@ -6,10 +6,9 @@
 script = ExtResource("1_mun8g")
 attackName = "instability scan"
 damage = 0
-type = 4
+type = 2
 focusType = 1
 healAmount = 0
-cooldown = 0
 element = ""
 hitboxName = ""
 statsAffected = Array[String](["deff"])
@@ -18,3 +17,5 @@ needToMove = false
 effectDuration = 3
 statusEffect = 1
 splashDamage = 0
+cooldown = 0
+currentCooldown = 0

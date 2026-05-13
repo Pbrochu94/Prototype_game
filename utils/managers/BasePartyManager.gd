@@ -53,9 +53,9 @@ func loadRandomTeam():
 			for i in range(1):
 				characterCount += 1
 				#Random characters
-#				var character = allCharacters.pick_random().instantiate()
+				var character = allCharacters.pick_random().instantiate()
 				#Specific character to test
-				var character = allCharacters[0].instantiate()
+#				var character = allCharacters[0].instantiate()
 				assignUnitFaction(character)
 				addUnitToParty(character)
 				addUnitConnections(character)
@@ -68,9 +68,9 @@ func loadRandomTeam():
 			for i in range(1):
 				characterCount += 1
 				#Random characters
-#				var character = allCharacters.pick_random().instantiate()
+				var character = allCharacters.pick_random().instantiate()
 				#Specific character to test
-				var character = allCharacters[0].instantiate()
+#				var character = allCharacters[0].instantiate()
 				assignUnitFaction(character)
 				addUnitToParty(character)
 				addUnitConnections(character)

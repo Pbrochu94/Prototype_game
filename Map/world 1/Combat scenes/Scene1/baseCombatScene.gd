@@ -33,10 +33,6 @@ func _ready():
 	initSummoner()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func initPlayerPartyData():
 	for i in range(playerPartyManager.party.size()):
 		var invocation = playerPartyManager.party[i]

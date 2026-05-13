@@ -653,7 +653,7 @@ atk = 20
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(9, 0)
 sprite_frames = SubResource("SpriteFrames_fax0j")
-animation = &"outro"
+animation = &"idle"
 
 [node name="Area2D" type="Area2D" parent="."]
 

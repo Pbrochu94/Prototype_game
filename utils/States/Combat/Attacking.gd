@@ -2,7 +2,6 @@ extends State
 class_name AttackingState
 
 #VARIABLES
-@onready var unit = owner
 var atkStat:int
 var attackSelected:Ability
 var attackName:String
@@ -18,10 +17,10 @@ func enter():
 	target = owner.target
 	attackSelected = owner.attackSelected
 	attackName = attackSelected.attackName
-	attacksDict = unit.attacks
+	attacksDict = owner.attacks
 	element = attackSelected.element
 	var attackName:String = attackSelected.attackName
-	if attacksDict[attackName]["cooldown"] > 0:
+	if attacksDict[attackName]["cooldown"] >  0:
 		var cooldown:int = attacksDict[attackName]["cooldown"]
 		print(attackName, " goes on a ", cooldown, " turn cooldown")
 		attacksDict[attackName]["currentCooldown"] = cooldown
@@ -46,7 +45,7 @@ func enter():
 		Enum.AbilityType.EFFECT:
 			target.applyEffect(attackSelected)
 			print(attackSelected.attackName)
-			unit.anim.play(attackSelected.attackName)
+			owner.anim.play(attackSelected.attackName)
 
 
 func update(delta):

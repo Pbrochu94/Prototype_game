@@ -8,8 +8,18 @@ func _ready():
 
 func initAttacks():
 	attacks = {
-	"bow shot" : preload("res://Invocations/Archer/Attacks/BowShot.tres"),
-	"power bow shot" : preload("res://Invocations/Archer/Attacks/BowPowerShot.tres")
+	"bow shot" : {
+		"path":preload("res://Invocations/Archer/Attacks/BowShot.tres"),
+		"cooldown": 0,
+		"currentCooldown":0,
+		"justUsed": false
+		},
+	"bow power shot" : {
+		"path":preload("res://Invocations/Archer/Attacks/BowPowerShot.tres"),
+		"cooldown": 3,
+		"currentCooldown":0,
+		"justUsed": false
+		}
 	}
 
 func initStats():
