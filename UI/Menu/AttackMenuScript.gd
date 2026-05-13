@@ -5,6 +5,8 @@ extends Control
 @onready var attackBtn = $ColorRect/Attack
 @onready var skillBtn = $ColorRect/Skill
 @onready var closeBtn = $ColorRect/Close
+var choiceMenuParent:Control
+var currentlyPlayingUnit:Node2D
 
 #SINGALS
 signal attackSelected(attackIndex:int)
@@ -20,12 +22,12 @@ func _process(delta):
 	pass
 
 func connectSignals():
-	
 	attackBtn.pressed.connect(onAttackSelected)
 	skillBtn.pressed.connect(onSkillSelected)
 	closeBtn.pressed.connect(close)
 
 func open():
+	currentlyPlayingUnit = choiceMenuParent.currentlyPlayingUnit
 	self.visible = true
 	for child in self.get_children():
 		child.visible = true
@@ -37,7 +39,15 @@ func close():
 	emit_signal("cancelSelection")
 
 func onAttackSelected():
-	emit_signal("attackSelected", 0)
+	var atkKey = currentlyPlayingUnit.attacks.keys()[0]
+	if currentlyPlayingUnit.attacks[atkKey]["currentCooldown"]>0:
+		print("Ability ", currentlyPlayingUnit.attacks.keys()[0], " on cd!")
+	else:
+		emit_signal("attackSelected", 0)
 
 func onSkillSelected():
-	emit_signal("attackSelected", 1)
+	var atkKey = currentlyPlayingUnit.attacks.keys()[1]
+	if currentlyPlayingUnit.attacks[atkKey]["currentCooldown"]>0:
+		print("Ability ", currentlyPlayingUnit.attacks.keys()[1], " on cd!")
+	else:
+		emit_signal("attackSelected", 1)

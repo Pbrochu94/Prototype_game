@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://UI/Menu/AttackMenuScript.gd" id="2_l8onr"]
 [ext_resource type="Script" path="res://UI/Menu/SpellMenuScript.gd" id="3_tcxpq"]
 
-[node name="combatMenu" type="Control"]
+[node name="CombatMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

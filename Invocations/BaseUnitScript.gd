@@ -185,7 +185,7 @@ func enemyStartTurn():
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
-	attackSelected = attacks.values()[index]
+	attackSelected = attacks.values()[index]["path"]
 	print("Attack selected: ", attackSelected.attackName)
 	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
 	match attackSelected.focusType:
@@ -210,9 +210,15 @@ func enemyChooseTarget():
 	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
 	print("Chosen target: ", target)
 func getRandomAttack() -> Ability:
+	var availableAtk = []
+	for attackName in attacks:
+		var attack = attacks[attackName]
+		if attack["currentCooldown"] <= 0 :
+			availableAtk.append(attack)
+	print(availableAtk)
 	var keys = attacks.keys()
-	var random_key = keys[randi() % keys.size()]
-	return attacks[random_key]
+	var randomAtk = availableAtk.pick_random()
+	return randomAtk["path"]
 func getInPosition():
 	if faction == Enum.Faction.PLAYER:
 		emit_signal("stopSelectingTarget")
@@ -267,10 +273,11 @@ func reduceTimers():
 			stats[effect["stat"]] -= effect["amount"]
 			activeEffects.erase(effect)
 	for attack in attacks:
+		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:
+			attacks[attack]["currentCooldown"] -= 1
+			print("attack: ",attack," cd = ", attacks[attack]["currentCooldown"])
 		print(attacks[attack])
-		if attacks[attack].currentCooldown > 0:
-			attacks[attack].currentCooldown -= 1
-			print("attack: ",attacks[attack].attackName," cd = ", attacks[attack].currentCooldown)
+		attacks[attack]["justUsed"] = false
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100
 	var value:float = baseStat * amountInPercent

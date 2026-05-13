@@ -9,9 +9,8 @@ extends Control
 @onready var attackMenu = $ChoiceMenu/SubMenus/AttackMenu
 @onready var itemMenu = $ChoiceMenu/SubMenus/ItemMenu
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
-
 var turnManager:Node
-
+var currentlyPlayingUnit:Node2D
 #SIGNALS
 signal selectionCancelled
 
@@ -28,6 +27,7 @@ func _process(delta):
 
 
 func openAttackMenu():
+	$ChoiceMenu/SubMenus/AttackMenu.choiceMenuParent = self
 	subMenuParent.visible = true
 	itemMenu.visible = false
 	spellMenu.visible = false
@@ -35,10 +35,12 @@ func openAttackMenu():
 
 
 func openInventoryMenu():
+#	$ChoiceMenu/SubMenus/InventoryMenu.choiceMenuParent = self
 	emit_signal("actionSelected", "inventory")
 
 
 func openSpellMenu():
+	$ChoiceMenu/SubMenus/SpellMenu.choiceMenuParent = self
 	subMenuParent.visible = true
 	itemMenu.visible = false
 	attackMenu.visible = false
@@ -53,6 +55,7 @@ func connectSignals():
 	spellMenu.cancelSelection.connect(cancelSelection)
 
 func open():
+	currentlyPlayingUnit = turnManager.currentlyPlaying
 	self.visible = true
 	subMenuParent.visible = false
 

@@ -4,41 +4,49 @@ class_name AttackingState
 #VARIABLES
 @onready var unit = owner
 var atkStat:int
-var attack:Ability
+var attackSelected:Ability
+var attackName:String
+var attacksDict:Dictionary
 var element:String
 var target:Node2D
+
 
 func _onready():
 	pass
 
 func enter():
 	target = owner.target
-	attack = owner.attackSelected
-	element = attack.element
-	var attackName:String = attack.attackName
-	if attack.cooldown > 0:
-		print(attackName, " goes on a ", attack.cooldown, " turn cooldown")
-		attack.currentCooldown = attack.cooldown
-	match attack.type:
+	attackSelected = owner.attackSelected
+	attackName = attackSelected.attackName
+	attacksDict = unit.attacks
+	element = attackSelected.element
+	var attackName:String = attackSelected.attackName
+	if attacksDict[attackName]["cooldown"] > 0:
+		var cooldown:int = attacksDict[attackName]["cooldown"]
+		print(attackName, " goes on a ", cooldown, " turn cooldown")
+		attacksDict[attackName]["currentCooldown"] = cooldown
+		attacksDict[attackName]["justUsed"] = true
+		print(attacksDict[attackName])
+	match attackSelected.type:
 		#IF ATTACK
 		Enum.AbilityType.ATTACK:
 			var atkStat = owner.stats["atk"]
-			var damageOutput:int = atkStat + attack.damage
+			var damageOutput:int = atkStat + attackSelected.damage
 			owner.anim.play(attackName)
-			target.receiveDamage(owner,attack,damageOutput)
+			target.receiveDamage(owner,attackSelected,damageOutput)
 			#IF ATTACK HAS AOE SPLASH DAMAGE
-			if attack.focusType == Enum.FocusType.ENEMY_AOE:
+			if attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
 				print("SPLASH DAMAGE")
 				for ally in target.partyManager.currentlyAliveCharacters:
 					if ally != target:
-						var splashDamage = attack.splashDamage + atkStat
-						ally.receiveDamage(owner,attack,splashDamage)
-						print(ally.characterName, " received ", attack.splashDamage, " of splash damage")
+						var splashDamage = attackSelected.splashDamage + atkStat
+						ally.receiveDamage(owner,attackSelected,splashDamage)
+						print(ally.characterName, " received ", attackSelected.splashDamage, " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 		Enum.AbilityType.EFFECT:
-			target.applyEffect(attack)
-			print(attack.attackName)
-			unit.anim.play(attack.attackName)
+			target.applyEffect(attackSelected)
+			print(attackSelected.attackName)
+			unit.anim.play(attackSelected.attackName)
 
 
 func update(delta):
