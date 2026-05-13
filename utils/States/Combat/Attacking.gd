@@ -16,6 +16,9 @@ func enter():
 	attack = owner.attackSelected
 	element = attack.element
 	var attackName:String = attack.attackName
+	if attack.cooldown > 0:
+		print(attackName, " goes on a ", attack.cooldown, " turn cooldown")
+		attack.currentCooldown = attack.cooldown
 	match attack.type:
 		#IF ATTACK
 		Enum.AbilityType.ATTACK:

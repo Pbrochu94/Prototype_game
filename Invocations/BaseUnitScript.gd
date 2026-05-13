@@ -40,6 +40,7 @@ var states:Dictionary
 @export var deff:int
 @export var atk:int
 var activeEffects:Array[Dictionary] = []
+var abilityCooldown:int
 
 #TIMERS
 var timers:Dictionary = {
@@ -134,7 +135,7 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attacker,attack, damage):
 		var trueDamage:int = damage - stats["deff"]
-		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage(",attack.damage,")+atk(",attacker.stats["atk"],")) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
+		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
 		print(characterName," has ", currentHp, " hp before attack ")
 		stateMachine.setState(stateMachine.states["hurt"])
 		stats["currentHp"]-= trueDamage
@@ -265,6 +266,11 @@ func reduceTimers():
 		else: 
 			stats[effect["stat"]] -= effect["amount"]
 			activeEffects.erase(effect)
+	for attack in attacks:
+		print(attacks[attack])
+		if attacks[attack].currentCooldown > 0:
+			attacks[attack].currentCooldown -= 1
+			print("attack: ",attacks[attack].attackName," cd = ", attacks[attack].currentCooldown)
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100
 	var value:float = baseStat * amountInPercent

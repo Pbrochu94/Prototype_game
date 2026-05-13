@@ -48,20 +48,38 @@ var allCharacters:Array[PackedScene] = [
 ]
 func loadRandomTeam():
 	var characterCount = 0
-	for i in range(3):
-		characterCount += 1
-		#Random characters
-#		var character = allCharacters.pick_random().instantiate()
-		#Specific character to test
-		var character = allCharacters[0].instantiate()
-		assignUnitFaction(character)
-		addUnitToParty(character)
-		addUnitConnections(character)
-		if character.faction == Enum.Faction.PLAYER:
-			character.characterName += " summon "
-		else:
-			character.characterName += " enemy "
-		character.characterName += str(characterCount)
+	match partyFaction:
+		Enum.Faction.PLAYER:
+			for i in range(1):
+				characterCount += 1
+				#Random characters
+#				var character = allCharacters.pick_random().instantiate()
+				#Specific character to test
+				var character = allCharacters[0].instantiate()
+				assignUnitFaction(character)
+				addUnitToParty(character)
+				addUnitConnections(character)
+				if character.faction == Enum.Faction.PLAYER:
+					character.characterName += " summon "
+				else:
+					character.characterName += " enemy "
+				character.characterName += str(characterCount)
+		Enum.Faction.ENEMY:
+			for i in range(1):
+				characterCount += 1
+				#Random characters
+#				var character = allCharacters.pick_random().instantiate()
+				#Specific character to test
+				var character = allCharacters[0].instantiate()
+				assignUnitFaction(character)
+				addUnitToParty(character)
+				addUnitConnections(character)
+				if character.faction == Enum.Faction.PLAYER:
+					character.characterName += " summon "
+				else:
+					character.characterName += " enemy "
+				character.characterName += str(characterCount)
+	
 
 func assignUnitFaction(character:Node2D):
 	character.faction = partyFaction
