@@ -15,6 +15,19 @@ extends Node2D
 var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
+var allSpell:Dictionary={
+	"fire ball" = {
+		"path": preload("res://Summoner/Spells/FireBall.tres"),
+		"cooldown":3,
+		"currentCooldown":0
+	},
+		"shield" = {
+		"path": preload("res://Summoner/Spells/FireBall.tres"),
+		"cooldown":3,
+		"currentCooldown":0
+	}
+}
+var learnedSpells:Dictionary
 
 #BOOLEANS
 var isWalking = false
@@ -26,11 +39,6 @@ signal introAnimCompleted
 func _ready():
 	stateMachine.init(self)
 	setState("intro")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func walk(delta, destination:Vector2):
 	if not isWalking:
@@ -52,3 +60,5 @@ func onFinishedIntro():
 #UTILS
 func setState(newState:String):
 	stateMachine.setState(states[newState])
+func addNewSpell(newSpell:SummonerSpell):
+	learnedSpells[newSpell.spellName] = newSpell

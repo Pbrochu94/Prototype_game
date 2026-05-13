@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SummonerSpell" load_steps=2 format=3 uid="uid://ns8utjudnhoo"]
+
+[ext_resource type="Script" path="res://utils/Attacks/SummonerSpell.gd" id="1_0u7j2"]
+
+[resource]
+script = ExtResource("1_0u7j2")
+spellName = "fire ball"
+damage = 100
+type = 0
+focusType = 1
+healAmount = 0
+element = "fire"
+hitboxName = ""
+statsAffected = Array[String]([])
+effectAmount = 0
+needToMove = false
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0
+cooldown = 5
+currentCooldown = 0

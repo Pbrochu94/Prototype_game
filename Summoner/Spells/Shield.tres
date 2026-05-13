@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SummonerSpell" load_steps=2 format=3 uid="uid://53k5etu0lprv"]
+
+[ext_resource type="Script" path="res://utils/Attacks/SummonerSpell.gd" id="1_4ovp4"]
+
+[resource]
+script = ExtResource("1_4ovp4")
+spellName = "shield"
+damage = 0
+type = 1
+focusType = 3
+healAmount = 0
+element = ""
+hitboxName = ""
+statsAffected = Array[String]([])
+effectAmount = 0
+needToMove = false
+effectDuration = 3
+statusEffect = 0
+splashDamage = 0
+cooldown = 5
+currentCooldown = 0

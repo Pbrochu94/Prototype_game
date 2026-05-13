@@ -5,6 +5,7 @@ extends Control
 @onready var shieldBtn = $ColorRect/ShieldBtn
 @onready var fireballBtn = $ColorRect/FireballBtn
 @onready var closeBtn = $ColorRect/Close
+var choiceMenuParent:Control
 
 #SIGNALS
 signal spellSelected(spellIndex:int)

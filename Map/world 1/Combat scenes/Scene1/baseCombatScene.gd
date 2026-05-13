@@ -32,7 +32,6 @@ func _ready():
 	turnManager.currentCombatScene = combatScene
 	initSummoner()
 
-
 func initPlayerPartyData():
 	for i in range(playerPartyManager.party.size()):
 		var invocation = playerPartyManager.party[i]

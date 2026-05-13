@@ -10,6 +10,7 @@ enum AbilityType {
 	EFFECT
 }
 enum StatusEffect {
+	NONE,
 	BUFF,
 	DEBUFF,
 	POISON,
@@ -24,4 +25,8 @@ enum FocusType {
 	ALLY_MULTIPLE,
 	ENEMY_AOE,
 	ALLY_AOE
+}
+enum SpellType{
+	ATTACK,
+	EFFECT
 }
