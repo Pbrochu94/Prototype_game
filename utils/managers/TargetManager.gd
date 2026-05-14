@@ -48,9 +48,15 @@ func enemyUnhovered(enemy:Node2D):
 		currentHovered = null
 		selectingArrow.visible = false
 func enemySelected(enemy:Node2D):
-	targets.append(enemy)
-	if targets.size() == nmbOfTargetToSelect:
-		turnManager.playerAttack(enemy)
+	var unitSelectable = enemy.partyManager.currentlyAliveCharacters
+	if enemy not in targets and not enemy.isDead:
+		targets.append(enemy)
+		print("selected ",enemy)
+		if targets.size() == nmbOfTargetToSelect:
+			turnManager.playerAttack(enemy)
+	elif enemy in targets:
+		print("enemy already selected or dead")
+
 
 #SELECTION FLOW
 func startSelection(nmbOftarget):
