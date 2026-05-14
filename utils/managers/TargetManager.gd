@@ -12,6 +12,7 @@ var currentIndex:int = 0
 var currentHovered:Node2D = null
 var nmbOfTargetToSelect:int
 var targets:Array[Node2D]
+var nmbOfAvailableTargets:int
 
 
 func _ready():
@@ -48,20 +49,24 @@ func enemyUnhovered(enemy:Node2D):
 		currentHovered = null
 		selectingArrow.visible = false
 func enemySelected(enemy:Node2D):
-	var unitSelectable = enemy.partyManager.currentlyAliveCharacters
 	if enemy not in targets and not enemy.isDead:
 		targets.append(enemy)
+		nmbOfAvailableTargets -= 1
 		print("selected ",enemy)
+		print("Player can select ", nmbOfAvailableTargets, " targets")
 		if targets.size() == nmbOfTargetToSelect:
 			turnManager.playerAttack(enemy)
+			targets.clear()
 	elif enemy in targets:
 		print("enemy already selected or dead")
 
 
 #SELECTION FLOW
 func startSelection(nmbOftarget):
+	var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
 	nmbOfTargetToSelect = nmbOftarget
-	print(nmbOfTargetToSelect)
+	nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+	print("Player can select ", nmbOfAvailableTargets, " targets")
 	for enemy in enemies:
 		enemy.canBeSelected = true
 		print(enemy, enemy.canBeSelected)
