@@ -107,6 +107,10 @@ func chooseAction():
 	print("Player is choosing what to do...")
 func onSpellSelected(spellIndex:int):
 	print("ENDDD")
+	var spellName = summoner.spells[spellIndex]
+	var spellSelected = summoner.spells[spellName]
+	unitSelectingEnemyTarget(spellSelected.focusType)
+	summoner.castSpell(spellIndex)
 func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
 func unitSelectingEnemyTarget(focusType):

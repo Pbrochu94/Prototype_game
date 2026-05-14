@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SummonerSpell" load_steps=2 format=3 uid="uid://53k5etu0lprv"]
 
-[ext_resource type="Script" path="res://utils/Attacks/SummonerSpell.gd" id="1_4ovp4"]
+[ext_resource type="Script" path="res://utils/Attacks/SummonerSpell.gd" id="1_r13uv"]
 
 [resource]
-script = ExtResource("1_4ovp4")
+script = ExtResource("1_r13uv")
 spellName = "shield"
 damage = 0
 type = 1

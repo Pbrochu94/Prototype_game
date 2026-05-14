@@ -17,12 +17,12 @@ var startingPosition:Vector2
 var states:Dictionary
 var allSpell:Dictionary={
 	"fire ball" = {
-		"path": preload("res://Summoner/Spells/FireBall.tres"),
+		"path": preload("res://Summoner/Spells/FireBall/FireBall.tres"),
 		"cooldown":3,
 		"currentCooldown":0
 	},
 		"shield" = {
-		"path": preload("res://Summoner/Spells/FireBall.tres"),
+		"path": preload("res://Summoner/Spells/Shield/Shield.tres"),
 		"cooldown":3,
 		"currentCooldown":0
 	}
@@ -40,6 +40,7 @@ func _ready():
 	stateMachine.init(self)
 	setState("intro")
 
+#BEHAVIOR
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
@@ -49,6 +50,9 @@ func walk(delta, destination:Vector2):
 		onFinishedIntro()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
+func castSpell(spellIndex:int):
+	
+#	print("Summoner cast ",spell.spellName, " on ", target.characterName)
 
 #TURN FLOW
 func playIntro():
