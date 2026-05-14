@@ -16,7 +16,7 @@ class_name SummonerSpell
 @export var splashDamage:int
 @export var cooldown: int
 @export var currentCooldown:int
-#@export var anim:
+@export var numberOfTargets:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

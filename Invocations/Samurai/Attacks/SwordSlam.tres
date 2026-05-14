@@ -9,6 +9,7 @@ damage = 30
 type = 0
 focusType = 5
 healAmount = 0
+numberOfTargets = 1
 element = "light"
 hitboxName = ""
 statsAffected = Array[String]([])

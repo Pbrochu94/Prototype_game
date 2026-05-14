@@ -19,7 +19,7 @@ var fightIsOver:bool = false
 
 #SIGNALS
 signal turnEnded
-signal targetSelectionStarted
+signal targetSelectionStarted(nmbOfTarget:int)
 signal selectionCompleted
 signal playOutroAnim
 
@@ -109,17 +109,19 @@ func onSpellSelected(spellIndex:int):
 	print("ENDDD")
 	var spellName = summoner.spells[spellIndex]
 	var spellSelected = summoner.spells[spellName]
-	unitSelectingEnemyTarget(spellSelected.focusType)
+	unitSelectingEnemyTarget(spellSelected.focusType,spellSelected.nmbOfTargets)
 	summoner.castSpell(spellIndex)
 func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
-func unitSelectingEnemyTarget(focusType):
+func unitSelectingEnemyTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
-			emit_signal("targetSelectionStarted")
+			emit_signal("targetSelectionStarted", 1)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
+		Enum.FocusType.ENEMY_MULTIPLE:
+			emit_signal("targetSelectionStarted", nmbOfTargets)
 	isSelecting = true
 func unitSelectingAllyTarget():
 	pass

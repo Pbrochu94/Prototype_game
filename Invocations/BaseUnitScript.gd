@@ -14,6 +14,7 @@ var partyManager:Node
 
 #VARIABLES
 var target:Node2D
+var multipleTargets:Array[Node2D]
 var collateralTargets:Array[Node2D]
 var canBeSelected = false
 var currentState:String
@@ -80,6 +81,7 @@ signal hovered(character)
 signal unhovered(character)
 signal enemySelected(enemy:Node2D)
 signal donePreparing
+signal clickedOn(unit:Node2D)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -192,7 +194,7 @@ func onChosenAttack(index:int):
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			emit_signal("startSelectingEnemyTarget", attackSelected.focusType)
 		Enum.FocusType.ENEMY_MULTIPLE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focusType)
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, attackSelected.numberOfTargets)
 		Enum.FocusType.ALLY_SINGLE:
 			#emit_signal(startSelectingAllyTarget)
 			pass
@@ -254,7 +256,7 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 	if not canBeSelected:
 		return
 	if event is InputEventMouseButton and event.pressed:
-		emit_signal("enemySelected",self)
+		emit_signal("clickedOn", self)
 
 #UTILS
 func setState(newState:String):

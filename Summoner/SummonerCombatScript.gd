@@ -51,7 +51,7 @@ func walk(delta, destination:Vector2):
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(spellIndex:int):
-	
+	pass
 #	print("Summoner cast ",spell.spellName, " on ", target.characterName)
 
 #TURN FLOW

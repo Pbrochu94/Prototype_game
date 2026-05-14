@@ -19,3 +19,4 @@ statusEffect = 0
 splashDamage = 0
 cooldown = 5
 currentCooldown = 0
+numberOfTargets = 1

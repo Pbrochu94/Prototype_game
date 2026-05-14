@@ -6,7 +6,7 @@ class_name Ability
 @export var type:Enum.AbilityType
 @export var focusType:Enum.FocusType
 @export var healAmount:int
-
+@export var numberOfTargets:int
 @export var element: String
 @export var hitboxName:String
 @export var statsAffected:Array[String]

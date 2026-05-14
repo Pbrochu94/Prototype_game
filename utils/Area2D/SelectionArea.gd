@@ -7,18 +7,11 @@ var playerIsSelectingTarget
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 #INPUT LISTENERS
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 			if playerIsSelectingTarget:
 				pass
-
 
 
 #CHECKS
