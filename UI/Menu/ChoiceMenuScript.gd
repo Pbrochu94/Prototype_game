@@ -9,6 +9,7 @@ extends Control
 @onready var attackMenu = $ChoiceMenu/SubMenus/AttackMenu
 @onready var itemMenu = $ChoiceMenu/SubMenus/ItemMenu
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
+@onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
 var currentlyPlayingUnit:Node2D
 #SIGNALS
@@ -19,11 +20,6 @@ func _ready():
 	self.visible = false
 	connectSignals()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func openAttackMenu():
@@ -51,8 +47,8 @@ func connectSignals():
 	attackBtn.pressed.connect(openAttackMenu)
 	inventoryBtn.pressed.connect(openInventoryMenu)
 	spellBtn.pressed.connect(openSpellMenu)
-	attackMenu.cancelSelection.connect(cancelSelection)
 	spellMenu.cancelSelection.connect(cancelSelection)
+	targetManager.selectionEnd.connect(close)
 
 func open():
 	currentlyPlayingUnit = turnManager.currentlyPlaying

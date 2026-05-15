@@ -10,16 +10,10 @@ var currentlyPlayingUnit:Node2D
 
 #SINGALS
 signal attackSelected(attackIndex:int)
-signal cancelSelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connectSignals()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func connectSignals():
 	attackBtn.pressed.connect(onAttackSelected)
@@ -36,7 +30,8 @@ func close():
 	self.visible = false
 	for child in attackMenu.get_children():
 		child.visible = false
-	emit_signal("cancelSelection")
+	choiceMenuParent.targetManager.cancelSelection()
+#	emit_signal("cancelSelection")
 
 func onAttackSelected():
 	var atkKey = currentlyPlayingUnit.attacks.keys()[0]

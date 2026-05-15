@@ -13,6 +13,10 @@ var currentHovered:Node2D = null
 var nmbOfTargetToSelect:int
 var targets:Array[Node2D]
 var nmbOfAvailableTargets:int
+var isActive:bool= false
+
+signal selectionEnd
+
 
 
 func _ready():
@@ -54,26 +58,33 @@ func enemySelected(enemy:Node2D):
 		nmbOfAvailableTargets -= 1
 		print("selected ",enemy)
 		print("Player can select ", nmbOfAvailableTargets, " targets")
-		if targets.size() == nmbOfTargetToSelect:
-			turnManager.playerAttack(enemy)
-			targets.clear()
 	elif enemy in targets:
 		print("enemy already selected or dead")
+	if nmbOfAvailableTargets <= 0:
+		endSelection()
 
 
 #SELECTION FLOW
-func startSelection(nmbOftarget):
+func startSelection(nmbOfTarget):
+	nmbOfTargetToSelect = nmbOfTarget
 	var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
-	nmbOfTargetToSelect = nmbOftarget
 	nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 	print("Player can select ", nmbOfAvailableTargets, " targets")
 	for enemy in enemies:
 		enemy.canBeSelected = true
 		print(enemy, enemy.canBeSelected)
-func selectionEnded():
+func cancelSelection():
 	for enemy in enemies:
 		enemy.canBeSelected = false
 	selectingArrow.visible = false
+	targets.clear()
+func endSelection():
+	for enemy in enemies:
+		enemy.canBeSelected = false
+	selectingArrow.visible = false
+	turnManager.playerAttack(targets)
+	targets.clear()
+	emit_signal("selectionEnd")
 
 #INIT CONNECTIONS
 func connectSignals():

@@ -38,9 +38,6 @@ func connectSignals():
 	choiceMenu.spellMenu.spellSelected.connect(onSpellSelected)
 	playerPartyManager.partyDead.connect(playerPartyDefeated)
 	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
-	targetSelectionStarted.connect(targetManager.startSelection)
-	selectionCompleted.connect(endSelection)
-	choiceMenu.selectionCancelled.connect(cancelSelection)
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
@@ -50,7 +47,7 @@ func connectEachInvocations():
 		invocation.selectedSelf.connect(endSelection)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
-		enemy.enemySelected.connect(playerAttack)
+#		enemy.enemySelected.connect(playerAttack)
 		enemy.donePreparing.connect(enemyMoveToAttack)
 		enemy.turnFinished.connect(endTurn)
 
@@ -117,30 +114,30 @@ func unitSelectingEnemyTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
-			emit_signal("targetSelectionStarted", 1)
+			targetManager.startSelection(nmbOfTargets)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
 		Enum.FocusType.ENEMY_MULTIPLE:
-			emit_signal("targetSelectionStarted", nmbOfTargets)
+			targetManager.startSelection(nmbOfTargets)
 	isSelecting = true
 func unitSelectingAllyTarget():
 	pass
-func cancelSelection():
-	for enemy in enemyPartyManager.party:
-		targetManager.selectionEnded()
 func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
-		targetManager.selectionEnded()
-func playerAttack(enemy:Node2D):
-	enemy.canBeSelected = false
-	print("Player move to attack", enemy.characterName)
-	#Assign the enemy selected in player node
-	currentlyPlaying.target = enemy
-#	if currentlyPlaying.attackSelected.focus == Enum.FocusType.ENEMY_AOE:
-#		for teamate in currentlyPlaying.party:
-#			currentlyPlaying.collateralTargets.append(teamate)
-	currentlyPlaying.getInPosition()
+		targetManager.endSelection()
+func playerAttack(enemies:Array[Node2D]):
+	for enemy in enemies:
+		currentlyPlaying.target = enemy
+		enemy.canBeSelected = false
+		print(currentlyPlaying.characterName," move to attack", enemy.characterName)
+		currentlyPlaying.attack(enemy, currentlyPlaying.attackSelected)
+		#Assign the enemy selected in player node
+#		currentlyPlaying.target = enemy
+		if currentlyPlaying.attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
+			for teamate in currentlyPlaying.party:
+				currentlyPlaying.collateralTargets.append(teamate)
+#		currentlyPlaying.getInPosition()
 func endTurn():
 	if fightIsOver:
 		endFight()

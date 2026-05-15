@@ -225,9 +225,12 @@ func getInPosition():
 	if faction == Enum.Faction.PLAYER:
 		emit_signal("stopSelectingTarget")
 	setState("getinposition")
-func attack(enemyTarget:Node2D,weapon):
+func attack(enemy:Node2D,weapon):
+	target = enemy
+	if weapon.needToMove:
+		setState("getinposition")
 	setState("attacking")
-	print("Player Attacked: ", target.name)
+	print(characterName," Attacked: ", enemy.name)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
@@ -243,7 +246,7 @@ func endingTurn():
 func isSelectable():
 	canBeSelected = true
 	area.monitoring = true
-func selectionEnded():
+func endSelection():
 	canBeSelected = false
 func onMouseEntered():
 	if not isDead and canBeSelected:

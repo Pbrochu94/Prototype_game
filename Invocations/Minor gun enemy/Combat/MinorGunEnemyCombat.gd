@@ -145,7 +145,7 @@ func isSelectable():
 	canBeSelected = true
 	area.monitoring = true
 	print("Player selection started")
-func selectionEnded():
+func endSelection():
 	canBeSelected = false
 
 #AREA SIGNALS
