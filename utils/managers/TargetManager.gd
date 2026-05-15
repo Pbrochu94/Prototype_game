@@ -67,7 +67,7 @@ func enemySelected(enemy:Node2D):
 #SELECTION FLOW
 func startSelection(nmbOfTarget):
 	nmbOfTargetToSelect = nmbOfTarget
-	var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
+	var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters.duplicate()
 	nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 	print("Player can select ", nmbOfAvailableTargets, " targets")
 	for enemy in enemies:
@@ -82,7 +82,7 @@ func endSelection():
 	for enemy in enemies:
 		enemy.canBeSelected = false
 	selectingArrow.visible = false
-	turnManager.playerAttack(targets)
+	turnManager.unitAttack(targets)
 	targets.clear()
 	emit_signal("selectionEnd")
 

@@ -50,12 +50,12 @@ func loadRandomTeam():
 	var characterCount = 0
 	match partyFaction:
 		Enum.Faction.PLAYER:
-			for i in range(1):
+			for i in range(3):
 				characterCount += 1
 				#Random characters
 #				var character = allCharacters.pick_random().instantiate()
 				#Specific character to test
-				var character = allCharacters[3].instantiate()
+				var character = allCharacters[1].instantiate()
 				assignUnitFaction(character)
 				addUnitToParty(character)
 				addUnitConnections(character)
@@ -65,12 +65,12 @@ func loadRandomTeam():
 					character.characterName += " enemy "
 				character.characterName += str(characterCount)
 		Enum.Faction.ENEMY:
-			for i in range(3):
+			for i in range(1):
 				characterCount += 1
 				#Random characters
-				var character = allCharacters.pick_random().instantiate()
+#				var character = allCharacters.pick_random().instantiate()
 				#Specific character to test
-#				var character = allCharacters[0].instantiate()
+				var character = allCharacters[3].instantiate()
 				assignUnitFaction(character)
 				addUnitToParty(character)
 				addUnitConnections(character)

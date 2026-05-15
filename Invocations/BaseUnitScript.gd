@@ -129,7 +129,6 @@ func walk(delta, destination:Vector2):
 	if stateMachine.currentState == states["getinposition"]:
 		if global_position == destination:
 			isWalking = false
-			emit_signal("inPositionToAttack", target)
 			attack(target, attackSelected)
 	else:
 		if global_position == destination:
@@ -137,6 +136,7 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attacker,attack, damage):
 		var trueDamage:int = damage - stats["deff"]
+		print(attacker)
 		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
 		print(characterName," has ", currentHp, " hp before attack ")
 		stateMachine.setState(stateMachine.states["hurt"])
@@ -150,6 +150,7 @@ func applyEffect(attack:Ability):
 			"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
 			"duration": attack.effectDuration
 		}
+		print(characterName, " received the effect ", effectApplied)
 		stats[effectApplied["stat"]] += effectApplied["amount"]
 		activeEffects.append(effectApplied)
 #	match attack.statusEffect:
@@ -166,33 +167,45 @@ func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
-	match attackSelected.focusType:
-		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			emit_signal("donePreparing")
-			enemyChooseTarget()
-		Enum.FocusType.ENEMY_MULTIPLE:
-			pass
-		Enum.FocusType.ALLY_SINGLE:
-			#emit_signal(startSelectingAllyTarget)
-			pass
-		Enum.FocusType.ALLY_MULTIPLE:
-			#emit_signal(startSelectingAllyTarget)
-			pass
-		Enum.FocusType.ENEMY_AOE:
-			pass
-		Enum.FocusType.SELF:
-			target = self
-			if attackSelected.type == Enum.AbilityType.HEAL:
-				setState("heal")
-			elif attackSelected.type == Enum.AbilityType.EFFECT:
-				pass
+	enemyChooseTarget(attackSelected.numberOfTargets)
+	emit_signal("donePreparing", target)
+#	var nmbOfTargetToSelect =  attackSelected.numberOfTargets
+#	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters
+#	var nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+#	print("Enemy select ", nmbOfAvailableTargets, " targets")
+#	for i in range(nmbOfAvailableTargets):
+#		target = enemyChooseTarget()
+#		print("Enemy ",self.characterName, " selected ", target)
+#		attack(target, attackSelected)
+#	emit_signal("donePreparing", target)
+#	match attackSelected.focusType:
+#		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
+#			target = enemyChooseTarget()
+#			print("Chosen target: ", target)
+#			emit_signal("donePreparing", target)
+#		Enum.FocusType.ENEMY_MULTIPLE:
+#			pass
+#		Enum.FocusType.ALLY_SINGLE:
+#			#emit_signal(startSelectingAllyTarget)
+#			pass
+#		Enum.FocusType.ALLY_MULTIPLE:
+#			#emit_signal(startSelectingAllyTarget)
+#			pass
+#		Enum.FocusType.ENEMY_AOE:
+#			pass
+#		Enum.FocusType.SELF:
+#			target = self
+#			if attackSelected.type == Enum.AbilityType.HEAL:
+#				setState("heal")
+#			elif attackSelected.type == Enum.AbilityType.EFFECT:
+#				pass
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]["path"]
 	print("Attack selected: ", attackSelected.attackName)
 	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
 	match attackSelected.focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focusType)
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, 1)
 		Enum.FocusType.ENEMY_MULTIPLE:
 			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, attackSelected.numberOfTargets)
 		Enum.FocusType.ALLY_SINGLE:
@@ -208,29 +221,53 @@ func onChosenAttack(index:int):
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
-func enemyChooseTarget():
-	target = currentCombatScene.playerPartyManager.currentlyAliveCharacters.pick_random()
-	print("Chosen target: ", target)
+func enemyChooseTarget(nmbOfTargetOfAttack:int):
+	print(turnManager.playerPartyManager.currentlyAliveCharacters)
+	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
+	var nmbOfAvailableTargets = min(nmbOfTargetOfAttack, unitSelectable.size())
+	print("Enemy select ", nmbOfAvailableTargets, " targets")
+	for i in range(nmbOfAvailableTargets):
+		print(unitSelectable)
+		target = unitSelectable.pick_random()
+		print("Enemy ",self.characterName, " selected ", target)
+		attack(target, attackSelected)
+		unitSelectable.erase(target)
 func getRandomAttack() -> Ability:
 	var availableAtk = []
 	for attackName in attacks:
 		var attack = attacks[attackName]
 		if attack["currentCooldown"] <= 0 :
 			availableAtk.append(attack)
-	print(availableAtk)
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
 	return randomAtk["path"]
-func getInPosition():
-	if faction == Enum.Faction.PLAYER:
-		emit_signal("stopSelectingTarget")
-	setState("getinposition")
-func attack(enemy:Node2D,weapon):
+func getInPosition(enemy:Node2D):
 	target = enemy
-	if weapon.needToMove:
-		setState("getinposition")
+	setState("getinposition")
+func attack(enemy:Node2D,attack:Ability):
 	setState("attacking")
-	print(characterName," Attacked: ", enemy.name)
+	var attackName:String = attackSelected.attackName
+	if attacks[attackName]["cooldown"] >  0:
+		var cooldown:int = attacks[attackName]["cooldown"]
+		print(attackName, " goes on a ", cooldown, " turn cooldown")
+		attacks[attackName]["currentCooldown"] = cooldown
+		attacks[attackName]["justUsed"] = true
+	match attack.type:
+		Enum.AbilityType.ATTACK:
+			var atkStat = stats["atk"]
+			var damageOutput:int = atkStat + attack.damage
+			enemy.receiveDamage(self,attack,damageOutput)
+			if attack.focusType == Enum.FocusType.ENEMY_AOE:
+				print("SPLASH DAMAGE")
+				for ally in enemy.partyManager.currentlyAliveCharacters:
+					if ally != target:
+						var splashDamage = attack.splashDamage + atkStat
+						ally.receiveDamage(self,attack,splashDamage)
+						print(ally.characterName, " received ", attack.splashDamage, " of splash damage")
+						print(ally, " stats after AOE: ", ally.getUnitInfo())
+		Enum.AbilityType.EFFECT:
+			enemy.applyEffect(attackSelected)
+	print(characterName," Attacked: ", enemy.characterName)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:

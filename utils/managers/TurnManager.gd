@@ -126,17 +126,19 @@ func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
-func playerAttack(enemies:Array[Node2D]):
+func unitAttack(enemies:Array[Node2D]):
 	for enemy in enemies:
 		currentlyPlaying.target = enemy
 		enemy.canBeSelected = false
 		print(currentlyPlaying.characterName," move to attack", enemy.characterName)
-		currentlyPlaying.attack(enemy, currentlyPlaying.attackSelected)
+		if currentlyPlaying.attackSelected.needToMove:
+			currentlyPlaying.getInPosition(enemy)
+		else:
+			currentlyPlaying.attack(enemy, currentlyPlaying.attackSelected)
 		#Assign the enemy selected in player node
-#		currentlyPlaying.target = enemy
-		if currentlyPlaying.attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
-			for teamate in currentlyPlaying.party:
-				currentlyPlaying.collateralTargets.append(teamate)
+#		if currentlyPlaying.attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
+#			for teamate in currentlyPlaying.party:
+#				currentlyPlaying.collateralTargets.append(teamate)
 #		currentlyPlaying.getInPosition()
 func endTurn():
 	if fightIsOver:
@@ -157,8 +159,8 @@ func endFight():
 		print("GAME OVER")
 
 #ENEMY BEHAVIORS
-func enemyMoveToAttack():
-	currentlyPlaying.getInPosition()
+func enemyMoveToAttack(target:Node2D):
+	currentlyPlaying.getInPosition(target)
 func enemyAttack():
 	enemy.attack()
 
