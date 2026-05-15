@@ -167,38 +167,26 @@ func enemyStartTurn():
 	print(characterName, " started his turn")
 	attackSelected = getRandomAttack()
 	print(characterName, " chose the attack: ", attackSelected.attackName)
-	enemyChooseTarget(attackSelected.numberOfTargets)
-	emit_signal("donePreparing", target)
-#	var nmbOfTargetToSelect =  attackSelected.numberOfTargets
-#	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters
-#	var nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
-#	print("Enemy select ", nmbOfAvailableTargets, " targets")
-#	for i in range(nmbOfAvailableTargets):
-#		target = enemyChooseTarget()
-#		print("Enemy ",self.characterName, " selected ", target)
-#		attack(target, attackSelected)
-#	emit_signal("donePreparing", target)
-#	match attackSelected.focusType:
-#		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-#			target = enemyChooseTarget()
-#			print("Chosen target: ", target)
+	match attackSelected.focusType:
+		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
+			enemyChooseTarget(attackSelected.numberOfTargets)
 #			emit_signal("donePreparing", target)
-#		Enum.FocusType.ENEMY_MULTIPLE:
-#			pass
-#		Enum.FocusType.ALLY_SINGLE:
-#			#emit_signal(startSelectingAllyTarget)
-#			pass
-#		Enum.FocusType.ALLY_MULTIPLE:
-#			#emit_signal(startSelectingAllyTarget)
-#			pass
-#		Enum.FocusType.ENEMY_AOE:
-#			pass
-#		Enum.FocusType.SELF:
-#			target = self
-#			if attackSelected.type == Enum.AbilityType.HEAL:
-#				setState("heal")
-#			elif attackSelected.type == Enum.AbilityType.EFFECT:
-#				pass
+		Enum.FocusType.ENEMY_MULTIPLE:
+			enemyChooseTarget(attackSelected.numberOfTargets)
+		Enum.FocusType.ALLY_SINGLE:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		Enum.FocusType.ALLY_MULTIPLE:
+			#emit_signal(startSelectingAllyTarget)
+			pass
+		Enum.FocusType.ENEMY_AOE:
+			pass
+		Enum.FocusType.SELF:
+			target = self
+			if attackSelected.type == Enum.AbilityType.HEAL:
+				setState("heal")
+			elif attackSelected.type == Enum.AbilityType.EFFECT:
+				pass
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]["path"]
 	print("Attack selected: ", attackSelected.attackName)
@@ -209,10 +197,8 @@ func onChosenAttack(index:int):
 		Enum.FocusType.ENEMY_MULTIPLE:
 			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, attackSelected.numberOfTargets)
 		Enum.FocusType.ALLY_SINGLE:
-			#emit_signal(startSelectingAllyTarget)
 			pass
 		Enum.FocusType.ALLY_MULTIPLE:
-			#emit_signal(startSelectingAllyTarget)
 			pass
 		Enum.FocusType.SELF:
 			target = self
