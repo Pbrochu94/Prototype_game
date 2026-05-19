@@ -138,7 +138,7 @@ func receiveDamage(attacker,attack, damage):
 		var trueDamage:int = damage - stats["deff"]
 		print(attacker)
 		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
-		print(characterName," has ", currentHp, " hp before attack ")
+		print(characterName," has ", stats["currentHp"], " hp before attack ")
 		stateMachine.setState(stateMachine.states["hurt"])
 		stats["currentHp"]-= trueDamage
 		emit_signal("hpChanged")
@@ -207,17 +207,6 @@ func onChosenAttack(index:int):
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
-func enemyChooseTarget(nmbOfTargetOfAttack:int):
-	print(turnManager.playerPartyManager.currentlyAliveCharacters)
-	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
-	var nmbOfAvailableTargets = min(nmbOfTargetOfAttack, unitSelectable.size())
-	print("Enemy select ", nmbOfAvailableTargets, " targets")
-	for i in range(nmbOfAvailableTargets):
-		print(unitSelectable)
-		target = unitSelectable.pick_random()
-		print("Enemy ",self.characterName, " selected ", target)
-		attack(target, attackSelected)
-		unitSelectable.erase(target)
 func getRandomAttack() -> Ability:
 	var availableAtk = []
 	for attackName in attacks:
@@ -227,6 +216,19 @@ func getRandomAttack() -> Ability:
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
 	return randomAtk["path"]
+func enemyChooseTarget(nmbOfTargetOfAttack:int):
+	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
+	var nmbOfAvailableTargets = min(nmbOfTargetOfAttack, unitSelectable.size())
+	print("Enemy select ", nmbOfAvailableTargets, " targets")
+	for i in range(nmbOfAvailableTargets):
+		target = unitSelectable.pick_random()
+		print("Enemy ",self.characterName, " selected ", target)
+		if attackSelected.needToMove:
+			getInPosition(target)
+		else:
+			attack(target, attackSelected)
+		unitSelectable.erase(target)
+
 func getInPosition(enemy:Node2D):
 	target = enemy
 	setState("getinposition")
@@ -249,7 +251,7 @@ func attack(enemy:Node2D,attack:Ability):
 					if ally != target:
 						var splashDamage = attack.splashDamage + atkStat
 						ally.receiveDamage(self,attack,splashDamage)
-						print(ally.characterName, " received ", attack.splashDamage, " of splash damage")
+						print(ally.characterName, " received ", (attack.splashDamage + stats["atk"]), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 		Enum.AbilityType.EFFECT:
 			enemy.applyEffect(attackSelected)

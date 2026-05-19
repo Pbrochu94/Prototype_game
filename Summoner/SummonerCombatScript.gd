@@ -50,8 +50,9 @@ func walk(delta, destination:Vector2):
 		onFinishedIntro()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
-func castSpell(spellIndex:int):
-	pass
+func castSpell(spellIndex:int, target:Node2D):
+	var spellInstance = allSpell["shield"]["path"].instanciate()
+	target.add_child(spellInstance)
 #	print("Summoner cast ",spell.spellName, " on ", target.characterName)
 
 #TURN FLOW

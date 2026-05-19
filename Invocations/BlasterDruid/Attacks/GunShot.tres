@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1_rhbfw")
 attackName = "gun shot"
-damage = 2000
+damage = 20
 type = 0
 focusType = 2
 healAmount = 0
-numberOfTargets = 3
+numberOfTargets = 2
 element = "light"
 hitboxName = ""
 statsAffected = Array[String]([])
