@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SummonerSpell" load_steps=2 format=3 uid="uid://ns8utjudnhoo"]
 
-[ext_resource type="Script" path="res://utils/Attacks/SummonerSpell.gd" id="1_0u7j2"]
+[ext_resource type="Script" path="res://Summoner/Spells/SummonerSpellResource.gd" id="1_0u7j2"]
 
 [resource]
 script = ExtResource("1_0u7j2")

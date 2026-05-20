@@ -30,3 +30,12 @@ enum SpellType{
 	ATTACK,
 	EFFECT
 }
+enum targetPartySelection{
+	ALLY,
+	ENEMY,
+	ALL
+}
+enum attackSource{
+	SUMMONER,
+	UNIT
+}

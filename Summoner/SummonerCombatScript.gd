@@ -12,22 +12,17 @@ extends Node2D
 @export var walkSpeed:int = 100
 
 #VARIABLES
+var targets:Array[Node2D]
+var target:Node2D
 var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
 var allSpell:Dictionary={
-	"fire ball" = {
-		"path": preload("res://Summoner/Spells/FireBall/FireBall.tres"),
-		"cooldown":3,
-		"currentCooldown":0
-	},
-		"shield" = {
-		"path": preload("res://Summoner/Spells/Shield/Shield.tres"),
-		"cooldown":3,
-		"currentCooldown":0
-	}
+	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBall.tres"),
+	"shield" = preload("res://Summoner/Spells/Shield/Shield.tres")
 }
 var learnedSpells:Dictionary
+var spellSelected:SummonerSpell
 
 #BOOLEANS
 var isWalking = false
@@ -39,6 +34,8 @@ signal introAnimCompleted
 func _ready():
 	stateMachine.init(self)
 	setState("intro")
+	print(allSpell["shield"])
+	addNewSpell(allSpell["shield"])
 
 #BEHAVIOR
 func walk(delta, destination:Vector2):
@@ -50,8 +47,9 @@ func walk(delta, destination:Vector2):
 		onFinishedIntro()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
-func castSpell(spellIndex:int, target:Node2D):
-	var spellInstance = allSpell["shield"]["path"].instanciate()
+func castSpell(target:Node2D):
+	var spellInstance = spellSelected.spellScene.instantiate()
+	print(target)
 	target.add_child(spellInstance)
 #	print("Summoner cast ",spell.spellName, " on ", target.characterName)
 
@@ -67,3 +65,4 @@ func setState(newState:String):
 	stateMachine.setState(states[newState])
 func addNewSpell(newSpell:SummonerSpell):
 	learnedSpells[newSpell.spellName] = newSpell
+	print(learnedSpells)

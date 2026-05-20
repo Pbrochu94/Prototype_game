@@ -3,11 +3,13 @@ extends Node
 #NODES
 @onready var selectingArrow = $SelectingArrow
 @onready var enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")
+@onready var playerPartyManager = get_tree().get_first_node_in_group("player party manager")
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
 
 
 #VARIABLES
-var enemies:Array[Node2D] = []
+var enemyParty:Array[Node2D]
+var allyParty:Array[Node2D] 
 var currentIndex:int = 0
 var currentHovered:Node2D = null
 var nmbOfTargetToSelect:int
@@ -20,7 +22,8 @@ signal selectionEnd
 
 
 func _ready():
-	enemies = enemyPartyManager.party
+	enemyParty = enemyPartyManager.party
+	allyParty = playerPartyManager.party
 	selectingArrow.visible = false
 	connectSignals()
 
@@ -41,7 +44,7 @@ func selectNext():
 	currentIndex = (currentIndex + 1) % valid.size()
 	return valid[currentIndex]
 func getValidTargets():
-	return enemies.filter(func(enemy): return not enemy.isDead and enemy.canBeSelected)
+	return enemyParty.filter(func(enemy): return not enemy.isDead and enemy.canBeSelected)
 
 #MOUSE HANDLING
 func enemyHovered(enemy:Node2D):
@@ -62,25 +65,55 @@ func enemySelected(enemy:Node2D):
 		print("enemy already selected or dead")
 	if nmbOfAvailableTargets <= 0:
 		endSelection()
+#MOUSE HANDLING
+func allyHovered(ally:Node2D):
+	currentHovered = ally
+	updateArrow(ally)
+	selectingArrow.visible = true
+func allyUnhovered(ally:Node2D):
+	if currentHovered == ally:
+		currentHovered = null
+		selectingArrow.visible = false
+func allySelected(ally:Node2D):
+	if ally not in targets and not ally.isDead:
+		targets.append(ally)
+		nmbOfAvailableTargets -= 1
+		print("selected ",ally)
+		print("Player can select ", nmbOfAvailableTargets, " targets")
+	elif ally in targets:
+		print("enemy already selected or dead")
+	if nmbOfAvailableTargets <= 0:
+		endSelection()
 
 
 #SELECTION FLOW
-func startSelection(nmbOfTarget):
+func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 	nmbOfTargetToSelect = nmbOfTarget
-	var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters.duplicate()
-	nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
-	print("Player can select ", nmbOfAvailableTargets, " targets")
-	for enemy in enemies:
-		enemy.canBeSelected = true
-		print(enemy, enemy.canBeSelected)
+	match partyFocus:
+		Enum.targetPartySelection.ALLY:
+			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters.duplicate()
+			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+			print("Player can select ", nmbOfAvailableTargets, " allie(s)")
+			print(allyParty)
+			for ally in allyParty:
+				ally.canBeSelected = true
+				print(ally, ally.canBeSelected)
+		Enum.targetPartySelection.ENEMY:
+			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters.duplicate()
+			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
+			for enemy in enemyParty:
+				enemy.canBeSelected = true
 func cancelSelection():
-	for enemy in enemies:
+	for enemy in enemyParty:
 		enemy.canBeSelected = false
 	selectingArrow.visible = false
 	targets.clear()
 func endSelection():
-	for enemy in enemies:
+	for enemy in enemyParty:
 		enemy.canBeSelected = false
+	for ally in allyParty:
+		ally.canBeSelected = false
 	selectingArrow.visible = false
 	turnManager.unitAttack(targets)
 	targets.clear()
@@ -88,10 +121,14 @@ func endSelection():
 
 #INIT CONNECTIONS
 func connectSignals():
-	for enemy in enemies:
+	for enemy in enemyParty:
 		enemy.hovered.connect(enemyHovered)
 		enemy.unhovered.connect(enemyUnhovered)
 		enemy.clickedOn.connect(enemySelected)
+	for ally in allyParty:
+		ally.hovered.connect(allyHovered)
+		ally.unhovered.connect(allyUnhovered)
+		ally.clickedOn.connect(allySelected)
 
 #NOT WORKING YET
 func getCurrentTarget():

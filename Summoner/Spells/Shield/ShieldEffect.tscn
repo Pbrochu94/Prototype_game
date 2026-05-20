@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://clulkso2jcl6k"]
 
-[ext_resource type="Script" path="res://Summoner/Spells/BaseSpellScript.gd" id="1_5f2d6"]
 [ext_resource type="Texture2D" uid="uid://fdd343mfbnjr" path="res://VFXSprite/Shield/Shield Spritesheet(green) 50x49.png" id="1_ffqq5"]
+[ext_resource type="Script" path="res://Summoner/Spells/Shield/ShieldSpell.gd" id="1_i11kn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wucg8"]
 atlas = ExtResource("1_ffqq5")
@@ -190,10 +190,12 @@ animations = [{
 }]
 
 [node name="ShieldEffect" type="Node2D"]
-script = ExtResource("1_5f2d6")
+script = ExtResource("1_i11kn")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="SpritePivot" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+position = Vector2(3, -5)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dgq07")
-animation = &"active"
-frame = 11
-frame_progress = 0.90992
+animation = &"disapear"

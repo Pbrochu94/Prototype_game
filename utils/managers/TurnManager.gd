@@ -7,6 +7,7 @@ extends Node
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
 var summoner:Node2D 
 var currentTurn = "player"
+var attackSource:Enum.attackSource
 var currentCombatScene:Node2D 
 var enemy:Node2D 
 var isSelecting = false
@@ -43,7 +44,7 @@ func connectEachInvocations():
 	for invocation in playerPartyManager.party:
 		invocation.stopSelectingTarget.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
-		invocation.startSelectingEnemyTarget.connect(unitSelectingEnemyTarget)
+		invocation.startSelectingEnemyTarget.connect(unitSelectingTarget)
 		invocation.selectedSelf.connect(endSelection)
 func connectEachEnemy():
 	for enemy in enemyPartyManager.party:
@@ -103,22 +104,21 @@ func chooseAction():
 	currentCombatScene.choiceMenu.open()
 	print("Player is choosing what to do...")
 func onSpellSelected(spellIndex:int):
-	print("ENDDD")
-	var spellName = summoner.spells[spellIndex]
-	var spellSelected = summoner.spells[spellName]
-	unitSelectingEnemyTarget(spellSelected.focusType,spellSelected.nmbOfTargets)
-	summoner.castSpell(spellIndex)
+	summoner.spellSelected = summoner.learnedSpells.values()[spellIndex]
+	unitSelectingTarget(summoner.spellSelected.focusType,summoner.spellSelected.numberOfTargets)
 func onAttackSelected(attackIndex:int):
 	currentlyPlaying.onChosenAttack(attackIndex)
-func unitSelectingEnemyTarget(focusType, nmbOfTargets):
+func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			print(currentlyPlaying.characterName," is selecting a target")
-			targetManager.startSelection(nmbOfTargets)
+			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ENEMY)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
 		Enum.FocusType.ENEMY_MULTIPLE:
-			targetManager.startSelection(nmbOfTargets)
+			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ENEMY)
+		Enum.FocusType.ALLY_SINGLE:
+			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ALLY)
 	isSelecting = true
 func unitSelectingAllyTarget():
 	pass
@@ -126,15 +126,22 @@ func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
-func unitAttack(enemies:Array[Node2D]):
-	for enemy in enemies:
-		currentlyPlaying.target = enemy
-		enemy.canBeSelected = false
-		print(currentlyPlaying.characterName," move to attack", enemy.characterName)
-		if currentlyPlaying.attackSelected.needToMove:
-			currentlyPlaying.getInPosition(enemy)
-		else:
-			currentlyPlaying.attack(enemy, currentlyPlaying.attackSelected)
+func unitAttack(targets:Array[Node2D]):
+		match attackSource:
+			Enum.attackSource.SUMMONER:
+				for target in targets:
+					summoner.target = target
+					target.canBeSelected = false
+					summoner.castSpell(summoner.target)
+			Enum.attackSource.UNIT:
+				for target in targets:
+					currentlyPlaying.target = target
+					target.canBeSelected = false
+					if currentlyPlaying.attackSelected.needToMove:
+						print(currentlyPlaying.characterName," move to attack", target.characterName)
+						currentlyPlaying.getInPosition(target)
+					else:
+						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
 		#Assign the enemy selected in player node
 #		if currentlyPlaying.attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
 #			for teamate in currentlyPlaying.party:

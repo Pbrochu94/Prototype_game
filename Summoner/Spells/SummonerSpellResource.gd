@@ -17,6 +17,7 @@ class_name SummonerSpell
 @export var cooldown: int
 @export var currentCooldown:int
 @export var numberOfTargets:int
+@export var spellScene:PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
