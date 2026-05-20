@@ -195,7 +195,6 @@ script = ExtResource("1_i11kn")
 [node name="SpritePivot" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
-position = Vector2(3, -5)
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_dgq07")
-animation = &"disapear"
+animation = &"active"
