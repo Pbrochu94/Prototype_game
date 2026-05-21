@@ -255,6 +255,8 @@ func attack(enemy:Node2D,attack:Ability):
 		attacks[attackName]["justUsed"] = true
 	match attack.type:
 		Enum.AbilityType.ATTACK:
+			if attack.statusEffect != Enum.StatusEffect.NONE:
+				applyEffect(attack)
 			var atkStat = stats["atk"]
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
