@@ -72,7 +72,8 @@ func initPlayOrder():
 	currentlyPlaying = playOrder[0]
 func updatePlayOrder():
 	playOrder.sort_custom(func(a, b):
-		return a.speed > b.speed
+		print(a.stats["speed"]," ", b.stats["speed"])
+		return a.stats["speed"] > b.stats["speed"]
 	)
 	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
@@ -91,7 +92,8 @@ func updateCurrentlyPlaying():
 		updateCurrentlyPlaying()
 	else:
 		pass
-
+func resetPlayingOrder():
+	currentlyPlaying = playOrder[0]
 #TURN FLOW
 func startTurn():
 	if not currentlyPlaying:
@@ -150,12 +152,17 @@ func endTurn():
 	if fightIsOver:
 		endFight()
 	else:
-		currentlyPlaying == playOrder[-1]
-		turnTracker += 1
-		print("turn ", turnTracker, " completed")
-		updatePlayOrder()
-		updateCurrentlyPlaying()
-		emit_signal("turnEnded")
+		if currentlyPlaying == playOrder[-1]:
+			endGlobalTurn()
+		else:
+			updateCurrentlyPlaying()
+			emit_signal("turnEnded")
+func endGlobalTurn():
+	turnTracker += 1
+	print("turn ", turnTracker, " completed")
+	updatePlayOrder()
+	resetPlayingOrder()
+	emit_signal("turnEnded")
 func endFight():
 	emit_signal("playOutroAnim")
 	if playerWon:
