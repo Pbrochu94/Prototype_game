@@ -142,7 +142,7 @@ func receiveDamage(attacker,attack, damage):
 		print(characterName, " is invulnerable and negated the attack from ", attacker)
 		return
 	var trueDamage:int = damage - stats["deff"]
-	if trueDamage < 0:
+	if trueDamage <= 0:
 		trueDamage = 0
 		print(attacker.characterName, " does no damage to ", characterName)
 	else:

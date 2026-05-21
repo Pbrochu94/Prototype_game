@@ -5,6 +5,8 @@ extends Node
 @onready var playerPartyManager:Node = get_tree().get_first_node_in_group("player party manager")
 @onready var enemyPartyManager:Node = get_tree().get_first_node_in_group("enemy party manager")
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
+@onready var everyUnits:Array[Node] 
+var everyLivingUnits
 var summoner:Node2D 
 var currentTurn = "player"
 #var attackSource:Enum.attackSource
@@ -18,6 +20,7 @@ var playerWon:bool = false
 var turnTracker:int = 0
 var fightIsOver:bool = false
 var caster:Enum.Caster
+
 
 #SIGNALS
 signal turnEnded
@@ -66,13 +69,18 @@ func startCombat():
 
 #ORDER HANDLERS
 func initPlayOrder():
-	for character in get_tree().get_nodes_in_group("unit"):
-		playOrder.append(character)
+	everyUnits = get_tree().get_nodes_in_group("unit")
+	for unit in everyUnits:
+		playOrder.append(unit)
 	updatePlayOrder()
 	currentlyPlaying = playOrder[0]
 func updatePlayOrder():
+	for unit in playOrder:
+		if unit.isDead:
+			playOrder.erase(unit)
 	playOrder.sort_custom(func(a, b):
-		print(a.stats["speed"]," ", b.stats["speed"])
+		if a.stats["speed"] == b.stats["speed"]:
+			return a.faction == Enum.Faction.ENEMY
 		return a.stats["speed"] > b.stats["speed"]
 	)
 	print("Updating play order : ", playOrder)
