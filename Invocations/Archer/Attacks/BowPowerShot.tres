@@ -5,15 +5,15 @@
 [resource]
 script = ExtResource("1_w5gkt")
 attackName = "bow power shot"
-damage = 0
+damage = 40
 type = 0
 focusType = 1
 healAmount = 0
 numberOfTargets = 1
 element = "light"
 hitboxName = ""
-statsAffected = Array[String]([])
-effectAmount = 0
+statsAffected = Array[String](["speed"])
+effectAmount = 20
 needToMove = true
 effectDuration = 0
 statusEffect = 0

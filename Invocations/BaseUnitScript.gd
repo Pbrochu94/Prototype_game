@@ -142,12 +142,16 @@ func receiveDamage(attacker,attack, damage):
 		print(characterName, " is invulnerable and negated the attack from ", attacker)
 		return
 	var trueDamage:int = damage - stats["deff"]
-	print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
-	print(characterName," has ", stats["currentHp"], " hp before attack ")
-	stateMachine.setState(stateMachine.states["hurt"])
-	stats["currentHp"]-= trueDamage
-	emit_signal("hpChanged")
-	print(characterName," now have ", stats["currentHp"], " hp after attack ")
+	if trueDamage < 0:
+		trueDamage = 0
+		print(attacker.characterName, " does no damage to ", characterName)
+	else:
+		print("Character: ", attacker.characterName, " attack ", characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
+		print(characterName," has ", stats["currentHp"], " hp before attack ")
+		stateMachine.setState(stateMachine.states["hurt"])
+		stats["currentHp"]-= trueDamage
+		emit_signal("hpChanged")
+		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
 	match attack.statusEffect:
 		Enum.StatusEffect.INVULNERABLE:
@@ -161,6 +165,7 @@ func applyEffect(attack):
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.statsAffected:
 				var effectApplied = {
+					"type":"stat modifier",
 					"stat":statAffected,
 					"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
 					"duration": attack.effectDuration

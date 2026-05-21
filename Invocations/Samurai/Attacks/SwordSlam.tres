@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_thvpo")
 attackName = "sword slam"
-damage = 0
+damage = 30
 type = 0
 focusType = 5
 healAmount = 0
@@ -17,6 +17,6 @@ effectAmount = 0
 needToMove = true
 effectDuration = 0
 statusEffect = 0
-splashDamage = 0
-cooldown = 0
+splashDamage = 10
+cooldown = 3
 currentCooldown = 0

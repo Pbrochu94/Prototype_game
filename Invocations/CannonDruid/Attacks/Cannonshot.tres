@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_srkc1")
 attackName = "cannon shot"
-damage = 0
+damage = 30
 type = 0
 focusType = 1
 healAmount = 0
