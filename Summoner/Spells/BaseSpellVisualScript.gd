@@ -7,10 +7,12 @@ func _ready():
 	anim.animation_finished.connect(onAnimationFinished)
 	anim.play("appear")
 
+func exit():
+	anim.play("disapear")
+
 func onAnimationFinished():
 	match anim.animation:
 		"appear":
 			anim.play("active")
 		"disapear":
-			pass
-			#Will remove object from unit instanciate
+			queue_free()

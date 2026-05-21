@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_rhbfw")
 attackName = "gun shot"
-damage = 0
+damage = 20
 type = 0
 focusType = 2
 healAmount = 0

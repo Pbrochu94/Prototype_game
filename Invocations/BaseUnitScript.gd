@@ -138,18 +138,20 @@ func walk(delta, destination:Vector2):
 			setState("endingturn")
 			isWalking = false
 func receiveDamage(attacker,attack, damage):
-		var trueDamage:int = damage - stats["deff"]
-		print(attacker)
-		print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
-		print(characterName," has ", stats["currentHp"], " hp before attack ")
-		stateMachine.setState(stateMachine.states["hurt"])
-		stats["currentHp"]-= trueDamage
-		emit_signal("hpChanged")
-		print(characterName," now have ", stats["currentHp"], " hp after attack ")
+	if isInvulnerable:
+		print(characterName, " is invulnerable and negated the attack from ", attacker)
+		return
+	var trueDamage:int = damage - stats["deff"]
+	print("Character: ", attacker.characterName, " attack ", self.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
+	print(characterName," has ", stats["currentHp"], " hp before attack ")
+	stateMachine.setState(stateMachine.states["hurt"])
+	stats["currentHp"]-= trueDamage
+	emit_signal("hpChanged")
+	print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
 	match attack.statusEffect:
 		Enum.StatusEffect.INVULNERABLE:
-			isInvulnerable
+			isInvulnerable = true
 			var effectApplied = {
 					"type":"invulnerable",
 					"duration": attack.effectDuration
@@ -303,11 +305,16 @@ func getUnitInfo():
 	}
 func reduceTimers():
 	for effect in activeEffects:
-		if effect["duration"] > 0:
-			effect["duration"] -= 1
-		else: 
-			stats[effect["stat"]] -= effect["amount"]
+		effect["duration"] -= 1
+		if effect["duration"]<= 0:
 			activeEffects.erase(effect)
+			match effect["type"]:
+				"invulnerable":
+					isInvulnerable = false
+					var spell = get_node("ShieldEffect")
+					spell.exit()
+				"stat modifier":
+					stats[effect["stat"]] -= effect["amount"]
 	for attack in attacks:
 		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:
 			attacks[attack]["currentCooldown"] -= 1

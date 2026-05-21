@@ -57,6 +57,7 @@ func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:Node2D):
 	var spellInstance = spellSelected.spellScene.instantiate()
+	print(spellInstance)
 	print(target)
 	target.add_child(spellInstance)
 	target.applyEffect(spellSelected)
