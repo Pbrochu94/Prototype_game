@@ -7,7 +7,7 @@ extends Node
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
 var summoner:Node2D 
 var currentTurn = "player"
-var attackSource:Enum.attackSource
+#var attackSource:Enum.attackSource
 var currentCombatScene:Node2D 
 var enemy:Node2D 
 var isSelecting = false
@@ -17,6 +17,7 @@ var playerLost:bool = false
 var playerWon:bool = false
 var turnTracker:int = 0
 var fightIsOver:bool = false
+var caster:Enum.Caster
 
 #SIGNALS
 signal turnEnded
@@ -33,6 +34,7 @@ func _ready():
 #CONNECTIONS
 func connectSignals():
 	summoner.introAnimCompleted.connect(startCombat)
+	summoner.turnFinished.connect(endTurn)
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
@@ -104,9 +106,11 @@ func chooseAction():
 	currentCombatScene.choiceMenu.open()
 	print("Player is choosing what to do...")
 func onSpellSelected(spellIndex:int):
+	caster = Enum.Caster.SUMMONER
 	summoner.spellSelected = summoner.learnedSpells.values()[spellIndex]
 	unitSelectingTarget(summoner.spellSelected.focusType,summoner.spellSelected.numberOfTargets)
 func onAttackSelected(attackIndex:int):
+	caster = Enum.Caster.UNIT
 	currentlyPlaying.onChosenAttack(attackIndex)
 func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
@@ -127,13 +131,13 @@ func endSelection():
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
 func unitAttack(targets:Array[Node2D]):
-		match attackSource:
-			Enum.attackSource.SUMMONER:
+		match caster:
+			Enum.Caster.SUMMONER:
 				for target in targets:
 					summoner.target = target
 					target.canBeSelected = false
 					summoner.castSpell(summoner.target)
-			Enum.attackSource.UNIT:
+			Enum.Caster.UNIT:
 				for target in targets:
 					currentlyPlaying.target = target
 					target.canBeSelected = false
@@ -142,11 +146,6 @@ func unitAttack(targets:Array[Node2D]):
 						currentlyPlaying.getInPosition(target)
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
-		#Assign the enemy selected in player node
-#		if currentlyPlaying.attackSelected.focusType == Enum.FocusType.ENEMY_AOE:
-#			for teamate in currentlyPlaying.party:
-#				currentlyPlaying.collateralTargets.append(teamate)
-#		currentlyPlaying.getInPosition()
 func endTurn():
 	if fightIsOver:
 		endFight()

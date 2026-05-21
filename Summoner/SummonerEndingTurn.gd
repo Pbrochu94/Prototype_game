@@ -1,0 +1,2 @@
+extends EndingTurnState
+class_name SummonerEndingTurn

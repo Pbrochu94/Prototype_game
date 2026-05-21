@@ -43,6 +43,9 @@ var states:Dictionary
 var activeEffects:Array[Dictionary] = []
 var abilityCooldown:int
 
+#EFFECTS
+var isInvulnerable:bool = false
+
 #TIMERS
 var timers:Dictionary = {
 	"debuffs" : {
@@ -143,23 +146,26 @@ func receiveDamage(attacker,attack, damage):
 		stats["currentHp"]-= trueDamage
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
-func applyEffect(attack:Ability):
-	for statAffected in attack.statsAffected:
-		var effectApplied = {
-			"stat":statAffected,
-			"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
-			"duration": attack.effectDuration
-		}
-		print(characterName, " received the effect ", effectApplied)
-		stats[effectApplied["stat"]] += effectApplied["amount"]
-		activeEffects.append(effectApplied)
-#	match attack.statusEffect:
-#		StatusEffect.DEBUFF:
-#			print(attack.statsAffected)
-#			for statAffected in attack.statsAffected:
-#				stats[statAffected] -= convertPourcentage(stats[statAffected],attack.effectAmount)
-#				timers["debuffs"][statAffected] += attack.effectDuration
-#				print("Target: ", characterName, " after debuff ", stats[statAffected], " for ", attack.effectDuration, " turn")
+func applyEffect(attack):
+	match attack.statusEffect:
+		Enum.StatusEffect.INVULNERABLE:
+			isInvulnerable
+			var effectApplied = {
+					"type":"invulnerable",
+					"duration": attack.effectDuration
+					}
+			activeEffects.append(effectApplied)
+			print(characterName, " is now invulnerable for ", attack.effectDuration, " turn")
+		Enum.StatusEffect.STAT_MODIFIER:
+			for statAffected in attack.statsAffected:
+				var effectApplied = {
+					"stat":statAffected,
+					"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
+					"duration": attack.effectDuration
+					}
+				print(characterName, " received the effect ", effectApplied)
+				stats[effectApplied["stat"]] += effectApplied["amount"]
+				activeEffects.append(effectApplied)
 
 
 #TURN FLOW

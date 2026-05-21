@@ -1,10 +1,36 @@
-[gd_scene load_steps=21 format=3 uid="uid://dg8rrat4c5hxv"]
+[gd_scene load_steps=29 format=3 uid="uid://dg8rrat4c5hxv"]
 
 [ext_resource type="Script" path="res://Summoner/SummonerCombatScript.gd" id="1_uhcc1"]
 [ext_resource type="Texture2D" uid="uid://b863xohn1euoy" path="res://CharacterSprite/Summoner/PlaceholderSummonerSpriteSheet(76x50).png" id="1_voc0o"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="1_wtsqx"]
 [ext_resource type="Script" path="res://Summoner/States/IdleState.gd" id="2_57jk0"]
 [ext_resource type="Script" path="res://Summoner/States/IntroState.gd" id="5_j7rn3"]
+[ext_resource type="Script" path="res://Summoner/SummonerCasting.gd" id="6_65cuo"]
+[ext_resource type="Script" path="res://Summoner/SummonerEndingTurn.gd" id="7_48lks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhhuh"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(0, 100, 76, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn1sg"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(76, 100, 76, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s277"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(152, 100, 76, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c47dx"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(228, 100, 76, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iguw5"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(304, 100, 76, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3isi"]
+atlas = ExtResource("1_voc0o")
+region = Rect2(380, 100, 76, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0bjn"]
 atlas = ExtResource("1_voc0o")
@@ -64,6 +90,29 @@ region = Rect2(532, 50, 76, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sosxi"]
 animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xhhuh")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xn1sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s277")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c47dx")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_iguw5")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_b3isi")
+}],
+"loop": false,
+"name": &"casting",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_v0bjn")
@@ -125,8 +174,9 @@ script = ExtResource("1_uhcc1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
 position = Vector2(-3, -15)
 sprite_frames = SubResource("SpriteFrames_sosxi")
-animation = &"walk"
-frame_progress = 0.417597
+animation = &"casting"
+frame = 5
+frame_progress = 1.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_wtsqx")
@@ -136,3 +186,11 @@ script = ExtResource("2_57jk0")
 
 [node name="Intro" type="Node" parent="StateMachine"]
 script = ExtResource("5_j7rn3")
+
+[node name="Casting" type="Node" parent="StateMachine"]
+script = ExtResource("6_65cuo")
+
+[node name="EndingTurn" type="Node" parent="StateMachine"]
+script = ExtResource("7_48lks")
+
+[connection signal="animation_finished" from="SpritePivot/AnimatedSprite2D" to="." method="onAnimationFinished"]

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_rhp2c")
 attackName = "bow shot"
-damage = 20
+damage = 0
 type = 0
 focusType = 1
 healAmount = 0

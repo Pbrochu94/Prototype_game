@@ -11,7 +11,8 @@ enum AbilityType {
 }
 enum StatusEffect {
 	NONE,
-	BUFF,
+	INVULNERABLE,
+	STAT_MODIFIER,
 	DEBUFF,
 	POISON,
 	BURN,
@@ -35,7 +36,11 @@ enum targetPartySelection{
 	ENEMY,
 	ALL
 }
-enum attackSource{
+#enum attackSource{
+#	SUMMONER,
+#	UNIT
+#}
+enum Caster{
 	SUMMONER,
 	UNIT
 }

@@ -23,12 +23,14 @@ var allSpell:Dictionary={
 }
 var learnedSpells:Dictionary
 var spellSelected:SummonerSpell
+var faction = Enum.Faction.PLAYER
 
 #BOOLEANS
 var isWalking = false
 
 #SIGNALS
 signal introAnimCompleted
+signal turnFinished
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +38,12 @@ func _ready():
 	setState("intro")
 	print(allSpell["shield"])
 	addNewSpell(allSpell["shield"])
+
+#SPRITE & ANIMATIONS
+func onAnimationFinished():
+	match anim.animation:
+		"casting":
+			setState("endingturn")
 
 #BEHAVIOR
 func walk(delta, destination:Vector2):
@@ -51,6 +59,8 @@ func castSpell(target:Node2D):
 	var spellInstance = spellSelected.spellScene.instantiate()
 	print(target)
 	target.add_child(spellInstance)
+	target.applyEffect(spellSelected)
+	setState("casting")
 #	print("Summoner cast ",spell.spellName, " on ", target.characterName)
 
 #TURN FLOW
@@ -59,7 +69,10 @@ func playIntro():
 func onFinishedIntro():
 	setState("idle")
 	emit_signal("introAnimCompleted")
-
+func endingTurn():
+	print("Summoner end turn")
+	setState("idle")
+	emit_signal("turnFinished")
 #UTILS
 func setState(newState:String):
 	stateMachine.setState(states[newState])
