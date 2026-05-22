@@ -107,6 +107,7 @@ func startTurn():
 	if not currentlyPlaying:
 		return
 	print("Now playing :", currentlyPlaying.getUnitInfo())
+	print("Summoner info: " ,summoner.getInfo())
 	currentlyPlaying.reduceTimers()
 	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()
@@ -169,6 +170,7 @@ func endTurn():
 func endGlobalTurn():
 	turnTracker += 1
 	print("turn ", turnTracker, " completed")
+	summoner.reduceTimers()
 	updatePlayOrder()
 	resetPlayingOrder()
 	emit_signal("turnEnded")

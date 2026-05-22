@@ -24,6 +24,7 @@ var allSpell:Dictionary={
 var learnedSpells:Dictionary
 var spellSelected:SummonerSpell
 var faction = Enum.Faction.PLAYER
+var spellCooldowns:Array
 
 #BOOLEANS
 var isWalking = false
@@ -61,6 +62,10 @@ func castSpell(target:Node2D):
 	var spellInstance = spellSelected.spellScene.instantiate()
 	print(spellInstance)
 	print(target)
+	spellCooldowns.append({
+		"name": spellSelected.spellName,
+		"cooldown":spellSelected.cooldown,
+	})
 	match spellSelected.startingAnimPoint:
 		Enum.SummonerSpellStartingPoint.SUMMONER:
 			add_child(spellInstance)
@@ -87,3 +92,10 @@ func setState(newState:String):
 func addNewSpell(newSpell:SummonerSpell):
 	learnedSpells[newSpell.spellName] = newSpell
 	print(learnedSpells)
+func getInfo():
+	return spellCooldowns
+func reduceTimers():
+	for i in range(spellCooldowns.size() - 1, -1, -1):
+		spellCooldowns[i]["cooldown"] -= 1
+		if spellCooldowns[i]["cooldown"] <= 0:
+			spellCooldowns.remove_at(i)

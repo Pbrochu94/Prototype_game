@@ -328,7 +328,6 @@ func reduceTimers():
 		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:
 			attacks[attack]["currentCooldown"] -= 1
 			print("attack: ",attack," cd = ", attacks[attack]["currentCooldown"])
-		print(attacks[attack])
 		attacks[attack]["justUsed"] = false
 func convertPourcentage(baseStat:int, amount:int):
 	var amountInPercent:float = float(amount)/100

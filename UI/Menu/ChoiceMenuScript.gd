@@ -11,16 +11,19 @@ extends Control
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
 @onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
+var summoner:Node2D 
 var currentlyPlayingUnit:Node2D
 #SIGNALS
 signal selectionCancelled
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_tree().process_frame
 	self.visible = false
 	connectSignals()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
-
+	summoner = get_tree().get_first_node_in_group("summoner")
+	print(summoner)
 
 func openAttackMenu():
 	$ChoiceMenu/SubMenus/AttackMenu.choiceMenuParent = self
