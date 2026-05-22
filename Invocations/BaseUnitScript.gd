@@ -148,8 +148,8 @@ func receiveDamage(attacker,attack, damage):
 	else:
 		print("Character: ", attacker.characterName, " attack ", characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
 		print(characterName," has ", stats["currentHp"], " hp before attack ")
-		stateMachine.setState(stateMachine.states["hurt"])
 		stats["currentHp"]-= trueDamage
+		setState("hurt")
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):

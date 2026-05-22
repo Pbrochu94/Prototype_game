@@ -77,10 +77,10 @@ func onFinishedIntro():
 	setState("idle")
 	emit_signal("introAnimCompleted")
 func endingTurn():
+	emit_signal("turnFinished")
 	print("Summoner end turn")
 	setState("endingturn")
 	setState("idle")
-	emit_signal("turnFinished")
 #UTILS
 func setState(newState:String):
 	stateMachine.setState(states[newState])

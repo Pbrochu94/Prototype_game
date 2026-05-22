@@ -15,11 +15,10 @@ func _process(delta):
 	projectileSpeed = max(projectileSpeed, minSpeed)
 	if isMoving:
 		for unit in targets:
-			print(targets)
 			var unitLocation = unit.global_position
 			global_position = global_position.move_toward(unitLocation, projectileSpeed*delta)
 			if global_position == unitLocation:
+				isMoving = false
 				emit_signal("spellFinishedCasting")
 				unit.receiveDamage(caster,spellSelected ,spellSelected.damage)
-				isMoving = false
 				exit()
