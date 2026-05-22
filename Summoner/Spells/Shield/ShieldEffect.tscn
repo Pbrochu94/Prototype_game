@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://clulkso2jcl6k"]
 
-[ext_resource type="Texture2D" uid="uid://fdd343mfbnjr" path="res://VFXSprite/Shield/Shield Spritesheet(green) 50x49.png" id="1_ffqq5"]
+[ext_resource type="Texture2D" uid="uid://fdd343mfbnjr" path="res://SpellSprite/Shield/Shield Spritesheet(green) 50x49.png" id="1_ffqq5"]
 [ext_resource type="Script" path="res://Summoner/Spells/Shield/ShieldSpell.gd" id="1_i11kn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wucg8"]

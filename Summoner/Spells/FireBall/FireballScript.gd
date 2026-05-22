@@ -1,0 +1,3 @@
+extends BaseSpellScript
+class_name FireballScript
+

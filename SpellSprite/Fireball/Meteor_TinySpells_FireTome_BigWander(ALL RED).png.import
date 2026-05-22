@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fdd343mfbnjr"
-path="res://.godot/imported/Shield Spritesheet(green) 50x49.png-71f11a61b303514de88aa924fd7bf18a.ctex"
+uid="uid://lv32rjuu7gnx"
+path="res://.godot/imported/Meteor_TinySpells_FireTome_BigWander(ALL RED).png-5cac72372c33dd6e5a9df19a45d22a00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VFXSprite/Shield/Shield Spritesheet(green) 50x49.png"
-dest_files=["res://.godot/imported/Shield Spritesheet(green) 50x49.png-71f11a61b303514de88aa924fd7bf18a.ctex"]
+source_file="res://SpellSprite/Fireball/Meteor_TinySpells_FireTome_BigWander(ALL RED).png"
+dest_files=["res://.godot/imported/Meteor_TinySpells_FireTome_BigWander(ALL RED).png-5cac72372c33dd6e5a9df19a45d22a00.ctex"]
 
 [params]
 
