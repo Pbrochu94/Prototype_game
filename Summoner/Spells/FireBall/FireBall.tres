@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_0u7j2")
 spellName = "fire ball"
-damage = 1
+damage = 100
 type = 0
 focusType = 1
 healAmount = 0
@@ -18,7 +18,7 @@ needToMove = false
 effectDuration = 0
 statusEffect = 0
 splashDamage = 0
-cooldown = 2
+cooldown = 5
 currentCooldown = 0
 numberOfTargets = 1
 spellScene = ExtResource("2_xxwle")
