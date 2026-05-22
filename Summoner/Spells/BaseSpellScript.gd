@@ -4,11 +4,18 @@ class_name BaseSpellScript
 @onready var caster = get_tree().get_first_node_in_group("summoner")
 @onready var targets:Array[Node2D] = caster.targets
 var targetsPosition:Array[Vector2]
-var projectileSpeed:int
+var projectileSpeed:float
+var acceleration :float
+var deceleration :float
+var minSpeed:float
+var maxSpeed :float
+var isMoving:bool = false
+
+signal spellFinishedCasting
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("AHHHH", targets)
+	z_index = 1
 	for unit in targets:
 		targetsPosition.append(unit.global_position)
 	anim.animation_finished.connect(onAnimationFinished)
@@ -21,5 +28,6 @@ func onAnimationFinished():
 	match anim.animation:
 		"appear":
 			anim.play("active")
+			isMoving = true
 		"disapear":
 			queue_free()
