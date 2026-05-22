@@ -42,9 +42,10 @@ func _ready():
 
 #SPRITE & ANIMATIONS
 func onAnimationFinished():
+	pass
 	match anim.animation:
 		"casting":
-			setState("endingturn")
+			setState("idle")
 
 #BEHAVIOR
 func walk(delta, destination:Vector2):
@@ -77,6 +78,7 @@ func onFinishedIntro():
 	emit_signal("introAnimCompleted")
 func endingTurn():
 	print("Summoner end turn")
+	setState("endingturn")
 	setState("idle")
 	emit_signal("turnFinished")
 #UTILS
