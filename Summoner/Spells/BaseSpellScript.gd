@@ -20,13 +20,14 @@ func _ready():
 	z_index = 1
 	spellSelected = caster.spellSelected
 	spellFinishedCasting.connect(caster.endingTurn)
-#	for unit in targets:
-#		targetsPosition.append(unit.global_position)
 	anim.animation_finished.connect(onAnimationFinished)
 	anim.play("appear")
 
 func exit():
 	anim.play("disapear")
+	if spellSelected.isDamagingSpell:
+		await anim.animation_finished
+		emit_signal("spellFinishedCasting")
 
 func onAnimationFinished():
 	match anim.animation:

@@ -19,6 +19,7 @@ class_name SummonerSpell
 @export var numberOfTargets:int
 @export var spellScene:PackedScene
 @export var startingAnimPoint:Enum.SummonerSpellStartingPoint
+@export var isDamagingSpell:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

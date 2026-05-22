@@ -150,6 +150,8 @@ func receiveDamage(attacker,attack, damage):
 		print(characterName," has ", stats["currentHp"], " hp before attack ")
 		stats["currentHp"]-= trueDamage
 		setState("hurt")
+		#Wait end of animation and transform this function into async
+#		await anim.animation_finished
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
