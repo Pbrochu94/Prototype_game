@@ -44,3 +44,7 @@ enum Caster{
 	SUMMONER,
 	UNIT
 }
+enum SummonerSpellStartingPoint {
+	SUMMONER,
+	UNIT
+}

@@ -141,6 +141,7 @@ func endSelection():
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
 func unitAttack(targets:Array[Node2D]):
+		summoner.targets = targets
 		match caster:
 			Enum.Caster.SUMMONER:
 				for target in targets:

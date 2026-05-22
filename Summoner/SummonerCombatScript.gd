@@ -18,8 +18,8 @@ var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
 var allSpell:Dictionary={
+	"shield" = preload("res://Summoner/Spells/Shield/Shield.tres"),
 	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBall.tres"),
-	"shield" = preload("res://Summoner/Spells/Shield/Shield.tres")
 }
 var learnedSpells:Dictionary
 var spellSelected:SummonerSpell
@@ -37,7 +37,8 @@ func _ready():
 	stateMachine.init(self)
 	setState("intro")
 	print(allSpell["shield"])
-	addNewSpell(allSpell["shield"])
+	for spell in allSpell.values():
+		addNewSpell(spell)
 
 #SPRITE & ANIMATIONS
 func onAnimationFinished():
@@ -59,10 +60,14 @@ func castSpell(target:Node2D):
 	var spellInstance = spellSelected.spellScene.instantiate()
 	print(spellInstance)
 	print(target)
-	target.add_child(spellInstance)
+	match spellSelected.startingAnimPoint:
+		Enum.SummonerSpellStartingPoint.SUMMONER:
+			add_child(spellInstance)
+		Enum.SummonerSpellStartingPoint.UNIT:
+			target.add_child(spellInstance)
 	target.applyEffect(spellSelected)
 	setState("casting")
-#	print("Summoner cast ",spell.spellName, " on ", target.characterName)
+	print("Summoner cast ",spellSelected.spellName, " on ", target.characterName)
 
 #TURN FLOW
 func playIntro():
