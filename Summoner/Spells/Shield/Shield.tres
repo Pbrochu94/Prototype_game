@@ -23,3 +23,4 @@ currentCooldown = 0
 numberOfTargets = 1
 spellScene = ExtResource("2_no7dq")
 startingAnimPoint = 1
+isDamagingSpell = false
