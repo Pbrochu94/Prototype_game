@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxonaee0pw4bh"]
 
 [ext_resource type="Script" path="res://MapNodes/Combat/CombatEncounterScript.gd" id="1_57k4s"]
-[ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/enemyPartyManager.tscn" id="2_v55kg"]
+[ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/EnemyPartyManager.tscn" id="2_v55kg"]
 [ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/PlayerPartyManager.tscn" id="3_ybhpe"]
 [ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_cx0va"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://utils/Managers/TurnManager.tscn" id="5_w1hj5"]

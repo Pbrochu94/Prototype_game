@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CombatEncounterLV1Data" load_steps=2 format=3 uid="uid://f5wkiooj8elp"]
+
+[ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.gd" id="1_q643x"]
+
+[resource]
+script = ExtResource("1_q643x")
+encounterBudget = 6

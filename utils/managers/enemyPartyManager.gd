@@ -1,7 +1,7 @@
 extends BasePartyManager
 class_name EnemyPartyManager
 
-@onready var encounter : CombatEncounterData = preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Resource.tres")
+@onready var encounter : CombatEncounterData = preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
 
 
 func init():
@@ -13,6 +13,7 @@ func init():
 
 func loadTeam():
 	var generatedEnemies = encounter.generateEncounter()
+	print(generatedEnemies)
 	for enemyData in generatedEnemies:
 		var enemy = enemyData.scene.instantiate()
 		party.append(enemy)

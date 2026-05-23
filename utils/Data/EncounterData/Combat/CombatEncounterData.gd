@@ -1,7 +1,7 @@
 extends EncounterData
 class_name CombatEncounterData
 
-@export var enemies : Array[EnemyData] = [
+var enemies : Array[EnemyData] = [
 	preload("res://Invocations/Samurai/SamuraiData.tres")
 ]
 
@@ -16,6 +16,7 @@ var hasBudget:bool = true
 func generateEncounter():
 	var remainingBudget = encounterBudget
 	var selectedEnemies: Array[EnemyData] = []
+	print(enemies)
 	while remainingBudget > 0:
 		var validEnemies = enemies.filter(
 			func(enemy):

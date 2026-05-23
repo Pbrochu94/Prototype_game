@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://cfyhgoeob1e6k"]
+
+[ext_resource type="Script" path="res://utils/Data/EnemyData/UnitData.gd" id="1_0wv1h"]
+[ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruidCombat.tscn" id="1_dpsiy"]
+
+[resource]
+script = ExtResource("1_0wv1h")
+scene = ExtResource("1_dpsiy")
+cost = 5
