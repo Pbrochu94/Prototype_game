@@ -22,6 +22,7 @@ signal selectionEnd
 
 
 func _ready():
+	await get_tree().process_frame
 	enemyParty = enemyPartyManager.party
 	allyParty = playerPartyManager.party
 	selectingArrow.visible = false
@@ -103,6 +104,7 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
 			for enemy in enemyParty:
+				print(enemy)
 				enemy.canBeSelected = true
 func cancelSelection():
 	for enemy in enemyParty:
