@@ -1,7 +1,7 @@
 extends BasePartyManager
 class_name EnemyPartyManager
 
-@onready var encounter : CombatEncounterData = preload("res://utils/Data/EncounterData/Combat/CombatEncounterLV1Resource.tres")
+@onready var encounter : CombatEncounterData = preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Resource.tres")
 
 
 func init():

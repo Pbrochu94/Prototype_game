@@ -5,7 +5,7 @@ class_name CombatEncounterData
 	preload("res://Invocations/Samurai/SamuraiData.tres")
 ]
 
-@export var encounterBudget : int = 6
+@export var encounterBudget : int 
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]
 #@export var isElite : bool
