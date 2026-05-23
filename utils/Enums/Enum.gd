@@ -48,3 +48,8 @@ enum SummonerSpellStartingPoint {
 	SUMMONER,
 	UNIT
 }
+enum EncounterType{
+	COMBAT,
+	SHOP,
+	HEAL,
+}

@@ -10,6 +10,7 @@ class_name BaseUnitScript
 @onready var currentCombatScene:Node2D = get_tree().get_first_node_in_group("combat scene") 
 @onready var spriteOrientation:Node2D = $SpritePivot
 @onready var area = $Area2D
+@export var faction:Enum.Faction
 var partyManager:Node
 
 #VARIABLES
@@ -21,7 +22,9 @@ var currentState:String
 var isWalking = false
 var direction:int
 var states:Dictionary
-@export var faction:Enum.Faction
+
+#DATA
+@export var unitCost:int
 
 #STATS
 @onready var stats:Dictionary = {

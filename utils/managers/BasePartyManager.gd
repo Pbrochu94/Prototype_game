@@ -79,7 +79,6 @@ func loadRandomTeam():
 				else:
 					character.characterName += " enemy "
 				character.characterName += str(characterCount)
-	
 
 func assignUnitFaction(character:Node2D):
 	character.faction = partyFaction
