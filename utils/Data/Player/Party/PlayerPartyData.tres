@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerPartyData" load_steps=3 format=3 uid="uid://7mqdh7slxiuy"]
+
+[ext_resource type="Resource" uid="uid://bmejitn1dn8q2" path="res://Invocations/Samurai/SamuraiData.tres" id="1_ensxb"]
+[ext_resource type="Script" path="res://utils/Data/Player/Party/PlayerPartyData.gd" id="1_py8ps"]
+
+[resource]
+script = ExtResource("1_py8ps")
+invocations = Array[Resource("res://utils/Data/EnemyData/EnemyData.gd")]([ExtResource("1_ensxb")])
+lightShards = 3

@@ -13,13 +13,6 @@ var hasBudget:bool = true
 #@export var isFinalBoss : bool
 
 
-#func _ready():
-#	encounterType = Enum.EncounterType.COMBAT
-#	var generatedEnemies = generateEncounter()
-#	for enemyData in generatedEnemies:
-#		var enemy = enemyData.scene.instantiate()
-
-
 func generateEncounter():
 	var remainingBudget = encounterBudget
 	var selectedEnemies: Array[EnemyData] = []

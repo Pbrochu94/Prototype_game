@@ -36,6 +36,7 @@ var enemyStartingPosition:Vector2
 func _ready():
 	pickRandomBackground()
 	initSummoner() 
+	summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
 	turnManager.currentCombatScene = combatScene

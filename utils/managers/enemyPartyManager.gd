@@ -20,10 +20,9 @@ func loadTeam():
 func addEnemyToParty():
 	for i in range(party.size()):
 		var enemy = party[i]
+		aliveCount += 1
 		enemy.currentCombatScene = currentCombatScene
-		if i < currentCombatScene.enemyAnchors.size():
-			enemy.global_position = currentCombatScene.enemyAnchors[i].global_position
-			enemy.startingPosition = currentCombatScene.enemyAnchors[i].global_position
+		addUnitConnections(enemy)
 	currentlyAliveCharacters = party
 
 func placeEnemies():

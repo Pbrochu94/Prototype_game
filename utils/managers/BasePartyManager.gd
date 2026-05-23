@@ -49,47 +49,47 @@ var allCharacters:Array[PackedScene] = [
 	preload("res://Invocations/Archer/ArcherCombat.tscn"),
 	preload("res://Invocations/BlasterDruid/BlasterDruidCombat.tscn")
 ]
-func loadRandomTeam():
-	var characterCount = 0
-	match partyFaction:
-		Enum.Faction.PLAYER:
-			for i in range(3):
-				characterCount += 1
-				#Random characters
-				var character = allCharacters.pick_random().instantiate()
-				#Specific character to test
-#				var character = allCharacters[0].instantiate()
-				assignUnitFaction(character)
-				addUnitToParty(character)
-				addUnitConnections(character)
-				if character.faction == Enum.Faction.PLAYER:
-					character.characterName += " summon "
-				else:
-					character.characterName += " enemy "
-				character.characterName += str(characterCount)
-		Enum.Faction.ENEMY:
-			for i in range(3):
-				characterCount += 1
-				#Random characters
-				var character = allCharacters.pick_random().instantiate()
-				#Specific character to test
-#				var character = allCharacters[3].instantiate()
-				assignUnitFaction(character)
-				addUnitToParty(character)
-				addUnitConnections(character)
-				if character.faction == Enum.Faction.PLAYER:
-					character.characterName += " summon "
-				else:
-					character.characterName += " enemy "
-				character.characterName += str(characterCount)
+#func loadRandomTeam():
+#	var characterCount = 0
+#	match partyFaction:
+#		Enum.Faction.PLAYER:
+#			for i in range(3):
+#				characterCount += 1
+#				#Random characters
+#				var character = allCharacters.pick_random().instantiate()
+#				#Specific character to test
+##				var character = allCharacters[0].instantiate()
+#				assignUnitFaction(character)
+#				addUnitToParty(character)
+#				addUnitConnections(character)
+#				if character.faction == Enum.Faction.PLAYER:
+#					character.characterName += " summon "
+#				else:
+#					character.characterName += " enemy "
+#				character.characterName += str(characterCount)
+#		Enum.Faction.ENEMY:
+#			for i in range(3):
+#				characterCount += 1
+#				#Random characters
+#				var character = allCharacters.pick_random().instantiate()
+#				#Specific character to test
+##				var character = allCharacters[3].instantiate()
+#				assignUnitFaction(character)
+#				addUnitToParty(character)
+#				addUnitConnections(character)
+#				if character.faction == Enum.Faction.PLAYER:
+#					character.characterName += " summon "
+#				else:
+#					character.characterName += " enemy "
+#				character.characterName += str(characterCount)
 
 func assignUnitFaction(character:Node2D):
 	character.faction = partyFaction
 
-func addUnitToParty(character:Node2D):
-	aliveCount += 1
-	party.append(character)
-	currentlyAliveCharacters.append(character)
+#func addUnitToParty(character:Node2D):
+#	aliveCount += 1
+#	party.append(character)
+#	currentlyAliveCharacters.append(character)
 
 func addUnitConnections(character:Node2D):
 	character.isDowned.connect(onCharacterDeath)
