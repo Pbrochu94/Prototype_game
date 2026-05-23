@@ -6,6 +6,8 @@ class_name CombatEncounter
 @onready var playerAnchor = get_node("PlayerAnchor")
 @onready var enemyAnchor = get_node("EnemyAnchor")
 @onready var choiceMenu = $ChoiceMenu
+@onready var turnManager = get_tree().get_first_node_in_group("turn manager")
+@onready var targetManager = $TargetManager
 @onready var playerPartyManager = $PlayerPartyManager
 @onready var enemyPartyManager = $EnemyPartyManager
 @onready var summonerAnchor = $SummonerAnchor
@@ -26,7 +28,6 @@ class_name CombatEncounter
 ]
 var player:Node2D 
 var enemy:Node2D 
-var turnManager:Node
 var playerStartingPosition:Vector2
 var enemyStartingPosition:Vector2
 
@@ -34,11 +35,15 @@ var enemyStartingPosition:Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pickRandomBackground()
-	turnManager = get_tree().get_first_node_in_group("turn manager")
-	turnManager.currentCombatScene = combatScene
-	initSummoner()
+	initSummoner() 
 	enemyPartyManager.init()
 	playerPartyManager.init()
+	turnManager.currentCombatScene = combatScene
+	turnManager.init()
+	targetManager.init()
+	choiceMenu.init()
+
+
 
 func initPlayerPartyData():
 	for i in range(playerPartyManager.party.size()):

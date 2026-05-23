@@ -5,6 +5,7 @@ extends Node
 @onready var enemyPartyManager = get_tree().get_first_node_in_group("enemy party manager")
 @onready var playerPartyManager = get_tree().get_first_node_in_group("player party manager")
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
+@onready var currentCombatScene = get_tree().get_first_node_in_group("combat scene")
 
 
 #VARIABLES
@@ -21,10 +22,11 @@ signal selectionEnd
 
 
 
-func _ready():
-	await get_tree().process_frame
-	enemyParty = enemyPartyManager.party
-	allyParty = playerPartyManager.party
+func init():
+	enemyParty = currentCombatScene.enemyPartyManager.party
+	allyParty = currentCombatScene.playerPartyManager.party
+	print(enemyParty)
+	print(allyParty)
 	selectingArrow.visible = false
 	connectSignals()
 

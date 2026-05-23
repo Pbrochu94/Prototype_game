@@ -6,11 +6,11 @@ extends Node
 @onready var enemyPartyManager:Node = get_tree().get_first_node_in_group("enemy party manager")
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
 @onready var everyUnits:Array[Node] 
+@onready var currentCombatScene = $CombatEncounterScene
 var everyLivingUnits
 var summoner:Node2D 
 var currentTurn = "player"
 #var attackSource:Enum.attackSource
-var currentCombatScene:Node2D 
 var enemy:Node2D 
 var isSelecting = false
 var playOrder:Array
@@ -28,16 +28,14 @@ signal targetSelectionStarted(nmbOfTarget:int)
 signal selectionCompleted
 signal playOutroAnim
 
-func _ready():
-	#Wait for all _ready() to complete
-	await get_tree().process_frame
+func init():
 	connectSignals()
 	playIntro()
 
 #CONNECTIONS
 func connectSignals():
-	summoner.introAnimCompleted.connect(startCombat)
-	summoner.turnFinished.connect(endTurn)
+	currentCombatScene.summoner.introAnimCompleted.connect(startCombat)
+	currentCombatScene.summoner.turnFinished.connect(endTurn)
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
@@ -59,7 +57,7 @@ func connectEachEnemy():
 
 #FIGHT INIT
 func playIntro():
-	summoner.playIntro()
+	currentCombatScene.summoner.playIntro()
 
 func startCombat():
 	currentCombatScene.initPlayerPartyData()
