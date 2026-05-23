@@ -13,7 +13,6 @@ func init():
 
 func loadTeam():
 	var generatedEnemies = encounter.generateEncounter()
-	print(generatedEnemies)
 	for enemyData in generatedEnemies:
 		var enemy = enemyData.scene.instantiate()
 		party.append(enemy)

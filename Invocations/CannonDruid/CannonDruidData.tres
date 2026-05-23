@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://bsogrgdk7fvkf"]
 
-[ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="1_fw17a"]
 [ext_resource type="Script" path="res://utils/Data/EnemyData/UnitData.gd" id="1_j8xef"]
+[ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="1_l62ve"]
 
 [resource]
 script = ExtResource("1_j8xef")
-scene = ExtResource("1_fw17a")
+scene = ExtResource("1_l62ve")
 cost = 5

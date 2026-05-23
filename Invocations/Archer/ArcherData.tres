@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://d140sd1gmu4e2"]
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://d140sd1gmu4e2"]
 
-[ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="1_dj3yg"]
-[ext_resource type="Script" path="res://utils/Data/EnemyData/EnemyData.gd" id="2_c0tvd"]
+[ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="1_36eu4"]
+[ext_resource type="Script" path="res://utils/Data/EnemyData/UnitData.gd" id="1_avyu7"]
 
 [resource]
-script = ExtResource("2_c0tvd")
-scene = ExtResource("1_dj3yg")
+script = ExtResource("1_avyu7")
+scene = ExtResource("1_36eu4")
 cost = 3
