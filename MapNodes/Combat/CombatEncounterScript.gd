@@ -1,5 +1,7 @@
 extends Node2D
+class_name CombatEncounter
 
+#NODES
 @onready var combatScene = self
 @onready var playerAnchor = get_node("PlayerAnchor")
 @onready var enemyAnchor = get_node("EnemyAnchor")
@@ -19,6 +21,9 @@ extends Node2D
 	$EnemyAnchor3
 ]
 @onready var summoner:Node2D = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
+@onready var environments:Array[PackedScene] = [
+	preload("res://MapNodes/Combat/Intro/CaveBackgroundScene.tscn")
+]
 var player:Node2D 
 var enemy:Node2D 
 var turnManager:Node
@@ -28,6 +33,7 @@ var enemyStartingPosition:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pickRandomBackground()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	turnManager.currentCombatScene = combatScene
 	initSummoner()
@@ -58,3 +64,8 @@ func initSummoner():
 	summoner.global_position = summonerIntroStartingPoint.global_position
 	summoner.startingPosition = summonerAnchor.global_position
 	summoner.playIntro()
+
+func pickRandomBackground():
+	var randomEnvironment = environments.pick_random()
+	var environment = randomEnvironment.instantiate()
+	$Background.add_child(environment)

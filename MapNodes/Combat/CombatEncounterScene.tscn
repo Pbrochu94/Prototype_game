@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxonaee0pw4bh"]
+
+[ext_resource type="Script" path="res://MapNodes/Combat/CombatEncounterScript.gd" id="1_57k4s"]
+[ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/EnemyPartyManager.tscn" id="2_v55kg"]
+[ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/PlayerPartyManager.tscn" id="3_ybhpe"]
+[ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_cx0va"]
+[ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://utils/Managers/TurnManager.tscn" id="5_w1hj5"]
+[ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_rwakw"]
+
+[node name="CombatEncounterScene" type="Node2D" groups=["combat scene"]]
+script = ExtResource("1_57k4s")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="EnemyPartyManager" parent="." instance=ExtResource("2_v55kg")]
+
+[node name="PlayerPartyManager" parent="." instance=ExtResource("3_ybhpe")]
+
+[node name="TargetManager" parent="." groups=["target manager"] instance=ExtResource("4_cx0va")]
+
+[node name="TurnManager" parent="." instance=ExtResource("5_w1hj5")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 10)
+zoom = Vector2(2.515, 2.515)
+
+[node name="PlayerAnchor2" type="Node2D" parent="."]
+position = Vector2(-147, 35)
+
+[node name="PlayerAnchor1" type="Node2D" parent="."]
+position = Vector2(-124, 77)
+
+[node name="PlayerAnchor3" type="Node2D" parent="."]
+position = Vector2(-147, 120)
+
+[node name="EnemyAnchor2" type="Node2D" parent="."]
+position = Vector2(145, 35)
+
+[node name="EnemyAnchor1" type="Node2D" parent="."]
+position = Vector2(122, 77)
+
+[node name="EnemyAnchor3" type="Node2D" parent="."]
+position = Vector2(145, 120)
+
+[node name="ChoiceMenu" parent="." groups=["combat menu"] instance=ExtResource("6_rwakw")]
+offset_left = -152.0
+offset_top = -60.0
+offset_right = -152.0
+offset_bottom = -60.0
+scale = Vector2(0.58, 0.58)
+
+[node name="SummonerAnchor" type="Node2D" parent="."]
+position = Vector2(-195, 77)
+
+[node name="SummonerIntroStart" type="Node2D" parent="."]
+position = Vector2(-253, 77)
