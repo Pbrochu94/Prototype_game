@@ -4,6 +4,7 @@ class_name BasePartyManager
 
 #NODES
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
+@onready var currentCombatScene = get_tree().get_first_node_in_group("combat scene")
 #VARIABLES
 var party:Array[Node2D]
 var aliveCount:int

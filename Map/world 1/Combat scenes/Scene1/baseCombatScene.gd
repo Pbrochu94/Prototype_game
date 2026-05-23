@@ -41,14 +41,14 @@ func initPlayerPartyData():
 			invocation.global_position = playerAnchors[i].global_position
 			invocation.startingPosition = playerAnchors[i].global_position
 
-func initEnemyPartyData():
-	for i in range(enemyPartyManager.party.size()):
-		var enemy = enemyPartyManager.party[i]
-		combatScene.add_child(enemy)
-		enemy.currentCombatScene = self
-		if i < enemyAnchors.size():
-			enemy.global_position = enemyAnchors[i].global_position
-			enemy.startingPosition = enemyAnchors[i].global_position
+#func initEnemyPartyData():
+#	for i in range(enemyPartyManager.party.size()):
+#		var enemy = enemyPartyManager.party[i]
+#		combatScene.add_child(enemy)
+#		enemy.currentCombatScene = self
+#		if i < enemyAnchors.size():
+#			enemy.global_position = enemyAnchors[i].global_position
+#			enemy.startingPosition = enemyAnchors[i].global_position
 
 func initSummoner():
 	combatScene.add_child(summoner)

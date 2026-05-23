@@ -63,7 +63,7 @@ func playIntro():
 
 func startCombat():
 	currentCombatScene.initPlayerPartyData()
-	currentCombatScene.initEnemyPartyData()
+#	currentCombatScene.initEnemyPartyData()
 	initPlayOrder()
 	startTurn()
 
