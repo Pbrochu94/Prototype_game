@@ -2,7 +2,8 @@ extends EncounterData
 class_name CombatEncounterData
 
 var enemies : Array[EnemyData] = [
-	preload("res://Invocations/Samurai/SamuraiData.tres")
+	preload("res://Invocations/Samurai/SamuraiData.tres"),
+	preload("res://Invocations/Archer/ArcherData.tres")
 ]
 
 @export var encounterBudget : int 
