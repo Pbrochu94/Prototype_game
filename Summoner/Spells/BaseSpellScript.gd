@@ -2,6 +2,8 @@ extends Node2D
 class_name BaseSpellScript
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var caster = get_tree().get_first_node_in_group("summoner")
+
+
 var targets:Array[Node2D] 
 var targetsPosition:Array[Vector2]
 var projectileSpeed:float

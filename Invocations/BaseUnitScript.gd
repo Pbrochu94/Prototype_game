@@ -43,7 +43,7 @@ var states:Dictionary
 @export var attackSelected:Ability
 @export var deff:int
 @export var atk:int
-var activeEffects:Array[Dictionary] = []
+var activeEffects:Array[Effect] = []
 var abilityCooldown:int
 
 #EFFECTS
@@ -158,15 +158,16 @@ func receiveDamage(attacker,attack, damage):
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
-	match attack.statusEffect:
+	match attack.effectRes.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
-			var effectApplied = {
-					"type":"invulnerable",
-					"duration": attack.effectDuration
-					}
+			var effectApplied = attack.effectRes
+#			var effectApplied = {
+#					"type":"invulnerable",
+#					"duration": attack.effectDuration
+#					}
 			activeEffects.append(effectApplied)
-			print(characterName, " is now invulnerable for ", attack.effectDuration, " turn")
+			print(characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.statsAffected:
 				var effectApplied = {

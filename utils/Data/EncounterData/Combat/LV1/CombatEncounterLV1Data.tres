@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_q643x")
-encounterBudget = 6
+encounterBudget = 3

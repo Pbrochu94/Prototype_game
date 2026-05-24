@@ -1,4 +1,5 @@
 extends BaseSpellScript
+class_name ShieldSpell
 
 
 

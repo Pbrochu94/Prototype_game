@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_py8ps")
 invocations = Array[Resource("res://utils/Data/EnemyData/UnitData.gd")]([ExtResource("1_80qba")])
-lightShards = 6
+lightShards = 3
