@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://lg6qfiatta5s"]
+
+[ext_resource type="Resource" uid="uid://d2g245tosy0hp" path="res://Invocations/Archer/Attacks/BowPowerShot/BowPowerShotEffectRes.tres" id="1_1hqlr"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="2_kxdpi"]
+
+[resource]
+script = ExtResource("2_kxdpi")
+attackName = "bow power shot"
+damage = 40
+type = 0
+focusType = 1
+healAmount = 0
+numberOfTargets = 1
+element = "light"
+hitboxName = ""
+effectAmount = 20
+needToMove = true
+effectDuration = 3
+statusEffect = 2
+splashDamage = 0
+cooldown = 0
+currentCooldown = 0
+effectRes = ExtResource("1_1hqlr")

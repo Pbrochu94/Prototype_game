@@ -158,6 +158,7 @@ func receiveDamage(attacker,attack, damage):
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
+	print(attack)
 	match attack.effectRes.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
@@ -169,15 +170,16 @@ func applyEffect(attack):
 			activeEffects.append(effectApplied)
 			print(characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
 		Enum.StatusEffect.STAT_MODIFIER:
-			for statAffected in attack.statsAffected:
-				var effectApplied = {
-					"type":"stat modifier",
-					"stat":statAffected,
-					"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
-					"duration": attack.effectDuration
-					}
+			for statAffected in attack.effectRes.statsAffected:
+				var effectApplied = attack.effectRes
+				stats[statAffected] += convertPourcentage(stats[statAffected],effectApplied.amount)
+#				var effectApplied = {
+#					"type":"stat modifier",
+#					"stat":statAffected,
+#					"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
+#					"duration": attack.effectDuration
+#					}
 				print(characterName, " received the effect ", effectApplied)
-				stats[effectApplied["stat"]] += effectApplied["amount"]
 				activeEffects.append(effectApplied)
 
 
@@ -207,7 +209,7 @@ func enemyStartTurn():
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
-	attackSelected = attacks.values()[index]["path"]
+	attackSelected = attacks.values()[index]
 	print("Attack selected: ", attackSelected.attackName)
 	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
 	match attackSelected.focusType:
@@ -234,7 +236,8 @@ func getRandomAttack() -> Ability:
 			availableAtk.append(attack)
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
-	return randomAtk["path"]
+	print(randomAtk)
+	return randomAtk
 func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
 	var nmbOfAvailableTargets = min(nmbOfTargetOfAttack, unitSelectable.size())

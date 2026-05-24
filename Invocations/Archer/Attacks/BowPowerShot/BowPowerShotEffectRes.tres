@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatModifierEffect" load_steps=2 format=3 uid="uid://d2g245tosy0hp"]
+
+[ext_resource type="Script" path="res://utils/Data/Effect/StatModifier/StatModifierEffect.gd" id="1_5qrx4"]
+
+[resource]
+script = ExtResource("1_5qrx4")
+amount = 20
+statsAffected = Array[String](["speed"])
+type = 2
+name = "speed buff"
+duration = 3

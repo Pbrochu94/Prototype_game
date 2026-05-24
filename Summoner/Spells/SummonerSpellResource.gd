@@ -5,14 +5,14 @@ class_name SummonerSpell
 @export var damage: int
 @export var type:Enum.SpellType
 @export var focusType:Enum.FocusType
-@export var healAmount:int
+#@export var healAmount:int
 @export var element: String
 @export var hitboxName:String
-@export var statsAffected:Array[String]
-@export var effectAmount:int
+#@export var statsAffected:Array[String]
+#@export var effectAmount:int
 @export var needToMove:bool
-@export var effectDuration:int
-@export var statusEffect:Enum.StatusEffect
+#@export var effectDuration:int
+#@export var statusEffect:Enum.StatusEffect
 @export var splashDamage:int
 @export var cooldown: int
 @export var currentCooldown:int

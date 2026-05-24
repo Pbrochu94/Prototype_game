@@ -9,7 +9,7 @@ class_name Ability
 @export var numberOfTargets:int
 @export var element: String
 @export var hitboxName:String
-@export var statsAffected:Array[String]
+#@export var statsAffected:Array[String]
 @export var effectAmount:int
 @export var needToMove:bool
 @export var effectDuration:int
@@ -17,4 +17,5 @@ class_name Ability
 @export var splashDamage:int
 @export var cooldown: int
 @export var currentCooldown:int
-
+@export var effectRes:Effect
+var justUsed:bool = false
