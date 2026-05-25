@@ -23,7 +23,7 @@ func generateParty():
 		#PICK RANDOM
 #		var unitPicked = validUnits.pick_random()
 		#PICK SPECIFIC
-		var unitPicked = validUnits[2]
+		var unitPicked = validUnits[1]
 		selectedUnits.append(unitPicked)
 		remainingBudget -= unitPicked.cost
 	return selectedUnits

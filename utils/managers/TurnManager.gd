@@ -173,9 +173,10 @@ func endFight():
 	emit_signal("playOutroAnim")
 	if playerWon:
 		print("You won !!")
+		RunManager.nodes[RunManager.currentNode]["completed"] = true
 	else:
-		print(playerWon)
 		print("GAME OVER")
+		RunManager.nodes[RunManager.currentNode]["completed"] = false
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack(target:Node2D):

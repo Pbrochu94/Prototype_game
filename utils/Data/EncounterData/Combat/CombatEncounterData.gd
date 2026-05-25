@@ -28,7 +28,7 @@ func generateEncounter():
 		#PICK RANDOM
 #		var unitPicked = validEnemies.pick_random()
 		#PICK SPECIFIC
-		var unitPicked = validEnemies[3]
+		var unitPicked = validEnemies[1]
 		selectedEnemies.append(unitPicked)
 		remainingBudget -= unitPicked.cost
 	return selectedEnemies
