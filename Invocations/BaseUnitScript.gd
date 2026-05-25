@@ -158,28 +158,20 @@ func receiveDamage(attacker,attack, damage):
 		emit_signal("hpChanged")
 		print(characterName," now have ", stats["currentHp"], " hp after attack ")
 func applyEffect(attack):
-	print(attack)
+	print(attack.effectRes.name, " is applied to: ", self)
 	match attack.effectRes.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
 			var effectApplied = attack.effectRes
-#			var effectApplied = {
-#					"type":"invulnerable",
-#					"duration": attack.effectDuration
-#					}
-			activeEffects.append(effectApplied)
+			activeEffects.append(effectApplied.duplicate(true))
 			print(characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.effectRes.statsAffected:
-				var effectApplied = attack.effectRes
-				stats[statAffected] += convertPourcentage(stats[statAffected],effectApplied.amount)
-#				var effectApplied = {
-#					"type":"stat modifier",
-#					"stat":statAffected,
-#					"amount": convertPourcentage(stats[statAffected],attack.effectAmount),
-#					"duration": attack.effectDuration
-#					}
-				print(characterName, " received the effect ", effectApplied)
+				var effectApplied = attack.effectRes.duplicate(true)
+				var modifier = int(stats[statAffected] * effectApplied.amount)
+				effectApplied.amountAppliedToUnit = modifier
+				stats[statAffected] += modifier
+				print(characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
 
 
@@ -265,7 +257,10 @@ func attack(enemy:Node2D,attack:Ability):
 	match attack.type:
 		Enum.AbilityType.ATTACK:
 			if attack.statusEffect != Enum.StatusEffect.NONE:
-				applyEffect(attack)
+				if attack.effectRes.target != Enum.FocusType.SELF:
+					enemy.applyEffect(attack)
+				else:
+					applyEffect(attack)
 			var atkStat = stats["atk"]
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
@@ -277,9 +272,9 @@ func attack(enemy:Node2D,attack:Ability):
 						ally.receiveDamage(self,attack,splashDamage)
 						print(ally.characterName, " received ", (attack.splashDamage + stats["atk"]), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
-		Enum.AbilityType.EFFECT:
-			enemy.applyEffect(attackSelected)
-	print(characterName," Attacked: ", enemy.characterName)
+#		Enum.AbilityType.EFFECT:
+#			enemy.applyEffect(attackSelected)
+#	print(characterName," Attacked: ", enemy.characterName)
 func attackFinished():
 	print("Attack finished")
 	if self.global_position != self.startingPosition:
@@ -314,35 +309,37 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 func setState(newState:String):
 	stateMachine.setState(states[newState])
 func getUnitInfo():
+	var effectSummaries = []
+	for effect in activeEffects:
+		var effectSummary = {}
+		effectSummary["name"] = effect.name
+		effectSummary["amount"] = effect.amountAppliedToUnit
+		effectSummary["duration"] = effect.duration
+		effectSummaries.append(effectSummary)
 	return {
 		"Name": characterName,
 		"Stats": stats,
-		"Active effects": activeEffects
+		"Active effects": effectSummaries
 	}
 func reduceTimers():
-	for effect in activeEffects:
+	for i in range(activeEffects.size() - 1, -1, -1):
+		var effect = activeEffects[i]
 		effect["duration"] -= 1
-		if effect["duration"]<= 0:
-			activeEffects.erase(effect)
-			match effect["type"]:
-				"invulnerable":
+		if effect["duration"] <= 0:
+			match effect.type:
+				Enum.StatusEffect.INVULNERABLE:
 					isInvulnerable = false
 					var spell = get_node("ShieldEffect")
 					spell.exit()
-				"stat modifier":
-					stats[effect["stat"]] -= effect["amount"]
+				Enum.StatusEffect.STAT_MODIFIER:
+					for statAffected in effect.statsAffected:
+						stats[statAffected] -= effect.amountAppliedToUnit
+			activeEffects.remove_at(i)
 	for attack in attacks:
 		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:
 			attacks[attack]["currentCooldown"] -= 1
-			print("attack: ",attack," cd = ", attacks[attack]["currentCooldown"])
+			print("attack: ", attack," cd = ", attacks[attack]["currentCooldown"])
 		attacks[attack]["justUsed"] = false
-func convertPourcentage(baseStat:int, amount:int):
-	var amountInPercent:float = float(amount)/100
-	var value:float = baseStat * amountInPercent
-	if value > 0:
-		return ceil(value)
-	else:
-		return floor(value)
 func linkToFactionParty():
 	if faction == Enum.Faction.PLAYER:
 		partyManager = get_tree().get_first_node_in_group("player party manager")

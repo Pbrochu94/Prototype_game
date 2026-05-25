@@ -104,9 +104,9 @@ func resetPlayingOrder():
 func startTurn():
 	if not currentlyPlaying:
 		return
+	currentlyPlaying.reduceTimers()
 	print("Now playing :", currentlyPlaying.getUnitInfo())
 	print("Summoner info: " ,summoner.getInfo())
-	currentlyPlaying.reduceTimers()
 	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()
 	else:

@@ -8,18 +8,8 @@ func _ready():
 
 func initAttacks():
 	attacks = {
-	"sword slash" : {
-		"path": preload("res://Invocations/Samurai/Attacks/SwordSlash.tres"),
-		"cooldown": 0,
-		"currentCooldown":0,
-		"justUsed": false
-	},
-	"sword slam": {
-		"path": preload("res://Invocations/Samurai/Attacks/SwordSlam.tres"),
-		"cooldown": 3,
-		"currentCooldown": 0,
-		"justUsed": false
-	}
+	"sword slash" : preload("res://Invocations/Samurai/Attacks/Sword slash/SwordSlash.tres").duplicate(true),
+	"sword slam": preload("res://Invocations/Samurai/Attacks/Sword slam/SwordSlam.tres").duplicate(true),
 }
 
 func initStats():

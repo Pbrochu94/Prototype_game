@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://y5j8ksmvehl2"]
+
+[ext_resource type="Resource" uid="uid://ddb8tj1s02awk" path="res://Invocations/BlasterDruid/Attacks/InstabilityScan/InstabilityScanEffectRes.tres" id="1_ijknv"]
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_sddqm"]
+
+[resource]
+script = ExtResource("1_sddqm")
+attackName = "instability scan"
+damage = 0
+type = 0
+focusType = 1
+healAmount = 0
+numberOfTargets = 1
+element = ""
+hitboxName = ""
+effectAmount = 0
+needToMove = false
+effectDuration = 3
+statusEffect = 2
+splashDamage = 0
+cooldown = 3
+currentCooldown = 0
+effectRes = ExtResource("1_ijknv")

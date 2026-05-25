@@ -8,8 +8,8 @@ func _ready():
 
 func initAttacks():
 	attacks = {
-	"bow shot" : preload("res://Invocations/Archer/Attacks/BowShot/BowShot.tres"),
-	"bow power shot" : preload("res://Invocations/Archer/Attacks/BowPowerShot/BowPowerShot.tres")
+	"bow shot" : preload("res://Invocations/Archer/Attacks/BowShot/BowShot.tres").duplicate(true),
+	"bow power shot" : preload("res://Invocations/Archer/Attacks/BowPowerShot/BowPowerShot.tres").duplicate(true)
 	}
 
 func initStats():

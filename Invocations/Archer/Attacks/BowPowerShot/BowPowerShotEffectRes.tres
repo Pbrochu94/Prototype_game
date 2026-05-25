@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_5qrx4")
-amount = 20
+amount = 0.2
 statsAffected = Array[String](["speed"])
 type = 2
 name = "speed buff"
 duration = 3
+target = 0

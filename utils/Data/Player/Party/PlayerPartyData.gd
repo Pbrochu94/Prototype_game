@@ -1,7 +1,7 @@
 extends Resource
 class_name PlayerPartyData
 
-@export var invocations : Array[UnitData] = [
+const invocations : Array[UnitData] = [
 	preload("res://Invocations/Samurai/SamuraiData.tres"),
 	preload("res://Invocations/Archer/ArcherData.tres"),
 	preload("res://Invocations/CannonDruid/CannonDruidData.tres"),
@@ -11,16 +11,19 @@ class_name PlayerPartyData
 @export var lightShards:int
 var hasBudget:bool = true 
 
-func generateEncounter():
+func generateParty():
 	var remainingBudget = lightShards
-	var selectedEnemies: Array[UnitData] = []
+	var selectedUnits: Array[UnitData] = []
 	while remainingBudget > 0:
-		var validUnit = invocations.filter(
+		var validUnits = invocations.filter(
 			func(invocation):
 				return invocation.cost <= remainingBudget)
-		if validUnit.is_empty():
+		if validUnits.is_empty():
 			break
-		var randomEnemy = validUnit.pick_random()
-		selectedEnemies.append(randomEnemy)
-		remainingBudget -= randomEnemy.cost
-	return selectedEnemies
+		#PICK RANDOM
+#		var unitPicked = validUnits.pick_random()
+		#PICK SPECIFIC
+		var unitPicked = validUnits[3]
+		selectedUnits.append(unitPicked)
+		remainingBudget -= unitPicked.cost
+	return selectedUnits

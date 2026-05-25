@@ -9,18 +9,8 @@ func _ready():
 
 func initAttacks():
 	attacks = {
-	"gun shot" : {
-		"path":preload("res://Invocations/BlasterDruid/Attacks/GunShot.tres"),
-		"cooldown": 0,
-		"currentCooldown":0,
-		"justUsed": false
-		},
-	"instability scan" : {
-		"path":preload("res://Invocations/BlasterDruid/Attacks/Scan.tres"),
-		"cooldown": 3,
-		"currentCooldown":0,
-		"justUsed": false
-		}
+	"gun shot" : preload("res://Invocations/BlasterDruid/Attacks/GunShot/GunShot.tres").duplicate(true),
+	"instability scan" : preload("res://Invocations/BlasterDruid/Attacks/InstabilityScan/Scan.tres").duplicate(true)
 	}
 
 func initStats():

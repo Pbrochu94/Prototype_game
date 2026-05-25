@@ -18,6 +18,6 @@ needToMove = true
 effectDuration = 3
 statusEffect = 2
 splashDamage = 0
-cooldown = 0
+cooldown = 3
 currentCooldown = 0
 effectRes = ExtResource("1_1hqlr")

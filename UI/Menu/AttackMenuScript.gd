@@ -36,13 +36,13 @@ func close():
 func onAttackSelected():
 	var atkKey = currentlyPlayingUnit.attacks.keys()[0]
 	if currentlyPlayingUnit.attacks[atkKey]["currentCooldown"]>0:
-		print("Ability ", currentlyPlayingUnit.attacks.keys()[0], " on cd!")
+		print("Ability ", currentlyPlayingUnit.attacks.keys()[0], " on cd for ", currentlyPlayingUnit.attacks[atkKey]["currentCooldown"])
 	else:
 		emit_signal("attackSelected", 0)
 
 func onSkillSelected():
 	var atkKey = currentlyPlayingUnit.attacks.keys()[1]
 	if currentlyPlayingUnit.attacks[atkKey]["currentCooldown"]>0:
-		print("Ability ", currentlyPlayingUnit.attacks.keys()[1], " on cd!")
+		print("Ability ", currentlyPlayingUnit.attacks.keys()[1], " on cd for ", currentlyPlayingUnit.attacks[atkKey]["currentCooldown"])
 	else:
 		emit_signal("attackSelected", 1)

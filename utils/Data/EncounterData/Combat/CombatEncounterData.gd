@@ -1,7 +1,7 @@
 extends EncounterData
 class_name CombatEncounterData
 
-var enemies : Array[UnitData] = [
+const enemies : Array[UnitData] = [
 	preload("res://Invocations/Samurai/SamuraiData.tres"),
 	preload("res://Invocations/Archer/ArcherData.tres"),
 	preload("res://Invocations/CannonDruid/CannonDruidData.tres"),
@@ -25,7 +25,10 @@ func generateEncounter():
 				return enemy.cost <= remainingBudget)
 		if validEnemies.is_empty():
 			break
-		var randomEnemy = validEnemies.pick_random()
-		selectedEnemies.append(randomEnemy)
-		remainingBudget -= randomEnemy.cost
+		#PICK RANDOM
+#		var unitPicked = validEnemies.pick_random()
+		#PICK SPECIFIC
+		var unitPicked = validEnemies[3]
+		selectedEnemies.append(unitPicked)
+		remainingBudget -= unitPicked.cost
 	return selectedEnemies

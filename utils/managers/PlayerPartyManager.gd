@@ -10,7 +10,7 @@ func init():
 
 
 func loadTeam():
-	var generatedUnits = encounter.generateEncounter()
+	var generatedUnits = encounter.generateParty()
 	for unitData in generatedUnits:
 		var unit = unitData.scene.instantiate()
 		party.append(unit)
@@ -18,6 +18,8 @@ func loadTeam():
 func addUnitToParty():
 	for i in range(party.size()):
 		var unit = party[i]
+		var numberNameTag = str(i+1)
+		unit.characterName +=  " player " + numberNameTag 
 		aliveCount += 1
 		unit.currentCombatScene = currentCombatScene
 		addUnitConnections(unit)
