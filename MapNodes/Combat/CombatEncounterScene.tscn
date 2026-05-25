@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxonaee0pw4bh"]
+[gd_scene load_steps=8 format=3 uid="uid://cxonaee0pw4bh"]
 
 [ext_resource type="Script" path="res://MapNodes/Combat/CombatEncounterScript.gd" id="1_57k4s"]
+[ext_resource type="PackedScene" uid="uid://debwlw6fs83mb" path="res://UI/EndFight/Reward/RewardScreen.tscn" id="2_qisru"]
 [ext_resource type="PackedScene" uid="uid://dii0fpe0rdidt" path="res://utils/Managers/enemyPartyManager.tscn" id="2_v55kg"]
 [ext_resource type="PackedScene" uid="uid://cxu53skii7dxs" path="res://utils/Managers/PlayerPartyManager.tscn" id="3_ybhpe"]
 [ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_cx0va"]
@@ -11,6 +12,8 @@
 script = ExtResource("1_57k4s")
 
 [node name="Background" type="Node2D" parent="."]
+
+[node name="RewardScreen" parent="." instance=ExtResource("2_qisru")]
 
 [node name="EnemyPartyManager" parent="." instance=ExtResource("2_v55kg")]
 

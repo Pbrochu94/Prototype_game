@@ -168,7 +168,9 @@ func applyEffect(attack):
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.effectRes.statsAffected:
 				var effectApplied = attack.effectRes.duplicate(true)
-				var modifier = int(stats[statAffected] * effectApplied.amount)
+				var modifier = int(stats[statAffected] * effectApplied.amount) 
+				if modifier == 0:
+					modifier = sign(effectApplied.amount)
 				effectApplied.amountAppliedToUnit = modifier
 				stats[statAffected] += modifier
 				print(characterName, " received the effect ", effectApplied.name)

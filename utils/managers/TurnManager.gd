@@ -39,8 +39,6 @@ func connectSignals():
 	connectEachEnemy()
 	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
 	choiceMenu.spellMenu.spellSelected.connect(onSpellSelected)
-	playerPartyManager.partyDead.connect(playerPartyDefeated)
-	enemyPartyManager.partyDead.connect(enemyPartyDefeated)
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
 	for invocation in playerPartyManager.party:
@@ -173,10 +171,13 @@ func endFight():
 	emit_signal("playOutroAnim")
 	if playerWon:
 		print("You won !!")
-		RunManager.nodes[RunManager.currentNode]["completed"] = true
+		openEndingScreen()
 	else:
 		print("GAME OVER")
 		RunManager.nodes[RunManager.currentNode]["completed"] = false
+		get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
+func openEndingScreen():
+	currentCombatScene.endingScreen.open()
 
 #ENEMY BEHAVIORS
 func enemyMoveToAttack(target:Node2D):
@@ -184,14 +185,3 @@ func enemyMoveToAttack(target:Node2D):
 func enemyAttack():
 	enemy.attack()
 
-#PARTY BEHAVIORS
-func playerPartyDefeated():
-	currentlyPlaying = null
-	playerLost = true
-#	emit_signal("playOutroAnim")
-	print("GAME OVER")
-func enemyPartyDefeated():
-	currentlyPlaying = null
-	playerLost = true
-#	emit_signal("playOutroAnim")
-	print("You won !!")

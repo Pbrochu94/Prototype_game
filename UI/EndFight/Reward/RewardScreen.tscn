@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://debwlw6fs83mb"]
+
+[ext_resource type="Script" path="res://UI/EndFight/Reward/RewardScreenScript.gd" id="1_e5txv"]
+
+[node name="RewardScreen" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e5txv")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -160.0
+offset_right = 120.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(240, 160)
+layout_mode = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -30.5
+offset_right = 39.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "YOU WON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/Button" to="." method="buttonPressed"]

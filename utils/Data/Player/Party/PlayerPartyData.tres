@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_py8ps")
-lightShards = 5
+lightShards = 6

@@ -12,6 +12,7 @@ class_name CombatEncounter
 @onready var enemyPartyManager = $EnemyPartyManager
 @onready var summonerAnchor = $SummonerAnchor
 @onready var summonerIntroStartingPoint = $SummonerIntroStart
+@onready var endingScreen = $RewardScreen
 @onready var playerAnchors = [
 	$PlayerAnchor1,
 	$PlayerAnchor2,
@@ -39,6 +40,7 @@ func _ready():
 	summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
+	endingScreen.init()
 	turnManager.currentCombatScene = combatScene
 	turnManager.init()
 	targetManager.init()
