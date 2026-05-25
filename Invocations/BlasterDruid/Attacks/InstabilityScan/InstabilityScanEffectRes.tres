@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_op1t3")
-amount = -0.2
 statsAffected = Array[String](["deff"])
 type = 2
 name = "deff debuff"
 duration = 3
 target = 1
+amount = -0.2

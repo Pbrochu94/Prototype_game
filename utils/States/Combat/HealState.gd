@@ -12,6 +12,7 @@ func enter():
 	attackSelected = owner.attackSelected
 	attackName = attackSelected.attackName
 	attacksDict = owner.attacks
+	target = owner.target
 	if attacksDict[attackName]["cooldown"] >  0:
 		var cooldown:int = attacksDict[attackName]["cooldown"]
 		print(attackName, " goes on a ", cooldown, " turn cooldown")
@@ -19,7 +20,6 @@ func enter():
 		attacksDict[attackName]["justUsed"] = true
 		print(attacksDict[attackName])
 	if attackSelected.focusType == Enum.FocusType.SELF:
-		target = owner
 		target.anim.play(attackSelected.attackName.to_lower())
 	else:
 		target = owner.target
@@ -27,7 +27,7 @@ func enter():
 	characterMaxHp = target.stats["maxHp"]
 	characterCurrentHp = target.stats["currentHp"]
 	owner.anim.play(attackSelected.attackName.to_lower())
-	characterCurrentHp += attackSelected.healAmount
+	characterCurrentHp += attackSelected.effectRes.amount
 	healStopsToMaxHp()
 
 func update(delta):

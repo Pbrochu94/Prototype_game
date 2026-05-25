@@ -1,6 +1,6 @@
 extends BasePartyManager
 
-@onready var encounter : PlayerPartyData = preload("res://utils/Data/Player/Party/PlayerPartyData.tres")
+@onready var playerParty : PlayerPartyData = preload("res://utils/Data/Player/Party/PlayerPartyData.tres")
 
 func init():
 	super()
@@ -10,7 +10,7 @@ func init():
 
 
 func loadTeam():
-	var generatedUnits = encounter.generateParty()
+	var generatedUnits = playerParty.generateParty()
 	for unitData in generatedUnits:
 		var unit = unitData.scene.instantiate()
 		party.append(unit)

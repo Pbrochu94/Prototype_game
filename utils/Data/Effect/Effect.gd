@@ -5,3 +5,4 @@ class_name Effect
 @export var name:String
 @export var duration:int
 @export var target:Enum.FocusType
+@export var amount:float

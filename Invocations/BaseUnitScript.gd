@@ -173,6 +173,8 @@ func applyEffect(attack):
 				stats[statAffected] += modifier
 				print(characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
+		Enum.StatusEffect.HEAL:
+				setState("heal")
 
 
 #TURN FLOW
@@ -197,7 +199,7 @@ func enemyStartTurn():
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.HEAL:
-				setState("heal")
+				applyEffect(attackSelected)
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
@@ -216,7 +218,7 @@ func onChosenAttack(index:int):
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.HEAL:
-				setState("heal")
+				applyEffect(attackSelected)
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
@@ -236,7 +238,7 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	print("Enemy select ", nmbOfAvailableTargets, " targets")
 	for i in range(nmbOfAvailableTargets):
 		target = unitSelectable.pick_random()
-		print("Enemy ",self.characterName, " selected ", target)
+		print("Enemy ",self.characterName, " selected ", target.characterName)
 		if attackSelected.needToMove:
 			getInPosition(target)
 		else:
@@ -246,6 +248,8 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 func getInPosition(enemy:Node2D):
 	target = enemy
 	setState("getinposition")
+func heal():
+	pass
 func attack(enemy:Node2D,attack:Ability):
 	setState("attacking")
 	var attackName:String = attackSelected.attackName

@@ -9,8 +9,8 @@ func _ready():
 
 func initAttacks():
 	attacks = {
-	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/Cannonshot.tres").duplicate(true),
-	"rebuild":preload("res://Invocations/CannonDruid/Attacks/DruidHeal.tres").duplicate(true)
+	"cannon shot" : preload("res://Invocations/CannonDruid/Attacks/CannonShot/Cannonshot.tres").duplicate(true),
+	"rebuild":preload("res://Invocations/CannonDruid/Attacks/Rebuild/Rebuild.tres").duplicate(true)
 	}
 
 func initStats():

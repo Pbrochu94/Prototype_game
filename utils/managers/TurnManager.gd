@@ -60,8 +60,6 @@ func playIntro():
 	currentCombatScene.summoner.playIntro()
 
 func startCombat():
-	currentCombatScene.initPlayerPartyData()
-#	currentCombatScene.initEnemyPartyData()
 	initPlayOrder()
 	startTurn()
 

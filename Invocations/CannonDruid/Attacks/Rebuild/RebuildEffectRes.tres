@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HealEffect" load_steps=2 format=3 uid="uid://dscp7tek1tkp7"]
+
+[ext_resource type="Script" path="res://utils/Data/Effect/Heal/HealEffect.gd" id="1_000qe"]
+
+[resource]
+script = ExtResource("1_000qe")
+type = 3
+name = "rebuild"
+duration = 0
+target = 0
+amount = 50

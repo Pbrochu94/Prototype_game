@@ -13,7 +13,7 @@ enum StatusEffect {
 	NONE,
 	INVULNERABLE,
 	STAT_MODIFIER,
-	DEBUFF,
+	HEAL,
 	POISON,
 	BURN,
 	FREEZE
