@@ -10,7 +10,6 @@ extends Node
 var everyLivingUnits
 var summoner:Node2D 
 var currentTurn = "player"
-#var attackSource:Enum.attackSource
 var enemy:Node2D 
 var isSelecting = false
 var playOrder:Array

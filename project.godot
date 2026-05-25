@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 [autoload]
 
 Enum="*res://utils/Enums/Enum.gd"
+RunManager="*res://utils/Managers/RunManager.gd"
 
 [display]
 

@@ -36,10 +36,6 @@ enum targetPartySelection{
 	ENEMY,
 	ALL
 }
-#enum attackSource{
-#	SUMMONER,
-#	UNIT
-#}
 enum Caster{
 	SUMMONER,
 	UNIT
@@ -50,6 +46,8 @@ enum SummonerSpellStartingPoint {
 }
 enum EncounterType{
 	COMBAT,
+	ELITE,
+	BOSS,
 	SHOP,
 	HEAL,
 }
