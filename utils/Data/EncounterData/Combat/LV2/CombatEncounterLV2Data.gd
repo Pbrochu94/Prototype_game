@@ -1,0 +1,3 @@
+extends CombatEncounterData
+
+class_name CombatEncounterLV2Data

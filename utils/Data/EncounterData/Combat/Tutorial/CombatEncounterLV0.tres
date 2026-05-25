@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="CombatEncounterLV0Data" load_steps=3 format=3 uid="uid://bb4n8ei86p628"]
-
-[ext_resource type="Resource" uid="uid://bmejitn1dn8q2" path="res://Invocations/Samurai/SamuraiData.tres" id="1_vrvnp"]
-[ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/Tutorial/CombatEncounterLV0Data.gd" id="2_hx57t"]
-
-[resource]
-script = ExtResource("2_hx57t")
-enemies = Array[Resource("res://utils/Data/EnemyData/EnemyData.gd")]([ExtResource("1_vrvnp")])
-encounterBudget = 3

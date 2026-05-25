@@ -32,11 +32,14 @@ var enemy:Node2D
 var playerStartingPosition:Vector2
 var enemyStartingPosition:Vector2
 
+#DATA
+var combatEncounterData:EncounterData
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pickRandomBackground()
 	initSummoner() 
+	combatEncounterData = RunManager.currentEncounterData
 	summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
@@ -45,26 +48,6 @@ func _ready():
 	turnManager.init()
 	targetManager.init()
 	choiceMenu.init()
-
-
-
-#func initPlayerPartyData():
-#	for i in range(playerPartyManager.party.size()):
-#		var invocation = playerPartyManager.party[i]
-#		combatScene.add_child(invocation)
-#		invocation.currentCombatScene = self
-#		if i < playerAnchors.size():
-#			invocation.global_position = playerAnchors[i].global_position
-#			invocation.startingPosition = playerAnchors[i].global_position
-
-#func initEnemyPartyData():
-#	for i in range(enemyPartyManager.party.size()):
-#		var enemy = enemyPartyManager.party[i]
-#		combatScene.add_child(enemy)
-#		enemy.currentCombatScene = self
-#		if i < enemyAnchors.size():
-#			enemy.global_position = enemyAnchors[i].global_position
-#			enemy.startingPosition = enemyAnchors[i].global_position
 
 func initSummoner():
 	combatScene.add_child(summoner)

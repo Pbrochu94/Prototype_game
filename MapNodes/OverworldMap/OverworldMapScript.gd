@@ -13,23 +13,27 @@ func _ready():
 
 func node1Pressed():
 	RunManager.currentNode = 0
+	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 1")
 
 
 func node2Pressed():
 	RunManager.currentNode = 1
+	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 2")
 
 
 func node3Pressed():
 	RunManager.currentNode = 2
+	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 3")
 
 
 func node4Pressed():
 	RunManager.currentNode = 3
+	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 4")
