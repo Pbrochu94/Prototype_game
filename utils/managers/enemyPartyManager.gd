@@ -23,7 +23,7 @@ func addEnemyToParty():
 	for i in range(party.size()):
 		var enemy = party[i]
 		var numberNameTag = str(i+1)
-		enemy.characterName +=  " enemy " + numberNameTag 
+		enemy.statsv2.characterName +=  " enemy " + numberNameTag 
 		aliveCount += 1
 		enemy.currentCombatScene = currentCombatScene
 		addUnitConnections(enemy)

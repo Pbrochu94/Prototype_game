@@ -8,6 +8,7 @@ extends Node2D
 #@onready var area = $Area2D
 
 #STATS
+@export var statsv2:UnitStatsData = preload("res://Summoner/SummonerStatsData.tres")
 @export var characterName:String = "Summoner"
 @export var walkSpeed:int = 100
 
@@ -73,7 +74,7 @@ func castSpell(target:Node2D):
 	if spellSelected.hasEffect:
 		target.applyEffect(spellSelected)
 	setState("casting")
-	print("Summoner cast ",spellSelected.spellName, " on ", target.characterName)
+	print("Summoner cast ",spellSelected.spellName, " on ", target.statsv2.characterName)
 
 #TURN FLOW
 func playIntro():

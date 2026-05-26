@@ -19,7 +19,7 @@ func addUnitToParty():
 	for i in range(party.size()):
 		var unit = party[i]
 		var numberNameTag = str(i+1)
-		unit.characterName +=  " player " + numberNameTag 
+		unit.statsv2.characterName +=  " player " + numberNameTag 
 		aliveCount += 1
 		unit.currentCombatScene = currentCombatScene
 		addUnitConnections(unit)

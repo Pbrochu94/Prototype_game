@@ -657,7 +657,6 @@ size = Vector2(20, 23)
 script = ExtResource("1_sps1a")
 unitCost = 3
 statsv2 = ExtResource("2_jj8mi")
-characterName = "Samurai"
 walkSpeed = 200
 maxHp = 120
 currentHp = 120

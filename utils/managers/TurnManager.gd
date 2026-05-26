@@ -89,7 +89,7 @@ func updateCurrentlyPlaying():
 		index = 0
 	currentlyPlaying = playOrder[index]
 	if currentlyPlaying.isDead:
-		print("Character :", currentlyPlaying.characterName, " is downed")
+		print("Character :", currentlyPlaying.statsv2.characterName, " is downed")
 		updateCurrentlyPlaying()
 	else:
 		pass
@@ -119,7 +119,7 @@ func onAttackSelected(attackIndex:int):
 func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			print(currentlyPlaying.characterName," is selecting a target")
+			print(currentlyPlaying.statsv2.characterName," is selecting a target")
 			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ENEMY)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
@@ -147,7 +147,7 @@ func unitAttack(targets:Array[Node2D]):
 					currentlyPlaying.target = target
 					target.canBeSelected = false
 					if currentlyPlaying.attackSelected.needToMove:
-						print(currentlyPlaying.characterName," move to attack", target.characterName)
+						print(currentlyPlaying.statsv2.characterName," move to attack", target.statsv2.characterName)
 						currentlyPlaying.getInPosition(target)
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
