@@ -1,8 +1,9 @@
-[gd_scene load_steps=127 format=3 uid="uid://b4ujsi8dfa3g"]
+[gd_scene load_steps=128 format=3 uid="uid://b4ujsi8dfa3g"]
 
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/BaseBlasterDroidScript.gd" id="1_0xp15"]
 [ext_resource type="Texture2D" uid="uid://wv1dg5clr7yo" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png" id="2_jq4id"]
 [ext_resource type="Texture2D" uid="uid://blf21jxd0ecle" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Death.png" id="2_n71qu"]
+[ext_resource type="Resource" uid="uid://d4h5c230r70vu" path="res://Invocations/BlasterDruid/BlasterDroidStatsData.tres" id="2_wlidc"]
 [ext_resource type="Texture2D" uid="uid://byk11bj5k8758" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot Start.png" id="3_dfm8k"]
 [ext_resource type="Texture2D" uid="uid://cvn0j37sy1k3k" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot.png" id="4_357ha"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="4_mltf0"]
@@ -801,7 +802,7 @@ size = Vector2(20, 23)
 
 [node name="BlasterDruid" type="Node2D" groups=["character", "party member", "unit"]]
 script = ExtResource("1_0xp15")
-characterName = "Blaster Droid"
+stats = ExtResource("2_wlidc")
 walkSpeed = 200
 maxHp = 150
 currentHp = 150
