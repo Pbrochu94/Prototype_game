@@ -89,7 +89,6 @@ func updateCurrentlyPlaying():
 		index = 0
 	currentlyPlaying = playOrder[index]
 	if currentlyPlaying.isDead:
-		print("Character :", currentlyPlaying.stats.characterName, " is downed")
 		updateCurrentlyPlaying()
 	else:
 		pass
@@ -108,7 +107,7 @@ func startTurn():
 		currentlyPlaying.enemyStartTurn()
 func chooseAction():
 	currentCombatScene.choiceMenu.open()
-	print("Player is choosing what to do...")
+	print(currentlyPlaying.stats.characterName," is choosing what to do...")
 func onSpellSelected(spellIndex:int):
 	caster = Enum.Caster.SUMMONER
 	summoner.spellSelected = summoner.learnedSpells.values()[spellIndex]
@@ -147,7 +146,6 @@ func unitAttack(targets:Array[Node2D]):
 					currentlyPlaying.target = target
 					target.canBeSelected = false
 					if currentlyPlaying.attackSelected.needToMove:
-						print(currentlyPlaying.stats.characterName," move to attack", target.stats.characterName)
 						currentlyPlaying.getInPosition(target)
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)

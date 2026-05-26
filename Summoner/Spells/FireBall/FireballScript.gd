@@ -4,7 +4,6 @@ class_name FireballScript
 
 func _ready():
 	super()
-	print(targets)
 	projectileSpeed = 600.0
 	deceleration = 200.0
 	minSpeed = 200.0

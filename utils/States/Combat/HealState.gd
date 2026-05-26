@@ -18,7 +18,6 @@ func enter():
 		print(attackName, " goes on a ", cooldown, " turn cooldown")
 		attacksDict[attackName]["currentCooldown"] = cooldown
 		attacksDict[attackName]["justUsed"] = true
-		print(attacksDict[attackName])
 	if attackSelected.focusType == Enum.FocusType.SELF:
 		target.anim.play(attackSelected.attackName.to_lower())
 	else:

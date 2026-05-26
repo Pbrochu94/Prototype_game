@@ -98,7 +98,6 @@ func _ready():
 func onAnimationFinished():
 	match currentState:
 		"attacking":
-			print(attackSelected.attackName)
 #			if anim.animation == attackSelected.attackName:
 			if attackSelected.needToMove:
 				setState("walkingback")
@@ -231,7 +230,6 @@ func getRandomAttack() -> Ability:
 			availableAtk.append(attack)
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
-	print(randomAtk)
 	return randomAtk
 func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
@@ -270,7 +268,6 @@ func attack(enemy:Node2D,attack:Ability):
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
 			if attack.focusType == Enum.FocusType.ENEMY_AOE:
-				print("SPLASH DAMAGE")
 				for ally in enemy.partyManager.currentlyAliveCharacters:
 					if ally != target:
 						var splashDamage = attack.splashDamage + atkStat
@@ -278,13 +275,12 @@ func attack(enemy:Node2D,attack:Ability):
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 func attackFinished():
-	print("Attack finished")
 	if self.global_position != self.startingPosition:
 		setState("walkingback")
 	else:
 		setState("endingturn")
 func endingTurn():
-	print("Player end turn")
+	print(stats.characterName," end its turn")
 	setState("idle")
 	emit_signal("turnFinished")
 

@@ -25,8 +25,6 @@ signal selectionEnd
 func init():
 	enemyParty = currentCombatScene.enemyPartyManager.party
 	allyParty = currentCombatScene.playerPartyManager.party
-	print(enemyParty)
-	print(allyParty)
 	selectingArrow.visible = false
 	connectSignals()
 
@@ -100,13 +98,11 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			print(allyParty)
 			for ally in allyParty:
 				ally.canBeSelected = true
-				print(ally, ally.canBeSelected)
 		Enum.targetPartySelection.ENEMY:
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters.duplicate()
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
 			for enemy in enemyParty:
-				print(enemy)
 				enemy.canBeSelected = true
 func cancelSelection():
 	for enemy in enemyParty:

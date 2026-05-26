@@ -13,4 +13,4 @@ func _process(delta):
 #EVENT LISTENERS
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		print("SPELLS CLICKED")
+		pass

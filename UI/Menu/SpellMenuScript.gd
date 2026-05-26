@@ -23,7 +23,7 @@ func connectSignals():
 func onShieldSelected():
 	for spell in choiceMenuParent.summoner.spellCooldowns:
 		if spell["name"] == choiceMenuParent.summoner.learnedSpells.values()[0].spellName:
-			print(spell["name"]," is in cooldown")
+			print(spell["name"]," is in cooldown for ", spell["currentCooldown"], " turn")
 			return
 	print("selected shield spell")
 	emit_signal("spellSelected", 0)
@@ -31,9 +31,9 @@ func onShieldSelected():
 func onFireballSelected():
 	for spell in choiceMenuParent.summoner.spellCooldowns:
 		if spell["name"] == choiceMenuParent.summoner.learnedSpells.values()[1].spellName:
-			print(spell["name"]," is in cooldown")
+			print(spell["name"]," is in cooldown for ", spell["currentCooldown"], " turn")
 			return
-	print("selected shield fireball spell")
+	print("selected fireball spell")
 	emit_signal("spellSelected", 1)
 
 func open():

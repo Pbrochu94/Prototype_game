@@ -22,7 +22,6 @@ func init():
 	connectSignals()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
 	summoner = get_tree().get_first_node_in_group("summoner")
-	print(summoner)
 
 func openAttackMenu():
 	$ChoiceMenu/SubMenus/AttackMenu.choiceMenuParent = self

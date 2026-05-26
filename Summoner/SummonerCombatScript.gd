@@ -38,7 +38,6 @@ signal turnFinished
 func _ready():
 	stateMachine.init(self)
 	setState("intro")
-	print(allSpell["shield"])
 	for spell in allSpell.values():
 		addNewSpell(spell)
 
@@ -92,7 +91,6 @@ func setState(newState:String):
 	stateMachine.setState(states[newState])
 func addNewSpell(newSpell:SummonerSpell):
 	learnedSpells[newSpell.spellName] = newSpell
-	print(learnedSpells)
 func getInfo():
 	return spellCooldowns
 func reduceTimers():

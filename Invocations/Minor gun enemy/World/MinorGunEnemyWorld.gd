@@ -78,7 +78,7 @@ func setState(newState):
 	currentState = newState
 	enterState(newState)
 func enterState(state):
-	print("Enter state: ",State.keys()[currentState])
+#	print("Enter state: ",State.keys()[currentState])
 	match state:
 		State.IDLE:
 			updateAnim("idle")

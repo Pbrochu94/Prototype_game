@@ -16,7 +16,6 @@ signal partyDead
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():
-#	print(turnManager)
 #	connectSignals()
 
 func init():
