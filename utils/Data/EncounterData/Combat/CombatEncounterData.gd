@@ -9,6 +9,7 @@ const enemies : Array[UnitData] = [
 ]
 
 @export var encounterBudget : int 
+@export var name : String 
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]
 #@export var isElite : bool
@@ -26,9 +27,9 @@ func generateEncounter():
 		if validEnemies.is_empty():
 			break
 		#PICK RANDOM
-#		var unitPicked = validEnemies.pick_random()
+		var unitPicked = validEnemies.pick_random()
 		#PICK SPECIFIC
-		var unitPicked = validEnemies[1]
+#		var unitPicked = validEnemies[1]
 		selectedEnemies.append(unitPicked)
 		remainingBudget -= unitPicked.cost
 	return selectedEnemies

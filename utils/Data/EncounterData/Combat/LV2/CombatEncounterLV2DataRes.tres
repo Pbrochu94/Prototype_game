@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_ptmff")
 encounterBudget = 9
+name = "lv 2 combat data res"

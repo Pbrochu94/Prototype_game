@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_p8e2t")
 encounterBudget = 3
+name = "tutorial combat res"

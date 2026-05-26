@@ -1,12 +1,15 @@
 extends BasePartyManager
 class_name EnemyPartyManager
 
-@onready var encounter : CombatEncounterData = preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
+var encounter : CombatEncounterData 
 
 
 func init():
 	super()
 	partyFaction = Enum.Faction.ENEMY
+	currentCombatScene = get_tree().get_first_node_in_group("combat scene")
+	encounter = currentCombatScene.combatEncounterData
+	print("AAAAA", encounter.name)
 	loadTeam()
 	addEnemyToParty()
 	placeEnemies()
