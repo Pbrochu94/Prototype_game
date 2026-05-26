@@ -269,7 +269,7 @@ func attack(enemy:Node2D,attack:Ability):
 					enemy.applyEffect(attack)
 				else:
 					applyEffect(attack)
-			var atkStat = stats["atk"]
+			var atkStat = statsv2.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
 			if attack.focusType == Enum.FocusType.ENEMY_AOE:
@@ -278,7 +278,7 @@ func attack(enemy:Node2D,attack:Ability):
 					if ally != target:
 						var splashDamage = attack.splashDamage + atkStat
 						ally.receiveDamage(self,attack,splashDamage)
-						print(ally.statsv2.characterName, " received ", (attack.splashDamage + stats["atk"]), " of splash damage")
+						print(ally.statsv2.characterName, " received ", (attack.splashDamage + statsv2.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 func attackFinished():
 	print("Attack finished")
