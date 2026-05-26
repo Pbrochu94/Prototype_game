@@ -30,9 +30,9 @@ var states:Dictionary
 #STATS
 @export var statsv2 : UnitStatsData
 @onready var stats:Dictionary = {
-	"maxHp": maxHp,
-	"currentHp": currentHp,
-	"atk": atk,
+#	"maxHp": maxHp,
+#	"currentHp": currentHp,
+#	"atk": atk,
 	"deff":deff,
 	"speed":speed
 }
@@ -113,7 +113,7 @@ func onAnimationFinished():
 				setState("endingturn")
 		"hurt":
 			if anim.animation == "hurt":
-				if stats["currentHp"] <= 0:
+				if statsv2.currentHp <= 0:
 					setState("downed")
 				else:
 					setState("idle")
@@ -152,13 +152,13 @@ func receiveDamage(attacker,attack, damage):
 		print(attacker.statsv2.characterName, " does no damage to ", statsv2.characterName)
 	else:
 		print("Character: ", attacker.statsv2.characterName, " attack ", statsv2.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
-		print(statsv2.characterName," has ", stats["currentHp"], " hp before attack ")
-		stats["currentHp"]-= trueDamage
+		print(statsv2.characterName," has ", statsv2.currentHp, " hp before attack ")
+		statsv2.currentHp-= trueDamage
 		setState("hurt")
 		#Wait end of animation and transform this function into async
 #		await anim.animation_finished
 		emit_signal("hpChanged")
-		print(statsv2.characterName," now have ", stats["currentHp"], " hp after attack ")
+		print(statsv2.characterName," now have ", statsv2.currentHp, " hp after attack ")
 func applyEffect(attack):
 	print(attack.effectRes.name, " is applied to: ", self)
 	match attack.effectRes.type:
@@ -323,7 +323,12 @@ func getUnitInfo():
 		effectSummaries.append(effectSummary)
 	return {
 		"Name": statsv2.characterName,
-		"Stats": stats,
+		"Stats": {
+			"currentHp": statsv2.currentHp,
+			"atk":statsv2.atk,
+			"deff":statsv2.deff,
+			"speed":statsv2.speed
+		},
 		"Active effects": effectSummaries
 	}
 func reduceTimers():

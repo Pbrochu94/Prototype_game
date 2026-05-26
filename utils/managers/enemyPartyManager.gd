@@ -17,6 +17,7 @@ func loadTeam():
 	var generatedEnemies = encounter.generateEncounter()
 	for enemyData in generatedEnemies:
 		var enemy = enemyData.scene.instantiate()
+		enemy.statsv2 = enemy.statsv2.duplicate(true)
 		party.append(enemy)
 
 func addEnemyToParty():
