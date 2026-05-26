@@ -33,7 +33,7 @@ var states:Dictionary
 #	"maxHp": maxHp,
 #	"currentHp": currentHp,
 #	"atk": atk,
-	"deff":deff,
+#	"deff":deff,
 	"speed":speed
 }
 #@export var characterName:String 
@@ -146,12 +146,12 @@ func receiveDamage(attacker,attack, damage):
 	if isInvulnerable:
 		print(statsv2.characterName, " is invulnerable and negated the attack from ", attacker)
 		return
-	var trueDamage:int = damage - stats["deff"]
+	var trueDamage:int = damage - statsv2.deff
 	if trueDamage <= 0:
 		trueDamage = 0
 		print(attacker.statsv2.characterName, " does no damage to ", statsv2.characterName)
 	else:
-		print("Character: ", attacker.statsv2.characterName, " attack ", statsv2.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats["deff"],"(deff) for a total of ",trueDamage)
+		print("Character: ", attacker.statsv2.characterName, " attack ", statsv2.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", statsv2.deff,"(deff) for a total of ",trueDamage)
 		print(statsv2.characterName," has ", statsv2.currentHp, " hp before attack ")
 		statsv2.currentHp-= trueDamage
 		setState("hurt")
