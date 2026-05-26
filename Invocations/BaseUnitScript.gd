@@ -28,7 +28,7 @@ var states:Dictionary
 @export var unitCost:int
 
 #STATS
-@export var statsv2 : UnitStatsData
+@export var stats : UnitStatsData
 
 #@export var characterName:String 
 @export var walkSpeed:int
@@ -107,7 +107,7 @@ func onAnimationFinished():
 				setState("endingturn")
 		"hurt":
 			if anim.animation == "hurt":
-				if statsv2.currentHp <= 0:
+				if stats.currentHp <= 0:
 					setState("downed")
 				else:
 					setState("idle")
@@ -138,21 +138,21 @@ func walk(delta, destination:Vector2):
 			isWalking = false
 func receiveDamage(attacker,attack, damage):
 	if isInvulnerable:
-		print(statsv2.characterName, " is invulnerable and negated the attack from ", attacker)
+		print(stats.characterName, " is invulnerable and negated the attack from ", attacker)
 		return
-	var trueDamage:int = damage - statsv2.deff
+	var trueDamage:int = damage - stats.deff
 	if trueDamage <= 0:
 		trueDamage = 0
-		print(attacker.statsv2.characterName, " does no damage to ", statsv2.characterName)
+		print(attacker.stats.characterName, " does no damage to ", stats.characterName)
 	else:
-		print("Character: ", attacker.statsv2.characterName, " attack ", statsv2.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", statsv2.deff,"(deff) for a total of ",trueDamage)
-		print(statsv2.characterName," has ", statsv2.currentHp, " hp before attack ")
-		statsv2.currentHp-= trueDamage
+		print("Character: ", attacker.stats.characterName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
+		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
+		stats.currentHp-= trueDamage
 		setState("hurt")
 		#Wait end of animation and transform this function into async
 #		await anim.animation_finished
 		emit_signal("hpChanged")
-		print(statsv2.characterName," now have ", statsv2.currentHp, " hp after attack ")
+		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
 func applyEffect(attack):
 	print(attack.effectRes.name, " is applied to: ", self)
 	match attack.effectRes.type:
@@ -160,19 +160,19 @@ func applyEffect(attack):
 			isInvulnerable = true
 			var effectApplied = attack.effectRes
 			activeEffects.append(effectApplied.duplicate(true))
-			print(statsv2.characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
+			print(stats.characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.effectRes.statsAffected:
 				var effectApplied = attack.effectRes.duplicate(true)
-				var modifier = int(statsv2.get(statAffected) * effectApplied.amount)
+				var modifier = int(stats.get(statAffected) * effectApplied.amount)
 				if modifier == 0:
 					modifier = sign(effectApplied.amount)
 				effectApplied.amountAppliedToUnit = modifier
-				statsv2.set(
+				stats.set(
 					statAffected,
-					statsv2.get(statAffected) + modifier
+					stats.get(statAffected) + modifier
 				)
-				print(statsv2.characterName, " received the effect ", effectApplied.name)
+				print(stats.characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
 				setState("heal")
@@ -180,9 +180,9 @@ func applyEffect(attack):
 
 #TURN FLOW
 func enemyStartTurn():
-	print(statsv2.characterName, " started his turn")
+	print(stats.characterName, " started his turn")
 	attackSelected = getRandomAttack()
-	print(statsv2.characterName, " chose the attack: ", attackSelected.attackName)
+	print(stats.characterName, " chose the attack: ", attackSelected.attackName)
 	match attackSelected.focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
 			enemyChooseTarget(attackSelected.numberOfTargets)
@@ -239,7 +239,7 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	print("Enemy select ", nmbOfAvailableTargets, " targets")
 	for i in range(nmbOfAvailableTargets):
 		target = unitSelectable.pick_random()
-		print("Enemy ",self.statsv2.characterName, " selected ", target.statsv2.characterName)
+		print("Enemy ",self.stats.characterName, " selected ", target.stats.characterName)
 		if attackSelected.needToMove:
 			getInPosition(target)
 		else:
@@ -266,7 +266,7 @@ func attack(enemy:Node2D,attack:Ability):
 					enemy.applyEffect(attack)
 				else:
 					applyEffect(attack)
-			var atkStat = statsv2.atk
+			var atkStat = stats.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
 			if attack.focusType == Enum.FocusType.ENEMY_AOE:
@@ -275,7 +275,7 @@ func attack(enemy:Node2D,attack:Ability):
 					if ally != target:
 						var splashDamage = attack.splashDamage + atkStat
 						ally.receiveDamage(self,attack,splashDamage)
-						print(ally.statsv2.characterName, " received ", (attack.splashDamage + statsv2.atk), " of splash damage")
+						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 func attackFinished():
 	print("Attack finished")
@@ -319,12 +319,12 @@ func getUnitInfo():
 		effectSummary["duration"] = effect.duration
 		effectSummaries.append(effectSummary)
 	return {
-		"Name": statsv2.characterName,
+		"Name": stats.characterName,
 		"Stats": {
-			"currentHp": statsv2.currentHp,
-			"atk":statsv2.atk,
-			"deff":statsv2.deff,
-			"speed":statsv2.speed
+			"currentHp": stats.currentHp,
+			"atk":stats.atk,
+			"deff":stats.deff,
+			"speed":stats.speed
 		},
 		"Active effects": effectSummaries
 	}
@@ -340,9 +340,9 @@ func reduceTimers():
 					spell.exit()
 				Enum.StatusEffect.STAT_MODIFIER:
 					for statAffected in effect.statsAffected:
-						statsv2.set(
+						stats.set(
 							statAffected,
-							statsv2.get(statAffected) - effect.amountAppliedToUnit
+							stats.get(statAffected) - effect.amountAppliedToUnit
 						)
 			activeEffects.remove_at(i)
 	for attack in attacks:

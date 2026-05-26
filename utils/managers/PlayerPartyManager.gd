@@ -12,14 +12,14 @@ func init():
 func loadTeam():
 	for unitData in RunManager.currentParty:
 		var unit = unitData.scene.instantiate()
-		unit.statsv2 = unit.statsv2.duplicate(true)
+		unit.stats = unit.stats.duplicate(true)
 		party.append(unit)
 
 func addUnitToParty():
 	for i in range(party.size()):
 		var unit = party[i]
 		var numberNameTag = str(i+1)
-		unit.statsv2.characterName +=  " player " + numberNameTag 
+		unit.stats.characterName +=  " player " + numberNameTag 
 		aliveCount += 1
 		unit.currentCombatScene = currentCombatScene
 		addUnitConnections(unit)

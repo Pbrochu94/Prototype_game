@@ -72,9 +72,9 @@ func updatePlayOrder():
 		if unit.isDead:
 			playOrder.erase(unit)
 	playOrder.sort_custom(func(a, b):
-		if a.statsv2.speed == b.statsv2.speed:
+		if a.stats.speed == b.stats.speed:
 			return a.faction == Enum.Faction.ENEMY
-		return a.statsv2.speed > b.statsv2.speed
+		return a.stats.speed > b.stats.speed
 	)
 	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
@@ -89,7 +89,7 @@ func updateCurrentlyPlaying():
 		index = 0
 	currentlyPlaying = playOrder[index]
 	if currentlyPlaying.isDead:
-		print("Character :", currentlyPlaying.statsv2.characterName, " is downed")
+		print("Character :", currentlyPlaying.stats.characterName, " is downed")
 		updateCurrentlyPlaying()
 	else:
 		pass
@@ -119,7 +119,7 @@ func onAttackSelected(attackIndex:int):
 func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			print(currentlyPlaying.statsv2.characterName," is selecting a target")
+			print(currentlyPlaying.stats.characterName," is selecting a target")
 			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ENEMY)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")
@@ -147,7 +147,7 @@ func unitAttack(targets:Array[Node2D]):
 					currentlyPlaying.target = target
 					target.canBeSelected = false
 					if currentlyPlaying.attackSelected.needToMove:
-						print(currentlyPlaying.statsv2.characterName," move to attack", target.statsv2.characterName)
+						print(currentlyPlaying.stats.characterName," move to attack", target.stats.characterName)
 						currentlyPlaying.getInPosition(target)
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)

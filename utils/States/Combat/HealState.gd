@@ -25,7 +25,7 @@ func enter():
 		target = owner.target
 		target.anim.play("heal")
 	characterMaxHp = target.stats["maxHp"]
-	characterCurrentHp = target.statsv2.currentHp
+	characterCurrentHp = target.stats.currentHp
 	owner.anim.play(attackSelected.attackName.to_lower())
 	characterCurrentHp += attackSelected.effectRes.amount
 	healStopsToMaxHp()
@@ -34,9 +34,9 @@ func update(delta):
 	pass
 
 func exit():
-	print("Hp BEFORE heal: ",owner.statsv2.currentHp)
-	owner.statsv2.currentHp = characterCurrentHp
-	print("Hp AFTER heal: ",owner.statsv2.currentHp)
+	print("Hp BEFORE heal: ",owner.stats.currentHp)
+	owner.stats.currentHp = characterCurrentHp
+	print("Hp AFTER heal: ",owner.stats.currentHp)
 
 func healStopsToMaxHp():
 	if characterCurrentHp > characterMaxHp:

@@ -656,7 +656,7 @@ size = Vector2(20, 23)
 [node name="Samurai" type="Node2D" groups=["party member", "unit"]]
 script = ExtResource("1_sps1a")
 unitCost = 3
-statsv2 = ExtResource("2_jj8mi")
+stats = ExtResource("2_jj8mi")
 walkSpeed = 200
 maxHp = 120
 currentHp = 120

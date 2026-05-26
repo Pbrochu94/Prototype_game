@@ -17,14 +17,14 @@ func loadTeam():
 	var generatedEnemies = encounter.generateEncounter()
 	for enemyData in generatedEnemies:
 		var enemy = enemyData.scene.instantiate()
-		enemy.statsv2 = enemy.statsv2.duplicate(true)
+		enemy.stats = enemy.stats.duplicate(true)
 		party.append(enemy)
 
 func addEnemyToParty():
 	for i in range(party.size()):
 		var enemy = party[i]
 		var numberNameTag = str(i+1)
-		enemy.statsv2.characterName +=  " enemy " + numberNameTag 
+		enemy.stats.characterName +=  " enemy " + numberNameTag 
 		aliveCount += 1
 		enemy.currentCombatScene = currentCombatScene
 		addUnitConnections(enemy)
