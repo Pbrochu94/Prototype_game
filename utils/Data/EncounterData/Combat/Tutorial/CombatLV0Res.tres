@@ -6,3 +6,7 @@
 script = ExtResource("1_p8e2t")
 encounterBudget = 3
 name = "tutorial combat res"
+lightShardReward = 3
+xpReward = 1
+itemReward = 0
+rareItemChance = 0.0

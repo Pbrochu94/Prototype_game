@@ -2,6 +2,17 @@ extends Node
 #NODES & TRACKING
 var currentNode:int
 var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
+#PROGRESS TRACKING
+var currentParty:Array[UnitData] 
+var currentLightShard:int
+var currentXp:int
+#STARTING KIT
+const startingUnit:UnitData = UnitDB.firstWorldUnits[0]
+const startingLightShards:int = 0
+
+
+func _ready():
+	currentParty.append(startingUnit)
 
 var nodes = [
 	{

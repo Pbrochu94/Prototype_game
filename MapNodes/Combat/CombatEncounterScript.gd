@@ -44,6 +44,7 @@ func _ready():
 	enemyPartyManager.init()
 	playerPartyManager.init()
 	endingScreen.init()
+	endingScreen.currentCombatScene = combatScene
 	turnManager.currentCombatScene = combatScene
 	turnManager.init()
 	targetManager.init()

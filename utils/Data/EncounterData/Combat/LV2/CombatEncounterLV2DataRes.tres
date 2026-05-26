@@ -6,3 +6,7 @@
 script = ExtResource("1_ptmff")
 encounterBudget = 9
 name = "lv 2 combat data res"
+lightShardReward = 9
+xpReward = 1
+itemReward = 0
+rareItemChance = 0.0

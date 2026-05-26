@@ -1,15 +1,14 @@
 extends EncounterData
 class_name CombatEncounterData
 
-const enemies : Array[UnitData] = [
-	preload("res://Invocations/Samurai/SamuraiData.tres"),
-	preload("res://Invocations/Archer/ArcherData.tres"),
-	preload("res://Invocations/CannonDruid/CannonDruidData.tres"),
-	preload("res://Invocations/BlasterDruid/BlasterDruidData.tres")
-]
 
 @export var encounterBudget : int 
 @export var name : String 
+@export var lightShardReward:int
+@export var xpReward:int
+@export var itemReward:int
+@export var rareItemChance:float
+
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]
 #@export var isElite : bool
@@ -21,7 +20,7 @@ func generateEncounter():
 	var remainingBudget = encounterBudget
 	var selectedEnemies: Array[UnitData] = []
 	while remainingBudget > 0:
-		var validEnemies = enemies.filter(
+		var validEnemies = UnitDB.firstWorldUnits.filter(
 			func(enemy):
 				return enemy.cost <= remainingBudget)
 		if validEnemies.is_empty():

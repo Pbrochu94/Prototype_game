@@ -8,6 +8,7 @@ extends Node2D
 ]
 
 func _ready():
+	print(getPlayerInfo())
 	for i in buttons.size():
 		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
@@ -37,3 +38,10 @@ func node4Pressed():
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 4")
+
+func getPlayerInfo():
+	var playerInfo: Dictionary = {
+		"light shards": RunManager.currentLightShard,
+		"xp": RunManager.currentXp
+	}
+	return playerInfo

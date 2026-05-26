@@ -10,8 +10,8 @@ func init():
 
 
 func loadTeam():
-	var generatedUnits = playerParty.generateParty()
-	for unitData in generatedUnits:
+#	var generatedUnits = playerParty.generateParty()
+	for unitData in RunManager.currentParty:
 		var unit = unitData.scene.instantiate()
 		party.append(unit)
 
