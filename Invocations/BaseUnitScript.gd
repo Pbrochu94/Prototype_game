@@ -29,13 +29,7 @@ var states:Dictionary
 
 #STATS
 @export var statsv2 : UnitStatsData
-@onready var stats:Dictionary = {
-#	"maxHp": maxHp,
-#	"currentHp": currentHp,
-#	"atk": atk,
-#	"deff":deff,
-	"speed":speed
-}
+
 #@export var characterName:String 
 @export var walkSpeed:int
 @export var maxHp:int 
@@ -170,11 +164,14 @@ func applyEffect(attack):
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in attack.effectRes.statsAffected:
 				var effectApplied = attack.effectRes.duplicate(true)
-				var modifier = int(stats[statAffected] * effectApplied.amount) 
+				var modifier = int(statsv2.get(statAffected) * effectApplied.amount)
 				if modifier == 0:
 					modifier = sign(effectApplied.amount)
 				effectApplied.amountAppliedToUnit = modifier
-				stats[statAffected] += modifier
+				statsv2.set(
+					statAffected,
+					statsv2.get(statAffected) + modifier
+				)
 				print(statsv2.characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
@@ -343,7 +340,10 @@ func reduceTimers():
 					spell.exit()
 				Enum.StatusEffect.STAT_MODIFIER:
 					for statAffected in effect.statsAffected:
-						stats[statAffected] -= effect.amountAppliedToUnit
+						statsv2.set(
+							statAffected,
+							statsv2.get(statAffected) - effect.amountAppliedToUnit
+						)
 			activeEffects.remove_at(i)
 	for attack in attacks:
 		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:

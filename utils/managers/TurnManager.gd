@@ -72,9 +72,9 @@ func updatePlayOrder():
 		if unit.isDead:
 			playOrder.erase(unit)
 	playOrder.sort_custom(func(a, b):
-		if a.stats["speed"] == b.stats["speed"]:
+		if a.statsv2.speed == b.statsv2.speed:
 			return a.faction == Enum.Faction.ENEMY
-		return a.stats["speed"] > b.stats["speed"]
+		return a.statsv2.speed > b.statsv2.speed
 	)
 	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
