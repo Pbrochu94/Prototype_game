@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitStatsData" load_steps=2 format=3 uid="uid://dhicdam6isqfw"]
+
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitStatsData.gd" id="1_88jmb"]
+
+[resource]
+script = ExtResource("1_88jmb")
+characterName = "Archer"
+maxHp = 100
+currentHp = 100
+speed = 4
+deff = 5
+atk = 20

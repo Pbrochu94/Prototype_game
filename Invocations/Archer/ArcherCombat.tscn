@@ -1,7 +1,8 @@
-[gd_scene load_steps=101 format=3 uid="uid://c1glvlmpjolmj"]
+[gd_scene load_steps=102 format=3 uid="uid://c1glvlmpjolmj"]
 
 [ext_resource type="Script" path="res://Invocations/Archer/BaseArcherScript.gd" id="1_owjqr"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
+[ext_resource type="Resource" uid="uid://dhicdam6isqfw" path="res://Invocations/Archer/ArcherStatsData.tres" id="2_jiu1s"]
 [ext_resource type="Texture2D" uid="uid://6yqussp8i6yn" path="res://CharacterSprite/Archer/special attack.png" id="2_wfhkc"]
 [ext_resource type="Texture2D" uid="uid://ysii3y6piowq" path="res://CharacterSprite/Archer/All.png" id="2_ysouo"]
 [ext_resource type="Texture2D" uid="uid://baklk4ax615bp" path="res://CharacterSprite/Archer/run.png" id="3_eds7e"]
@@ -640,7 +641,7 @@ size = Vector2(20, 23)
 
 [node name="Archer" type="Node2D" groups=["enemy", "unit"]]
 script = ExtResource("1_owjqr")
-characterName = "Archer"
+statsv2 = ExtResource("2_jiu1s")
 walkSpeed = 200
 maxHp = 100
 currentHp = 100
