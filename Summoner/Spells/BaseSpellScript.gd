@@ -13,6 +13,7 @@ var minSpeed:float
 var maxSpeed :float
 var isMoving:bool = false
 var spellSelected
+@export var spellRes:SummonerSpell
 
 signal spellFinishedCasting
 

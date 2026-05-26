@@ -19,5 +19,5 @@ func _process(delta):
 			global_position = global_position.move_toward(unitLocation, projectileSpeed*delta)
 			if global_position == unitLocation:
 				isMoving = false
-				unit.receiveDamage(caster,spellSelected ,spellSelected.damage)
+				unit.receiveDamage(caster,spellSelected ,spellSelected.amount)
 				exit()

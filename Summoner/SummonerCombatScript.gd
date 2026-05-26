@@ -60,8 +60,6 @@ func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:Node2D):
 	var spellInstance = spellSelected.spellScene.instantiate()
-	print(spellInstance)
-	print(target)
 	spellCooldowns.append({
 		"name": spellSelected.spellName,
 		"cooldown":spellSelected.cooldown,
@@ -71,7 +69,9 @@ func castSpell(target:Node2D):
 			add_child(spellInstance)
 		Enum.SummonerSpellStartingPoint.UNIT:
 			target.add_child(spellInstance)
-	target.applyEffect(spellSelected)
+	var spellResource = spellInstance.spellRes
+	if spellSelected.hasEffect:
+		target.applyEffect(spellSelected)
 	setState("casting")
 	print("Summoner cast ",spellSelected.spellName, " on ", target.characterName)
 

@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
 
 var nodes = [
 	{

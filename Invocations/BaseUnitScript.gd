@@ -319,7 +319,7 @@ func getUnitInfo():
 	for effect in activeEffects:
 		var effectSummary = {}
 		effectSummary["name"] = effect.name
-		effectSummary["amount"] = effect.amountAppliedToUnit
+		effectSummary["amount"] = effect.amountAppliedToUnit if "amountAppliedToUnit" in effect else ""
 		effectSummary["duration"] = effect.duration
 		effectSummaries.append(effectSummary)
 	return {

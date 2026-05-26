@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://clulkso2jcl6k"]
+[gd_scene load_steps=29 format=3 uid="uid://clulkso2jcl6k"]
 
 [ext_resource type="Script" path="res://Summoner/Spells/Shield/ShieldSpell.gd" id="1_i11kn"]
+[ext_resource type="Resource" uid="uid://53k5etu0lprv" path="res://Summoner/Spells/Shield/Shield.tres" id="2_51l7f"]
 [ext_resource type="Texture2D" uid="uid://fdd343mfbnjr" path="res://SpellSprite/Shield/Shield Spritesheet(green) 50x49.png" id="2_s3ima"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wucg8"]
@@ -215,6 +216,7 @@ animations = [{
 
 [node name="ShieldEffect" type="Node2D"]
 script = ExtResource("1_i11kn")
+spellRes = ExtResource("2_51l7f")
 
 [node name="SpritePivot" type="Node2D" parent="."]
 

@@ -2,7 +2,7 @@ extends Resource
 class_name SummonerSpell
 
 @export var spellName: String
-@export var damage: int
+@export var amount: int
 @export var type:Enum.SpellType
 @export var focusType:Enum.FocusType
 #@export var healAmount:int
@@ -21,6 +21,7 @@ class_name SummonerSpell
 @export var startingAnimPoint:Enum.SummonerSpellStartingPoint
 @export var isDamagingSpell:bool = false
 @export var effectRes:Effect
+@export var hasEffect:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -9,7 +9,6 @@ func init():
 	partyFaction = Enum.Faction.ENEMY
 	currentCombatScene = get_tree().get_first_node_in_group("combat scene")
 	encounter = currentCombatScene.combatEncounterData
-	print("AAAAA", encounter.name)
 	loadTeam()
 	addEnemyToParty()
 	placeEnemies()
