@@ -13,6 +13,7 @@ class_name BaseUnitScript
 @export var faction:Enum.Faction
 var partyManager:Node
 
+
 #VARIABLES
 var target:Node2D
 var multipleTargets:Array[Node2D]
@@ -27,6 +28,7 @@ var states:Dictionary
 @export var unitCost:int
 
 #STATS
+@export var statsv2 : UnitStatsData
 @onready var stats:Dictionary = {
 	"maxHp": maxHp,
 	"currentHp": currentHp,

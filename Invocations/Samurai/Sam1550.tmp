@@ -1,8 +1,7 @@
-[gd_scene load_steps=102 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=101 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
-[ext_resource type="Resource" uid="uid://frip40f6u4vk" path="res://Invocations/Samurai/SamuraiStatsData.tres" id="2_jj8mi"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/IdleSamurai.gd" id="5_5jnhc"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/GetInPositionSamurai.gd" id="6_ok88i"]
@@ -656,12 +655,7 @@ size = Vector2(20, 23)
 [node name="Samurai" type="Node2D" groups=["party member", "unit"]]
 script = ExtResource("1_sps1a")
 unitCost = 3
-statsv2 = ExtResource("2_jj8mi")
-characterName = "Samurai"
 walkSpeed = 200
-maxHp = 120
-currentHp = 120
-speed = 5
 deff = 10
 atk = 20
 

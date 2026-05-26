@@ -1,5 +1,5 @@
 extends BasePartyManager
-class_name EnemyPartyManager
+#class_name EnemyPartyManager
 
 var encounter : CombatEncounterData 
 
