@@ -6,7 +6,10 @@ class_name UnitStatsData
 @export var maxHp:int 
 @export var currentHp:int 
 @export var speed:int 
+@export var baseSpeed:int 
 #@export var attacks:Dictionary = {}
 #@export var attackSelected:Ability
 @export var deff:int
+@export var baseDeff:int 
 @export var atk:int
+@export var baseAtk:int 

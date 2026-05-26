@@ -167,6 +167,8 @@ func endGlobalTurn():
 	emit_signal("turnEnded")
 func endFight():
 	emit_signal("playOutroAnim")
+	for unit in playerPartyManager.party:
+		unit.resetAllStatsBesideHp()
 	if playerWon:
 		print("You won !!")
 		openEndingScreen()

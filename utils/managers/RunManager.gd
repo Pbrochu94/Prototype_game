@@ -7,7 +7,7 @@ var currentParty:Array[UnitData]
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-const startingUnit:UnitData = UnitDB.firstWorldUnits[0]
+var startingUnit:UnitData = UnitDB.firstWorldUnits[0].duplicate(true)
 const startingLightShards:int = 0
 
 

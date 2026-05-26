@@ -346,6 +346,10 @@ func reduceTimers():
 			attacks[attack]["currentCooldown"] -= 1
 			print("attack: ", attack," cd = ", attacks[attack]["currentCooldown"])
 		attacks[attack]["justUsed"] = false
+func resetAllStatsBesideHp():
+	stats.atk = stats.baseAtk
+	stats.deff = stats.baseDeff
+	stats.speed = stats.baseSpeed
 func linkToFactionParty():
 	if faction == Enum.Faction.PLAYER:
 		partyManager = get_tree().get_first_node_in_group("player party manager")

@@ -9,12 +9,21 @@ func init():
 	addUnitToParty()
 
 
-func loadTeam():
-	for unitData in RunManager.currentParty:
-		var unit = unitData.scene.instantiate()
-		unit.stats = unit.stats.duplicate(true)
-		party.append(unit)
+#func loadFirstTeam():
+#	for unitData in RunManager.currentParty:
+#		var unitScene = unitData.scene.instantiate()
+#		unitScene.stats = unitScene.stats.duplicate(true)
+#		party.append(unitScene)
 
+#func loadTeam():
+#	for unitData in RunManager.currentParty:
+#		var unit = unitData.scene.instantiate()
+#		unit.stats = unitData.stats
+#		party.append(unit)
+
+func loadTeam():
+	for unit in RunManager.currentParty:
+		party.append(unit.scene.instantiate())
 func addUnitToParty():
 	for i in range(party.size()):
 		var unit = party[i]

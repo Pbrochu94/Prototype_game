@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_0wv1h")
 scene = ExtResource("1_4x6si")
-cost = 1
+cost = 3
