@@ -15,7 +15,7 @@ func init():
 	placeUnit()
 
 func loadTeam():
-	var generatedEnemies = encounter.generateEncounter()
+	var generatedEnemies = encounter.generateEncounter(currentCombatScene.combatEncounterData.encounterType)
 	for enemyData in generatedEnemies:
 		party.append(enemyData)
 

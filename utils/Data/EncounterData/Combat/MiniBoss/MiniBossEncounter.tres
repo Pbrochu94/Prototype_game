@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MiniBossEncounter" load_steps=2 format=3 uid="uid://docvmwudcumqr"]
+
+[ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.gd" id="1_g8ap0"]
+
+[resource]
+script = ExtResource("1_g8ap0")
+encounterBudget = 25
+name = "mini boss encounter"
+lightShardReward = 10
+xpReward = 10
+itemReward = 0
+rareItemChance = 0.0
+encounterType = 2

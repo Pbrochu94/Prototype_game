@@ -7,3 +7,6 @@ const firstWorldUnits : Array[UnitDefinition] = [
 	preload("res://Invocations/BlasterDruid/BlasterDroidDef.tres"),
 	preload("res://Invocations/CannonDruid/CannonDroidDef.tres")
 ]
+const firstWorldMiniBosses:Array[UnitDefinition] =  [
+	preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
+]

@@ -26,7 +26,13 @@ text = "Combat 3"
 layout_mode = 2
 text = "Combat 4"
 
+[node name="CombatNode5" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Combat 4
+"
+
 [connection signal="pressed" from="VBoxContainer/CombatNode1" to="." method="node1Pressed"]
 [connection signal="pressed" from="VBoxContainer/CombatNode2" to="." method="node2Pressed"]
 [connection signal="pressed" from="VBoxContainer/CombatNode3" to="." method="node3Pressed"]
 [connection signal="pressed" from="VBoxContainer/CombatNode4" to="." method="node4Pressed"]
+[connection signal="pressed" from="VBoxContainer/CombatNode5" to="." method="node5Pressed"]

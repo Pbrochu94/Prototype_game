@@ -39,6 +39,12 @@ func node4Pressed():
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 4")
 
+func node5Pressed():
+	RunManager.currentNode = 4
+	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
+	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
+	print("ENTERING BOSS SCENE")
+
 func getPlayerInfo():
 	var playerInfo: Dictionary = {
 		"light shards": RunManager.currentLightShard,

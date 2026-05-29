@@ -1,0 +1,4 @@
+extends CombatEncounterData
+
+class_name MiniBossEncounter
+

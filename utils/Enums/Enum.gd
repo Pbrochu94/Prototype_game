@@ -47,6 +47,7 @@ enum SummonerSpellStartingPoint {
 enum EncounterType{
 	COMBAT,
 	ELITE,
+	MINI_BOSS,
 	BOSS,
 	SHOP,
 	HEAL,

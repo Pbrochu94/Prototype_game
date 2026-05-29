@@ -9,12 +9,13 @@ func _onready():
 
 func enter():
 	owner.anim.play(owner.attackSelected.attackName)
+	owner.z_index = 2
 
 
 func update(delta):
 	pass
 
 func exit():
-	pass
+	owner.z_index = 0
 
 

@@ -4,7 +4,6 @@ class_name BaseArcherScript
 func _ready():
 	super()
 	initAttacks()
-	initStats()
 
 func initAttacks():
 	attacks = {
@@ -12,5 +11,3 @@ func initAttacks():
 	"bow power shot" : preload("res://Invocations/Archer/Attacks/BowPowerShot/BowPowerShot.tres").duplicate(true)
 	}
 
-func initStats():
-	pass

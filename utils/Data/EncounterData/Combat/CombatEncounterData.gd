@@ -8,6 +8,7 @@ class_name CombatEncounterData
 @export var xpReward:int
 @export var itemReward:int
 @export var rareItemChance:float
+@export var encounterType:Enum.EncounterType
 
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]
@@ -16,19 +17,41 @@ var hasBudget:bool = true
 #@export var isFinalBoss : bool
 
 
-func generateEncounter():
-	var remainingBudget = encounterBudget
-	var selectedEnemies: Array[UnitDefinition] = []
-	while remainingBudget > 0:
-		var validEnemies = UnitDB.firstWorldUnits.filter(
-			func(enemy):
-				return enemy.summonCost <= remainingBudget)
-		if validEnemies.is_empty():
-			break
-		#PICK RANDOM
-		var unitPicked = validEnemies.pick_random().duplicate(true)
-		#PICK SPECIFIC
-#		var unitPicked = validEnemies[1]
-		selectedEnemies.append(unitPicked)
-		remainingBudget -= unitPicked.summonCost
-	return selectedEnemies
+func generateEncounter(type:Enum.EncounterType):
+	match type:
+		Enum.EncounterType.COMBAT:
+			var remainingBudget = encounterBudget
+			var selectedEnemies: Array[UnitDefinition] = []
+			while remainingBudget > 0:
+				var validEnemies = UnitDB.firstWorldUnits.filter(
+					func(enemy):
+						return enemy.summonCost <= remainingBudget)
+				if validEnemies.is_empty():
+					break
+				#PICK RANDOM
+				var unitPicked = validEnemies.pick_random().duplicate(true)
+				#PICK SPECIFIC
+		#		var unitPicked = validEnemies[1]
+				selectedEnemies.append(unitPicked)
+				remainingBudget -= unitPicked.summonCost
+			return selectedEnemies
+		Enum.EncounterType.ELITE:
+			pass
+		Enum.EncounterType.MINI_BOSS:
+			var remainingBudget = encounterBudget
+			var selectedEnemies: Array[UnitDefinition] = []
+			while remainingBudget > 0:
+				var validEnemies = UnitDB.firstWorldMiniBosses.filter(
+					func(enemy):
+						return enemy.summonCost <= remainingBudget)
+				if validEnemies.is_empty():
+					break
+				#PICK RANDOM
+				var unitPicked = validEnemies.pick_random().duplicate(true)
+				#PICK SPECIFIC
+		#		var unitPicked = validEnemies[1]
+				selectedEnemies.append(unitPicked)
+				remainingBudget -= unitPicked.summonCost
+			return selectedEnemies
+		Enum.EncounterType.BOSS:
+			pass

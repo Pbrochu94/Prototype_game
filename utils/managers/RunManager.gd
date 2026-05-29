@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
 var currentLightShard:int
@@ -38,6 +38,13 @@ var nodes = [
 	},
 	{
 		"id": 3,
+		"type": Enum.EncounterType.COMBAT,
+		"completed": false,
+		"unlocked": false,
+		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
+	},
+	{
+		"id": 4,
 		"type": Enum.EncounterType.BOSS,
 		"completed": false,
 		"unlocked": false,

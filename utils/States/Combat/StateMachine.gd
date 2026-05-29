@@ -31,4 +31,4 @@ func setState(state:State):
 	state.enter()
 	currentState = state
 	owner.currentState = state.name.to_lower()
-#	print(owner.stats.characterName," enter state: ",currentState.name)
+	print(owner.stats.characterName," enter state: ",currentState.name)
