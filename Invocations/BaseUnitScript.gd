@@ -147,17 +147,17 @@ func receiveDamage(attacker,attack, damage):
 		setState("hurt")
 		emit_signal("hpChanged")
 		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
-func applyEffect(attack):
-	print(attack.effectRes.name, " is applied to: ", self)
-	match attack.effectRes.type:
+func applyEffect(effect:Effect):
+	print(effect.name, " is applied to: ", self)
+	match effect.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
-			var effectApplied = attack.effectRes
+			var effectApplied = effect
 			activeEffects.append(effectApplied.duplicate(true))
-			print(stats.characterName, " is now invulnerable for ", attack.effectRes.duration, " turn")
+			print(stats.characterName, " is now invulnerable for ", effect.duration, " turn")
 		Enum.StatusEffect.STAT_MODIFIER:
-			for statAffected in attack.effectRes.statsAffected:
-				var effectApplied = attack.effectRes.duplicate(true)
+			for statAffected in effect.statsAffected:
+				var effectApplied = effect.duplicate(true)
 				var modifier = int(stats.get(statAffected) * effectApplied.amount)
 				if modifier == 0:
 					modifier = sign(effectApplied.amount)
@@ -194,7 +194,7 @@ func enemyStartTurn():
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.HEAL:
-				applyEffect(attackSelected)
+				applyEffect(attackSelected.effectRes)
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 func onChosenAttack(index:int):
@@ -213,7 +213,7 @@ func onChosenAttack(index:int):
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.HEAL:
-				applyEffect(attackSelected)
+				applyEffect(attackSelected.effectRes)
 			elif attackSelected.type == Enum.AbilityType.EFFECT:
 				pass
 			emit_signal("selectedSelf")
@@ -256,9 +256,9 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 		Enum.AbilityType.ATTACK:
 			if attack.statusEffect != Enum.StatusEffect.NONE:
 				if attack.effectRes.target != Enum.FocusType.SELF:
-					enemy.applyEffect(attack)
+					enemy.applyEffect(attack.effectRes)
 				else:
-					applyEffect(attack)
+					applyEffect(attack.effectRes)
 			var atkStat = stats.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
@@ -270,7 +270,7 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 		Enum.AbilityType.EFFECT:
-			enemy.applyEffect(attack)
+			enemy.applyEffect(attack.effectRes)
 func attackFinished():
 	if self.global_position != self.startingPosition:
 		setState("walkingback")

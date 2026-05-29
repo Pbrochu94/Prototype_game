@@ -7,13 +7,12 @@ var currentParty:Array[UnitDefinition]
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[0].duplicate(true)
+var startingUnit:UnitDefinition = addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 const startingLightShards:int = 0
 
 
 func _ready():
-	for i in range(1):
-		addUnitToParty(preload("res://Invocations/BlasterDruid/BlasterDroidDef.tres"))
+	currentParty.append(startingUnit)
 
 var nodes = [
 	{

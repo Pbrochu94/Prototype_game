@@ -73,7 +73,7 @@ func castSpell(target:BaseUnitScript):
 			target.add_child(spellInstance)
 	var spellResource = spellInstance.spellRes
 	if spellSelected.hasEffect:
-		target.applyEffect(spellSelected)
+		target.applyEffect(spellSelected.effectRes)
 	setState("casting")
 	print("Summoner cast ",spellSelected.spellName, " on ", target.stats.characterName)
 
