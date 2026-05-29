@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://dqu83bv21vuce"]
-
-[ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="1_646c3"]
-[ext_resource type="Script" path="res://utils/Data/UnitData/UnitData.gd" id="1_p345i"]
-
-[resource]
-script = ExtResource("1_p345i")
-scene = ExtResource("1_646c3")
-cost = 3
