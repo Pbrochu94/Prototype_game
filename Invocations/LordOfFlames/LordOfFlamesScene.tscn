@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://vf35ymhc31wt"]
+[gd_scene load_steps=118 format=3 uid="uid://vf35ymhc31wt"]
 
 [ext_resource type="PackedScene" uid="uid://o3pk3ttlbnmm" path="res://Invocations/BaseUnitScene.tscn" id="1_fmdth"]
 [ext_resource type="Script" path="res://Invocations/LordOfFlames/BaseLordOfFlamesScript.gd" id="2_1vvfy"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dfy5q7mbq4gk8" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Idle.png" id="2_u013k"]
 [ext_resource type="Texture2D" uid="uid://cpdk024asta7r" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-BUff.png" id="2_wrc0j"]
 [ext_resource type="Texture2D" uid="uid://cku3c6yxx3iyt" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Range Fire Burst.png" id="3_emadf"]
-[ext_resource type="Resource" uid="uid://o178otfbl661" path="res://Invocations/LordOfFlames/LordOfFlamesDef.tres" id="3_g11wc"]
 [ext_resource type="Texture2D" uid="uid://codi2ei5xnagg" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Death.png" id="4_6j36b"]
 [ext_resource type="Texture2D" uid="uid://b6qih41123m3i" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Move.png" id="4_r1h2g"]
 [ext_resource type="Texture2D" uid="uid://bdjjjx5po7moo" path="res://CharacterSprite/LordOfFlames/Lord of the Flames SpriteSheet 145x47 With Glow Glow(WITH HURT).png" id="6_ms2e4"]
@@ -746,7 +745,6 @@ animations = [{
 
 [node name="LordOfFlames" instance=ExtResource("1_fmdth")]
 script = ExtResource("2_1vvfy")
-stats = ExtResource("3_g11wc")
 walkSpeed = 160
 
 [node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
@@ -780,6 +778,10 @@ script = ExtResource("16_dvv5x")
 
 [node name="Outro" parent="StateMachine" index="7"]
 script = ExtResource("17_qqeem")
+
+[node name="Area2D" parent="." index="3"]
+position = Vector2(-6, 5)
+scale = Vector2(1.32, 1.4)
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(6, -5.25)
