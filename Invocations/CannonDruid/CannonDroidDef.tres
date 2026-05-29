@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_terbi")
-characterName = "Cannon droid"
+characterName = "cannon droid"
 maxHp = 150
 currentHp = 150
 speed = 1

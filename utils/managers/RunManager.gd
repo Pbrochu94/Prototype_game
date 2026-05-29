@@ -7,7 +7,7 @@ var currentParty:Array[UnitDefinition]
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = addUnitToParty(UnitDB.firstWorldUnits.pick_random())
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[0].duplicate(true)
 const startingLightShards:int = 0
 
 

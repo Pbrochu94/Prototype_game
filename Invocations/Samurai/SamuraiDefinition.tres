@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_f8q0i")
-characterName = "Samurai"
+characterName = "samurai"
 maxHp = 120
 currentHp = 120
 speed = 5
