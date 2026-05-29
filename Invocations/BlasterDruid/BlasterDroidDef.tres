@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://bfxuii11he6tq"]
+
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_4tmo7"]
+[ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruidCombat.tscn" id="1_w766w"]
+
+[resource]
+script = ExtResource("1_4tmo7")
+characterName = "Blaster droid"
+maxHp = 150
+currentHp = 150
+speed = 2
+baseSpeed = 2
+deff = 20
+baseDeff = 20
+atk = 10
+baseAtk = 10
+scene = ExtResource("1_w766w")
+summonCost = 5

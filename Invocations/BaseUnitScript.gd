@@ -28,7 +28,6 @@ var states:Dictionary
 #STATS
 @export var stats : UnitDefinition
 
-#@export var characterName:String 
 @export var walkSpeed:int
 @export var maxHp:int 
 @export var currentHp:int 
@@ -146,8 +145,6 @@ func receiveDamage(attacker,attack, damage):
 		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
 		stats.currentHp-= trueDamage
 		setState("hurt")
-		#Wait end of animation and transform this function into async
-#		await anim.animation_finished
 		emit_signal("hpChanged")
 		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
 func applyEffect(attack):
@@ -272,6 +269,8 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						ally.receiveDamage(self,attack,splashDamage)
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
+		Enum.AbilityType.EFFECT:
+			enemy.applyEffect(attack)
 func attackFinished():
 	if self.global_position != self.startingPosition:
 		setState("walkingback")

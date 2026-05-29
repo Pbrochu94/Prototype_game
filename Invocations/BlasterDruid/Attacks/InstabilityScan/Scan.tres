@@ -7,7 +7,7 @@
 script = ExtResource("1_sddqm")
 attackName = "instability scan"
 damage = 0
-type = 0
+type = 2
 focusType = 1
 healAmount = 0
 numberOfTargets = 1
