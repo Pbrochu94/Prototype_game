@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://dmgp62drulcpe"]
+
+[ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="1_lpyl7"]
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_qcs25"]
+
+[resource]
+script = ExtResource("1_qcs25")
+characterName = "Archer"
+maxHp = 100
+currentHp = 100
+speed = 4
+baseSpeed = 4
+deff = 10
+baseDeff = 10
+atk = 30
+baseAtk = 30
+scene = ExtResource("1_lpyl7")
+summonCost = 3

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://um6tcdrsxrpi"]
+
+[ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="1_h7d8i"]
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_terbi"]
+
+[resource]
+script = ExtResource("1_terbi")
+characterName = "Cannon droid"
+maxHp = 150
+currentHp = 150
+speed = 1
+baseSpeed = 1
+deff = 20
+baseDeff = 20
+atk = 20
+baseAtk = 20
+scene = ExtResource("1_h7d8i")
+summonCost = 5
