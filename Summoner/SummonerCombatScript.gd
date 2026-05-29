@@ -20,7 +20,7 @@ var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
 var allSpell:Dictionary={
-	"shield" = preload("res://Summoner/Spells/Shield/Shield.tres"),
+	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
 	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBall.tres"),
 }
 var learnedSpells:Dictionary
@@ -60,6 +60,7 @@ func walk(delta, destination:Vector2):
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:BaseUnitScript):
+	print(spellSelected.spellName)
 	var spellInstance = spellSelected.spellScene.instantiate()
 	spellCooldowns.append({
 		"name": spellSelected.spellName,

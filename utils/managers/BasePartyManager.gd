@@ -28,7 +28,7 @@ func connectSignals():
 #PARTY HANDLERS
 func onCharacterDeath(character:BaseUnitScript):
 	aliveCount -= 1
-	currentlyAliveCharacters = party.filter(
+	currentlyAliveCharacters = partyInstances.filter(
 		func(character):
 			return not character.isDead
 	)

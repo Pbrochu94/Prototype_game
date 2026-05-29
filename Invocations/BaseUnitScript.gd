@@ -298,10 +298,7 @@ func onMouseExited():
 func onArea2DInputEvent(viewport, event, shape_idx):
 	if not canBeSelected:
 		return
-	if event is InputEventMouseButton:#HEEEEEEEEEEEEEREEEEEEEEEEEEEE IIIIIIIIIIT BUGSSS
-		print("OOOH")
 	if event is InputEventMouseButton and event.pressed:
-		print("AHHHHH")
 		emit_signal("clickedOn", self)
 
 #UTILS

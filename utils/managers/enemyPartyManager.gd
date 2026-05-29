@@ -21,7 +21,6 @@ func loadTeam():
 #		var enemy = enemyData.scene.instantiate()
 #		enemy.stats = enemy.stats.duplicate(true)
 		party.append(enemyData)
-	print("AAAHHH", party)
 
 func addEnemyToParty():
 	for i in range(party.size()):

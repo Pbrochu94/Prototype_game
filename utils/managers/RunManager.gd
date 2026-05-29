@@ -12,7 +12,8 @@ const startingLightShards:int = 0
 
 
 func _ready():
-	addUnitToParty(preload("res://Invocations/Samurai/SamuraiDefinition.tres"))
+	for i in range(3):
+		addUnitToParty(preload("res://Invocations/Samurai/SamuraiDefinition.tres"))
 
 var nodes = [
 	{

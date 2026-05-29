@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvulnerableEffect" load_steps=2 format=3 uid="uid://c6uqesh8t4s6v"]
+
+[ext_resource type="Script" path="res://utils/Data/Effect/Invulnerable/InvulnerableEffect.gd" id="1_yl5aw"]
+
+[resource]
+script = ExtResource("1_yl5aw")
+type = 1
+name = "invulnerable"
+duration = 3
+target = 0
+amount = 0.0

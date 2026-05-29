@@ -51,7 +51,6 @@ func getValidTargets():
 
 #MOUSE HANDLING
 func enemyHovered(enemy:BaseUnitScript):
-	print("AHHHHHH")
 	currentHovered = enemy
 	updateArrow(enemy)
 	selectingArrow.visible = true
@@ -110,14 +109,16 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			for enemy in enemyPartyInstances:
 				enemy.canBeSelected = true
 func cancelSelection():
-	for enemy in enemyParty:
+	for enemy in enemyPartyInstances:
 		enemy.canBeSelected = false
+	for ally in allyPartyInstances:
+		ally.canBeSelected = false
 	selectingArrow.visible = false
 	targets.clear()
 func endSelection():
-	for enemy in enemyParty:
+	for enemy in enemyPartyInstances:
 		enemy.canBeSelected = false
-	for ally in allyParty:
+	for ally in allyPartyInstances:
 		ally.canBeSelected = false
 	selectingArrow.visible = false
 	turnManager.unitAttack(targets)
