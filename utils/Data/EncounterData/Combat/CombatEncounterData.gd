@@ -18,17 +18,17 @@ var hasBudget:bool = true
 
 func generateEncounter():
 	var remainingBudget = encounterBudget
-	var selectedEnemies: Array[UnitData] = []
+	var selectedEnemies: Array[UnitDefinition] = []
 	while remainingBudget > 0:
 		var validEnemies = UnitDB.firstWorldUnits.filter(
 			func(enemy):
-				return enemy.cost <= remainingBudget)
+				return enemy.summonCost <= remainingBudget)
 		if validEnemies.is_empty():
 			break
 		#PICK RANDOM
-		var unitPicked = validEnemies.pick_random()
+		var unitPicked = validEnemies.pick_random().duplicate(true)
 		#PICK SPECIFIC
 #		var unitPicked = validEnemies[1]
 		selectedEnemies.append(unitPicked)
-		remainingBudget -= unitPicked.cost
+		remainingBudget -= unitPicked.summonCost
 	return selectedEnemies

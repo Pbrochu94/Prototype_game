@@ -11,30 +11,48 @@ func init():
 	encounter = currentCombatScene.combatEncounterData
 	loadTeam()
 	addEnemyToParty()
-	placeEnemies()
+	addUnitToPartyInstances()
+	placeUnit()
 
 func loadTeam():
 	var generatedEnemies = encounter.generateEncounter()
+	print(generatedEnemies)
 	for enemyData in generatedEnemies:
-		var enemy = enemyData.scene.instantiate()
-		enemy.stats = enemy.stats.duplicate(true)
-		party.append(enemy)
+#		var enemy = enemyData.scene.instantiate()
+#		enemy.stats = enemy.stats.duplicate(true)
+		party.append(enemyData)
+	print("AAAHHH", party)
 
 func addEnemyToParty():
 	for i in range(party.size()):
 		var enemy = party[i]
 		var numberNameTag = str(i+1)
-		enemy.stats.characterName +=  " enemy " + numberNameTag 
+		enemy.characterName +=  " enemy " + numberNameTag 
 		aliveCount += 1
-		enemy.currentCombatScene = currentCombatScene
-		addUnitConnections(enemy)
-	currentlyAliveCharacters = party
+	currentlyAliveCharacters = partyInstances
 
-func placeEnemies():
-	for i in range(party.size()):
-		var enemy = party[i]
-		enemy.faction = Enum.Faction.ENEMY
-		currentCombatScene.add_child(enemy)
+func addUnitToPartyInstances():
+		for i in range(party.size()):
+			var unit = party[i]
+			var unitScene = unit.scene.instantiate()
+			unitScene.stats = unit
+			unitScene.faction = Enum.Faction.ENEMY
+			partyInstances.append(unitScene)
+
+func placeUnit():
+	for instance in partyInstances:
+		instance.currentCombatScene = currentCombatScene
+		addUnitConnections(instance)
+	for i in range(partyInstances.size()):
+#		var unitData = party[i]
+#		var unitScene = unitData.scene.instantiate()
+#		unitScene.currentCombatScene = currentCombatScene
+#		addUnitConnections(unitScene)
+#		print(unitScene)
+#		unitScene.stats = unitData
+##		unitScene.faction = Enum.Faction.PLAYER
+		currentCombatScene.add_child(partyInstances[i])
 		if i < currentCombatScene.enemyAnchors.size():
-			enemy.global_position = currentCombatScene.enemyAnchors[i].global_position
-			enemy.startingPosition = currentCombatScene.enemyAnchors[i].global_position
+			partyInstances[i].global_position = currentCombatScene.enemyAnchors[i].global_position
+			partyInstances[i].startingPosition = currentCombatScene.enemyAnchors[i].global_position
+

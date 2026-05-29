@@ -1,8 +1,8 @@
 extends State
 class_name GetInPositionState
 
-var player:Node2D
-var target:Node2D
+var player:BaseUnitScript
+var target:BaseUnitScript
 var attackSelected:Ability
 
 func enter():

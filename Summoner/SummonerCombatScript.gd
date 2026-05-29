@@ -1,4 +1,5 @@
 extends Node2D
+class_name BaseSummonerScript
 #NODES
 @onready var anim = $SpritePivot/AnimatedSprite2D
 @onready var stateMachine = $StateMachine
@@ -8,13 +9,13 @@ extends Node2D
 #@onready var area = $Area2D
 
 #STATS
-@export var stats:UnitStatsData = preload("res://Summoner/SummonerStatsData.tres")
+@export var stats:UnitDefinition = preload("res://Summoner/SummonerDefinition.tres")
 @export var characterName:String = "Summoner"
 @export var walkSpeed:int = 100
 
 #VARIABLES
-var targets:Array[Node2D]
-var target:Node2D
+var targets:Array[BaseUnitScript]
+var target:BaseUnitScript
 var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
@@ -58,7 +59,7 @@ func walk(delta, destination:Vector2):
 		onFinishedIntro()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
-func castSpell(target:Node2D):
+func castSpell(target:BaseUnitScript):
 	var spellInstance = spellSelected.spellScene.instantiate()
 	spellCooldowns.append({
 		"name": spellSelected.spellName,

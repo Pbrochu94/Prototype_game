@@ -4,7 +4,7 @@ class_name HealState
 var attackSelected:Ability
 var characterMaxHp:int
 var characterCurrentHp:int
-var target:Node2D
+var target:BaseUnitScript
 var attackName:String
 var attacksDict:Dictionary
 

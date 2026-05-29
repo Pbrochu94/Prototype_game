@@ -6,7 +6,7 @@ extends Control
 @onready var skillBtn = $ColorRect/Skill
 @onready var closeBtn = $ColorRect/Close
 var choiceMenuParent:Control
-var currentlyPlayingUnit:Node2D
+var currentlyPlayingUnit:BaseUnitScript
 
 #SINGALS
 signal attackSelected(attackIndex:int)

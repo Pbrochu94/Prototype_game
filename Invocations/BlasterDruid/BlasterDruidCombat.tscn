@@ -802,6 +802,7 @@ size = Vector2(20, 23)
 
 [node name="BlasterDruid" type="Node2D" groups=["character", "party member", "unit"]]
 script = ExtResource("1_0xp15")
+unitCost = null
 stats = ExtResource("2_wlidc")
 walkSpeed = 200
 maxHp = 150

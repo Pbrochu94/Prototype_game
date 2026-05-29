@@ -23,12 +23,11 @@ class_name CombatEncounter
 	$EnemyAnchor2,
 	$EnemyAnchor3
 ]
-@onready var summoner:Node2D = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
+@onready var summoner:BaseSummonerScript = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
 @onready var environments:Array[PackedScene] = [
 	preload("res://MapNodes/Combat/Intro/CaveBackgroundScene.tscn")
 ]
-var player:Node2D 
-var enemy:Node2D 
+
 var playerStartingPosition:Vector2
 var enemyStartingPosition:Vector2
 
@@ -43,6 +42,7 @@ func _ready():
 	summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
+	print_tree()
 	endingScreen.init()
 	endingScreen.currentCombatScene = combatScene
 	turnManager.currentCombatScene = combatScene

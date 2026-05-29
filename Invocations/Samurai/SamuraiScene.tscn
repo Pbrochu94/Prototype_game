@@ -1,8 +1,7 @@
-[gd_scene load_steps=102 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=103 format=3 uid="uid://0gmygfaywn0b"]
 
 [ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
-[ext_resource type="Resource" uid="uid://frip40f6u4vk" path="res://Invocations/Samurai/SamuraiStatsData.tres" id="2_jj8mi"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/IdleSamurai.gd" id="5_5jnhc"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/GetInPositionSamurai.gd" id="6_ok88i"]
@@ -13,6 +12,36 @@
 [ext_resource type="Script" path="res://Invocations/Samurai/States/DownedSamurai.gd" id="10_jb3k4"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="11_4b2fb"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/OutroSamurai.gd" id="11_rrmkh"]
+
+[sub_resource type="GDScript" id="GDScript_4omsk"]
+script/source = "extends Resource
+class_name UnitStatsData
+
+#STATS
+@export var characterName:String 
+@export var maxHp:int 
+@export var currentHp:int 
+@export var speed:int 
+@export var baseSpeed:int 
+#@export var attacks:Dictionary = {}
+#@export var attackSelected:Ability
+@export var deff:int
+@export var baseDeff:int 
+@export var atk:int
+@export var baseAtk:int 
+"
+
+[sub_resource type="Resource" id="Resource_4h44m"]
+script = SubResource("GDScript_4omsk")
+characterName = "Samurai"
+maxHp = 120
+currentHp = 120
+speed = 5
+baseSpeed = 5
+deff = 10
+baseDeff = 10
+atk = 20
+baseAtk = 20
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kn0ci"]
 atlas = ExtResource("2_3jdm4")
@@ -655,8 +684,7 @@ size = Vector2(20, 23)
 
 [node name="Samurai" type="Node2D" groups=["party member", "unit"]]
 script = ExtResource("1_sps1a")
-unitCost = 3
-stats = ExtResource("2_jj8mi")
+stats = SubResource("Resource_4h44m")
 walkSpeed = 200
 maxHp = 120
 currentHp = 120

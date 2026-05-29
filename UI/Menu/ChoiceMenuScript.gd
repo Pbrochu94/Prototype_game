@@ -11,8 +11,8 @@ extends Control
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
 @onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
-var summoner:Node2D 
-var currentlyPlayingUnit:Node2D
+var summoner:BaseSummonerScript 
+var currentlyPlayingUnit:BaseUnitScript
 #SIGNALS
 signal selectionCancelled
 

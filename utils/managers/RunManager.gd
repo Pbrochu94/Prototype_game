@@ -3,16 +3,16 @@ extends Node
 var currentNode:int
 var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
 #PROGRESS TRACKING
-var currentParty:Array[UnitData] 
+var currentParty:Array[UnitDefinition] 
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitData = UnitDB.firstWorldUnits[0].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[0].duplicate(true)
 const startingLightShards:int = 0
 
 
 func _ready():
-	currentParty.append(startingUnit)
+	addUnitToParty(preload("res://Invocations/Samurai/SamuraiDefinition.tres"))
 
 var nodes = [
 	{
@@ -44,3 +44,7 @@ var nodes = [
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
 	}
 ]
+
+func addUnitToParty(unit:UnitDefinition):
+	var unitData = unit.duplicate(true)
+	currentParty.append(unitData)

@@ -8,12 +8,12 @@ extends Node
 @onready var everyUnits:Array[Node] 
 @onready var currentCombatScene = $CombatEncounterScene
 var everyLivingUnits
-var summoner:Node2D 
+var summoner:BaseSummonerScript 
 var currentTurn = "player"
-var enemy:Node2D 
+var enemy:BaseUnitScript 
 var isSelecting = false
 var playOrder:Array
-var currentlyPlaying:Node2D
+var currentlyPlaying:BaseUnitScript
 var playerLost:bool = false
 var playerWon:bool = false
 var turnTracker:int = 0
@@ -41,16 +41,16 @@ func connectSignals():
 	choiceMenu.spellMenu.spellSelected.connect(onSpellSelected)
 	turnEnded.connect(startTurn)
 func connectEachInvocations():
-	for invocation in playerPartyManager.party:
+	for invocation in playerPartyManager.partyInstances:
 		invocation.stopSelectingTarget.connect(endSelection)
 		invocation.turnFinished.connect(endTurn)
 		invocation.startSelectingEnemyTarget.connect(unitSelectingTarget)
 		invocation.selectedSelf.connect(endSelection)
 func connectEachEnemy():
-	for enemy in enemyPartyManager.party:
+	for enemyInstance in enemyPartyManager.partyInstances:
 #		enemy.enemySelected.connect(playerAttack)
-		enemy.donePreparing.connect(enemyMoveToAttack)
-		enemy.turnFinished.connect(endTurn)
+		enemyInstance.donePreparing.connect(enemyMoveToAttack)
+		enemyInstance.turnFinished.connect(endTurn)
 
 #FIGHT INIT
 func playIntro():
@@ -133,7 +133,7 @@ func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
-func unitAttack(targets:Array[Node2D]):
+func unitAttack(targets:Array[BaseUnitScript]):
 		summoner.targets = targets
 		match caster:
 			Enum.Caster.SUMMONER:
@@ -180,8 +180,9 @@ func openEndingScreen():
 	currentCombatScene.endingScreen.open()
 
 #ENEMY BEHAVIORS
-func enemyMoveToAttack(target:Node2D):
+func enemyMoveToAttack(target:BaseUnitScript):
 	currentlyPlaying.getInPosition(target)
 func enemyAttack():
-	enemy.attack()
+	pass
+#	enemy.attack()
 

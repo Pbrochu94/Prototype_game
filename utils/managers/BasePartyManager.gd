@@ -6,9 +6,10 @@ class_name BasePartyManager
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
 @onready var currentCombatScene = get_tree().get_first_node_in_group("combat scene")
 #VARIABLES
-var party:Array[Node2D]
+var party:Array[UnitDefinition]
+var partyInstances:Array[BaseUnitScript]
 var aliveCount:int
-var currentlyAliveCharacters:Array[Node2D]
+var currentlyAliveCharacters:Array[BaseUnitScript]
 var partyFaction
 
 #SIGNALS
@@ -25,7 +26,7 @@ func init():
 func connectSignals():
 	turnManager.playOutroAnim.connect(outroAnim)
 #PARTY HANDLERS
-func onCharacterDeath(character:Node2D):
+func onCharacterDeath(character:BaseUnitScript):
 	aliveCount -= 1
 	currentlyAliveCharacters = party.filter(
 		func(character):
@@ -43,7 +44,7 @@ func outroAnim():
 		character.setState("outro")
 #TEST DATA
 
-func assignUnitFaction(character:Node2D):
+func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
 #func addUnitToParty(character:Node2D):
@@ -51,7 +52,7 @@ func assignUnitFaction(character:Node2D):
 #	party.append(character)
 #	currentlyAliveCharacters.append(character)
 
-func addUnitConnections(character:Node2D):
+func addUnitConnections(character:BaseUnitScript):
 	character.isDowned.connect(onCharacterDeath)
 
 func getPartyInfo():

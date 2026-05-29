@@ -15,20 +15,18 @@ var partyManager:Node
 
 
 #VARIABLES
-var target:Node2D
-var multipleTargets:Array[Node2D]
-var collateralTargets:Array[Node2D]
+var target:BaseUnitScript
+var multipleTargets:Array[BaseUnitScript]
+var collateralTargets:Array[BaseUnitScript]
 var canBeSelected = false
 var currentState:String
 var isWalking = false
 var direction:int
 var states:Dictionary
 
-#DATA
-@export var unitCost:int
 
 #STATS
-@export var stats : UnitStatsData
+@export var stats : UnitDefinition
 
 #@export var characterName:String 
 @export var walkSpeed:int
@@ -71,7 +69,7 @@ var isDead:bool = false
 
 #SIGNALS
 signal introFinished
-signal inPositionToAttack(enemy:Node2D)
+signal inPositionToAttack(enemy:BaseUnitScript)
 signal stopSelectingTarget
 signal dealDamage(amount:int)
 signal turnFinished
@@ -79,11 +77,11 @@ signal startSelectingEnemyTarget
 signal selectedSelf()
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
-signal hovered(character)
-signal unhovered(character)
-signal enemySelected(enemy:Node2D)
+signal hovered(character:BaseUnitScript)
+signal unhovered(character:BaseUnitScript)
+signal enemySelected(enemy:BaseUnitScript)
 signal donePreparing
-signal clickedOn(unit:Node2D)
+signal clickedOn(unit:BaseUnitScript)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -244,12 +242,12 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 			attack(target, attackSelected)
 		unitSelectable.erase(target)
 
-func getInPosition(enemy:Node2D):
+func getInPosition(enemy:BaseUnitScript):
 	target = enemy
 	setState("getinposition")
 func heal():
 	pass
-func attack(enemy:Node2D,attack:Ability):
+func attack(enemy:BaseUnitScript,attack:Ability):
 	setState("attacking")
 	var attackName:String = attackSelected.attackName
 	if attacks[attackName]["cooldown"] >  0:
@@ -300,7 +298,10 @@ func onMouseExited():
 func onArea2DInputEvent(viewport, event, shape_idx):
 	if not canBeSelected:
 		return
+	if event is InputEventMouseButton:#HEEEEEEEEEEEEEREEEEEEEEEEEEEE IIIIIIIIIIT BUGSSS
+		print("OOOH")
 	if event is InputEventMouseButton and event.pressed:
+		print("AHHHHH")
 		emit_signal("clickedOn", self)
 
 #UTILS

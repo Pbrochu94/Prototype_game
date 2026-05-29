@@ -4,7 +4,7 @@ extends Control
 @onready var hpBar = $VBoxContainer/HBoxContainer/HpBar
 @onready var hpText = $VBoxContainer/HBoxContainer/HpText
 
-var character:Node2D
+var character:BaseUnitScript
 
 func setup(char):
 	character = char  

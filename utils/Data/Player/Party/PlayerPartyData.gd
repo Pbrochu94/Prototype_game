@@ -11,7 +11,7 @@ func generateParty():
 	while remainingBudget > 0:
 		var validUnits = UnitDB.firstWorldUnits.filter(
 			func(invocation):
-				return invocation.cost <= remainingBudget)
+				return invocation.summoneCost <= remainingBudget)
 		if validUnits.is_empty():
 			break
 		#PICK RANDOM
@@ -19,5 +19,5 @@ func generateParty():
 		#PICK SPECIFIC
 		var unitPicked = validUnits[1]
 		selectedUnits.append(unitPicked)
-		remainingBudget -= unitPicked.cost
+		remainingBudget -= unitPicked.summonCost
 	return selectedUnits

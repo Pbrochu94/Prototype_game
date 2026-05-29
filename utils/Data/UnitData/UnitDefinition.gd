@@ -1,5 +1,5 @@
 extends Resource
-class_name UnitStatsData
+class_name UnitDefinition
 
 #STATS
 @export var characterName:String 
@@ -13,3 +13,5 @@ class_name UnitStatsData
 @export var baseDeff:int 
 @export var atk:int
 @export var baseAtk:int 
+@export var scene:PackedScene
+@export var summonCost:int

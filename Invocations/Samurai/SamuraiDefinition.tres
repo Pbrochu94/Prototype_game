@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://grqb7dx8nqf7"]
+
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_f8q0i"]
+[ext_resource type="PackedScene" uid="uid://0gmygfaywn0b" path="res://Invocations/Samurai/SamuraiScene.tscn" id="1_ntjrs"]
+
+[resource]
+script = ExtResource("1_f8q0i")
+characterName = "Samurai"
+maxHp = 120
+currentHp = 120
+speed = 5
+baseSpeed = 5
+deff = 10
+baseDeff = 10
+atk = 20
+baseAtk = 20
+scene = ExtResource("1_ntjrs")
+summonCost = 3
