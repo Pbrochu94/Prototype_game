@@ -4,12 +4,14 @@ extends Node2D
 	$VBoxContainer/CombatNode1,
 	$VBoxContainer/CombatNode2,
 	$VBoxContainer/CombatNode3,
-	$VBoxContainer/CombatNode4
+	$VBoxContainer/CombatNode4,
+	$VBoxContainer/CombatNode5
 ]
 
 func _ready():
 	print(getPlayerInfo())
 	for i in buttons.size():
+		print(buttons[i])
 		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
 func node1Pressed():

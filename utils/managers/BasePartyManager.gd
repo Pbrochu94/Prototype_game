@@ -15,10 +15,6 @@ var partyFaction
 #SIGNALS
 signal partyDead
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	connectSignals()
-
 func init():
 	connectSignals()
 
@@ -28,6 +24,7 @@ func connectSignals():
 #PARTY HANDLERS
 func onCharacterDeath(character:BaseUnitScript):
 	aliveCount -= 1
+	removeUnit(character.stats)
 	currentlyAliveCharacters = partyInstances.filter(
 		func(character):
 			return not character.isDead
@@ -47,6 +44,12 @@ func outroAnim():
 func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
+func removeUnit(character:UnitDefinition):
+	partyInstances.erase(character.scene)
+	party.erase(character)
+	print(partyInstances)
+	print(party)
+	character.scene.queue_free()
 #func addUnitToParty(character:Node2D):
 #	aliveCount += 1
 #	party.append(character)

@@ -24,4 +24,9 @@ func gainReward():
 
 func open():
 	visible = true
+	if currentCombatScene.playerPartyManager.party.size() < 3:
+		choosingInvocation()
 	gainReward()
+
+func choosingInvocation():
+	RunManager.addUnitToParty(UnitDB.firstWorldUnits.pick_random())
