@@ -18,4 +18,7 @@ class_name Ability
 @export var cooldown: int
 @export var currentCooldown:int
 @export var effectRes:Effect
+@export var hasProjectile:bool
+@export var visual:PackedScene
+
 var justUsed:bool = false

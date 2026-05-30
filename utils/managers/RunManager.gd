@@ -13,7 +13,9 @@ const startingLightShards:int = 0
 
 
 func _ready():
-	currentParty.append(startingUnit)
+#	currentParty.append(startingUnit)
+	for i in range(3):
+		addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 
 var nodes = [
 	{

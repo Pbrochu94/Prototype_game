@@ -114,6 +114,9 @@ func onAnimationFinished():
 				setState("endingturn")
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
+func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
+	target.add_child(visual.instantiate())
+
 
 #INIT
 func connectSignals():
@@ -259,6 +262,8 @@ func heal():
 	pass
 func attack(enemy:BaseUnitScript,attack:Ability):
 	setState("attacking")
+	if attack.hasProjectile:
+		spawnVisuals(attack.visual,enemy)
 	var attackName:String = attackSelected.attackName
 	if attacks[attackName]["cooldown"] >  0:
 		var cooldown:int = attacks[attackName]["cooldown"]
