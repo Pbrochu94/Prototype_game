@@ -47,14 +47,10 @@ func assignUnitFaction(character:BaseUnitScript):
 func removeUnit(character:UnitDefinition):
 	partyInstances.erase(character.sceneInstance)
 	party.erase(character)
-	print(partyInstances)
-	print(party)
+	RunManager.currentParty.erase(character)
 	await character.sceneInstance.anim.animation_finished
 	character.sceneInstance.queue_free()
-#func addUnitToParty(character:Node2D):
-#	aliveCount += 1
-#	party.append(character)
-#	currentlyAliveCharacters.append(character)
+	turnManager.playOrder.erase(character.sceneInstance)
 
 func addUnitConnections(character:BaseUnitScript):
 	character.isDowned.connect(onCharacterDeath)

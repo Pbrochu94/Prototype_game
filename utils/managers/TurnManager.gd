@@ -78,6 +78,7 @@ func updatePlayOrder():
 	)
 	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
+	print(playOrder)
 	if playerLost:
 		return
 	if not currentlyPlaying:

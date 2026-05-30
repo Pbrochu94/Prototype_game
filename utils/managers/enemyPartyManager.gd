@@ -41,13 +41,6 @@ func placeUnit():
 		instance.currentCombatScene = currentCombatScene
 		addUnitConnections(instance)
 	for i in range(partyInstances.size()):
-#		var unitData = party[i]
-#		var unitScene = unitData.scene.instantiate()
-#		unitScene.currentCombatScene = currentCombatScene
-#		addUnitConnections(unitScene)
-#		print(unitScene)
-#		unitScene.stats = unitData
-##		unitScene.faction = Enum.Faction.PLAYER
 		currentCombatScene.add_child(partyInstances[i])
 		if i < currentCombatScene.enemyAnchors.size():
 			partyInstances[i].global_position = currentCombatScene.enemyAnchors[i].global_position
