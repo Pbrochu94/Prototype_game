@@ -14,4 +14,5 @@ class_name UnitDefinition
 @export var atk:int
 @export var baseAtk:int 
 @export var scene:PackedScene
+@export var sceneInstance:Node2D
 @export var summonCost:int

@@ -45,11 +45,12 @@ func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
 func removeUnit(character:UnitDefinition):
-	partyInstances.erase(character.scene)
+	partyInstances.erase(character.sceneInstance)
 	party.erase(character)
 	print(partyInstances)
 	print(party)
-	character.scene.queue_free()
+	await character.sceneInstance.anim.animation_finished
+	character.sceneInstance.queue_free()
 #func addUnitToParty(character:Node2D):
 #	aliveCount += 1
 #	party.append(character)

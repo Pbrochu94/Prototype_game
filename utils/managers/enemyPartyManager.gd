@@ -31,6 +31,7 @@ func addUnitToPartyInstances():
 		for i in range(party.size()):
 			var unit = party[i]
 			var unitScene = unit.scene.instantiate()
+			unit.sceneInstance = unitScene
 			unitScene.stats = unit
 			unitScene.faction = Enum.Faction.ENEMY
 			partyInstances.append(unitScene)
