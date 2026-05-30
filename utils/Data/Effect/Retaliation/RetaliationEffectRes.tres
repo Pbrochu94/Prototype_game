@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RetaliationEffect" load_steps=2 format=3 uid="uid://08b4t3rimyhw"]
+
+[ext_resource type="Script" path="res://utils/Data/Effect/Retaliation/RetaliationEffect.gd" id="1_smfq2"]
+
+[resource]
+script = ExtResource("1_smfq2")
+type = 4
+name = "retaliation"
+duration = 3
+target = 0
+amount = 0.0

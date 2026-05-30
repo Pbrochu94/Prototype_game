@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://chht6opudnl86"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_4kysr"]
+[ext_resource type="Resource" uid="uid://d1gglywa7msp" path="res://Invocations/LordOfFlames/Attacks/Combustion/CombustionEffectRes.tres" id="1_kb8ry"]
+
+[resource]
+script = ExtResource("1_4kysr")
+attackName = "combustion"
+damage = 0
+type = 0
+focusType = 0
+healAmount = 0
+numberOfTargets = 1
+element = "fire"
+hitboxName = ""
+effectAmount = 0
+needToMove = false
+effectDuration = 0
+statusEffect = 4
+splashDamage = 0
+cooldown = 5
+currentCooldown = 0
+effectRes = ExtResource("1_kb8ry")

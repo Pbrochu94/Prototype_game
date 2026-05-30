@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://dit6kyly3lg61"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_lcery"]
+[ext_resource type="PackedScene" uid="uid://b13e3pyqp5yc1" path="res://Invocations/LordOfFlames/Attacks/Ablaze/ablazeVisual.tscn" id="2_kignl"]
+
+[resource]
+script = ExtResource("1_lcery")
+attackName = "ablaze"
+damage = 10
+type = 0
+focusType = 2
+healAmount = 0
+numberOfTargets = 5
+element = "fire"
+hitboxName = ""
+effectAmount = 0
+needToMove = false
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0
+cooldown = 1
+currentCooldown = 0
+hasProjectile = true
+visual = ExtResource("2_kignl")

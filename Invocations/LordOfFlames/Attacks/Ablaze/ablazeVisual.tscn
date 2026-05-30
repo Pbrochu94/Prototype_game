@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://b13e3pyqp5yc1"]
+
+[ext_resource type="PackedScene" uid="uid://xdhvkw0tjs33" path="res://Summoner/Spells/BaseSpellScene.tscn" id="1_2svxw"]
+[ext_resource type="Script" path="res://Invocations/LordOfFlames/Attacks/Ablaze/AblazeVisualScript.gd" id="2_amwbs"]
+[ext_resource type="Texture2D" uid="uid://qsoh6kv22la0" path="res://CharacterSprite/LordOfFlames/Range Sprite 49x28 With Glow.png" id="2_owcdx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvrcx"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(245, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnnqx"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(294, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f7wu"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(343, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7bqa"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(0, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54au5"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(49, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dgsv"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(98, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmoqr"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(147, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0577"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(196, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avrq2"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(392, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksnot"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(441, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72ofq"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(490, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky67b"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(539, 0, 49, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8x4o"]
+atlas = ExtResource("2_owcdx")
+region = Rect2(588, 0, 49, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0xbu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvrcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnnqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f7wu")
+}],
+"loop": false,
+"name": &"active",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7bqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54au5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dgsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmoqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0577")
+}],
+"loop": false,
+"name": &"appear",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avrq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksnot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72ofq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ky67b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8x4o")
+}],
+"loop": false,
+"name": &"disapear",
+"speed": 10.0
+}]
+
+[node name="Ablaze" instance=ExtResource("1_2svxw")]
+script = ExtResource("2_amwbs")
+
+[node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
+position = Vector2(-4, -7)
+sprite_frames = SubResource("SpriteFrames_h0xbu")
+animation = &"appear"
+
+[connection signal="animation_finished" from="SpritePivot/AnimatedSprite2D" to="." method="onAnimationFinished"]
