@@ -23,6 +23,7 @@ var currentState:String
 var isWalking = false
 var direction:int
 var states:Dictionary
+var previousState:String
 
 
 #STATS
@@ -41,6 +42,7 @@ var abilityCooldown:int
 
 #EFFECTS
 var isInvulnerable:bool = false
+var hasRetaliation:bool = false
 
 #TIMERS
 var timers:Dictionary = {
@@ -106,7 +108,7 @@ func onAnimationFinished():
 				if stats.currentHp <= 0:
 					setState("downed")
 				else:
-					setState("idle")
+					setState(previousState)
 		"heal":
 			if anim.animation == attackSelected.attackName:
 				setState("endingturn")
@@ -136,6 +138,11 @@ func receiveDamage(attacker,attack, damage):
 	if isInvulnerable:
 		print(stats.characterName, " is invulnerable and negated the attack from ", attacker)
 		return
+	elif hasRetaliation:
+		for effect in activeEffects:
+			if effect.name == "retaliation":
+				if !attacker.is_in_group("main character"):
+					attacker.receiveDamage(self,effect,effect.amount)
 	var trueDamage:int = damage - stats.deff
 	if trueDamage <= 0:
 		trueDamage = 0
@@ -149,15 +156,14 @@ func receiveDamage(attacker,attack, damage):
 		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
 func applyEffect(effect:Effect):
 	print(effect.name, " is applied to: ", self)
+	var effectApplied = effect.duplicate(true)
+	print(stats.characterName, " is now ", effectApplied.name," for ", effect.duration, " turn")
 	match effect.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
-			var effectApplied = effect
-			activeEffects.append(effectApplied.duplicate(true))
-			print(stats.characterName, " is now invulnerable for ", effect.duration, " turn")
+			activeEffects.append(effectApplied)
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in effect.statsAffected:
-				var effectApplied = effect.duplicate(true)
 				var modifier = int(stats.get(statAffected) * effectApplied.amount)
 				if modifier == 0:
 					modifier = sign(effectApplied.amount)
@@ -170,6 +176,9 @@ func applyEffect(effect:Effect):
 				activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
 				setState("heal")
+		Enum.StatusEffect.RETALIATION:
+			hasRetaliation = true
+			activeEffects.append(effectApplied)
 
 
 #TURN FLOW
@@ -193,10 +202,10 @@ func enemyStartTurn():
 			pass
 		Enum.FocusType.SELF:
 			target = self
-			if attackSelected.type == Enum.AbilityType.HEAL:
+			if attackSelected.statusEffect != Enum.StatusEffect.NONE:
+				setState("attacking")
 				applyEffect(attackSelected.effectRes)
-			elif attackSelected.type == Enum.AbilityType.EFFECT:
-				pass
+			emit_signal("selectedSelf")
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
 	print("Attack selected: ", attackSelected.attackName)
@@ -221,10 +230,14 @@ func getRandomAttack() -> Ability:
 	var availableAtk = []
 	for attackName in attacks:
 		var attack = attacks[attackName]
-		if attack["currentCooldown"] <= 0 :
+		if attack.currentCooldown <= 0 :
 			availableAtk.append(attack)
+	for attackName in attacks:
+		var attackCd = attacks[attackName].currentCooldown
+		print(attackName," is on CD for ", attackCd)
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
+	randomAtk.currentCooldown = randomAtk.cooldown
 	return randomAtk
 func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters.duplicate()
@@ -288,6 +301,7 @@ func isSelectable():
 func endSelection():
 	canBeSelected = false
 func onMouseEntered():
+	print(getUnitInfo())
 	if not isDead and canBeSelected:
 		emit_signal("hovered", self)
 	else:
@@ -308,7 +322,7 @@ func getUnitInfo():
 	for effect in activeEffects:
 		var effectSummary = {}
 		effectSummary["name"] = effect.name
-		effectSummary["amount"] = effect.amountAppliedToUnit if "amountAppliedToUnit" in effect else ""
+		effectSummary["amount"] = effect.amount if "amount" in effect else ""
 		effectSummary["duration"] = effect.duration
 		effectSummaries.append(effectSummary)
 	return {

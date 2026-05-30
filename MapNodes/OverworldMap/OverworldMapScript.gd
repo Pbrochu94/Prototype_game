@@ -11,7 +11,6 @@ extends Node2D
 func _ready():
 	print(getPlayerInfo())
 	for i in buttons.size():
-		print(buttons[i])
 		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
 func node1Pressed():

@@ -1,8 +1,8 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-#var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
-var currentEncounterData:EncounterData
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
+#var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
 var currentLightShard:int

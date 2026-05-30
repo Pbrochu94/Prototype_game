@@ -19,6 +19,7 @@ var target:BaseUnitScript
 var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
+var previousState:String
 var allSpell:Dictionary={
 	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
 	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBall.tres"),

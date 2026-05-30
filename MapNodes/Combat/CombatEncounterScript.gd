@@ -42,7 +42,7 @@ func _ready():
 	summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
-	print_tree()
+#	print_tree()
 	endingScreen.init()
 	endingScreen.currentCombatScene = combatScene
 	turnManager.currentCombatScene = combatScene

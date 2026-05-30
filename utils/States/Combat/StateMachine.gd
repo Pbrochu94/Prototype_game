@@ -27,8 +27,9 @@ func setState(state:State):
 	if !State:
 		return
 	if currentState:
+		owner.previousState = str(currentState.name).to_lower()
 		currentState.exit()
 	state.enter()
 	currentState = state
 	owner.currentState = state.name.to_lower()
-	print(owner.stats.characterName," enter state: ",currentState.name)
+#	print(owner.stats.characterName," enter state: ",currentState.name)
