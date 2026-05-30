@@ -7,7 +7,7 @@
 script = ExtResource("1_8jhah")
 attackName = "rebuild"
 damage = 0
-type = 1
+type = 2
 focusType = 0
 healAmount = 50
 numberOfTargets = 0
@@ -21,3 +21,4 @@ splashDamage = 0
 cooldown = 3
 currentCooldown = 0
 effectRes = ExtResource("1_mg68l")
+hasProjectile = false

@@ -205,8 +205,7 @@ func enemyStartTurn():
 			pass
 		Enum.FocusType.SELF:
 			target = self
-			if attackSelected.statusEffect != Enum.StatusEffect.NONE:
-				setState("attacking")
+			if attackSelected.type == Enum.AbilityType.EFFECT:
 				applyEffect(attackSelected.effectRes)
 			emit_signal("selectedSelf")
 func onChosenAttack(index:int):
