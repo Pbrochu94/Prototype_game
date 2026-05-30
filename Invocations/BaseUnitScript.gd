@@ -237,7 +237,6 @@ func getRandomAttack() -> Ability:
 			availableAtk.append(attack)
 	for attackName in attacks:
 		var attackCd = attacks[attackName].currentCooldown
-		print(attackName," is on CD for ", attackCd)
 	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
 	randomAtk.currentCooldown = randomAtk.cooldown

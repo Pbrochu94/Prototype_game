@@ -1,21 +1,21 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[0].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[3].duplicate(true)
 const startingLightShards:int = 0
 
 
 func _ready():
-#	currentParty.append(startingUnit)
-	for i in range(3):
-		addUnitToParty(UnitDB.firstWorldUnits.pick_random())
+	currentParty.append(startingUnit)
+#	for i in range(3):
+#		addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 
 var nodes = [
 	{
