@@ -22,7 +22,7 @@ var states:Dictionary
 var previousState:String
 var allSpell:Dictionary={
 	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
-	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBall.tres"),
+	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
 }
 var learnedSpells:Dictionary
 var spellSelected:SummonerSpell

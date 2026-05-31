@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SummonerSpell" load_steps=3 format=3 uid="uid://dyl6xwkq6c8ya"]
+
+[ext_resource type="Script" path="res://Summoner/Spells/SummonerSpellResource.gd" id="1_ylh3f"]
+[ext_resource type="PackedScene" uid="uid://dn5ym1r5q12kk" path="res://Summoner/Spells/FireBall/FireballScene.tscn" id="2_q2jpl"]
+
+[resource]
+script = ExtResource("1_ylh3f")
+spellName = "fire ball"
+amount = 100
+type = 0
+focusType = 1
+element = "fire"
+hitboxName = ""
+needToMove = false
+splashDamage = 0
+cooldown = 5
+currentCooldown = 0
+numberOfTargets = 1
+spellScene = ExtResource("2_q2jpl")
+startingAnimPoint = 0
+isDamagingSpell = true
+hasEffect = false

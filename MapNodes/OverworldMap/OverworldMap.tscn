@@ -28,7 +28,7 @@ text = "Combat 4"
 
 [node name="CombatNode5" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Combat 4
+text = "Combat 5
 "
 
 [connection signal="pressed" from="VBoxContainer/CombatNode1" to="." method="node1Pressed"]
