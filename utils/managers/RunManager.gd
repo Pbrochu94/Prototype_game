@@ -8,7 +8,7 @@ var currentParty:Array[UnitDefinition]
 var currentLightShard:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[0].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[3].duplicate(true)
 const startingLightShards:int = 0
 
 

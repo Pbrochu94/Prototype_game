@@ -67,6 +67,7 @@ var timers:Dictionary = {
 
 #STATUS
 var isDead:bool = false
+var isSelectingToSummon:bool = false
 
 #SIGNALS
 signal introFinished
@@ -83,6 +84,7 @@ signal unhovered(character:BaseUnitScript)
 signal enemySelected(enemy:BaseUnitScript)
 signal donePreparing
 signal clickedOn(unit:BaseUnitScript)
+signal selectedForSummon(unit:UnitDefinition)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -223,10 +225,10 @@ func onChosenAttack(index:int):
 			pass
 		Enum.FocusType.SELF:
 			target = self
-			if attackSelected.type == Enum.AbilityType.HEAL:
+			if attackSelected.type == Enum.AbilityType.EFFECT:
 				applyEffect(attackSelected.effectRes)
-			elif attackSelected.type == Enum.AbilityType.EFFECT:
-				pass
+#			elif attackSelected.type == Enum.AbilityType.EFFECT:
+#				pass
 			emit_signal("selectedSelf")
 func getRandomAttack() -> Ability:
 	var availableAtk = []
@@ -305,7 +307,7 @@ func endSelection():
 	canBeSelected = false
 func onMouseEntered():
 	print(getUnitInfo())
-	if not isDead and canBeSelected:
+	if canBeSelected:
 		emit_signal("hovered", self)
 	else:
 		return
@@ -314,7 +316,9 @@ func onMouseExited():
 func onArea2DInputEvent(viewport, event, shape_idx):
 	if not canBeSelected:
 		return
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and isSelectingToSummon:
+		emit_signal("selectedForSummon", stats)
+	elif event is InputEventMouseButton and event.pressed:
 		emit_signal("clickedOn", self)
 
 #UTILS

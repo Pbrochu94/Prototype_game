@@ -108,6 +108,13 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
 			for enemy in enemyPartyInstances:
 				enemy.canBeSelected = true
+func invocationSelectionStarted():
+	for enemy in enemyPartyInstances:
+		enemy.canBeSelected = true
+		enemy.isSelectingToSummon = true
+func invocationSelectionEnded():
+	for enemy in enemyPartyInstances:
+		enemy.canBeSelected = false
 func cancelSelection():
 	for enemy in enemyPartyInstances:
 		enemy.canBeSelected = false

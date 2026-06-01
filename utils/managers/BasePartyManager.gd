@@ -24,7 +24,7 @@ func connectSignals():
 #PARTY HANDLERS
 func onCharacterDeath(character:BaseUnitScript):
 	aliveCount -= 1
-	removeUnit(character.stats)
+	removeUnitFromQ(character.stats)
 	currentlyAliveCharacters = partyInstances.filter(
 		func(character):
 			return not character.isDead
@@ -44,13 +44,22 @@ func outroAnim():
 func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
-func removeUnit(character:UnitDefinition):
-	partyInstances.erase(character.sceneInstance)
-	party.erase(character)
-	RunManager.currentParty.erase(character)
-	await character.sceneInstance.anim.animation_finished
-	character.sceneInstance.queue_free()
+func removeUnitFromQ(character:UnitDefinition):
+#	partyInstances.erase(character.sceneInstance)
+#	party.erase(character)
+#	RunManager.currentParty.erase(character)
+#	await character.sceneInstance.anim.animation_finished
+#	character.sceneInstance.queue_free()
+	character.sceneInstance.isSelectable()
 	turnManager.playOrder.erase(character.sceneInstance)
+
+func removeUnitsFromParties():
+	for unit in party:
+		if unit.sceneInstance.isDead:
+			partyInstances.erase(unit.sceneInstance)
+			party.erase(unit)
+			RunManager.currentParty.erase(unit)
+			unit.sceneInstance.queue_free()
 
 func addUnitConnections(character:BaseUnitScript):
 	character.isDowned.connect(onCharacterDeath)

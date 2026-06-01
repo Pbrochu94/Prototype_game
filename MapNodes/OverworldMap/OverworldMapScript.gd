@@ -1,11 +1,11 @@
 extends Node2D
 
 @onready var buttons = [
-	$VBoxContainer/CombatNode1,
-	$VBoxContainer/CombatNode2,
-	$VBoxContainer/CombatNode3,
-	$VBoxContainer/CombatNode4,
-	$VBoxContainer/CombatNode5
+	$HBoxContainer/CombatNode1,
+	$HBoxContainer/CombatNode2,
+	$HBoxContainer/CombatNode3,
+	$HBoxContainer/CombatNode4,
+	$HBoxContainer/CombatNode5
 ]
 
 func _ready():
