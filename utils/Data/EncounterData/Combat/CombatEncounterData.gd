@@ -8,7 +8,6 @@ class_name CombatEncounterData
 @export var xpReward:int
 @export var itemReward:int
 @export var rareItemChance:float
-@export var encounterType:Enum.EncounterType
 
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]

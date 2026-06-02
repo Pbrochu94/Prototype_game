@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://yxkytn74bvpe"]
+
+[ext_resource type="Script" path="res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounter.gd" id="1_a717g"]
+[ext_resource type="Texture2D" uid="uid://cv6mkmwljddcp" path="res://BackgroundSprite/SpellEncounter/Spell encounter temple(Template).png" id="1_x8yks"]
+
+[node name="SpellSelectionEncounter" type="Node2D"]
+script = ExtResource("1_a717g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-137, 24)
+texture = ExtResource("1_x8yks")
+
+[node name="SummonerAnchor" type="Node2D" parent="."]
+position = Vector2(-209, 72)
+
+[node name="SummonerIntroStart" type="Node2D" parent="."]
+position = Vector2(-285, 72)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-137, 17)
+zoom = Vector2(4.01, 4.01)
