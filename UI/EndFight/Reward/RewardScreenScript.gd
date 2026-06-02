@@ -11,6 +11,7 @@ func connectSignals():
 		enemy.selectedForSummon.connect(summon)
 func buttonPressed():
 	currentCombatScene.playerPartyManager.removeUnitsFromParties()
+	currentCombatScene.targetManager.invocationSelectionEnded()
 	RunManager.nodes[RunManager.currentNode]["completed"] = true
 	var nextNode = RunManager.currentNode + 1
 	if nextNode < RunManager.nodes.size():
@@ -30,12 +31,14 @@ func open():
 	connectSignals()
 	visible = true
 	gainReward()
-	if currentCombatScene.playerPartyManager.party.size() < 3:
-		choosingInvocation()
+	choosingInvocation()
 func choosingInvocation():
 #	RunManager.addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 	currentCombatScene.targetManager.invocationSelectionStarted()
 func summon(unit:UnitDefinition):
+	if RunManager.currentParty.size() >= 5:
+		print("party is currently full: ", RunManager.currentParty)
+		return
 	var hasEnoughLightShards:bool = calculateSummonCost(unit.summonCost)
 	if hasEnoughLightShards:
 		var lightShardsBeforePayment = RunManager.currentLightShards 

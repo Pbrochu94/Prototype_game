@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6tr3sgcy32ik"]
+
+[ext_resource type="Script" path="res://MapNodes/OverworldMap/OverworldMapScript.gd" id="1_wr0ug"]
+
+[node name="OverworldMap" type="Node2D"]
+script = ExtResource("1_wr0ug")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="CombatNode1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Combat 1"
+
+[node name="CombatNode2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Combat 2
+"
+
+[node name="CombatNode3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Combat 3"
+
+[node name="CombatNode4" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Combat 4"
+
+[node name="CombatNode5" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Combat 5
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/CombatNode1" to="." method="node1Pressed"]
+[connection signal="pressed" from="HBoxContainer/CombatNode2" to="." method="node2Pressed"]
+[connection signal="pressed" from="HBoxContainer/CombatNode3" to="." method="node3Pressed"]
+[connection signal="pressed" from="HBoxContainer/CombatNode4" to="." method="node4Pressed"]
+[connection signal="pressed" from="HBoxContainer/CombatNode5" to="." method="node5Pressed"]

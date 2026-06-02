@@ -7,7 +7,7 @@
 script = ExtResource("1_4kysr")
 attackName = "combustion"
 damage = 0
-type = 0
+type = 2
 focusType = 0
 healAmount = 0
 numberOfTargets = 1
@@ -21,3 +21,4 @@ splashDamage = 0
 cooldown = 5
 currentCooldown = 0
 effectRes = ExtResource("1_kb8ry")
+hasProjectile = false

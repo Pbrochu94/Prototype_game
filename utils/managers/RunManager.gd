@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
@@ -13,9 +13,9 @@ const startingLightShards:int = 0
 
 
 func _ready():
-	currentParty.append(startingUnit)
-#	for i in range(3):
-#		addUnitToParty(UnitDB.firstWorldUnits.pick_random())
+	initStartingParty()
+#	for i in range(5):
+#		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
 
 var nodes = [
 	{
@@ -55,6 +55,20 @@ var nodes = [
 	}
 ]
 
+func initStartingParty():
+	currentParty.append(startingUnit)
+
 func addUnitToParty(unit:UnitDefinition):
 	var unitData = unit.duplicate(true)
 	currentParty.append(unitData)
+
+func runReset():
+	currentParty.clear()
+	resetMapProgress()
+	initStartingParty()
+
+func resetMapProgress():
+	for node in nodes:
+		if node["id"] != 0:
+			node["completed"] = false
+			node["unlocked"] = false

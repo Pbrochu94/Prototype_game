@@ -24,31 +24,32 @@ script = ExtResource("1_57k4s")
 [node name="TurnManager" parent="." instance=ExtResource("5_w1hj5")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.14, 2.14)
+position = Vector2(0, 10)
+zoom = Vector2(2.515, 2.515)
 
 [node name="PlayerAnchor5" type="Node2D" parent="."]
-position = Vector2(-124, 23)
+position = Vector2(-147, 27)
 
 [node name="PlayerAnchor2" type="Node2D" parent="."]
-position = Vector2(-147, 48)
+position = Vector2(-147, 52)
 
 [node name="PlayerAnchor1" type="Node2D" parent="."]
-position = Vector2(-124, 73)
+position = Vector2(-124, 77)
 
 [node name="PlayerAnchor3" type="Node2D" parent="."]
-position = Vector2(-147, 98)
+position = Vector2(-147, 102)
 
 [node name="PlayerAnchor4" type="Node2D" parent="."]
-position = Vector2(-124, 128)
+position = Vector2(-147, 132)
 
 [node name="EnemyAnchor2" type="Node2D" parent="."]
-position = Vector2(145, 43)
+position = Vector2(145, 47)
 
 [node name="EnemyAnchor1" type="Node2D" parent="."]
-position = Vector2(122, 73)
+position = Vector2(122, 77)
 
 [node name="EnemyAnchor3" type="Node2D" parent="."]
-position = Vector2(145, 103)
+position = Vector2(145, 107)
 
 [node name="ChoiceMenu" parent="." groups=["combat menu"] instance=ExtResource("6_rwakw")]
 offset_left = -152.0
@@ -61,4 +62,4 @@ scale = Vector2(0.58, 0.58)
 position = Vector2(-195, 77)
 
 [node name="SummonerIntroStart" type="Node2D" parent="."]
-position = Vector2(-285, 77)
+position = Vector2(-253, 77)

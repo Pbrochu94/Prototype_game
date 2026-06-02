@@ -207,7 +207,10 @@ func enemyStartTurn():
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.EFFECT:
+				anim.play(attackSelected.attackName)
+				await anim.animation_finished
 				applyEffect(attackSelected.effectRes)
+				attackFinished()
 			emit_signal("selectedSelf")
 func onChosenAttack(index:int):
 	attackSelected = attacks.values()[index]
@@ -279,6 +282,8 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 			var atkStat = stats.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
+			if attack.effectRes:
+				enemy.applyEffect(attack.effectRes)
 			if attack.focusType == Enum.FocusType.ENEMY_AOE:
 				for ally in enemy.partyManager.currentlyAliveCharacters:
 					if ally != target:
@@ -286,8 +291,8 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						ally.receiveDamage(self,attack,splashDamage)
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
-		Enum.AbilityType.EFFECT:
-			enemy.applyEffect(attack.effectRes)
+#		Enum.AbilityType.EFFECT:
+#			enemy.applyEffect(attack.effectRes)
 func attackFinished():
 	if self.global_position != self.startingPosition:
 		setState("walkingback")
@@ -300,7 +305,8 @@ func endingTurn():
 
 #UI & SELECTION
 func isSelectable():
-	canBeSelected = true
+	if not isDead:
+		canBeSelected = true
 	area.monitoring = true
 func endSelection():
 	canBeSelected = false

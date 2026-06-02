@@ -16,7 +16,9 @@ class_name CombatEncounter
 @onready var playerAnchors = [
 	$PlayerAnchor1,
 	$PlayerAnchor2,
-	$PlayerAnchor3
+	$PlayerAnchor3,
+	$PlayerAnchor4,
+	$PlayerAnchor5
 ]
 @onready var enemyAnchors = [
 	$EnemyAnchor1,
@@ -61,3 +63,4 @@ func pickRandomBackground():
 	var randomEnvironment = environments.pick_random()
 	var environment = randomEnvironment.instantiate()
 	$Background.add_child(environment)
+	environment.position = Vector2(0,0)

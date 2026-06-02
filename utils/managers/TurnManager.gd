@@ -176,6 +176,7 @@ func endFight():
 	else:
 		print("GAME OVER")
 		RunManager.nodes[RunManager.currentNode]["completed"] = false
+		RunManager.runReset()
 		get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
 func openEndingScreen():
 	currentCombatScene.endingScreen.open()
