@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_o82nq")
 characterName = "lord of flames"
+characterTag = "lord of flames"
 maxHp = 500
 currentHp = 500
 speed = 4

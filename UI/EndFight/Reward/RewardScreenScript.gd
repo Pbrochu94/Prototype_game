@@ -18,32 +18,36 @@ func buttonPressed():
 		get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
 
 func gainReward():
-	var lightShardGained = currentCombatScene.combatEncounterData.lightShardReward
+	var lightShardsGained = currentCombatScene.combatEncounterData.lightShardReward
 	var xpGained = currentCombatScene.combatEncounterData.xpReward
-	RunManager.currentLightShard += lightShardGained
+	RunManager.currentLightShards += lightShardsGained
 	RunManager.currentXp += currentCombatScene.combatEncounterData.xpReward
-	print("You gain: ", lightShardGained, " light shards")
+	print("You gain: ", lightShardsGained, " light shards")
 	print("You gain: ", xpGained, " xp")
 
 
 func open():
 	connectSignals()
 	visible = true
+	gainReward()
 	if currentCombatScene.playerPartyManager.party.size() < 3:
 		choosingInvocation()
-	gainReward()
 func choosingInvocation():
 #	RunManager.addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 	currentCombatScene.targetManager.invocationSelectionStarted()
 func summon(unit:UnitDefinition):
 	var hasEnoughLightShards:bool = calculateSummonCost(unit.summonCost)
 	if hasEnoughLightShards:
-		RunManager.addUnitToParty(unit)
+		var lightShardsBeforePayment = RunManager.currentLightShards 
+		RunManager.currentLightShards -= unit.summonCost
+		var unitNameTag = unit.characterTag
+		var summon = UnitDB.firstWorldUnits.get(unitNameTag)
+		RunManager.addUnitToParty(summon)
+		print("Player current lightshards : ", lightShardsBeforePayment," -> ", RunManager.currentLightShards)
 	else:
-		print(unit.summonCost, " light shards is needed to invoke, player only has: ", RunManager.currentLightShard)
+		print(unit.summonCost, " light shards is needed to invoke, player only has: ", RunManager.currentLightShards)
 func calculateSummonCost(unitCost:int):
-	if RunManager.currentLightShard >= unitCost:
-		RunManager.currentLightShard -= unitCost
+	if RunManager.currentLightShards >= unitCost:
 		return true
 	else:
 		return false

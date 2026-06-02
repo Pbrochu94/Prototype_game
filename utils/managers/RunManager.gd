@@ -5,10 +5,10 @@ var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
-var currentLightShard:int
+var currentLightShards:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits[3].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 
 

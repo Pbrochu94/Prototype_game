@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_4tmo7")
 characterName = "blaster droid"
+characterTag = "blaster droid"
 maxHp = 150
 currentHp = 150
 speed = 2

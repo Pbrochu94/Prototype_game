@@ -3,6 +3,7 @@ class_name UnitDefinition
 
 #STATS
 @export var characterName:String 
+@export var characterTag:String 
 @export var maxHp:int 
 @export var currentHp:int 
 @export var speed:int 
@@ -16,3 +17,4 @@ class_name UnitDefinition
 @export var scene:PackedScene
 @export var sceneInstance:Node2D
 @export var summonCost:int
+@export var baseTemplate:UnitDefinition

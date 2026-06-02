@@ -19,7 +19,7 @@ var nmbOfTargetToSelect:int
 var targets:Array[BaseUnitScript]
 var nmbOfAvailableTargets:int
 var isActive:bool= false
-
+var isSummoning:bool = false
 signal selectionEnd
 
 
@@ -51,6 +51,10 @@ func getValidTargets():
 
 #MOUSE HANDLING
 func enemyHovered(enemy:BaseUnitScript):
+	if enemy.canBeSelected and isSummoning:
+		print("This unit cost : ", enemy.stats.summonCost, " lightshards")
+	if enemy.canBeSelected and not isSummoning:
+		print(enemy.getUnitInfo())
 	currentHovered = enemy
 	updateArrow(enemy)
 	selectingArrow.visible = true
@@ -109,10 +113,12 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			for enemy in enemyPartyInstances:
 				enemy.canBeSelected = true
 func invocationSelectionStarted():
+	isSummoning = true
 	for enemy in enemyPartyInstances:
 		enemy.canBeSelected = true
 		enemy.isSelectingToSummon = true
 func invocationSelectionEnded():
+	isSummoning = false
 	for enemy in enemyPartyInstances:
 		enemy.canBeSelected = false
 func cancelSelection():

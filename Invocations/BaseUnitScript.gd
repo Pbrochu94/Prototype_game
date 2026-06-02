@@ -28,7 +28,6 @@ var previousState:String
 
 #STATS
 @export var stats : UnitDefinition
-
 @export var walkSpeed:int
 @export var maxHp:int 
 @export var currentHp:int 

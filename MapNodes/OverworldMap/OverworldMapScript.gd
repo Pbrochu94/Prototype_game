@@ -48,7 +48,7 @@ func node5Pressed():
 
 func getPlayerInfo():
 	var playerInfo: Dictionary = {
-		"light shards": RunManager.currentLightShard,
+		"light shards": RunManager.currentLightShards,
 		"xp": RunManager.currentXp
 	}
 	return playerInfo
