@@ -13,9 +13,9 @@ const startingLightShards:int = 0
 
 
 func _ready():
-	initStartingParty()
-#	for i in range(5):
-#		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
+#	initStartingParty()
+	for i in range(5):
+		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
 
 var nodes = [
 	{
@@ -72,3 +72,36 @@ func resetMapProgress():
 		if node["id"] != 0:
 			node["completed"] = false
 			node["unlocked"] = false
+
+func removeDownedAllyFromParty():
+	for unit in currentParty:
+		if unit.sceneInstance.isDead:
+			currentParty.erase(unit) 
+
+func summon(unit:UnitDefinition):
+	var hasEnoughLightShards:bool = calculateSummonCost(unit.summonCost)
+	if hasEnoughLightShards:
+		if currentParty.size() >= 5:
+			print("party is currently full: ", currentParty)
+			return
+		var lightShardsBeforePayment = currentLightShards 
+		currentLightShards -= unit.summonCost
+		var unitNameTag = unit.characterTag
+		var summon = UnitDB.firstWorldUnits.get(unitNameTag)
+		addUnitToParty(summon)
+		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
+	else:
+		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)
+
+func calculateSummonCost(unitCost:int):
+	if currentLightShards >= unitCost:
+		return true
+	else:
+		return false
+
+func getPlayerInfo():
+	var playerInfo: Dictionary = {
+		"light shards": RunManager.currentLightShards,
+		"xp": RunManager.currentXp
+	}
+	return playerInfo

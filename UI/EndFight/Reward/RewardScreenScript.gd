@@ -8,7 +8,7 @@ func init():
 
 func connectSignals():
 	for enemy in currentCombatScene.enemyPartyManager.partyInstances:
-		enemy.selectedForSummon.connect(summon)
+		enemy.selectedForSummon.connect(RunManager.summon)
 func buttonPressed():
 	currentCombatScene.playerPartyManager.removeUnitsFromParties()
 	currentCombatScene.targetManager.invocationSelectionEnded()
@@ -31,26 +31,11 @@ func open():
 	connectSignals()
 	visible = true
 	gainReward()
+	RunManager.removeDownedAllyFromParty()
 	choosingInvocation()
+	print(RunManager.getPlayerInfo())
 func choosingInvocation():
 #	RunManager.addUnitToParty(UnitDB.firstWorldUnits.pick_random())
 	currentCombatScene.targetManager.invocationSelectionStarted()
-func summon(unit:UnitDefinition):
-	if RunManager.currentParty.size() >= 5:
-		print("party is currently full: ", RunManager.currentParty)
-		return
-	var hasEnoughLightShards:bool = calculateSummonCost(unit.summonCost)
-	if hasEnoughLightShards:
-		var lightShardsBeforePayment = RunManager.currentLightShards 
-		RunManager.currentLightShards -= unit.summonCost
-		var unitNameTag = unit.characterTag
-		var summon = UnitDB.firstWorldUnits.get(unitNameTag)
-		RunManager.addUnitToParty(summon)
-		print("Player current lightshards : ", lightShardsBeforePayment," -> ", RunManager.currentLightShards)
-	else:
-		print(unit.summonCost, " light shards is needed to invoke, player only has: ", RunManager.currentLightShards)
-func calculateSummonCost(unitCost:int):
-	if RunManager.currentLightShards >= unitCost:
-		return true
-	else:
-		return false
+
+
