@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv6mkmwljddcp"
-path="res://.godot/imported/Spell encounter temple(Template).png-546535eaba6fc7be6af681aed1c8fb72.ctex"
+uid="uid://buvlp1vr31vid"
+path="res://.godot/imported/Fire Torch.png-cab92c4c7f3b10a3d6fbb30d68747f86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/SpellEncounter/Spell encounter temple(Template).png"
-dest_files=["res://.godot/imported/Spell encounter temple(Template).png-546535eaba6fc7be6af681aed1c8fb72.ctex"]
+source_file="res://BackgroundSprite/SpellEncounter/Fire Torch.png"
+dest_files=["res://.godot/imported/Fire Torch.png-cab92c4c7f3b10a3d6fbb30d68747f86.ctex"]
 
 [params]
 

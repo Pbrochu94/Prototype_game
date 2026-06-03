@@ -33,8 +33,8 @@ func init():
 
 #CONNECTIONS
 func connectSignals():
-	currentCombatScene.summoner.introAnimCompleted.connect(startCombat)
-	currentCombatScene.summoner.turnFinished.connect(endTurn)
+	RunManager.summoner.introAnimCompleted.connect(startCombat)
+	RunManager.summoner.turnFinished.connect(endTurn)
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
@@ -54,7 +54,7 @@ func connectEachEnemy():
 
 #FIGHT INIT
 func playIntro():
-	currentCombatScene.summoner.playIntro()
+	RunManager.summoner.playIntro()
 
 func startCombat():
 	initPlayOrder()

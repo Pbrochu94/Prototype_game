@@ -10,6 +10,7 @@ var currentXp:int
 #STARTING KIT
 var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
+@onready var summoner:BaseSummonerScript = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
 
 
 func _ready():
