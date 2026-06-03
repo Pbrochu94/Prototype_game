@@ -9,9 +9,9 @@ class_name BaseSummonerScript
 #@onready var area = $Area2D
 
 #STATS
-@export var stats:UnitDefinition 
+@export var def:SummonerDef 
 @export var characterName:String = "Summoner"
-@export var walkSpeed:int = 100
+#@export var walkSpeed:int = 100
 
 #VARIABLES
 var targets:Array[BaseUnitScript]
@@ -20,11 +20,11 @@ var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
 var previousState:String
-var allSpell:Dictionary={
-	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
-	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
-}
-var learnedSpells:Dictionary
+#var allSpell:Dictionary={
+#	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
+#	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+#}
+#var learnedSpells:Dictionary
 var spellSelected:SummonerSpell
 var faction = Enum.Faction.PLAYER
 var spellCooldowns:Array
@@ -39,8 +39,9 @@ signal turnFinished
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	stateMachine.init(self)
+	def = RunManager.summoner
 	setState("intro")
-	for spell in allSpell.values():
+	for spell in def.allSpells.values():
 		addNewSpell(spell)
 
 #SPRITE & ANIMATIONS
@@ -54,8 +55,8 @@ func onAnimationFinished():
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
-	global_position = global_position.move_toward(destination, walkSpeed*delta)
-	if global_position == destination:
+	global_position = global_position.move_toward(destination, def.walkSpeed*delta)
+	if global_position == destination and stateMachine.currentState.name == "Intro":
 		isWalking = false
 		onFinishedIntro()
 func orientSprite(direction:int):
@@ -93,7 +94,7 @@ func endingTurn():
 func setState(newState:String):
 	stateMachine.setState(states[newState])
 func addNewSpell(newSpell:SummonerSpell):
-	learnedSpells[newSpell.spellName] = newSpell
+	def.learnedSpells[newSpell.spellName] = newSpell
 func getInfo():
 	return spellCooldowns
 func reduceTimers():

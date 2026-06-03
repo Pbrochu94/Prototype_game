@@ -19,3 +19,9 @@ class_name SummonerDef
 #@export var baseTemplate:UnitDefinition
 @export var baseWalkSpeed:int
 @export var walkSpeed:int
+@export var learnedSpells:Dictionary
+var allSpells:Dictionary = {
+	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
+	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+}
+

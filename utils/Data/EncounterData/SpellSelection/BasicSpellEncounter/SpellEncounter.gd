@@ -12,6 +12,7 @@ extends Node2D
 func _ready():
 	initSummoner() 
 	startSceneAnim()
+	connectSignals()
 
 func initSummoner():
 	RunManager.summoner.walkSpeed = 80
@@ -27,5 +28,12 @@ func startSceneAnim():
 	torchRight.play("active")
 
 func summonerExit():
-	RunManager.summoner.walkSpeed = 80
+	RunManager.summoner.walkSpeed = RunManager.summoner.baseWalkSpeed
 	RunManager.summoner.z_index = 1
+
+func connectSignals():
+	RunManager.summoner.sceneInstance.introAnimCompleted.connect(summonerIntroCompleted)
+
+func summonerIntroCompleted():
+	print("intro done")
+	#spell cards appears

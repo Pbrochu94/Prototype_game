@@ -111,7 +111,7 @@ func chooseAction():
 	print(currentlyPlaying.stats.characterName," is choosing what to do...")
 func onSpellSelected(spellIndex:int):
 	caster = Enum.Caster.SUMMONER
-	summoner.sceneInstance.spellSelected = summoner.sceneInstance.learnedSpells.values()[spellIndex]
+	summoner.sceneInstance.spellSelected = summoner.learnedSpells.values()[spellIndex]
 	unitSelectingTarget(summoner.sceneInstance.spellSelected.focusType,summoner.sceneInstance.spellSelected.numberOfTargets)
 func onAttackSelected(attackIndex:int):
 	caster = Enum.Caster.UNIT

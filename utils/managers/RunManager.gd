@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
@@ -14,10 +14,10 @@ var summoner:SummonerDef
 
 
 func _ready():
-#	initStartingParty()
 	initNewPlayer()
-	for i in range(5):
-		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
+	initStartingParty()
+#	for i in range(5):
+#		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
 
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
