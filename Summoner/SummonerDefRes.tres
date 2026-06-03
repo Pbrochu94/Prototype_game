@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SummonerDef" load_steps=3 format=3 uid="uid://b02a5ugcicj1d"]
+
+[ext_resource type="Script" path="res://Summoner/SummonerDef.gd" id="1_3uk2s"]
+[ext_resource type="PackedScene" uid="uid://dg8rrat4c5hxv" path="res://Summoner/SummonerCombatScene.tscn" id="1_87kk1"]
+
+[resource]
+script = ExtResource("1_3uk2s")
+characterName = "summoner"
+characterTag = "summoner"
+scene = ExtResource("1_87kk1")
+baseWalkSpeed = 120
+walkSpeed = 0

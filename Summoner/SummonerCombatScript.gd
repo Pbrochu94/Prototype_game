@@ -9,7 +9,7 @@ class_name BaseSummonerScript
 #@onready var area = $Area2D
 
 #STATS
-@export var stats:UnitDefinition = preload("res://Summoner/SummonerDefinition.tres")
+@export var stats:UnitDefinition 
 @export var characterName:String = "Summoner"
 @export var walkSpeed:int = 100
 

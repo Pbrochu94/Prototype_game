@@ -305,19 +305,19 @@ texture = ExtResource("2_klrjn")
 position = Vector2(-161, 41)
 sprite_frames = SubResource("SpriteFrames_bv43b")
 animation = &"active"
-frame_progress = 0.448618
+frame_progress = 0.571262
 
 [node name="TorchRight" type="AnimatedSprite2D" parent="bk"]
 position = Vector2(-98, 41)
 sprite_frames = SubResource("SpriteFrames_ymlub")
 animation = &"active"
-frame_progress = 0.335603
+frame_progress = 0.458246
 
 [node name="Knight" type="AnimatedSprite2D" parent="bk"]
 position = Vector2(-132, 47)
 sprite_frames = SubResource("SpriteFrames_lv0fs")
 animation = &"active"
-frame_progress = 0.343673
+frame_progress = 0.0418055
 
 [node name="Fog" type="Sprite2D" parent="bk"]
 z_index = 2

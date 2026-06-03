@@ -15,11 +15,11 @@ func _ready():
 
 func initSummoner():
 	RunManager.summoner.walkSpeed = 80
-	RunManager.summoner.z_index = 1
-	add_child(RunManager.summoner)
-	RunManager.summoner.global_position = summonerIntroStartingPoint.global_position
-	RunManager.summoner.startingPosition = summonerAnchor.global_position
-	RunManager.summoner.playIntro()
+	RunManager.summoner.sceneInstance.z_index = 1
+	add_child(RunManager.summoner.sceneInstance)
+	RunManager.summoner.sceneInstance.global_position = summonerIntroStartingPoint.global_position
+	RunManager.summoner.sceneInstance.startingPosition = summonerAnchor.global_position
+	RunManager.summoner.sceneInstance.playIntro()
 
 func startSceneAnim():
 	knightThrone.play("active")

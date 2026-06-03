@@ -18,3 +18,4 @@ class_name UnitDefinition
 @export var sceneInstance:Node2D
 @export var summonCost:int
 @export var baseTemplate:UnitDefinition
+@export var walk:UnitDefinition

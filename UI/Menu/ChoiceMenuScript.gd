@@ -11,7 +11,7 @@ extends Control
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
 @onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
-var summoner:BaseSummonerScript 
+var summoner:SummonerDef
 var currentlyPlayingUnit:BaseUnitScript
 #SIGNALS
 signal selectionCancelled
@@ -21,7 +21,7 @@ func init():
 	self.visible = false
 	connectSignals()
 	turnManager = get_tree().get_first_node_in_group("turn manager")
-	summoner = get_tree().get_first_node_in_group("summoner")
+	summoner = RunManager.summoner
 
 func openAttackMenu():
 	$ChoiceMenu/SubMenus/AttackMenu.choiceMenuParent = self

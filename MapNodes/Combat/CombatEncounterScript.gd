@@ -25,7 +25,6 @@ class_name CombatEncounter
 	$EnemyAnchor2,
 	$EnemyAnchor3
 ]
-#@onready var summoner:BaseSummonerScript = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
 @onready var environments:Array[PackedScene] = [
 	preload("res://MapNodes/Combat/Intro/CaveBackgroundScene.tscn")
 ]
@@ -41,7 +40,7 @@ func _ready():
 	pickRandomBackground()
 	initSummoner() 
 	combatEncounterData = RunManager.currentEncounterData
-	RunManager.summoner.introAnimCompleted.connect(playerPartyManager.placeUnit)
+	RunManager.summoner.sceneInstance.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()
 #	print_tree()
@@ -53,11 +52,11 @@ func _ready():
 	choiceMenu.init()
 
 func initSummoner():
-	combatScene.add_child(RunManager.summoner)
+	combatScene.add_child(RunManager.summoner.sceneInstance)
 	turnManager.summoner = RunManager.summoner
-	RunManager.summoner.global_position = summonerIntroStartingPoint.global_position
-	RunManager.summoner.startingPosition = summonerAnchor.global_position
-	RunManager.summoner.playIntro()
+	RunManager.summoner.sceneInstance.global_position = summonerIntroStartingPoint.global_position
+	RunManager.summoner.sceneInstance.startingPosition = summonerAnchor.global_position
+	RunManager.summoner.sceneInstance.playIntro()
 
 func pickRandomBackground():
 	var randomEnvironment = environments.pick_random()

@@ -10,13 +10,18 @@ var currentXp:int
 #STARTING KIT
 var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
-@onready var summoner:BaseSummonerScript = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
+var summoner:SummonerDef
 
 
 func _ready():
 #	initStartingParty()
+	initNewPlayer()
 	for i in range(5):
 		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
+
+func initNewPlayer():
+	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
+	summoner.sceneInstance = summoner.scene.instantiate()
 
 var nodes = [
 	{

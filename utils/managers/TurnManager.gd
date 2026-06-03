@@ -8,7 +8,7 @@ extends Node
 @onready var everyUnits:Array[Node] 
 @onready var currentCombatScene = $CombatEncounterScene
 var everyLivingUnits
-var summoner:BaseSummonerScript 
+var summoner:SummonerDef
 var currentTurn = "player"
 var enemy:BaseUnitScript 
 var isSelecting = false
@@ -33,8 +33,8 @@ func init():
 
 #CONNECTIONS
 func connectSignals():
-	RunManager.summoner.introAnimCompleted.connect(startCombat)
-	RunManager.summoner.turnFinished.connect(endTurn)
+	RunManager.summoner.sceneInstance.introAnimCompleted.connect(startCombat)
+	RunManager.summoner.sceneInstance.turnFinished.connect(endTurn)
 	connectEachInvocations()
 	connectEachEnemy()
 	choiceMenu.attackMenu.attackSelected.connect(onAttackSelected)
@@ -54,7 +54,7 @@ func connectEachEnemy():
 
 #FIGHT INIT
 func playIntro():
-	RunManager.summoner.playIntro()
+	RunManager.summoner.sceneInstance.playIntro()
 
 func startCombat():
 	initPlayOrder()
@@ -101,7 +101,7 @@ func startTurn():
 		return
 	currentlyPlaying.reduceTimers()
 	print("Now playing :", currentlyPlaying.getUnitInfo())
-	print("Summoner info: " ,summoner.getInfo())
+	print("Summoner info: " ,summoner.sceneInstance.getInfo())
 	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()
 	else:
@@ -111,8 +111,8 @@ func chooseAction():
 	print(currentlyPlaying.stats.characterName," is choosing what to do...")
 func onSpellSelected(spellIndex:int):
 	caster = Enum.Caster.SUMMONER
-	summoner.spellSelected = summoner.learnedSpells.values()[spellIndex]
-	unitSelectingTarget(summoner.spellSelected.focusType,summoner.spellSelected.numberOfTargets)
+	summoner.sceneInstance.spellSelected = summoner.sceneInstance.learnedSpells.values()[spellIndex]
+	unitSelectingTarget(summoner.sceneInstance.spellSelected.focusType,summoner.sceneInstance.spellSelected.numberOfTargets)
 func onAttackSelected(attackIndex:int):
 	caster = Enum.Caster.UNIT
 	currentlyPlaying.onChosenAttack(attackIndex)
@@ -135,13 +135,13 @@ func endSelection():
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
 func unitAttack(targets:Array[BaseUnitScript]):
-		summoner.targets = targets
+		summoner.sceneInstance.targets = targets
 		match caster:
 			Enum.Caster.SUMMONER:
 				for target in targets:
-					summoner.target = target
+					summoner.sceneInstance.target = target
 					target.canBeSelected = false
-					summoner.castSpell(summoner.target)
+					summoner.sceneInstance.castSpell(summoner.sceneInstance.target)
 			Enum.Caster.UNIT:
 				for target in targets:
 					currentlyPlaying.target = target
@@ -162,7 +162,7 @@ func endTurn():
 func endGlobalTurn():
 	turnTracker += 1
 	print("turn ", turnTracker, " completed")
-	summoner.reduceTimers()
+	summoner.sceneInstance.reduceTimers()
 	updatePlayOrder()
 	resetPlayingOrder()
 	emit_signal("turnEnded")

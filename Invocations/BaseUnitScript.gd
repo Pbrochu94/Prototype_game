@@ -152,7 +152,8 @@ func receiveDamage(attacker,attack, damage):
 		trueDamage = 0
 		print(attacker.stats.characterName, " does no damage to ", stats.characterName)
 	else:
-		print("Character: ", attacker.stats.characterName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
+		var attackerName = attacker.characterName if attacker is BaseSummonerScript else attacker.stats.characterName
+		print(attackerName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
 		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
 		stats.currentHp-= trueDamage
 		setState("hurt")
