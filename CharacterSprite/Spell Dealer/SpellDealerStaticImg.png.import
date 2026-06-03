@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buvlp1vr31vid"
-path="res://.godot/imported/Fire Torch.png-cab92c4c7f3b10a3d6fbb30d68747f86.ctex"
+uid="uid://pqsm5h2bkita"
+path="res://.godot/imported/SpellDealerStaticImg.png-7680452aa6e39bdf8fd5f3b0065929bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/SpellEncounter/Fire Torch.png"
-dest_files=["res://.godot/imported/Fire Torch.png-cab92c4c7f3b10a3d6fbb30d68747f86.ctex"]
+source_file="res://CharacterSprite/Spell Dealer/SpellDealerStaticImg.png"
+dest_files=["res://.godot/imported/SpellDealerStaticImg.png-7680452aa6e39bdf8fd5f3b0065929bd.ctex"]
 
 [params]
 

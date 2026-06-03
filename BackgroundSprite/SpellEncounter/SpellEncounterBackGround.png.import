@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://57ofy2wjho64"
-path="res://.godot/imported/Temple fog.png-2058f82d8d7db734c15e66b5375d3fac.ctex"
+uid="uid://bo8ai42tjk8ik"
+path="res://.godot/imported/SpellEncounterBackGround.png-54438891e004ab0e9147363eb1140fcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/SpellEncounter/Temple fog.png"
-dest_files=["res://.godot/imported/Temple fog.png-2058f82d8d7db734c15e66b5375d3fac.ctex"]
+source_file="res://BackgroundSprite/SpellEncounter/SpellEncounterBackGround.png"
+dest_files=["res://.godot/imported/SpellEncounterBackGround.png-54438891e004ab0e9147363eb1140fcd.ctex"]
 
 [params]
 

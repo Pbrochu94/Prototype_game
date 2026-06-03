@@ -50,6 +50,7 @@ enum EncounterType{
 	ELITE,
 	MINI_BOSS,
 	BOSS,
+	SPELL,
 	SHOP,
 	HEAL,
 }

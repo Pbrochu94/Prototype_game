@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0if20mbruxl7"
-path="res://.godot/imported/Temple static unpowered.png-b8c2c5ff1878de123e767aa25ced0627.ctex"
+uid="uid://chne4vpd8udav"
+path="res://.godot/imported/SpellEncounterForeGround.png-95d6284f898f7e24c6b4e8d05a237411.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/SpellEncounter/Temple static unpowered.png"
-dest_files=["res://.godot/imported/Temple static unpowered.png-b8c2c5ff1878de123e767aa25ced0627.ctex"]
+source_file="res://BackgroundSprite/SpellEncounter/SpellEncounterForeGround.png"
+dest_files=["res://.godot/imported/SpellEncounterForeGround.png-95d6284f898f7e24c6b4e8d05a237411.ctex"]
 
 [params]
 
