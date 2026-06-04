@@ -20,6 +20,7 @@ animations = [{
 }]
 
 [node name="FireBallCard" instance=ExtResource("1_01nbi")]
+scale = Vector2(0.6, 0.6)
 script = ExtResource("2_au4i8")
 spellTag = "fire ball"
 

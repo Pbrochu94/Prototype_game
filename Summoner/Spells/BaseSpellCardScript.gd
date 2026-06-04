@@ -15,7 +15,7 @@ func onClicking(_viewport, event, _shape_idx):
 		RunManager.addNewSpell(spellTag)
 
 func onHover():
-	card.scale = Vector2(1.1, 1.1)
+	card.scale *= 1.10
 
 func onMouseExit():
-	card.scale = Vector2(1, 1)
+	card.scale /= 1.10

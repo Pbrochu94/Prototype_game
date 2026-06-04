@@ -4,8 +4,10 @@
 size = Vector2(232, 332)
 
 [node name="SpellCardBaseScene" type="Node2D"]
+z_index = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.555, 0.555)
 animation = &""
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]

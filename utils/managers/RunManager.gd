@@ -20,6 +20,7 @@ var allSpells:Dictionary = {
 		"scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
 	} ,
 }
+var nmbOfSpellChoice:int = 2
 var spellSlot:int = 2
 
 func _ready():
