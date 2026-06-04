@@ -22,7 +22,6 @@ class_name SummonerSpell
 @export var isDamagingSpell:bool = false
 @export var effectRes:Effect
 @export var hasEffect:bool
-@export var cardScene:PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

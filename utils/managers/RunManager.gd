@@ -15,11 +15,6 @@ var summoner:SummonerDef
 #STATS
 var learnedSpells:Dictionary
 var allSpells:Dictionary = {
-#	"shield" :{"res":preload("res://Summoner/Spells/Shield/ShieldRes.tres"),"card scene": preload("")},
-#	"fire ball" :{
-#		"res":preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
-#		"card scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
-#		},
 	"fire ball": preload("res://Summoner/Spells/FireBall/FireBallRes.tres")
 }
 var spellSlot:int = 2
@@ -127,6 +122,9 @@ func getPlayerInfo():
 	}
 	return playerInfo
 
-func addNewSpell(newSpell:SummonerSpell):
-	print("learning ", newSpell.spellName)
-	RunManager.learnedSpells[newSpell.spellName] = newSpell
+func addNewSpell(spellTag:String):
+	print(RunManager.learnedSpells)
+	var newSpell = allSpells[spellTag]
+	print("learning ", spellTag)
+	RunManager.learnedSpells[spellTag] = newSpell
+	print(RunManager.learnedSpells)

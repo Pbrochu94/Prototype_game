@@ -21,7 +21,6 @@ animations = [{
 
 [node name="FireBallCard" instance=ExtResource("1_01nbi")]
 script = ExtResource("2_au4i8")
-spellTag = "fire ball"
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_el6wx")

@@ -11,8 +11,8 @@ func init():
 func onClicking(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed :
 		print("Clicked on card")
-		var chosenSpell:SummonerSpell = RunManager.allSpells[spellTag]
-		RunManager.summoner.sceneInstance.addNewSpell(chosenSpell)
+#		var chosenSpell:SummonerSpell = RunManager.allSpells[spellTag]
+		RunManager.addNewSpell(spellTag)
 
 func onHover():
 	card.scale = Vector2(1.1, 1.1)

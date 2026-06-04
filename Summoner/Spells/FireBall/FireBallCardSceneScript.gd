@@ -1,0 +1,4 @@
+extends BaseSpellCard
+
+
+
