@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://djiv2kbseu74l" path="res://utils/Data/EncounterData/BaseEncounterScene.tscn" id="1_unnmt"]
 [ext_resource type="Script" path="res://utils/Data/EncounterData/BaseEncounterScene.gd" id="2_naww6"]
-[ext_resource type="Texture2D" uid="uid://bo8ai42tjk8ik" path="res://BackgroundSprite/SpellEncounter/SpellEncounterBackGround.png" id="3_dweus"]
-[ext_resource type="Texture2D" uid="uid://chne4vpd8udav" path="res://BackgroundSprite/SpellEncounter/SpellEncounterForeGround.png" id="4_875ob"]
+[ext_resource type="Texture2D" uid="uid://cf7psg8uck0lv" path="res://BackgroundSprite/SpellEncounter/SpellEncounterBackGround.png" id="3_dweus"]
+[ext_resource type="Texture2D" uid="uid://kyyqc6fa3b2x" path="res://BackgroundSprite/SpellEncounter/Tileset.png" id="4_57cl0"]
 [ext_resource type="Texture2D" uid="uid://pqsm5h2bkita" path="res://CharacterSprite/Spell Dealer/SpellDealerStaticImg.png" id="5_kiyxh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f0qkf"]
@@ -29,21 +29,20 @@ texture = ExtResource("3_dweus")
 [node name="ForeGround" type="Sprite2D" parent="bk" index="1"]
 z_index = 2
 position = Vector2(-138, 23)
-texture = ExtResource("4_875ob")
+texture = ExtResource("4_57cl0")
 
 [node name="SummonerAnchor" parent="." index="1"]
-position = Vector2(-209, 50)
+position = Vector2(-209, 80)
 
 [node name="SummonerIntroStart" parent="." index="2"]
-position = Vector2(-321, 50)
+position = Vector2(-323, 80)
 
 [node name="Camera2D" parent="." index="3"]
 z_index = 2
-position = Vector2(-137, 22)
-zoom = Vector2(3.125, 3.515)
+position = Vector2(-138, 22)
+zoom = Vector2(3.115, 2.685)
 
 [node name="SpellDealer" type="AnimatedSprite2D" parent="." index="4"]
 z_index = 1
-position = Vector2(-80, 34)
-scale = Vector2(0.715, 0.715)
+position = Vector2(-75, 54)
 sprite_frames = SubResource("SpriteFrames_f0qkf")

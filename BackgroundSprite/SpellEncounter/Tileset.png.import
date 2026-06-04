@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chne4vpd8udav"
-path="res://.godot/imported/SpellEncounterForeGround.png-95d6284f898f7e24c6b4e8d05a237411.ctex"
+uid="uid://kyyqc6fa3b2x"
+path="res://.godot/imported/Tileset.png-4fc5a7ed9030c725880a022a702bddca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/SpellEncounter/SpellEncounterForeGround.png"
-dest_files=["res://.godot/imported/SpellEncounterForeGround.png-95d6284f898f7e24c6b4e8d05a237411.ctex"]
+source_file="res://BackgroundSprite/SpellEncounter/Tileset.png"
+dest_files=["res://.godot/imported/Tileset.png-4fc5a7ed9030c725880a022a702bddca.ctex"]
 
 [params]
 
