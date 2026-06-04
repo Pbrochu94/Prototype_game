@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhfdsw6fp6fp6"]
+
+[ext_resource type="PackedScene" uid="uid://cbgyd4nx4dmlu" path="res://Summoner/Spells/SpellCardBaseScene.tscn" id="1_01nbi"]
+[ext_resource type="Script" path="res://Summoner/Spells/FireBall/FireBallCardScene.gd" id="2_b8f2f"]
+[ext_resource type="Texture2D" uid="uid://bqmtknorfmi4t" path="res://SpellSprite/Fireball/FireBall card template.png" id="2_dia8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukg40"]
+atlas = ExtResource("2_dia8o")
+region = Rect2(0, 0, 232, 332)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_el6wx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukg40")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[node name="FireBallCard" instance=ExtResource("1_01nbi")]
+script = ExtResource("2_b8f2f")
+spellTag = "fire ball"
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_el6wx")
+animation = &"active"
+
+[connection signal="input_event" from="AnimatedSprite2D/Area2D" to="." method="onClicking"]
+[connection signal="mouse_entered" from="AnimatedSprite2D/Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="AnimatedSprite2D/Area2D" to="." method="onMouseExit"]

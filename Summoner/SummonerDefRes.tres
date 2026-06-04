@@ -9,4 +9,5 @@ characterName = "summoner"
 characterTag = "summoner"
 scene = ExtResource("1_87kk1")
 baseWalkSpeed = 120
-walkSpeed = 0
+walkSpeed = 120
+learnedSpells = {}

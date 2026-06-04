@@ -11,7 +11,11 @@ var currentXp:int
 var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
-
+var learnedSpells:Dictionary
+var allSpells:Dictionary = {
+	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
+	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+}
 
 func _ready():
 	initNewPlayer()

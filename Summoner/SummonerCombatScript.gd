@@ -41,7 +41,7 @@ func _ready():
 	stateMachine.init(self)
 	def = RunManager.summoner
 	setState("intro")
-	for spell in def.allSpells.values():
+	for spell in RunManager.allSpells.values():
 		addNewSpell(spell)
 
 #SPRITE & ANIMATIONS
@@ -94,7 +94,8 @@ func endingTurn():
 func setState(newState:String):
 	stateMachine.setState(states[newState])
 func addNewSpell(newSpell:SummonerSpell):
-	def.learnedSpells[newSpell.spellName] = newSpell
+	print("learning ", newSpell.spellName)
+	RunManager.learnedSpells[newSpell.spellName] = newSpell
 func getInfo():
 	return spellCooldowns
 func reduceTimers():

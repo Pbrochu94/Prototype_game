@@ -167,6 +167,7 @@ animations = [{
 }]
 
 [node name="Summoner" type="Node2D" groups=["main character", "summoner"]]
+z_index = 2
 script = ExtResource("1_uhcc1")
 
 [node name="SpritePivot" type="Node2D" parent="."]

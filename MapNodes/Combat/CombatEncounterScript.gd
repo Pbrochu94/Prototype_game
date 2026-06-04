@@ -57,6 +57,8 @@ func initSummoner():
 	RunManager.summoner.sceneInstance.global_position = summonerIntroStartingPoint.global_position
 	RunManager.summoner.sceneInstance.startingPosition = summonerAnchor.global_position
 	RunManager.summoner.sceneInstance.playIntro()
+#	print(RunManager.summoner.sceneInstance.golbal_position)
+	
 
 func pickRandomBackground():
 	var randomEnvironment = environments.pick_random()

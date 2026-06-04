@@ -21,6 +21,7 @@ func connectSignals():
 	closeBtn.pressed.connect(close)
 
 func onShieldSelected():
+	choiceMenuParent.targetManager.cancelSelection()
 	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
 		if spell["name"] == choiceMenuParent.summoner.sceneInstance.learnedSpells.values()[0].spellName:
 			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
@@ -29,8 +30,9 @@ func onShieldSelected():
 	emit_signal("spellSelected", 0)
 
 func onFireballSelected():
+	choiceMenuParent.targetManager.cancelSelection()
 	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
-		if spell["name"] == choiceMenuParent.summoner.sceneInstance.learnedSpells.values()[1].spellName:
+		if spell["name"] == RunManager.learnedSpells.values()[1].spellName:
 			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
 			return
 	print("selected fireball spell")

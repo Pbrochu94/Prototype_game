@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dn5ym1r5q12kk"]
+[gd_scene load_steps=25 format=3 uid="uid://dn5ym1r5q12kk"]
 
 [ext_resource type="PackedScene" uid="uid://xdhvkw0tjs33" path="res://Summoner/Spells/BaseSpellScene.tscn" id="1_6l5tu"]
 [ext_resource type="Texture2D" uid="uid://lv32rjuu7gnx" path="res://SpellSprite/Fireball/Meteor_TinySpells_FireTome_BigWander(ALL RED).png" id="2_3h7dm"]
