@@ -20,11 +20,6 @@ var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
 var previousState:String
-#var allSpell:Dictionary={
-#	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
-#	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
-#}
-#var learnedSpells:Dictionary
 var spellSelected:SummonerSpell
 var faction = Enum.Faction.PLAYER
 var spellCooldowns:Array
@@ -41,8 +36,8 @@ func _ready():
 	stateMachine.init(self)
 	def = RunManager.summoner
 	setState("intro")
-	for spell in RunManager.allSpells.values():
-		addNewSpell(spell)
+#	for spell in RunManager.allSpells.values():
+#		addNewSpell(spell)
 
 #SPRITE & ANIMATIONS
 func onAnimationFinished():
@@ -93,9 +88,9 @@ func endingTurn():
 #UTILS
 func setState(newState:String):
 	stateMachine.setState(states[newState])
-func addNewSpell(newSpell:SummonerSpell):
-	print("learning ", newSpell.spellName)
-	RunManager.learnedSpells[newSpell.spellName] = newSpell
+#func addNewSpell(newSpell:SummonerSpell):
+#	print("learning ", newSpell.spellName)
+#	RunManager.learnedSpells[newSpell.spellName] = newSpell
 func getInfo():
 	return spellCooldowns
 func reduceTimers():
@@ -103,3 +98,9 @@ func reduceTimers():
 		spellCooldowns[i]["cooldown"] -= 1
 		if spellCooldowns[i]["cooldown"] <= 0:
 			spellCooldowns.remove_at(i)
+
+func _exit_tree():
+	print("SUMMONER EXIT TREE")
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		print("SUMMONER PREDELETE")

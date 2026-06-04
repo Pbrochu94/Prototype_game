@@ -284,7 +284,10 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
 			if attack.effectRes:
-				enemy.applyEffect(attack.effectRes)
+				if attack.effectRes.target == Enum.FocusType.SELF:
+					applyEffect(attack.effectRes)
+				else:
+					enemy.applyEffect(attack.effectRes)
 			if attack.focusType == Enum.FocusType.ENEMY_AOE:
 				for ally in enemy.partyManager.currentlyAliveCharacters:
 					if ally != target:

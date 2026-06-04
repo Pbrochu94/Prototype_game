@@ -11,11 +11,18 @@ var currentXp:int
 var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
+
+#STATS
 var learnedSpells:Dictionary
 var allSpells:Dictionary = {
-	"shield" = preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
-	"fire ball" = preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+#	"shield" :{"res":preload("res://Summoner/Spells/Shield/ShieldRes.tres"),"card scene": preload("")},
+#	"fire ball" :{
+#		"res":preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+#		"card scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
+#		},
+	"fire ball": preload("res://Summoner/Spells/FireBall/FireBallRes.tres")
 }
+var spellSlot:int = 2
 
 func _ready():
 	initNewPlayer()
@@ -23,9 +30,12 @@ func _ready():
 #	for i in range(5):
 #		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
 
+func createSummonerInstance():
+	summoner.sceneInstance = summoner.scene.instantiate()
+
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
-	summoner.sceneInstance = summoner.scene.instantiate()
+	createSummonerInstance()
 
 var nodes = [
 	{
@@ -37,10 +47,11 @@ var nodes = [
 	},
 	{
 		"id": 1,
-		"type": Enum.EncounterType.COMBAT,
+		"type": Enum.EncounterType.SPELL,
 		"completed": false,
 		"unlocked": false,
-		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
+		"encounter data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres")
+#		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
 	},
 	{
 		"id": 2,
@@ -115,3 +126,7 @@ func getPlayerInfo():
 		"xp": RunManager.currentXp
 	}
 	return playerInfo
+
+func addNewSpell(newSpell:SummonerSpell):
+	print("learning ", newSpell.spellName)
+	RunManager.learnedSpells[newSpell.spellName] = newSpell

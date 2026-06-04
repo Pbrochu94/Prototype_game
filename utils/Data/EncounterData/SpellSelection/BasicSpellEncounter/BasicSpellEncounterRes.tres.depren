@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="SpellSelectionEncounter" load_steps=5 format=3 uid="uid://bmy3hcayiy2pu"]
 
 [ext_resource type="PackedScene" uid="uid://ce76gnmle2ea4" path="res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn" id="1_123tk"]
+[ext_resource type="Script" path="res://utils/Data/EncounterData/SpellSelection/SpellSelectionEncounterScene.gd" id="1_pfvhr"]
 [ext_resource type="Resource" uid="uid://f6dh4ww4mde8" path="res://Summoner/Spells/Shield/ShieldRes.tres" id="2_0evyb"]
-[ext_resource type="Script" path="res://utils/Data/EncounterData/SpellSelection/SpellSelectionEncounterRes.gd" id="2_vjf0u"]
 [ext_resource type="Resource" uid="uid://dyl6xwkq6c8ya" path="res://Summoner/Spells/FireBall/FireBallRes.tres" id="3_nqt8h"]
 
 [resource]
-script = ExtResource("2_vjf0u")
+script = ExtResource("1_pfvhr")
 nmbOfChoices = 2
 spellOffered = Array[Resource("res://Summoner/Spells/SummonerSpellResource.gd")]([ExtResource("2_0evyb"), ExtResource("3_nqt8h")])
 scene = ExtResource("1_123tk")

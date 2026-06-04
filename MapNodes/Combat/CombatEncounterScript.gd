@@ -52,6 +52,7 @@ func _ready():
 	choiceMenu.init()
 
 func initSummoner():
+	print(RunManager.summoner.sceneInstance)
 	combatScene.add_child(RunManager.summoner.sceneInstance)
 	turnManager.summoner = RunManager.summoner
 	RunManager.summoner.sceneInstance.global_position = summonerIntroStartingPoint.global_position

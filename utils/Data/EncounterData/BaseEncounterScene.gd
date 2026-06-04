@@ -1,4 +1,5 @@
 extends Node2D
+class_name BaseNonCombatEncounter
 
 
 @onready var summonerAnchor = $SummonerAnchor
@@ -35,4 +36,3 @@ func connectSignals():
 
 func summonerIntroCompleted():
 	print("intro done")
-	#spell cards appears

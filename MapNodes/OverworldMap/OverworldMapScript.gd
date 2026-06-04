@@ -14,6 +14,7 @@ func _ready():
 		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
 func node1Pressed():
+	RunManager.createSummonerInstance()
 	RunManager.currentNode = 0
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
@@ -21,13 +22,15 @@ func node1Pressed():
 
 
 func node2Pressed():
+	RunManager.createSummonerInstance()
 	RunManager.currentNode = 1
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING COMBAT SCENE 2")
+	get_tree().change_scene_to_file("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn")
+	print("ENTERING SPELL SCENE 2")
 
 
 func node3Pressed():
+	RunManager.createSummonerInstance()
 	RunManager.currentNode = 2
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
@@ -35,12 +38,14 @@ func node3Pressed():
 
 
 func node4Pressed():
+	RunManager.createSummonerInstance()
 	RunManager.currentNode = 3
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
 	print("ENTERING COMBAT SCENE 4")
 
 func node5Pressed():
+	RunManager.createSummonerInstance()
 	RunManager.currentNode = 4
 	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
 	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")

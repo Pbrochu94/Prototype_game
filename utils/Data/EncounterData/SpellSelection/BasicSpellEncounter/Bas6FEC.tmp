@@ -10,4 +10,4 @@ script = ExtResource("2_vjf0u")
 nmbOfChoices = 2
 spellOffered = Array[Resource("res://Summoner/Spells/SummonerSpellResource.gd")]([ExtResource("2_0evyb"), ExtResource("3_nqt8h")])
 scene = ExtResource("1_123tk")
-encounterType = 4
+encounterType = 0
