@@ -15,7 +15,10 @@ var summoner:SummonerDef
 #STATS
 var learnedSpells:Dictionary
 var allSpells:Dictionary = {
-	"fire ball": preload("res://Summoner/Spells/FireBall/FireBallRes.tres")
+	"fire ball":{
+		"res":preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
+		"scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
+	} ,
 }
 var spellSlot:int = 2
 
