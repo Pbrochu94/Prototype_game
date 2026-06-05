@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dg8rrat4c5hxv"]
+[gd_scene load_steps=30 format=3 uid="uid://dg8rrat4c5hxv"]
 
 [ext_resource type="Script" path="res://Summoner/SummonerCombatScript.gd" id="1_uhcc1"]
 [ext_resource type="Texture2D" uid="uid://b863xohn1euoy" path="res://CharacterSprite/Summoner/PlaceholderSummonerSpriteSheet(76x50).png" id="1_voc0o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Summoner/States/IntroState.gd" id="5_j7rn3"]
 [ext_resource type="Script" path="res://Summoner/SummonerCasting.gd" id="6_65cuo"]
 [ext_resource type="Script" path="res://Summoner/States/SummonerEndingTurn.gd" id="7_vlfgg"]
+[ext_resource type="Script" path="res://Summoner/States/WalkoutState.gd" id="8_mp1b6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xhhuh"]
 atlas = ExtResource("1_voc0o")
@@ -193,5 +194,8 @@ script = ExtResource("6_65cuo")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
 script = ExtResource("7_vlfgg")
+
+[node name="Walkout" type="Node" parent="StateMachine"]
+script = ExtResource("8_mp1b6")
 
 [connection signal="animation_finished" from="SpritePivot/AnimatedSprite2D" to="." method="onAnimationFinished"]

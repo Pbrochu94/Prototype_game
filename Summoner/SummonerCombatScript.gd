@@ -23,6 +23,7 @@ var previousState:String
 var spellSelected:SummonerSpell
 var faction = Enum.Faction.PLAYER
 var spellCooldowns:Array
+var currentScene
 
 #BOOLEANS
 var isWalking = false
@@ -54,6 +55,9 @@ func walk(delta, destination:Vector2):
 	if global_position == destination and stateMachine.currentState.name == "Intro":
 		isWalking = false
 		onFinishedIntro()
+	if global_position == destination and stateMachine.currentState.name == "Walkout":
+		isWalking = false
+		onFinishedWalkout()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:BaseUnitScript):
@@ -80,6 +84,8 @@ func playIntro():
 func onFinishedIntro():
 	setState("idle")
 	emit_signal("introAnimCompleted")
+func onFinishedWalkout():
+	setState("idle")
 func endingTurn():
 	emit_signal("turnFinished")
 	print("Summoner end turn")
@@ -101,6 +107,4 @@ func reduceTimers():
 
 func _exit_tree():
 	print("SUMMONER EXIT TREE")
-func _notification(what):
-	if what == NOTIFICATION_PREDELETE:
-		print("SUMMONER PREDELETE")
+

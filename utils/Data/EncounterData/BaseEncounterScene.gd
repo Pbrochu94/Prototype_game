@@ -20,6 +20,8 @@ func initSummoner():
 	RunManager.summoner.sceneInstance.global_position = summonerIntroStartingPoint.global_position
 	RunManager.summoner.sceneInstance.startingPosition = summonerAnchor.global_position
 	RunManager.summoner.sceneInstance.playIntro()
+	RunManager.summoner.sceneInstance.currentScene = self
+	print(RunManager.summoner.sceneInstance.currentScene)
 
 func startSceneAnim():
 	pass

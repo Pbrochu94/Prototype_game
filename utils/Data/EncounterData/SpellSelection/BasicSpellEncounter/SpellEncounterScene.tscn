@@ -36,7 +36,7 @@ position = Vector2(-209, 80)
 [node name="SummonerIntroStart" type="Node2D" parent="."]
 position = Vector2(-323, 80)
 
-[node name="SummonerEndingAnchor" type="Node2D" parent="."]
+[node name="ExitAnchor" type="Node2D" parent="."]
 position = Vector2(47, 80)
 
 [node name="SpellDealer" type="AnimatedSprite2D" parent="."]
