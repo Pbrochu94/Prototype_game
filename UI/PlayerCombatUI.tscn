@@ -150,46 +150,63 @@ offset_bottom = 40.0
 script = ExtResource("3_tcxpq")
 
 [node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/SpellMenu"]
-layout_mode = 0
-offset_left = 172.0
-offset_top = -24.0
-offset_right = 193.0
-offset_bottom = 16.0
-scale = Vector2(6.88618, 3.45311)
+layout_mode = 2
+offset_left = 167.0
+offset_top = -93.0
+offset_right = 367.0
+offset_bottom = 107.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="SpellLabel" type="Label" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
-layout_mode = 0
-offset_left = 5.37308
-offset_top = 0.579189
-offset_right = 49.3731
-offset_bottom = 26.5792
-scale = Vector2(0.239056, 0.351309)
+[node name="Header" type="Control" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+
+[node name="SpellLabel" type="Label" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect/Header"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_right = 34.0
+offset_bottom = 37.0
+grow_horizontal = 2
+scale = Vector2(1, 0.992208)
+theme_override_font_sizes/font_size = 24
 text = "Spells
 "
 
-[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-scale = Vector2(0.186777, 0.223888)
+[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
 text = "X"
 
-[node name="ShieldBtn" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
-layout_mode = 0
-offset_left = 2.16177
-offset_top = 10.0
-offset_right = 84.1618
-offset_bottom = 41.0
-scale = Vector2(0.215821, 0.328142)
-text = "Shield lv1
-"
+[node name="ScrollContainer" type="ScrollContainer" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
+custom_minimum_size = Vector2(200, 160)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -160.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_scroll_mode = 0
 
-[node name="FireballBtn" type="Button" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect"]
-layout_mode = 0
-offset_left = 1.5974
-offset_top = 24.0363
-offset_right = 93.5974
-offset_bottom = 55.0363
-scale = Vector2(0.194748, 0.334465)
-text = "Fireball lv1"
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoiceMenu/SubMenus/SpellMenu/ColorRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

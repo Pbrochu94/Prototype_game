@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bqf6mitfetevb"]
+
+[node name="SpellButton" type="Button"]
+z_index = 3
+custom_minimum_size = Vector2(120, 10)
+offset_right = 120.0
+offset_bottom = 10.0
+size_flags_horizontal = 3

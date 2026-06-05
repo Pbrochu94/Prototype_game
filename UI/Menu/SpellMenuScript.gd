@@ -2,9 +2,8 @@ extends Control
 
 #NODES
 @onready var spellMenu = self
-@onready var shieldBtn = $ColorRect/ShieldBtn
-@onready var fireballBtn = $ColorRect/FireballBtn
 @onready var closeBtn = $ColorRect/Close
+@onready var scrollContainer = $ColorRect/ScrollContainer/VBoxContainer
 var choiceMenuParent:Control
 
 #SIGNALS
@@ -13,12 +12,18 @@ signal cancelSelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for spell in RunManager.learnedSpells:
+		var buttonScene = preload("res://UI/Spells/SpellButtonScene.tscn").instantiate()
+		scrollContainer.add_child(buttonScene)
+		buttonScene.text = spell
+		print("added: ", buttonScene)
 	connectSignals()
 
 func connectSignals():
-	shieldBtn.pressed.connect(onShieldSelected)
-	fireballBtn.pressed.connect(onFireballSelected)
-	closeBtn.pressed.connect(close)
+	pass
+#	shieldBtn.pressed.connect(onShieldSelected)
+#	fireballBtn.pressed.connect(onFireballSelected)
+#	closeBtn.pressed.connect(close)
 
 func onShieldSelected():
 	choiceMenuParent.targetManager.cancelSelection()
