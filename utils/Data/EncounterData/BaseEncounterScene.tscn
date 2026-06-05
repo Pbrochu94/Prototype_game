@@ -11,3 +11,6 @@ position = Vector2(-285, 72)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-137, 17)
 zoom = Vector2(4.01, 4.01)
+
+[node name="SummonerEndingAnchor" type="Node2D" parent="."]
+position = Vector2(47, 80)

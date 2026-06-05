@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1fp34l8egwsi"]
+
+[ext_resource type="PackedScene" uid="uid://cbgyd4nx4dmlu" path="res://Summoner/Spells/SpellCardBaseScene.tscn" id="1_5dbq7"]
+[ext_resource type="Texture2D" uid="uid://50asg56l0kdq" path="res://SpellSprite/Shield/Shield card template.png" id="2_8u0rw"]
+[ext_resource type="Script" path="res://Summoner/Spells/Shield/ShieldCardSceneScript.gd" id="2_j14yc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_velfr"]
+atlas = ExtResource("2_8u0rw")
+region = Rect2(0, 0, 232, 332)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_22krh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_velfr")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[node name="ShieldSpellCard" instance=ExtResource("1_5dbq7")]
+script = ExtResource("2_j14yc")
+spellTag = "shield"
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_22krh")
+animation = &"active"
+
+[connection signal="input_event" from="AnimatedSprite2D/Area2D" to="." method="onClicking"]
+[connection signal="mouse_entered" from="AnimatedSprite2D/Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="AnimatedSprite2D/Area2D" to="." method="onMouseExit"]

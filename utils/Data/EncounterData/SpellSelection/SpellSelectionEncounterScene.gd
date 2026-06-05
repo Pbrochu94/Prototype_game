@@ -7,6 +7,7 @@ class_name SpellSelectionEncounter
 	$SpellCardAnchor4,
 	$SpellCardAnchor5
 ]
+@onready var summoner = RunManager.summoner.sceneInstance
 var cardScenes:Array
 
 func summonerIntroCompleted():
@@ -16,6 +17,8 @@ func summonerIntroCompleted():
 	#spell cards appears
 func connectSignals():
 	super()
+	for card in cardScenes:
+		card.spellSelected.connect(endScene)
 
 func generateRandomSpells(nmbOfSpells:int):
 	var cardCounter:int
@@ -23,11 +26,18 @@ func generateRandomSpells(nmbOfSpells:int):
 	var availableSpells:Array
 	for spell in RunManager.allSpells:
 		availableSpells.append(spell)
+	print("Available spell: ",availableSpells )
 	for i in range(nmbOfSpells):
 		var spellData = availableSpells.pick_random()
 		availableSpells.erase(spellData)
-		var cardInstance = RunManager.allSpells[spellData]["scene"].instantiate()
+		var cardInstance = RunManager.allSpells[spellData]["card scene"].instantiate()
 		add_child(cardInstance)
 		cardScenes.append(cardInstance)
 		cardInstance.global_position = cardAnchors[cardCounter].global_position
 		cardCounter += 1
+
+func endScene():
+	#Npc talks
+	print("ending scene")
+	summoner.setState("walkout")
+

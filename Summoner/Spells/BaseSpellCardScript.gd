@@ -9,9 +9,11 @@ signal spellSelected
 func init():
 	pass
 
+func _ready():
+	card.scale = Vector2(0.555,0.555)
+
 func onClicking(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed :
-		print("Clicked on card")
 #		var chosenSpell:SummonerSpell = RunManager.allSpells[spellTag]
 		RunManager.addNewSpell(spellTag)
 		emit_signal("spellSelected")

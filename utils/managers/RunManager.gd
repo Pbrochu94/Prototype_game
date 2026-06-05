@@ -17,10 +17,14 @@ var learnedSpells:Dictionary
 var allSpells:Dictionary = {
 	"fire ball":{
 		"res":preload("res://Summoner/Spells/FireBall/FireBallRes.tres"),
-		"scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
+		"card scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
+	} ,
+	"shield":{
+		"res":preload("res://Summoner/Spells/Shield/ShieldRes.tres"),
+		"card scene": preload("res://Summoner/Spells/Shield/ShieldCardScene.tscn")
 	} ,
 }
-var nmbOfSpellChoice:int = 1
+var nmbOfSpellChoice:int = 2
 var spellSlot:int = 2
 
 func _ready():
@@ -127,8 +131,7 @@ func getPlayerInfo():
 	return playerInfo
 
 func addNewSpell(spellTag:String):
-	print(RunManager.learnedSpells)
 	var newSpell = allSpells[spellTag]["res"]
 	print("learning ", spellTag)
 	RunManager.learnedSpells[spellTag] = newSpell
-	print(RunManager.learnedSpells)
+	print("Spell inventory: ",RunManager.learnedSpells)
