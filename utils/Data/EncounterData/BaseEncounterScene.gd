@@ -21,7 +21,6 @@ func initSummoner():
 	RunManager.summoner.sceneInstance.startingPosition = summonerAnchor.global_position
 	RunManager.summoner.sceneInstance.playIntro()
 	RunManager.summoner.sceneInstance.currentScene = self
-	print(RunManager.summoner.sceneInstance.currentScene)
 
 func startSceneAnim():
 	pass
@@ -35,6 +34,11 @@ func summonerExit():
 
 func connectSignals():
 	RunManager.summoner.sceneInstance.introAnimCompleted.connect(summonerIntroCompleted)
+	RunManager.summoner.sceneInstance.walkoutFinished.connect(changeScene)
+
 
 func summonerIntroCompleted():
 	print("intro done")
+
+func changeScene():
+	RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")

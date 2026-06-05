@@ -23,3 +23,6 @@ func onHover():
 
 func onMouseExit():
 	card.scale /= 1.10
+
+func removeCard():
+	queue_free()

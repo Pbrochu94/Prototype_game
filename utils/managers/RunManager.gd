@@ -33,6 +33,8 @@ func _ready():
 #	for i in range(5):
 #		addUnitToParty(UnitDB.firstWorldUnits.values().pick_random())
 
+func changeScene(scenePath:String):
+	get_tree().change_scene_to_file(scenePath)
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 

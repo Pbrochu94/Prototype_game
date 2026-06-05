@@ -31,6 +31,7 @@ var isWalking = false
 #SIGNALS
 signal introAnimCompleted
 signal turnFinished
+signal walkoutFinished
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -86,6 +87,7 @@ func onFinishedIntro():
 	emit_signal("introAnimCompleted")
 func onFinishedWalkout():
 	setState("idle")
+	emit_signal("walkoutFinished")
 func endingTurn():
 	emit_signal("turnFinished")
 	print("Summoner end turn")

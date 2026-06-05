@@ -38,7 +38,12 @@ func generateRandomSpells(nmbOfSpells:int):
 		cardCounter += 1
 
 func endScene():
+	for card in cardScenes:
+		card.removeCard()
 	#Npc talks
+	#When npc done talking walksout
 	print("ending scene")
 	summoner.setState("walkout")
 
+func changingScene():
+	RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
