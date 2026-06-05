@@ -20,7 +20,7 @@ var allSpells:Dictionary = {
 		"scene": preload("res://Summoner/Spells/FireBall/FireBallCardScene.tscn")
 	} ,
 }
-var nmbOfSpellChoice:int = 2
+var nmbOfSpellChoice:int = 1
 var spellSlot:int = 2
 
 func _ready():
@@ -128,7 +128,7 @@ func getPlayerInfo():
 
 func addNewSpell(spellTag:String):
 	print(RunManager.learnedSpells)
-	var newSpell = allSpells[spellTag]
+	var newSpell = allSpells[spellTag]["res"]
 	print("learning ", spellTag)
 	RunManager.learnedSpells[spellTag] = newSpell
 	print(RunManager.learnedSpells)
