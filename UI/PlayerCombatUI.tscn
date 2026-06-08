@@ -81,44 +81,57 @@ script = ExtResource("2_l8onr")
 layout_mode = 0
 offset_left = -169.0
 offset_top = 129.0
-offset_right = -148.0
-offset_bottom = 169.0
-scale = Vector2(6.88618, 3.45311)
+offset_right = 31.0
+offset_bottom = 329.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="AttackLabel" type="Label" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
-layout_mode = 0
-offset_left = 3.63046
-offset_top = 0.868786
-offset_right = 61.6305
-offset_bottom = 26.8688
-scale = Vector2(0.239056, 0.351309)
+[node name="Header" type="Control" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+
+[node name="AttackLabel" type="Label" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect/Header"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_right = 43.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
 text = "Attacks"
 
-[node name="Attack" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
-layout_mode = 0
-offset_left = 1.30696
-offset_top = 9.5566
-offset_right = 93.307
-offset_bottom = 40.5566
-scale = Vector2(0.200978, 0.33713)
-text = "Base move"
-
-[node name="Skill" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
-layout_mode = 0
-offset_left = 3.77568
-offset_top = 23.7467
-offset_right = 61.7757
-offset_bottom = 54.7467
-scale = Vector2(0.239056, 0.281807)
-text = "Skill"
-
-[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-scale = Vector2(0.186777, 0.223888)
+[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect/Header"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
 text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -160.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoiceMenu/SubMenus/AttackMenu/ColorRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="ItemMenu" type="Control" parent="ChoiceMenu/SubMenus"]
 anchors_preset = 0
@@ -144,6 +157,7 @@ scale = Vector2(0.239056, 0.351309)
 text = "items"
 
 [node name="SpellMenu" type="Control" parent="ChoiceMenu/SubMenus"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
