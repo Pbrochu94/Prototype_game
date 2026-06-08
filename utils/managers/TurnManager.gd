@@ -109,10 +109,10 @@ func startTurn():
 func chooseAction():
 	currentCombatScene.choiceMenu.open()
 	print(currentlyPlaying.stats.characterName," is choosing what to do...")
-func onSpellSelected(spellIndex:int):
+func onSpellSelected(spell:SummonerSpell):
 	caster = Enum.Caster.SUMMONER
-	summoner.sceneInstance.spellSelected = RunManager.learnedSpells.values()[spellIndex]
-	unitSelectingTarget(summoner.sceneInstance.spellSelected.focusType,summoner.sceneInstance.spellSelected.numberOfTargets)
+	summoner.sceneInstance.spellSelected = spell
+	unitSelectingTarget(spell.focusType,spell.numberOfTargets)
 func onAttackSelected(attackIndex:int):
 	caster = Enum.Caster.UNIT
 	currentlyPlaying.onChosenAttack(attackIndex)
