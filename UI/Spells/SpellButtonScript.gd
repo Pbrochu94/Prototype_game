@@ -15,6 +15,6 @@ func onMouseExit():
 
 
 func onClick():
+	print("Selected summoner spell: ", self.text)
 	targetManager.cancelSelection()
-	print("3",RunManager.learnedSpells[self.text])
 	emit_signal("summonerSpellSelected", RunManager.learnedSpells[self.text])

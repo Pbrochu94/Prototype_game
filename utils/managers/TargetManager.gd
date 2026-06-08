@@ -55,7 +55,6 @@ func enemyHovered(enemy:BaseUnitScript):
 		print("This unit cost : ", enemy.stats.summonCost, " lightshards")
 	if enemy.canBeSelected and not isSummoning:
 		print(enemy.getUnitInfo())
-		print(enemy.canBeSelected)
 	currentHovered = enemy
 	updateArrow(enemy)
 	selectingArrow.visible = true
@@ -103,12 +102,10 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " allie(s)")
-			print(allyParty)
 			for ally in allyPartyInstances:
 				ally.canBeSelected = true
 		Enum.targetPartySelection.ENEMY:
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
-			print(unitSelectable)
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
 			for enemy in enemyPartyInstances:

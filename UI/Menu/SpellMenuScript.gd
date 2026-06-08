@@ -2,6 +2,7 @@ extends Control
 
 #NODES
 @onready var spellMenu = self
+@onready var targetManager = get_tree().get_first_node_in_group("target manager")
 @onready var closeBtn = $ColorRect/Close
 @onready var scrollContainer = $ColorRect/ScrollContainer/VBoxContainer
 var choiceMenuParent:Control
@@ -16,7 +17,6 @@ func _ready():
 		var buttonScene = preload("res://UI/Spells/SpellButtonScene.tscn").instantiate()
 		scrollContainer.add_child(buttonScene)
 		buttonScene.text = spell
-		print("added: ", buttonScene)
 	connectSignals()
 
 func connectSignals():
@@ -25,23 +25,23 @@ func connectSignals():
 #	fireballBtn.pressed.connect(onFireballSelected)
 #	closeBtn.pressed.connect(close)
 
-func onShieldSelected():
-	choiceMenuParent.targetManager.cancelSelection()
-	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
-		if spell["name"] == choiceMenuParent.summoner.sceneInstance.learnedSpells.values()[0].spellName:
-			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
-			return
-	print("selected shield spell")
-	emit_signal("spellSelected", 0)
-
-func onFireballSelected():
-	choiceMenuParent.targetManager.cancelSelection()
-	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
-		if spell["name"] == RunManager.learnedSpells.values()[1].spellName:
-			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
-			return
-	print("selected fireball spell")
-	emit_signal("spellSelected", 1)
+#func onShieldSelected():
+#	choiceMenuParent.targetManager.cancelSelection()
+#	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
+#		if spell["name"] == choiceMenuParent.summoner.sceneInstance.learnedSpells.values()[0].spellName:
+#			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
+#			return
+#	print("selected shield spell")
+#	emit_signal("spellSelected", 0)
+#
+#func onFireballSelected():
+#	choiceMenuParent.targetManager.cancelSelection()
+#	for spell in choiceMenuParent.summoner.sceneInstance.spellCooldowns:
+#		if spell["name"] == RunManager.learnedSpells.values()[1].spellName:
+#			print(spell["name"]," is in cooldown for ", spell["cooldown"], " turn")
+#			return
+#	print("selected fireball spell")
+#	emit_signal("spellSelected", 1)
 
 func open():
 	self.visible = true
@@ -49,6 +49,7 @@ func open():
 		child.visible = true
 
 func close():
+	targetManager.cancelSelection()
 	self.visible = false
 	for child in spellMenu.get_children():
 		child.visible = false

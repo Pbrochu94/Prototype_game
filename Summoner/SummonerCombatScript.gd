@@ -62,7 +62,6 @@ func walk(delta, destination:Vector2):
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:BaseUnitScript):
-	print(spellSelected.spellName)
 	var spellInstance = spellSelected.spellScene.instantiate()
 	spellCooldowns.append({
 		"name": spellSelected.spellName,

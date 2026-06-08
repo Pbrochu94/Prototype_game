@@ -35,5 +35,5 @@ func connectSignals():
 	RunManager.summoner.sceneInstance.introAnimCompleted.connect(summonerIntroCompleted)
 
 func summonerIntroCompleted():
-	print("intro done")
+	pass
 	#spell cards appears

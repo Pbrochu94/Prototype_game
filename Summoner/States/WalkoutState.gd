@@ -15,4 +15,3 @@ func update(delta):
 
 func exit():
 	owner.def.walkSpeed = owner.def.baseWalkSpeed
-	print("AHHHH")
