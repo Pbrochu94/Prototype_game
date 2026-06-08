@@ -17,6 +17,7 @@ func _ready():
 		var buttonScene = preload("res://UI/Spells/SpellButtonScene.tscn").instantiate()
 		scrollContainer.add_child(buttonScene)
 		buttonScene.text = spell
+		buttonScene.init()
 	connectSignals()
 
 func connectSignals():

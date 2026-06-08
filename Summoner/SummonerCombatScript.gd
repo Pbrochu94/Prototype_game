@@ -63,10 +63,11 @@ func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func castSpell(target:BaseUnitScript):
 	var spellInstance = spellSelected.spellScene.instantiate()
-	spellCooldowns.append({
-		"name": spellSelected.spellName,
-		"cooldown":spellSelected.cooldown,
-	})
+#	spellCooldowns.append({
+#		"name": spellSelected.spellName,
+#		"cooldown":spellSelected.cooldown,
+#	})
+	spellSelected.currentCooldown = spellSelected.cooldown
 	match spellSelected.startingAnimPoint:
 		Enum.SummonerSpellStartingPoint.SUMMONER:
 			add_child(spellInstance)
@@ -99,12 +100,19 @@ func setState(newState:String):
 #	print("learning ", newSpell.spellName)
 #	RunManager.learnedSpells[newSpell.spellName] = newSpell
 func getInfo():
+	var spellCooldowns:Array[Dictionary]
+	for spellName in RunManager.learnedSpells:
+		if RunManager.learnedSpells[spellName].currentCooldown > 0:
+			var spellInfo = {
+				"spell": RunManager.learnedSpells[spellName].spellName,
+				"spellCooldowns": RunManager.learnedSpells[spellName].currentCooldown 
+			}
+			spellCooldowns.append(spellInfo)
 	return spellCooldowns
 func reduceTimers():
-	for i in range(spellCooldowns.size() - 1, -1, -1):
-		spellCooldowns[i]["cooldown"] -= 1
-		if spellCooldowns[i]["cooldown"] <= 0:
-			spellCooldowns.remove_at(i)
+	for spellName in RunManager.learnedSpells:
+		if RunManager.learnedSpells[spellName].currentCooldown > 0:
+			RunManager.learnedSpells[spellName].currentCooldown -= 1
 
 func _exit_tree():
 	print("SUMMONER EXIT TREE")
