@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bnu4x6yak3yk2"]
+
+[node name="AttackButton" type="Button"]
+custom_minimum_size = Vector2(120, 10)

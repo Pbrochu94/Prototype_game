@@ -8,7 +8,7 @@ var currentParty:Array[UnitDefinition]
 var currentLightShards:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["archer"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
 

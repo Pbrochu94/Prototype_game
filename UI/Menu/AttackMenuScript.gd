@@ -2,11 +2,13 @@ extends Control
 
 #NODES
 @onready var attackMenu = self
-@onready var attackBtn = $ColorRect/Attack
-@onready var skillBtn = $ColorRect/Skill
-@onready var closeBtn = $ColorRect/Close
+#@onready var attackBtn = $ColorRect/Attack
+#@onready var skillBtn = $ColorRect/Skill
+@onready var closeBtn = $ColorRect/Header/Close
+@onready var vBox = $ColorRect/ScrollContainer/VBoxContainer
 var choiceMenuParent:Control
 var currentlyPlayingUnit:BaseUnitScript
+var attackButtonInstances:Array
 
 #SINGALS
 signal attackSelected(attackIndex:int)
@@ -16,15 +18,21 @@ func _ready():
 	connectSignals()
 
 func connectSignals():
-	attackBtn.pressed.connect(onAttackSelected)
-	skillBtn.pressed.connect(onSkillSelected)
+#	attackBtn.pressed.connect(onAttackSelected)
+#	skillBtn.pressed.connect(onSkillSelected)
 	closeBtn.pressed.connect(close)
 
 func open():
 	currentlyPlayingUnit = choiceMenuParent.currentlyPlayingUnit
 	self.visible = true
-	for child in self.get_children():
-		child.visible = true
+	for attack in currentlyPlayingUnit.attacks:
+		var attackButton = preload("res://UI/Attack/AttackButton.tscn").instantiate()
+		attackButton.text = attack
+		vBox.add_child(attackButton)
+		attackButtonInstances.append(attackButton)
+		print(attack)
+#	for child in self.get_children():
+#		child.visible = true
 
 func close():
 	self.visible = false
