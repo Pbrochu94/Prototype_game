@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://bnu4x6yak3yk2"]
+[gd_scene load_steps=2 format=3 uid="uid://bnu4x6yak3yk2"]
+
+[ext_resource type="Script" path="res://UI/Attack/AttackButtonScript.gd" id="1_244en"]
 
 [node name="AttackButton" type="Button"]
 custom_minimum_size = Vector2(120, 10)
+script = ExtResource("1_244en")
+
+[connection signal="pressed" from="." to="." method="onClick"]

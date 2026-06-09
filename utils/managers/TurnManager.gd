@@ -113,9 +113,9 @@ func onSpellSelected(spell:SummonerSpell):
 	caster = Enum.Caster.SUMMONER
 	summoner.sceneInstance.spellSelected = spell
 	unitSelectingTarget(spell.focusType,spell.numberOfTargets)
-func onAttackSelected(attackIndex:int):
+func onAttackSelected(attack:Ability):
 	caster = Enum.Caster.UNIT
-	currentlyPlaying.onChosenAttack(attackIndex)
+	currentlyPlaying.onChosenAttack(attack)
 func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
@@ -135,6 +135,7 @@ func endSelection():
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
 func unitAttack(targets:Array[BaseUnitScript]):
+		choiceMenu.attackMenu.resetAttackButton()
 		summoner.sceneInstance.targets = targets
 		match caster:
 			Enum.Caster.SUMMONER:

@@ -8,7 +8,7 @@ var currentParty:Array[UnitDefinition]
 var currentLightShards:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["archer"].duplicate(true)
+var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
 
@@ -82,7 +82,9 @@ var nodes = [
 ]
 
 func initStartingParty():
-	currentParty.append(startingUnit)
+	for i in range(3):
+		currentParty.append(UnitDB.firstWorldUnits["blaster droid"].duplicate(true))
+#	currentParty.append(startingUnit)
 
 func addUnitToParty(unit:UnitDefinition):
 	var unitData = unit.duplicate(true)

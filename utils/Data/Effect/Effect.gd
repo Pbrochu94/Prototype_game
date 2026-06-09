@@ -7,3 +7,5 @@ class_name Effect
 @export var target:Enum.FocusType
 @export var amount:float
 @export var element:String
+@export var digitAmount:int
+

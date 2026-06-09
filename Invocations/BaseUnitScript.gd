@@ -162,7 +162,6 @@ func receiveDamage(attacker,attack, damage):
 func applyEffect(effect:Effect):
 	print(effect.name, " is applied to: ", self)
 	var effectApplied = effect.duplicate(true)
-	print(stats.characterName, " is now ", effectApplied.name," for ", effect.duration, " turn")
 	match effect.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
@@ -173,6 +172,7 @@ func applyEffect(effect:Effect):
 				if modifier == 0:
 					modifier = sign(effectApplied.amount)
 				effectApplied.amountAppliedToUnit = modifier
+				effectApplied.digitAmount = modifier
 				stats.set(
 					statAffected,
 					stats.get(statAffected) + modifier
@@ -213,8 +213,8 @@ func enemyStartTurn():
 				applyEffect(attackSelected.effectRes)
 				attackFinished()
 			emit_signal("selectedSelf")
-func onChosenAttack(index:int):
-	attackSelected = attacks.values()[index]
+func onChosenAttack(attack:Ability):
+	attackSelected = attack
 	print("Attack selected: ", attackSelected.attackName)
 	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
 	match attackSelected.focusType:
@@ -275,11 +275,11 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 		attacks[attackName]["justUsed"] = true
 	match attack.type:
 		Enum.AbilityType.ATTACK:
-			if attack.statusEffect != Enum.StatusEffect.NONE:
-				if attack.effectRes.target != Enum.FocusType.SELF:
-					enemy.applyEffect(attack.effectRes)
-				else:
-					applyEffect(attack.effectRes)
+#			if attack.statusEffect != Enum.StatusEffect.NONE:
+#				if attack.effectRes.target != Enum.FocusType.SELF:
+#					enemy.applyEffect(attack.effectRes)
+#				else:
+#					applyEffect(attack.effectRes)
 			var atkStat = stats.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
@@ -295,8 +295,8 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						ally.receiveDamage(self,attack,splashDamage)
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
-#		Enum.AbilityType.EFFECT:
-#			enemy.applyEffect(attack.effectRes)
+		Enum.AbilityType.EFFECT:
+			enemy.applyEffect(attack.effectRes)
 func attackFinished():
 	if self.global_position != self.startingPosition:
 		setState("walkingback")
@@ -338,7 +338,8 @@ func getUnitInfo():
 	for effect in activeEffects:
 		var effectSummary = {}
 		effectSummary["name"] = effect.name
-		effectSummary["amount"] = effect.amount if "amount" in effect else ""
+		effectSummary["amount %"] = effect.amount if "amount" in effect else ""
+		effectSummary["amount digit"] = effect.digitAmount
 		effectSummary["duration"] = effect.duration
 		effectSummaries.append(effectSummary)
 	return {
