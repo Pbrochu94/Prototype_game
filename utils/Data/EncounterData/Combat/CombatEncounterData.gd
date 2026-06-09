@@ -40,7 +40,7 @@ func generateEncounter(type:Enum.EncounterType):
 			var remainingBudget = encounterBudget
 			var selectedEnemies: Array[UnitDefinition] = []
 			while remainingBudget > 0:
-				var validEnemies = UnitDB.firstWorldMiniBosses.filter(
+				var validEnemies = UnitDB.firstWorldMiniBosses.values().filter(
 					func(enemy):
 						return enemy.summonCost <= remainingBudget)
 				if validEnemies.is_empty():

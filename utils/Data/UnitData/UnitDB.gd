@@ -7,6 +7,6 @@ const firstWorldUnits : Dictionary = {
 	"blaster droid":preload("res://Invocations/BlasterDruid/BlasterDroidDef.tres"),
 	"cannon droid": preload("res://Invocations/CannonDruid/CannonDroidDef.tres")
 }
-const firstWorldMiniBosses:Array[UnitDefinition] =  [
-	preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
-]
+const firstWorldMiniBosses:Dictionary =  {
+	"lord of flames": preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
+}

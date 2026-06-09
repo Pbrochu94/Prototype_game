@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNode:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
+var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres").duplicate(true)
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
 var currentParty:Array[UnitDefinition] 
@@ -82,9 +82,9 @@ var nodes = [
 ]
 
 func initStartingParty():
-	for i in range(3):
-		currentParty.append(UnitDB.firstWorldUnits["blaster droid"].duplicate(true))
-#	currentParty.append(startingUnit)
+#	for i in range(3):
+#		currentParty.append(UnitDB.firstWorldUnits["cannon droid"].duplicate(true))
+	currentParty.append(UnitDB.firstWorldMiniBosses["lord of flames"])
 
 func addUnitToParty(unit:UnitDefinition):
 	var unitData = unit.duplicate(true)

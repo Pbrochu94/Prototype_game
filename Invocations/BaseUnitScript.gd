@@ -229,9 +229,7 @@ func onChosenAttack(attack:Ability):
 		Enum.FocusType.SELF:
 			target = self
 			if attackSelected.type == Enum.AbilityType.EFFECT:
-				applyEffect(attackSelected.effectRes)
-#			elif attackSelected.type == Enum.AbilityType.EFFECT:
-#				pass
+				attack(target,attackSelected)
 			emit_signal("selectedSelf")
 func getRandomAttack() -> Ability:
 	var availableAtk = []
@@ -336,12 +334,21 @@ func setState(newState:String):
 func getUnitInfo():
 	var effectSummaries = []
 	for effect in activeEffects:
+		match effect.type:
+			Enum.StatusEffect.STAT_MODIFIER:
+						var effectSummary:Dictionary
+						effectSummary["name"] = effect.name
+						effectSummary["amount %"] = effect.amount if "amount" in effect else ""
+						effectSummary["amount digit"] = effect.digitAmount
+						effectSummary["duration"] = effect.duration
+						effectSummaries.append(effectSummary)
+			Enum.StatusEffect.RETALIATION:
+						var effectSummary:Dictionary
+						effectSummary["name"] = effect.name
+						effectSummary["amount"] = effect.amount if "amount" in effect else ""
+						effectSummary["duration"] = effect.duration
+						effectSummaries.append(effectSummary)
 		var effectSummary = {}
-		effectSummary["name"] = effect.name
-		effectSummary["amount %"] = effect.amount if "amount" in effect else ""
-		effectSummary["amount digit"] = effect.digitAmount
-		effectSummary["duration"] = effect.duration
-		effectSummaries.append(effectSummary)
 	return {
 		"Name": stats.characterName,
 		"Stats": {
