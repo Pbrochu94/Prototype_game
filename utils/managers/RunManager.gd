@@ -54,7 +54,7 @@ var nodes = [
 		"next":[2,3],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
 	},
 	{
@@ -62,7 +62,7 @@ var nodes = [
 		"next":[4],
 		"type": Enum.EncounterType.SPELL,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres")
 	},
 	{
@@ -70,7 +70,7 @@ var nodes = [
 		"next":[4],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
 	},
 	{
@@ -152,11 +152,7 @@ func addNewSpell(spellTag:String):
 
 func unlockNextNode():
 	RunManager.nodes[RunManager.currentNode]["completed"] = true
-#	var nextNode = RunManager.currentNode + 1
 	var nextNodes = RunManager.nodes[currentNode]["next"]
 	for nodeId in nextNodes:
 		RunManager.nodes[nodeId]["unlocked"] = true
 	get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
-#	if nextNode < RunManager.nodes.size():
-#		RunManager.nodes[nextNode]["unlocked"] = true
-#		get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")

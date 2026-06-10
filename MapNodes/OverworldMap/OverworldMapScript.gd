@@ -15,47 +15,36 @@ func _ready():
 		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
 func combatNode1Clicked():
-	RunManager.createSummonerInstance()
-	RunManager.currentNode = 0
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING COMBAT SCENE 1")
+	enterNode(0)
 
 
 func combatNode2Clicked():
-	RunManager.createSummonerInstance()
-	RunManager.currentNode = 1
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING COMBAT SCENE 2")
+	enterNode(1)
 
 
 func spellNode1Clicked():
-	RunManager.createSummonerInstance()
-	RunManager.currentNode = 2
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn")
-	print("ENTERING SPELL SCENE 3")
+	enterNode(2)
 
 func combatNode3Clicked():
-	RunManager.createSummonerInstance()
-	RunManager.currentNode = 3
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING COMBAT SCENE 2")
+	enterNode(3)
 
 func combatNode4Clicked():
-	RunManager.createSummonerInstance()
-	RunManager.currentNode = 4
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING COMBAT SCENE 4")
+	enterNode(4)
 
 func combatNode5Clicked():
+	enterNode(5)
+
+func enterNode(nodeId:int):
+	if RunManager.nodes[nodeId]["completed"]:
+		print("Level completed !")
+		return
 	RunManager.createSummonerInstance()
-	RunManager.currentNode = 5
-	RunManager.currentEncounterData = RunManager.nodes[RunManager.currentNode]["encounter data"]
-	get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-	print("ENTERING BOSS SCENE")
-
-
+	RunManager.currentNode = nodeId
+	RunManager.currentEncounterData = RunManager.nodes[nodeId]["encounter data"]
+	match  RunManager.nodes[nodeId]["type"]:
+		Enum.EncounterType.COMBAT:
+			get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
+			print("ENTERING COMBAT SCENE Id:", nodeId)
+		Enum.EncounterType.SPELL:
+			print("ENTERING SPELL SCENE Id:", nodeId)
+			get_tree().change_scene_to_file("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn")
