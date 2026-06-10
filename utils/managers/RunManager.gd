@@ -125,8 +125,12 @@ func summon(unit:UnitDefinition):
 		var lightShardsBeforePayment = currentLightShards 
 		currentLightShards -= unit.summonCost
 		var unitNameTag = unit.characterTag
-		var summon = UnitDB.firstWorldUnits.get(unitNameTag)
+		var summon = UnitDB.firstWorldUnits[unitNameTag].duplicate(true)
 		addUnitToParty(summon)
+		print(currentParty[0].get_instance_id())
+		print(currentParty[1].get_instance_id())
+		print(currentParty[0].currentHp)
+		print(currentParty[1].currentHp)
 		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
 	else:
 		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)

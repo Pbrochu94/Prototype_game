@@ -5,14 +5,13 @@
 [resource]
 script = ExtResource("1_rhp2c")
 attackName = "bow shot"
-damage = 30
+damage = 300
 type = 0
 focusType = 1
 healAmount = 0
 numberOfTargets = 1
 element = "light"
 hitboxName = ""
-statsAffected = Array[String]([])
 effectAmount = 0
 needToMove = true
 effectDuration = 0
@@ -20,3 +19,4 @@ statusEffect = 0
 splashDamage = 0
 cooldown = 0
 currentCooldown = 0
+hasProjectile = false
