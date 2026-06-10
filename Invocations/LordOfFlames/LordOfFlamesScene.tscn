@@ -750,7 +750,7 @@ walkSpeed = 160
 [node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
 position = Vector2(40, -7.5)
 sprite_frames = SubResource("SpriteFrames_epbi3")
-animation = &"combustion"
+animation = &"downed"
 
 [node name="StateMachine" parent="." index="1"]
 script = ExtResource("10_8v6nb")
