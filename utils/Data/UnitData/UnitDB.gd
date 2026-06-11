@@ -18,7 +18,11 @@ func createUnitInstance(characterTag:String):
 	unit.characterName = unit.definition.characterName
 	unit.characterTag = unit.definition.characterTag
 	unit.currentHp = unit.definition.maxHp
-	unit.atk = unit.definition.baseAtk
-	unit.deff = unit.definition.baseDeff
+	unit.atk = unit.definition.atk
+	unit.deff = unit.definition.deff
 	unit.speed = unit.definition.speed
+	unit.maxHp =  unit.definition.maxHp
+	unit.baseSpeed =  unit.definition.speed
+	unit.baseDeff =  unit.definition.deff
+	unit.baseAtk =  unit.definition.atk
 	return unit

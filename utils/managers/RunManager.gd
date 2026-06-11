@@ -62,7 +62,7 @@ var nodes = [
 		"next":[4],
 		"type": Enum.EncounterType.SPELL,
 		"completed": false,
-		"unlocked": false,
+		"unlocked": true,
 		"encounter data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres")
 	},
 	{
