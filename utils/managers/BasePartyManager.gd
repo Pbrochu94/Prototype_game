@@ -6,7 +6,7 @@ class_name BasePartyManager
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
 @onready var currentCombatScene = get_tree().get_first_node_in_group("combat scene")
 #VARIABLES
-var party:Array[UnitDefinition]
+var party:Array[UnitInstance]
 var partyInstances:Array[BaseUnitScript]
 var aliveCount:int
 var currentlyAliveCharacters:Array[BaseUnitScript]
@@ -24,7 +24,7 @@ func connectSignals():
 #PARTY HANDLERS
 func onCharacterDeath(character:BaseUnitScript):
 	aliveCount -= 1
-	removeUnitFromQ(character.stats)
+	removeUnitFromQ(character)
 	currentlyAliveCharacters = partyInstances.filter(
 		func(character):
 			return not character.isDead
@@ -44,14 +44,10 @@ func outroAnim():
 func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
-func removeUnitFromQ(character:UnitDefinition):
-#	partyInstances.erase(character.sceneInstance)
-#	party.erase(character)
-#	RunManager.currentParty.erase(character)
-#	await character.sceneInstance.anim.animation_finished
-#	character.sceneInstance.queue_free()
-	character.sceneInstance.isSelectable()
-	turnManager.playOrder.erase(character.sceneInstance)
+func removeUnitFromQ(character):
+	var sceneInstance = character.stats.sceneInstance
+	sceneInstance.isSelectable()
+	turnManager.playOrder.erase(sceneInstance)
 
 func removeUnitsFromParties():
 	for unit in party:

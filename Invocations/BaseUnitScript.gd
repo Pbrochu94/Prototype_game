@@ -27,7 +27,8 @@ var previousState:String
 
 
 #STATS
-@export var stats : UnitDefinition
+@export var definition : UnitDefinition
+@export var stats : UnitInstance
 @export var walkSpeed:int
 @export var maxHp:int 
 @export var currentHp:int 
@@ -83,7 +84,7 @@ signal unhovered(character:BaseUnitScript)
 signal enemySelected(enemy:BaseUnitScript)
 signal donePreparing
 signal clickedOn(unit:BaseUnitScript)
-signal selectedForSummon(unit:UnitDefinition)
+signal selectedForSummon(unit:UnitInstance)
 
 
 # Called when the node enters the scene tree for the first time.

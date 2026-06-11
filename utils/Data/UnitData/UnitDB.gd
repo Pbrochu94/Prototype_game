@@ -10,3 +10,15 @@ const firstWorldUnits : Dictionary = {
 const firstWorldMiniBosses:Dictionary =  {
 	"lord of flames": preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
 }
+
+
+func createUnitInstance(characterTag:String):
+	var unit = UnitInstance.new()
+	unit.definition = UnitDB.firstWorldUnits[characterTag]
+	unit.characterName = unit.definition.characterName
+	unit.characterTag = unit.definition.characterTag
+	unit.currentHp = unit.definition.maxHp
+	unit.atk = unit.definition.baseAtk
+	unit.deff = unit.definition.baseDeff
+	unit.speed = unit.definition.speed
+	return unit

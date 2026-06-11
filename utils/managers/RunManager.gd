@@ -4,11 +4,11 @@ var currentNode:int
 var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres").duplicate(true)
 #var currentEncounterData:EncounterData
 #PROGRESS TRACKING
-var currentParty:Array[UnitDefinition] 
+var currentParty:Array[UnitInstance] 
 var currentLightShards:int
 var currentXp:int
 #STARTING KIT
-var startingUnit:UnitDefinition = UnitDB.firstWorldUnits["samurai"].duplicate(true)
+#var startingUnit:UnitInstance = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
 
@@ -94,9 +94,9 @@ var nodes = [
 func initStartingParty():
 #	for i in range(3):
 #		currentParty.append(UnitDB.firstWorldUnits["cannon droid"].duplicate(true))
-	currentParty.append(UnitDB.firstWorldUnits["archer"])
+	currentParty.append(UnitDB.createUnitInstance("archer"))
 
-func addUnitToParty(unit:UnitDefinition):
+func addUnitToParty(unit:UnitInstance):
 	var unitData = unit.duplicate(true)
 	currentParty.append(unitData)
 
@@ -116,21 +116,18 @@ func removeDownedAllyFromParty():
 		if unit.sceneInstance.isDead:
 			currentParty.erase(unit) 
 
-func summon(unit:UnitDefinition):
-	var hasEnoughLightShards:bool = calculateSummonCost(unit.summonCost)
+func summon(unit:UnitInstance):
+	var unitCost = unit.definition.summonCost
+	var hasEnoughLightShards:bool = calculateSummonCost(unitCost)
 	if hasEnoughLightShards:
 		if currentParty.size() >= 5:
 			print("party is currently full: ", currentParty)
 			return
 		var lightShardsBeforePayment = currentLightShards 
-		currentLightShards -= unit.summonCost
+		currentLightShards -= unitCost
 		var unitNameTag = unit.characterTag
-		var summon = UnitDB.firstWorldUnits[unitNameTag].duplicate(true)
+		var summon = UnitDB.createUnitInstance(unitNameTag)
 		addUnitToParty(summon)
-		print(currentParty[0].get_instance_id())
-		print(currentParty[1].get_instance_id())
-		print(currentParty[0].currentHp)
-		print(currentParty[1].currentHp)
 		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
 	else:
 		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)

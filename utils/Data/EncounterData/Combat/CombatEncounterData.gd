@@ -20,7 +20,7 @@ func generateEncounter(type:Enum.EncounterType):
 	match type:
 		Enum.EncounterType.COMBAT:
 			var remainingBudget = encounterBudget
-			var selectedEnemies: Array[UnitDefinition] = []
+			var selectedEnemies: Array[UnitInstance] = []
 			while remainingBudget > 0:
 				var validEnemies = UnitDB.firstWorldUnits.values().filter(
 					func(enemy):
@@ -28,17 +28,18 @@ func generateEncounter(type:Enum.EncounterType):
 				if validEnemies.is_empty():
 					break
 				#PICK RANDOM
-				var unitPicked = validEnemies.pick_random().duplicate(true)
+				var unitPickedTag = validEnemies.pick_random().characterTag
+				var unitPicked = UnitDB.createUnitInstance(unitPickedTag)
 				#PICK SPECIFIC
 		#		var unitPicked = validEnemies[1]
 				selectedEnemies.append(unitPicked)
-				remainingBudget -= unitPicked.summonCost
+				remainingBudget -= unitPicked.definition.summonCost
 			return selectedEnemies
 		Enum.EncounterType.ELITE:
 			pass
 		Enum.EncounterType.MINI_BOSS:
 			var remainingBudget = encounterBudget
-			var selectedEnemies: Array[UnitDefinition] = []
+			var selectedEnemies: Array[UnitInstance] = []
 			while remainingBudget > 0:
 				var validEnemies = UnitDB.firstWorldMiniBosses.values().filter(
 					func(enemy):

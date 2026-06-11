@@ -1,7 +1,7 @@
 extends Resource
-class_name UnitDefinition
+class_name UnitInstance
 
-#STATS
+@export var definition: UnitDefinition
 @export var characterName:String 
 @export var characterTag:String 
 @export var maxHp:int 
@@ -14,7 +14,4 @@ class_name UnitDefinition
 @export var baseDeff:int 
 @export var atk:int
 @export var baseAtk:int 
-@export var scene:PackedScene
-@export var summonCost:int
-@export var baseTemplate:UnitDefinition
-
+@export var sceneInstance:Node2D

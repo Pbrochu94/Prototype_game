@@ -52,7 +52,7 @@ func getValidTargets():
 #MOUSE HANDLING
 func enemyHovered(enemy:BaseUnitScript):
 	if enemy.canBeSelected and isSummoning:
-		print("This unit cost : ", enemy.stats.summonCost, " lightshards")
+		print("This unit cost : ", enemy.definition.summonCost, " lightshards")
 	if enemy.canBeSelected and not isSummoning:
 		print(enemy.getUnitInfo())
 	currentHovered = enemy
