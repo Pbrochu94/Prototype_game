@@ -171,6 +171,7 @@ func endFight():
 	emit_signal("playOutroAnim")
 	for unit in playerPartyManager.currentlyAliveCharacters:
 		unit.resetAllStatsBesideHp()
+	summoner.sceneInstance.resetSpellCooldowns()
 	if playerWon:
 		print("You won !!")
 		openEndingScreen()

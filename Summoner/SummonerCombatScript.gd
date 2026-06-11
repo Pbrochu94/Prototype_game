@@ -113,6 +113,9 @@ func reduceTimers():
 	for spellName in RunManager.learnedSpells:
 		if RunManager.learnedSpells[spellName].currentCooldown > 0:
 			RunManager.learnedSpells[spellName].currentCooldown -= 1
+func resetSpellCooldowns():
+	for spellName in RunManager.learnedSpells:
+		RunManager.learnedSpells[spellName].currentCooldown = 0
 
 func _exit_tree():
 	print("SUMMONER EXIT TREE")
