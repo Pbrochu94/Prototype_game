@@ -48,3 +48,7 @@ func enterNode(nodeId:int):
 		Enum.EncounterType.SPELL:
 			print("ENTERING SPELL SCENE Id:", nodeId)
 			get_tree().change_scene_to_file("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn")
+		Enum.EncounterType.BOSS:
+			print("ENTERING BOSS SCENE Id:", nodeId)
+			get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
+

@@ -22,9 +22,10 @@ func generateEncounter(type:Enum.EncounterType):
 			var remainingBudget = encounterBudget
 			var selectedEnemies: Array[UnitInstance] = []
 			while remainingBudget > 0:
-				var validEnemies = UnitDB.firstWorldUnits.values().filter(
+				var validEnemies = UnitDB.units.values().filter(
 					func(enemy):
-						return enemy.summonCost <= remainingBudget)
+						return enemy.summonCost <= remainingBudget and enemy.unitRank == Enum.UnitRank.BASE
+				)
 				if validEnemies.is_empty():
 					break
 				#PICK RANDOM
@@ -41,17 +42,19 @@ func generateEncounter(type:Enum.EncounterType):
 			var remainingBudget = encounterBudget
 			var selectedEnemies: Array[UnitInstance] = []
 			while remainingBudget > 0:
-				var validEnemies = UnitDB.firstWorldMiniBosses.values().filter(
+				var validEnemies = UnitDB.units.values().filter(
 					func(enemy):
-						return enemy.summonCost <= remainingBudget)
+						return enemy.summonCost <= remainingBudget and enemy.unitRank == Enum.UnitRank.MINI_BOSS
+				)
 				if validEnemies.is_empty():
 					break
 				#PICK RANDOM
-				var unitPicked = validEnemies.pick_random().duplicate(true)
+				var unitPickedTag = validEnemies.pick_random().characterTag
+				var unitPicked = UnitDB.createUnitInstance(unitPickedTag)
 				#PICK SPECIFIC
 		#		var unitPicked = validEnemies[1]
 				selectedEnemies.append(unitPicked)
-				remainingBudget -= unitPicked.summonCost
+				remainingBudget -= unitPicked.definition.summonCost
 			return selectedEnemies
 		Enum.EncounterType.BOSS:
 			pass

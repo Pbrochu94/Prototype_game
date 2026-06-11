@@ -54,3 +54,13 @@ enum EncounterType{
 	SHOP,
 	HEAL,
 }
+enum UnitRank{
+	BASE,
+	ELITE,
+	MINI_BOSS,
+	BOSS
+}
+enum UnitLocation{
+	INTRO,
+	FIRST_WORLD,
+}

@@ -118,5 +118,6 @@ func resetSpellCooldowns():
 		RunManager.learnedSpells[spellName].currentCooldown = 0
 
 func _exit_tree():
-	print("SUMMONER EXIT TREE")
+	pass
+#	print("SUMMONER EXIT TREE")
 

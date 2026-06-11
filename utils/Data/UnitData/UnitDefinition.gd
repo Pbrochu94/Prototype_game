@@ -8,8 +8,8 @@ class_name UnitDefinition
 @export var currentHp:int 
 @export var speed:int 
 @export var baseSpeed:int 
-#@export var attacks:Dictionary = {}
-#@export var attackSelected:Ability
+@export var unitRank:Enum.UnitRank
+@export var unitLocation:Enum.UnitLocation
 @export var deff:int
 @export var baseDeff:int 
 @export var atk:int

@@ -178,8 +178,7 @@ func endFight():
 	else:
 		print("GAME OVER")
 		RunManager.nodes[RunManager.currentNode]["completed"] = false
-		RunManager.runReset()
-		RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
+		RunManager.gameOver()
 func openEndingScreen():
 	currentCombatScene.endingScreen.open()
 

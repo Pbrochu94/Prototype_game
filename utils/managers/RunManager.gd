@@ -44,6 +44,7 @@ var nodes = [
 	{
 		"id": 0,
 		"next":[1],
+		"same level nodes":[],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
 		"unlocked": true,
@@ -52,6 +53,7 @@ var nodes = [
 	{
 		"id": 1,
 		"next":[2,3],
+		"same level nodes":[],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
 		"unlocked": false,
@@ -60,6 +62,7 @@ var nodes = [
 	{
 		"id": 2,
 		"next":[4],
+		"same level nodes":[3],
 		"type": Enum.EncounterType.SPELL,
 		"completed": false,
 		"unlocked": true,
@@ -68,6 +71,7 @@ var nodes = [
 	{
 		"id": 3,
 		"next":[4],
+		"same level nodes":[2],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
 		"unlocked": false,
@@ -76,6 +80,7 @@ var nodes = [
 	{
 		"id": 4,
 		"next":[5],
+		"same level nodes":[],
 		"type": Enum.EncounterType.COMBAT,
 		"completed": false,
 		"unlocked": false,
@@ -84,9 +89,10 @@ var nodes = [
 	{
 		"id": 5,
 		"next":[],
+		"same level nodes":[],
 		"type": Enum.EncounterType.BOSS,
 		"completed": false,
-		"unlocked": false,
+		"unlocked": true,
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
 	}
 ]
@@ -100,16 +106,30 @@ func addUnitToParty(unit:UnitInstance):
 	var unitData = unit.duplicate(true)
 	currentParty.append(unitData)
 
+func gameOver():
+	runReset()
+	changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
+
 func runReset():
-	currentParty.clear()
+	resetParty()
+	print(currentParty)
 	resetMapProgress()
+	resetSummonerPerks()
 	initStartingParty()
 
+func resetSummonerPerks():
+	learnedSpells.clear()
+
+func resetParty():
+	currentParty.clear()
 func resetMapProgress():
 	for node in nodes:
 		if node["id"] != 0:
 			node["completed"] = false
 			node["unlocked"] = false
+		else:
+			node["completed"] = false
+			node["unlocked"] = true
 
 func removeDownedAllyFromParty():
 	for unit in currentParty:
@@ -153,6 +173,9 @@ func addNewSpell(spellTag:String):
 
 func unlockNextNode():
 	RunManager.nodes[RunManager.currentNode]["completed"] = true
+	var sameLevelNodes:Array =  RunManager.nodes[RunManager.currentNode]["same level nodes"]
+	for nodeId in sameLevelNodes:
+		RunManager.nodes[nodeId]["completed"] = true
 	var nextNodes = RunManager.nodes[currentNode]["next"]
 	for nodeId in nextNodes:
 		RunManager.nodes[nodeId]["unlocked"] = true
