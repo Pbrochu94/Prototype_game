@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://vf35ymhc31wt"]
+[gd_scene load_steps=120 format=3 uid="uid://vf35ymhc31wt"]
 
 [ext_resource type="PackedScene" uid="uid://o3pk3ttlbnmm" path="res://Invocations/BaseUnitScene.tscn" id="1_fmdth"]
 [ext_resource type="Script" path="res://Invocations/LordOfFlames/BaseLordOfFlamesScript.gd" id="2_1vvfy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfy5q7mbq4gk8" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Idle.png" id="2_u013k"]
 [ext_resource type="Texture2D" uid="uid://cpdk024asta7r" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-BUff.png" id="2_wrc0j"]
 [ext_resource type="Texture2D" uid="uid://cku3c6yxx3iyt" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Range Fire Burst.png" id="3_emadf"]
+[ext_resource type="Shader" path="res://Invocations/Shaders/WhiteHurtFlash.gdshader" id="3_kwlam"]
 [ext_resource type="Texture2D" uid="uid://codi2ei5xnagg" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Death.png" id="4_6j36b"]
 [ext_resource type="Texture2D" uid="uid://b6qih41123m3i" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Move.png" id="4_r1h2g"]
 [ext_resource type="Texture2D" uid="uid://bdjjjx5po7moo" path="res://CharacterSprite/LordOfFlames/Lord of the Flames SpriteSheet 145x47 With Glow Glow(WITH HURT).png" id="6_ms2e4"]
@@ -18,6 +19,11 @@
 [ext_resource type="Script" path="res://Invocations/LordOfFlames/States/HurtLordOfFlames.gd" id="15_241gq"]
 [ext_resource type="Script" path="res://Invocations/LordOfFlames/States/DownedLordOfFlames.gd" id="16_dvv5x"]
 [ext_resource type="Script" path="res://Invocations/LordOfFlames/States/OutroLordOfFlames.gd" id="17_qqeem"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mk2ec"]
+resource_local_to_scene = true
+shader = ExtResource("3_kwlam")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmrlx"]
 atlas = ExtResource("3_emadf")
@@ -748,6 +754,7 @@ script = ExtResource("2_1vvfy")
 walkSpeed = 160
 
 [node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
+material = SubResource("ShaderMaterial_mk2ec")
 position = Vector2(40, -7.5)
 sprite_frames = SubResource("SpriteFrames_epbi3")
 animation = &"downed"

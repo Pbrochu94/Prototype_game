@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Invocations/Archer/States/OutroArcher.gd" id="16_o5jyx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3h5na"]
+resource_local_to_scene = true
 shader = ExtResource("2_8x6du")
 shader_parameter/flash_amount = 0.0
 

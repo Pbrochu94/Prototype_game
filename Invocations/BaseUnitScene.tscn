@@ -3,6 +3,7 @@
 [ext_resource type="Shader" path="res://Invocations/Shaders/WhiteHurtFlash.gdshader" id="1_bb7li"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g38hc"]
+resource_local_to_scene = true
 shader = ExtResource("1_bb7li")
 shader_parameter/flash_amount = 0.0
 

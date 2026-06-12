@@ -1,5 +1,6 @@
-[gd_scene load_steps=103 format=3 uid="uid://0gmygfaywn0b"]
+[gd_scene load_steps=105 format=3 uid="uid://0gmygfaywn0b"]
 
+[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="1_manxf"]
 [ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
@@ -42,6 +43,11 @@ deff = 10
 baseDeff = 10
 atk = 20
 baseAtk = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fykn"]
+resource_local_to_scene = true
+shader = ExtResource("1_manxf")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kn0ci"]
 atlas = ExtResource("2_3jdm4")
@@ -695,6 +701,7 @@ atk = 20
 [node name="SpritePivot" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+material = SubResource("ShaderMaterial_2fykn")
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_fxuqu")
 animation = &"outro"

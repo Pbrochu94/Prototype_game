@@ -143,11 +143,11 @@ func receiveDamage(attacker,attack, damage):
 	if isInvulnerable:
 		print(stats.characterName, " is invulnerable and negated the attack from ", attacker)
 		return
-	elif hasRetaliation:
-		for effect in activeEffects:
-			if effect.name == "retaliation":
-				if !attacker.is_in_group("main character"):
-					attacker.receiveDamage(self,effect,effect.amount)
+#	elif hasRetaliation:
+#		for effect in activeEffects:
+#			if effect.name == "retaliation":
+#				if !attacker.is_in_group("main character"):
+#					attacker.receiveDamage(self,effect,effect.amount)
 	var trueDamage:int = damage - stats.deff
 	if trueDamage <= 0:
 		trueDamage = 0
@@ -314,6 +314,10 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						ally.receiveDamage(self,attack,splashDamage)
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
+			if enemy.hasRetaliation:
+				for effect in enemy.activeEffects:
+					if effect.name == "retaliation":
+						receiveDamage(self,effect,effect.amount)
 		Enum.AbilityType.EFFECT:
 			enemy.applyEffect(attack.effectRes)
 func attackFinished():

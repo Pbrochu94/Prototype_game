@@ -1,8 +1,9 @@
-[gd_scene load_steps=127 format=3 uid="uid://b4ujsi8dfa3g"]
+[gd_scene load_steps=129 format=3 uid="uid://b4ujsi8dfa3g"]
 
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/BaseBlasterDroidScript.gd" id="1_0xp15"]
 [ext_resource type="Texture2D" uid="uid://wv1dg5clr7yo" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png" id="2_jq4id"]
 [ext_resource type="Texture2D" uid="uid://blf21jxd0ecle" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Death.png" id="2_n71qu"]
+[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="2_srfow"]
 [ext_resource type="Texture2D" uid="uid://byk11bj5k8758" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot Start.png" id="3_dfm8k"]
 [ext_resource type="Texture2D" uid="uid://cvn0j37sy1k3k" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot.png" id="4_357ha"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="4_mltf0"]
@@ -20,6 +21,11 @@
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/States/DownedBlasterDruid.gd" id="15_0kp7g"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="16_fa1gc"]
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/States/OutroBlasterDroid.gd" id="19_dbv1v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0i3p"]
+resource_local_to_scene = true
+shader = ExtResource("2_srfow")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oguey"]
 atlas = ExtResource("2_n71qu")
@@ -811,6 +817,7 @@ atk = 5
 [node name="SpritePivot" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+material = SubResource("ShaderMaterial_d0i3p")
 position = Vector2(-8, -2)
 sprite_frames = SubResource("SpriteFrames_ou3ms")
 animation = &"instability scan"

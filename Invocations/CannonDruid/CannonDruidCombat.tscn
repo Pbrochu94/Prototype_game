@@ -1,8 +1,9 @@
-[gd_scene load_steps=132 format=3 uid="uid://67avdf4jdwg3"]
+[gd_scene load_steps=134 format=3 uid="uid://67avdf4jdwg3"]
 
 [ext_resource type="Script" path="res://Invocations/CannonDruid/BaseCannonDruidScript.gd" id="1_5f126"]
 [ext_resource type="Texture2D" uid="uid://cu68ygnjp41d" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Shoot.png" id="2_njyno"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
+[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="2_spec7"]
 [ext_resource type="Texture2D" uid="uid://b2tw7ka81nxvb" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sprite Sheet 135x38.png" id="3_gf0hk"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_gj5uk"]
 [ext_resource type="Texture2D" uid="uid://6s28kiyswxid" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Heal.png" id="4_mjo78"]
@@ -17,6 +18,11 @@
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="12_iknec"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/States/HealStateCannonDroid.gd" id="15_dv8fq"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/States/OutroCannonDroid.gd" id="16_fud3t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_st5x7"]
+resource_local_to_scene = true
+shader = ExtResource("2_spec7")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obmaw"]
 atlas = ExtResource("2_njyno")
@@ -868,6 +874,7 @@ atk = 10
 position = Vector2(0, -1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpritePivot"]
+material = SubResource("ShaderMaterial_st5x7")
 position = Vector2(31, -7)
 sprite_frames = SubResource("SpriteFrames_lwixa")
 animation = &"idle"
