@@ -6,7 +6,6 @@ func _onready():
 
 func enter():
 	owner.anim.play("downed")
-	owner.isDead = true
 	owner.emit_signal("isDowned", owner)
 
 func update(delta):

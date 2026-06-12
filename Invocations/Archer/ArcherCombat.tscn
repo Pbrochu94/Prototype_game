@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://c1glvlmpjolmj"]
+[gd_scene load_steps=102 format=3 uid="uid://c1glvlmpjolmj"]
 
 [ext_resource type="Script" path="res://Invocations/Archer/BaseArcherScript.gd" id="1_owjqr"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://Invocations/Archer/States/AttackingArcher.gd" id="11_i413p"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/WalkingBackArcher.gd" id="12_84rx0"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/EndingTurnArcher.gd" id="13_turxm"]
-[ext_resource type="Script" path="res://Invocations/Archer/States/HurtArcher.gd" id="14_jb0mt"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/DownedArcher.gd" id="15_ylls3"]
 [ext_resource type="Script" path="res://Invocations/Archer/States/OutroArcher.gd" id="16_o5jyx"]
 
@@ -683,9 +682,6 @@ script = ExtResource("12_84rx0")
 
 [node name="EndingTurn" type="Node" parent="StateMachine"]
 script = ExtResource("13_turxm")
-
-[node name="Hurt" type="Node" parent="StateMachine"]
-script = ExtResource("14_jb0mt")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("15_ylls3")

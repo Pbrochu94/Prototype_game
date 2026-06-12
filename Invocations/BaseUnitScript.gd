@@ -100,17 +100,17 @@ func onAnimationFinished():
 	match currentState:
 		"attacking":
 #			if anim.animation == attackSelected.attackName:
-			if attackSelected.needToMove:
+			if attackSelected.needToMove and !isDead:
 				setState("walkingback")
-			else:
+			elif !attackSelected.needToMove and !isDead:
 				setState("idle")
 				setState("endingturn")
-		"hurt":
-			if anim.animation == "hurt":
-				if stats.currentHp <= 0:
-					setState("downed")
-				else:
-					setState(previousState)
+#		"hurt":
+#			if anim.animation == "hurt":
+#				if stats.currentHp <= 0:
+#					setState("downed")
+#				else:
+#					setState(previousState)
 		"heal":
 			if anim.animation == attackSelected.attackName:
 				setState("endingturn")
@@ -157,9 +157,29 @@ func receiveDamage(attacker,attack, damage):
 		print(attackerName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
 		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
 		stats.currentHp-= trueDamage
-		setState("hurt")
+#		setState("hurt")
+		hurtFlash()
 		emit_signal("hpChanged")
+		checkIfDead()
 		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
+func checkIfDead():
+	if stats.currentHp <= 0:
+		isDead = true
+		match currentState:
+			"attacking":
+				await anim.animation_finished
+				setState("downed")
+				await anim.animation_finished
+				endingTurn()
+			"idle":
+				setState("downed")
+func hurtFlash():
+	var mat = anim.material as ShaderMaterial
+	mat.set_shader_parameter("flash_amount", 1.0)
+	var tween = create_tween()
+	tween.tween_method(
+		func(value):
+			mat.set_shader_parameter("flash_amount", value),1.0,0.0,0.25)
 func applyEffect(effect:Effect):
 	print(effect.name, " is applied to: ", self)
 	var effectApplied = effect.duplicate(true)
