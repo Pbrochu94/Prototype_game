@@ -100,7 +100,7 @@ var nodes = [
 func initStartingParty():
 #	for i in range(3):
 #		currentParty.append(UnitDB.firstWorldUnits["cannon droid"].duplicate(true))
-	currentParty.append(UnitDB.createUnitInstance("samurai"))
+	currentParty.append(UnitDB.createUnitInstance("cannon droid"))
 
 func addUnitToParty(unit:UnitInstance):
 	var unitData = unit.duplicate(true)

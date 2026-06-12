@@ -18,4 +18,4 @@ baseDeff = 10
 atk = 30
 baseAtk = 30
 scene = ExtResource("1_lpyl7")
-summonCost = 3
+summonCost = 30

@@ -95,7 +95,7 @@ func _ready():
 	connectSignals()
 	linkToFactionParty()
 
-#ANIMATIONS & SPRITES
+#ANIMATIONS/VISUALS & SPRITES ----------------------------------------------------------------------
 func onAnimationFinished():
 	match currentState:
 		"attacking":
@@ -105,12 +105,6 @@ func onAnimationFinished():
 			elif !attackSelected.needToMove and !isDead:
 				setState("idle")
 				setState("endingturn")
-#		"hurt":
-#			if anim.animation == "hurt":
-#				if stats.currentHp <= 0:
-#					setState("downed")
-#				else:
-#					setState(previousState)
 		"heal":
 			if anim.animation == attackSelected.attackName:
 				setState("endingturn")
@@ -118,15 +112,21 @@ func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
 	target.add_child(visual.instantiate())
+func hurtFlash():
+	var mat = anim.material as ShaderMaterial
+	mat.set_shader_parameter("flash_amount", 1.0)
+	var tween = create_tween()
+	tween.tween_method(
+		func(value):
+			mat.set_shader_parameter("flash_amount", value),1.0,0.0,0.25)
 
-
-#INIT
+#INIT ----------------------------------------------------------------------------------------------
 func connectSignals():
 	turnManager.targetSelectionStarted.connect(isSelectable)
 	inPositionToAttack.connect(attack)
 	anim.animation_finished.connect(onAnimationFinished)
 
-#BEHAVIORS
+#BASIC BEHAVIORS -----------------------------------------------------------------------------------------
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
@@ -139,75 +139,8 @@ func walk(delta, destination:Vector2):
 		if global_position == destination:
 			setState("endingturn")
 			isWalking = false
-func receiveDamage(attacker,attack, damage):
-	if isInvulnerable:
-		print(stats.characterName, " is invulnerable and negated the attack from ", attacker)
-		return
-#	elif hasRetaliation:
-#		for effect in activeEffects:
-#			if effect.name == "retaliation":
-#				if !attacker.is_in_group("main character"):
-#					attacker.receiveDamage(self,effect,effect.amount)
-	var trueDamage:int = damage - stats.deff
-	if trueDamage <= 0:
-		trueDamage = 0
-		print(attacker.stats.characterName, " does no damage to ", stats.characterName)
-	else:
-		var attackerName = attacker.characterName if attacker is BaseSummonerScript else attacker.stats.characterName
-		print(attackerName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
-		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
-		stats.currentHp-= trueDamage
-#		setState("hurt")
-		hurtFlash()
-		emit_signal("hpChanged")
-		checkIfDead()
-		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
-func checkIfDead():
-	if stats.currentHp <= 0:
-		isDead = true
-		match currentState:
-			"attacking":
-				await anim.animation_finished
-				setState("downed")
-				await anim.animation_finished
-				endingTurn()
-			"idle":
-				setState("downed")
-func hurtFlash():
-	var mat = anim.material as ShaderMaterial
-	mat.set_shader_parameter("flash_amount", 1.0)
-	var tween = create_tween()
-	tween.tween_method(
-		func(value):
-			mat.set_shader_parameter("flash_amount", value),1.0,0.0,0.25)
-func applyEffect(effect:Effect):
-	print(effect.name, " is applied to: ", self)
-	var effectApplied = effect.duplicate(true)
-	match effect.type:
-		Enum.StatusEffect.INVULNERABLE:
-			isInvulnerable = true
-			activeEffects.append(effectApplied)
-		Enum.StatusEffect.STAT_MODIFIER:
-			for statAffected in effect.statsAffected:
-				var modifier = int(stats.get(statAffected) * effectApplied.amount)
-				if modifier == 0:
-					modifier = sign(effectApplied.amount)
-				effectApplied.amountAppliedToUnit = modifier
-				effectApplied.digitAmount = modifier
-				stats.set(
-					statAffected,
-					stats.get(statAffected) + modifier
-				)
-				print(stats.characterName, " received the effect ", effectApplied.name)
-				activeEffects.append(effectApplied)
-		Enum.StatusEffect.HEAL:
-				setState("heal")
-		Enum.StatusEffect.RETALIATION:
-			hasRetaliation = true
-			activeEffects.append(effectApplied)
 
-
-#TURN FLOW
+#ENEMY SPECIFIC ACTIONS ------------------------------------------------------------------------------------
 func enemyStartTurn():
 	print(stats.characterName, " started his turn")
 	attackSelected = getRandomAttack()
@@ -234,24 +167,6 @@ func enemyStartTurn():
 				applyEffect(attackSelected.effectRes)
 				attackFinished()
 			emit_signal("selectedSelf")
-func onChosenAttack(attack:Ability):
-	attackSelected = attack
-	print("Attack selected: ", attackSelected.attackName)
-	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
-	match attackSelected.focusType:
-		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, 1)
-		Enum.FocusType.ENEMY_MULTIPLE:
-			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, attackSelected.numberOfTargets)
-		Enum.FocusType.ALLY_SINGLE:
-			pass
-		Enum.FocusType.ALLY_MULTIPLE:
-			pass
-		Enum.FocusType.SELF:
-			target = self
-			if attackSelected.type == Enum.AbilityType.EFFECT:
-				attack(target,attackSelected)
-			emit_signal("selectedSelf")
 func getRandomAttack() -> Ability:
 	var availableAtk = []
 	for attackName in attacks:
@@ -276,12 +191,28 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 		else:
 			attack(target, attackSelected)
 		unitSelectable.erase(target)
-
+#ATTACKING -----------------------------------------------------------------------------------------
+func onChosenAttack(attack:Ability):
+	attackSelected = attack
+	print("Attack selected: ", attackSelected.attackName)
+	print("Focus type : ",Enum.FocusType.keys()[attackSelected.focusType])
+	match attackSelected.focusType:
+		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, 1)
+		Enum.FocusType.ENEMY_MULTIPLE:
+			emit_signal("startSelectingEnemyTarget", attackSelected.focusType, attackSelected.numberOfTargets)
+		Enum.FocusType.ALLY_SINGLE:
+			pass
+		Enum.FocusType.ALLY_MULTIPLE:
+			pass
+		Enum.FocusType.SELF:
+			target = self
+			if attackSelected.type == Enum.AbilityType.EFFECT:
+				attack(target,attackSelected)
+			emit_signal("selectedSelf")
 func getInPosition(enemy:BaseUnitScript):
 	target = enemy
 	setState("getinposition")
-func heal():
-	pass
 func attack(enemy:BaseUnitScript,attack:Ability):
 	setState("attacking")
 	if attack.hasProjectile:
@@ -294,11 +225,6 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 		attacks[attackName]["justUsed"] = true
 	match attack.type:
 		Enum.AbilityType.ATTACK:
-#			if attack.statusEffect != Enum.StatusEffect.NONE:
-#				if attack.effectRes.target != Enum.FocusType.SELF:
-#					enemy.applyEffect(attack.effectRes)
-#				else:
-#					applyEffect(attack.effectRes)
 			var atkStat = stats.atk
 			var damageOutput:int = atkStat + attack.damage
 			enemy.receiveDamage(self,attack,damageOutput)
@@ -315,9 +241,7 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 						print(ally.stats.characterName, " received ", (attack.splashDamage + stats.atk), " of splash damage")
 						print(ally, " stats after AOE: ", ally.getUnitInfo())
 			if enemy.hasRetaliation:
-				for effect in enemy.activeEffects:
-					if effect.name == "retaliation":
-						receiveDamage(self,effect,effect.amount)
+				receiveRetaliationDamage(enemy)
 		Enum.AbilityType.EFFECT:
 			enemy.applyEffect(attack.effectRes)
 func attackFinished():
@@ -325,12 +249,86 @@ func attackFinished():
 		setState("walkingback")
 	else:
 		setState("endingturn")
+# EFFECTS & SUPPORTS
+func applyEffect(effect:Effect):
+	print(effect.name, " is applied to: ", self)
+	var effectApplied = effect.duplicate(true)
+	match effect.type:
+		Enum.StatusEffect.INVULNERABLE:
+			isInvulnerable = true
+			activeEffects.append(effectApplied)
+		Enum.StatusEffect.STAT_MODIFIER:
+			for statAffected in effect.statsAffected:
+				var modifier = int(stats.get(statAffected) * effectApplied.amount)
+				if modifier == 0:
+					modifier = sign(effectApplied.amount)
+				effectApplied.amountAppliedToUnit = modifier
+				effectApplied.digitAmount = modifier
+				stats.set(
+					statAffected,
+					stats.get(statAffected) + modifier
+				)
+				print(stats.characterName, " received the effect ", effectApplied.name)
+				activeEffects.append(effectApplied)
+		Enum.StatusEffect.HEAL:
+				heal()
+		Enum.StatusEffect.RETALIATION:
+			hasRetaliation = true
+			activeEffects.append(effectApplied)
+func heal():
+	var attackName = attackSelected.attackName
+	if attackSelected.focusType == Enum.FocusType.SELF:
+		target.anim.play(attackSelected.attackName.to_lower())
+	else:
+		target = owner.target
+		target.anim.play("heal")
+	print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
+	target.stats.currentHp += attackSelected.effectRes.amount
+	if target.stats.currentHp > target.stats.maxHp:
+		target.stats.currentHp = target.stats.maxHp
+	print(target.stats.characterName," hp AFTER heal: ",target.stats.currentHp)
+#RECEIVING DAMAGE-----------------------------------------------------------------------------------
+func receiveDamage(attacker,attack, damage):
+	if isInvulnerable:
+		negateDamage(attacker)
+		return
+	var trueDamage:int = damage - stats.deff
+	if trueDamage <= 0:
+		trueDamage = 0
+		print(attacker.stats.characterName, " does no damage to ", stats.characterName)
+	else:
+		var attackerName = attacker.characterName if attacker is BaseSummonerScript else attacker.stats.characterName
+		print(attackerName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
+		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
+		stats.currentHp-= trueDamage
+		hurtFlash()
+		emit_signal("hpChanged")
+		checkIfDead()
+		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
+func receiveRetaliationDamage(enemy:BaseUnitScript):
+	for effect in enemy.activeEffects:
+		if effect.name == "retaliation":
+			receiveDamage(self,effect,effect.amount)
+func negateDamage(attacker:BaseUnitScript):
+	if isInvulnerable:
+		print(stats.characterName, " is invulnerable and negated the attack from ", attacker)
+func checkIfDead():
+	if stats.currentHp <= 0:
+		isDead = true
+		match currentState:
+			"attacking":
+				await anim.animation_finished
+				setState("downed")
+				await anim.animation_finished
+				endingTurn()
+			"idle":
+				setState("downed")
+#END OF TURN ---------------------------------------------------------------------------------------
 func endingTurn():
 	print(stats.characterName," end its turn")
 	setState("idle")
 	emit_signal("turnFinished")
-
-#UI & SELECTION
+#UI & SELECTION ------------------------------------------------------------------------------------
 func isSelectable():
 	if not isDead:
 		canBeSelected = true
@@ -352,8 +350,7 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 		emit_signal("selectedForSummon", stats)
 	elif event is InputEventMouseButton and event.pressed:
 		emit_signal("clickedOn", self)
-
-#UTILS
+#UTILS ---------------------------------------------------------------------------------------------
 func setState(newState:String):
 	stateMachine.setState(states[newState])
 func getUnitInfo():
