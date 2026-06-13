@@ -110,6 +110,7 @@ func onAnimationFinished():
 				setState("endingturn")
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
+	z_index = 1
 func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
 	target.add_child(visual.instantiate())
 func hurtFlash():
@@ -320,7 +321,7 @@ func checkIfDead():
 				await anim.animation_finished
 				setState("downed")
 				await anim.animation_finished
-				endingTurn()
+				emit_signal("turnFinished")
 			"idle":
 				setState("downed")
 #END OF TURN ---------------------------------------------------------------------------------------
@@ -370,6 +371,11 @@ func getUnitInfo():
 						effectSummary["amount"] = effect.amount if "amount" in effect else ""
 						effectSummary["duration"] = effect.duration
 						effectSummaries.append(effectSummary)
+			Enum.StatusEffect.INVULNERABLE:
+						var effectSummary:Dictionary
+						effectSummary["name"] = effect.name
+						effectSummary["duration"] = effect.duration
+						effectSummaries.append(effectSummary)
 		var effectSummary = {}
 	return {
 		"Name": stats.characterName,
@@ -379,7 +385,9 @@ func getUnitInfo():
 			"deff":stats.deff,
 			"speed":stats.speed
 		},
-		"Active effects": effectSummaries
+		"Active effects": effectSummaries,
+#		"State": currentState,
+#		"z": z_index
 	}
 func reduceTimers():
 	for i in range(activeEffects.size() - 1, -1, -1):

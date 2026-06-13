@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfy5q7mbq4gk8" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Idle.png" id="2_u013k"]
 [ext_resource type="Texture2D" uid="uid://cpdk024asta7r" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-BUff.png" id="2_wrc0j"]
 [ext_resource type="Texture2D" uid="uid://cku3c6yxx3iyt" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Range Fire Burst.png" id="3_emadf"]
-[ext_resource type="Shader" path="res://Invocations/Shaders/WhiteHurtFlash.gdshader" id="3_kwlam"]
+[ext_resource type="Shader" path="res://Shaders/Hurt/HurtRedFlash.gdshader" id="3_wc3hh"]
 [ext_resource type="Texture2D" uid="uid://codi2ei5xnagg" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Death.png" id="4_6j36b"]
 [ext_resource type="Texture2D" uid="uid://b6qih41123m3i" path="res://CharacterSprite/LordOfFlames/Lord of The Flames-Move.png" id="4_r1h2g"]
 [ext_resource type="Texture2D" uid="uid://bdjjjx5po7moo" path="res://CharacterSprite/LordOfFlames/Lord of the Flames SpriteSheet 145x47 With Glow Glow(WITH HURT).png" id="6_ms2e4"]
@@ -22,7 +22,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mk2ec"]
 resource_local_to_scene = true
-shader = ExtResource("3_kwlam")
+shader = ExtResource("3_wc3hh")
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmrlx"]

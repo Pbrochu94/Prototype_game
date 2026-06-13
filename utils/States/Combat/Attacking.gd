@@ -16,6 +16,6 @@ func update(delta):
 	pass
 
 func exit():
-	owner.z_index = 0
+	owner.z_index = 1
 
 

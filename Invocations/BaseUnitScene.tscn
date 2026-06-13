@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://o3pk3ttlbnmm"]
 
-[ext_resource type="Shader" path="res://Invocations/Shaders/WhiteHurtFlash.gdshader" id="1_bb7li"]
+[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="1_isjbf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g38hc"]
 resource_local_to_scene = true
-shader = ExtResource("1_bb7li")
+shader = ExtResource("1_isjbf")
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0nh23"]

@@ -18,4 +18,4 @@ baseDeff = 10
 atk = 20
 baseAtk = 20
 scene = ExtResource("1_ntjrs")
-summonCost = 30
+summonCost = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://67avdf4jdwg3"]
+[gd_scene load_steps=133 format=3 uid="uid://67avdf4jdwg3"]
 
 [ext_resource type="Script" path="res://Invocations/CannonDruid/BaseCannonDruidScript.gd" id="1_5f126"]
 [ext_resource type="Texture2D" uid="uid://cu68ygnjp41d" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Shoot.png" id="2_njyno"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://Invocations/CannonDruid/States/HurtCannonDruid.gd" id="9_lg4l2"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/States/DownedCannonDruid.gd" id="10_i6gay"]
 [ext_resource type="Script" path="res://utils/Area2D/SelectionArea.gd" id="12_iknec"]
-[ext_resource type="Script" path="res://Invocations/CannonDruid/States/HealStateCannonDroid.gd" id="15_dv8fq"]
 [ext_resource type="Script" path="res://Invocations/CannonDruid/States/OutroCannonDroid.gd" id="16_fud3t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_st5x7"]
@@ -902,9 +901,6 @@ script = ExtResource("9_lg4l2")
 
 [node name="Downed" type="Node" parent="StateMachine"]
 script = ExtResource("10_i6gay")
-
-[node name="Heal" type="Node" parent="StateMachine"]
-script = ExtResource("15_dv8fq")
 
 [node name="Outro" type="Node" parent="StateMachine"]
 script = ExtResource("16_fud3t")

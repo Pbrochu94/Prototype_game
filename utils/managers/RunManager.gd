@@ -2,13 +2,9 @@ extends Node
 #NODES & TRACKING
 var currentNode:int
 var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres").duplicate(true)
-#var currentEncounterData:EncounterData
-#PROGRESS TRACKING
 var currentParty:Array[UnitInstance] 
 var currentLightShards:int
 var currentXp:int
-#STARTING KIT
-#var startingUnit:UnitInstance = UnitDB.firstWorldUnits["samurai"].duplicate(true)
 const startingLightShards:int = 0
 var summoner:SummonerDef
 
@@ -27,19 +23,86 @@ var allSpells:Dictionary = {
 var nmbOfSpellChoice:int = 2
 var spellSlot:int = 2
 
+#FIRST BOOT ----------------------------------------------------------------------------------------
 func _ready():
 	initNewPlayer()
 	initStartingParty()
-
-func changeScene(scenePath:String):
-	get_tree().change_scene_to_file(scenePath)
-func createSummonerInstance():
-	summoner.sceneInstance = summoner.scene.instantiate()
-
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
 	createSummonerInstance()
+func createSummonerInstance():
+	summoner.sceneInstance = summoner.scene.instantiate()
+#PARTY MANAGING ------------------------------------------------------------------------------------
+func initStartingParty():
+	for i in range(3):
+		currentParty.append(UnitDB.createUnitInstance("cannon droid"))
+#	currentParty.append(UnitDB.createUnitInstance("cannon droid"))
+func addUnitToParty(unit:UnitInstance):
+	var unitData = unit.duplicate(true)
+	currentParty.append(unitData)
+func removeDownedAllyFromParty():
+	for unit in currentParty:
+		if unit.sceneInstance.isDead:
+			currentParty.erase(unit) 
 
+#RUN RESET -----------------------------------------------------------------------------------------
+func gameOver():
+	runReset()
+	changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
+func runReset():
+	resetParty()
+	print(currentParty)
+	resetMapProgress()
+	resetSummonerPerks()
+	initStartingParty()
+func resetSummonerPerks():
+	learnedSpells.clear()
+func resetParty():
+	currentParty.clear()
+func resetMapProgress():
+	for node in nodes:
+		if node["id"] != 0:
+			node["completed"] = false
+			node["unlocked"] = false
+		else:
+			node["completed"] = false
+			node["unlocked"] = true
+
+#SUMMON AND INVOKING -------------------------------------------------------------------------------
+func summon(unit:UnitInstance):
+	var unitCost = unit.definition.summonCost
+	var hasEnoughLightShards:bool = calculateSummonCost(unitCost)
+	if hasEnoughLightShards:
+		if currentParty.size() >= 5:
+			print("party is currently full: ", currentParty)
+			return
+		var lightShardsBeforePayment = currentLightShards 
+		currentLightShards -= unitCost
+		var unitNameTag = unit.characterTag
+		var summon = UnitDB.createUnitInstance(unitNameTag)
+		addUnitToParty(summon)
+		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
+	else:
+		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)
+func calculateSummonCost(unitCost:int):
+	if currentLightShards >= unitCost:
+		return true
+	else:
+		return false
+
+#SUMMONER MANAGING ---------------------------------------------------------------------------------
+func getPlayerInfo():
+	var playerInfo: Dictionary = {
+		"light shards": RunManager.currentLightShards,
+		"xp": RunManager.currentXp
+	}
+	return playerInfo
+func addNewSpell(spellTag:String):
+	var newSpell = allSpells[spellTag]["res"]
+	print("learning ", spellTag)
+	RunManager.learnedSpells[spellTag] = newSpell
+	print("Spell inventory: ",RunManager.learnedSpells)
+#NODE PROGRESSION ----------------------------------------------------------------------------------
 var nodes = [
 	{
 		"id": 0,
@@ -96,81 +159,6 @@ var nodes = [
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
 	}
 ]
-
-func initStartingParty():
-#	for i in range(3):
-#		currentParty.append(UnitDB.firstWorldUnits["cannon droid"].duplicate(true))
-	currentParty.append(UnitDB.createUnitInstance("cannon droid"))
-
-func addUnitToParty(unit:UnitInstance):
-	var unitData = unit.duplicate(true)
-	currentParty.append(unitData)
-
-func gameOver():
-	runReset()
-	changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
-
-func runReset():
-	resetParty()
-	print(currentParty)
-	resetMapProgress()
-	resetSummonerPerks()
-	initStartingParty()
-
-func resetSummonerPerks():
-	learnedSpells.clear()
-
-func resetParty():
-	currentParty.clear()
-func resetMapProgress():
-	for node in nodes:
-		if node["id"] != 0:
-			node["completed"] = false
-			node["unlocked"] = false
-		else:
-			node["completed"] = false
-			node["unlocked"] = true
-
-func removeDownedAllyFromParty():
-	for unit in currentParty:
-		if unit.sceneInstance.isDead:
-			currentParty.erase(unit) 
-
-func summon(unit:UnitInstance):
-	var unitCost = unit.definition.summonCost
-	var hasEnoughLightShards:bool = calculateSummonCost(unitCost)
-	if hasEnoughLightShards:
-		if currentParty.size() >= 5:
-			print("party is currently full: ", currentParty)
-			return
-		var lightShardsBeforePayment = currentLightShards 
-		currentLightShards -= unitCost
-		var unitNameTag = unit.characterTag
-		var summon = UnitDB.createUnitInstance(unitNameTag)
-		addUnitToParty(summon)
-		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
-	else:
-		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)
-
-func calculateSummonCost(unitCost:int):
-	if currentLightShards >= unitCost:
-		return true
-	else:
-		return false
-
-func getPlayerInfo():
-	var playerInfo: Dictionary = {
-		"light shards": RunManager.currentLightShards,
-		"xp": RunManager.currentXp
-	}
-	return playerInfo
-
-func addNewSpell(spellTag:String):
-	var newSpell = allSpells[spellTag]["res"]
-	print("learning ", spellTag)
-	RunManager.learnedSpells[spellTag] = newSpell
-	print("Spell inventory: ",RunManager.learnedSpells)
-
 func unlockNextNode():
 	RunManager.nodes[RunManager.currentNode]["completed"] = true
 	var sameLevelNodes:Array =  RunManager.nodes[RunManager.currentNode]["same level nodes"]
@@ -180,3 +168,5 @@ func unlockNextNode():
 	for nodeId in nextNodes:
 		RunManager.nodes[nodeId]["unlocked"] = true
 	get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
+func changeScene(scenePath:String):
+	get_tree().change_scene_to_file(scenePath)
