@@ -7,7 +7,7 @@ var currentLightShards:int
 var currentXp:int
 const startingLightShards:int = 0
 var summoner:SummonerDef
-
+var inventory:Dictionary
 #STATS
 var learnedSpells:Dictionary
 var allSpells:Dictionary = {
@@ -30,8 +30,18 @@ func _ready():
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
 	createSummonerInstance()
+	addItemToInventory(ItemDB.consumables["light potion"])
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
+#INVENTORY MANAGEMENT ------------------------------------------------------------------------------
+func addItemToInventory(item:ItemData):
+	var itemName = item.itemName
+	var itemObject = {
+		"name": itemName,
+		"icon": item.icon,
+		"amount": 1
+	}
+	inventory[itemName] = itemObject
 #PARTY MANAGING ------------------------------------------------------------------------------------
 func initStartingParty():
 #	for i in range(3):
@@ -96,6 +106,14 @@ func getPlayerInfo():
 		"light shards": RunManager.currentLightShards,
 		"xp": RunManager.currentXp
 	}
+	if not inventory.is_empty():
+		playerInfo["inventory"] = []
+		for itemName in inventory:
+			var inventorySummary = {
+				"name": itemName,
+				"amount": inventory[itemName]["amount"]
+			}
+			playerInfo["inventory"].append(inventorySummary)
 	return playerInfo
 func addNewSpell(spellTag:String):
 	var newSpell = allSpells[spellTag]["res"]

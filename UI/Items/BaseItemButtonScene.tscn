@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dexyywsgvqhxf"]
+
+[node name="BaseItemButtonScene2" type="Button"]
+custom_minimum_size = Vector2(120, 24)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(120, 10)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 24.0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+autowrap_mode = 2
+
+[node name="Amount" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2

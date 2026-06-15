@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bt8tgj6gwavrr"]
+
+[ext_resource type="Texture2D" uid="uid://3lpjc84q2ftj" path="res://ItemSprite/Consumable/LightPotion.png" id="1_dnq8q"]
+[ext_resource type="Script" path="res://utils/Data/ItemData/ItemData.gd" id="1_kiwwk"]
+
+[resource]
+script = ExtResource("1_kiwwk")
+itemName = "light potion"
+description = ""
+icon = ExtResource("1_dnq8q")
+amnount = 0
+maxAmnount = 99
