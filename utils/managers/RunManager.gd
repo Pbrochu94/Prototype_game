@@ -153,6 +153,15 @@ var nodes = [
 		"id": 5,
 		"next":[],
 		"same level nodes":[],
+		"type": Enum.EncounterType.HEAL,
+		"completed": false,
+		"unlocked": true,
+		"encounter data": preload("res://utils/Data/EncounterData/HealEncounter/HealEncounterRes.gd")
+	},
+	{
+		"id": 6,
+		"next":[],
+		"same level nodes":[],
 		"type": Enum.EncounterType.BOSS,
 		"completed": false,
 		"unlocked": true,

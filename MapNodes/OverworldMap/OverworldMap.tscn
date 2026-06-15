@@ -56,6 +56,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Combat 4"
 
+[node name="HealNode1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Heal"
+
 [node name="CombatNode5" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -70,4 +76,5 @@ text = "Combat 5
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/SpellEncounter1" to="." method="spellNode1Clicked"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/CombatNode3" to="." method="combatNode3Clicked"]
 [connection signal="pressed" from="HBoxContainer/CombatNode4" to="." method="combatNode4Clicked"]
+[connection signal="pressed" from="HBoxContainer/HealNode1" to="." method="healNode1Clicked"]
 [connection signal="pressed" from="HBoxContainer/CombatNode5" to="." method="combatNode5Clicked"]

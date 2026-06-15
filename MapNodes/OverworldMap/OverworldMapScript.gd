@@ -31,8 +31,11 @@ func combatNode3Clicked():
 func combatNode4Clicked():
 	enterNode(4)
 
-func combatNode5Clicked():
+func healNode1Clicked():
 	enterNode(5)
+
+func combatNode5Clicked():
+	enterNode(6)
 
 func enterNode(nodeId:int):
 	if RunManager.nodes[nodeId]["completed"]:
@@ -51,4 +54,10 @@ func enterNode(nodeId:int):
 		Enum.EncounterType.BOSS:
 			print("ENTERING BOSS SCENE Id:", nodeId)
 			get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
+		Enum.EncounterType.HEAL:
+			print("ENTERING HEAL SCENE Id:", nodeId)
+			get_tree().change_scene_to_file("res://utils/Data/EncounterData/HealEncounter/HealEncounterCaveScene.tscn")
+
+
+
 
