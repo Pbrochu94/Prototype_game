@@ -18,6 +18,7 @@ func addUnitToParty():
 		aliveCount += 1
 		var numberNameTag = str(i+1)
 		var unitScene = unit.definition.scene.instantiate()
+		unit.characterName = unit.definition.characterName
 		unit.characterName +=  " player " + numberNameTag 
 		unitScene.faction = Enum.Faction.PLAYER
 	currentlyAliveCharacters = partyInstances

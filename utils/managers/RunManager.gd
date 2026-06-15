@@ -34,9 +34,9 @@ func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 #PARTY MANAGING ------------------------------------------------------------------------------------
 func initStartingParty():
-	for i in range(3):
-		currentParty.append(UnitDB.createUnitInstance("cannon droid"))
-#	currentParty.append(UnitDB.createUnitInstance("cannon droid"))
+#	for i in range(3):
+#		currentParty.append(UnitDB.createUnitInstance("cannon droid"))
+	currentParty.append(UnitDB.createUnitInstance("archer"))
 func addUnitToParty(unit:UnitInstance):
 	var unitData = unit.duplicate(true)
 	currentParty.append(unitData)
@@ -83,7 +83,7 @@ func summon(unit:UnitInstance):
 		addUnitToParty(summon)
 		print("Player current lightshards : ", lightShardsBeforePayment," -> ", currentLightShards)
 	else:
-		print(unit.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)
+		print(unit.definition.summonCost, " light shards is needed to invoke, player only has: ", currentLightShards)
 func calculateSummonCost(unitCost:int):
 	if currentLightShards >= unitCost:
 		return true
@@ -128,7 +128,7 @@ var nodes = [
 		"same level nodes":[3],
 		"type": Enum.EncounterType.SPELL,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres")
 	},
 	{
@@ -151,11 +151,11 @@ var nodes = [
 	},
 	{
 		"id": 5,
-		"next":[],
+		"next":[6],
 		"same level nodes":[],
 		"type": Enum.EncounterType.HEAL,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/HealEncounter/HealEncounterRes.gd")
 	},
 	{
@@ -164,7 +164,7 @@ var nodes = [
 		"same level nodes":[],
 		"type": Enum.EncounterType.BOSS,
 		"completed": false,
-		"unlocked": true,
+		"unlocked": false,
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
 	}
 ]

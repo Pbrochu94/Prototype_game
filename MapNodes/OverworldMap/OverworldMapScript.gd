@@ -6,6 +6,7 @@ extends Node2D
 	$HBoxContainer/VBoxContainer/SpellEncounter1,
 	$HBoxContainer/VBoxContainer/CombatNode3,
 	$HBoxContainer/CombatNode4,
+	$HBoxContainer/HealNode1,
 	$HBoxContainer/CombatNode5
 ]
 

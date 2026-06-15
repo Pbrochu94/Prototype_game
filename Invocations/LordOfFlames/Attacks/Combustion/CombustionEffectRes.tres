@@ -8,6 +8,6 @@ type = 4
 name = "retaliation"
 duration = 3
 target = 0
-amount = 2000.0
+amount = 20.0
 element = "fire"
 digitAmount = 0
