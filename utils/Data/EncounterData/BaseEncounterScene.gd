@@ -1,10 +1,10 @@
 extends Node2D
 class_name BaseNonCombatEncounter
 
-
+@onready var summoner = RunManager.summoner.sceneInstance
 @onready var summonerAnchor = $SummonerAnchor
 @onready var summonerIntroStartingPoint = $SummonerIntroStart
-
+@onready var exitAnchor = $ExitAnchor
 
 
 # Called when the node enters the scene tree for the first time.

@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://235ahsir718s"]
+
+[ext_resource type="PackedScene" uid="uid://djiv2kbseu74l" path="res://utils/Data/EncounterData/BaseEncounterScene.tscn" id="1_oxe0r"]
+[ext_resource type="Texture2D" uid="uid://qphehaa8knq4" path="res://BackgroundSprite/HealEncounter/BK.png" id="2_1srub"]
+[ext_resource type="Script" path="res://utils/Data/EncounterData/HealEncounter/HealEncounterCaveScript.gd" id="2_wke7b"]
+[ext_resource type="Texture2D" uid="uid://ced5drb7fa3fn" path="res://BackgroundSprite/HealEncounter/FrontTile.png" id="3_110sx"]
+[ext_resource type="Texture2D" uid="uid://bupx60n7u4sca" path="res://BackgroundSprite/HealEncounter/FrontLight.png" id="4_30hv1"]
+[ext_resource type="Texture2D" uid="uid://bthxcu6v85h3k" path="res://BackgroundSprite/HealEncounter/Heal black and white.png" id="4_sl4v3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4458g"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(0, 0, 78, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uq0k"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(78, 0, 78, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go557"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(156, 0, 78, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg751"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(234, 0, 78, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbifi"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(312, 0, 78, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rotsv"]
+atlas = ExtResource("4_sl4v3")
+region = Rect2(390, 0, 78, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vqs3c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4458g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uq0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go557")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg751")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbifi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rotsv")
+}],
+"loop": true,
+"name": &"active",
+"speed": 6.0
+}]
+
+[node name="BaseEncounterScene" instance=ExtResource("1_oxe0r")]
+script = ExtResource("2_wke7b")
+
+[node name="Environments" type="Node" parent="." index="0"]
+
+[node name="bk" type="Sprite2D" parent="Environments" index="0"]
+position = Vector2(-134, -18)
+texture = ExtResource("2_1srub")
+
+[node name="Crystal" type="AnimatedSprite2D" parent="Environments" index="1"]
+position = Vector2(-133, 12)
+sprite_frames = SubResource("SpriteFrames_vqs3c")
+animation = &"active"
+frame_progress = 0.789209
+
+[node name="FrontTile" type="Sprite2D" parent="Environments" index="2"]
+z_index = 5
+position = Vector2(-134, -18)
+texture = ExtResource("3_110sx")
+
+[node name="FrontLights" type="Sprite2D" parent="Environments" index="3"]
+z_index = 5
+position = Vector2(-134, -18)
+texture = ExtResource("4_30hv1")
+
+[node name="SummonerAnchor" parent="." index="1"]
+position = Vector2(-213, 84)
+
+[node name="SummonerIntroStart" parent="." index="2"]
+position = Vector2(-370, 84)
+
+[node name="Camera2D" parent="." index="3"]
+position = Vector2(-132, -18)
+zoom = Vector2(2.45, 2.45)
+
+[node name="ExitAnchor" parent="." index="4"]
+position = Vector2(101, 80)

@@ -7,8 +7,6 @@ class_name SpellSelectionEncounter
 	$SpellCardAnchor4,
 	$SpellCardAnchor5
 ]
-@onready var summoner = RunManager.summoner.sceneInstance
-@onready var exitAnchor = $ExitAnchor
 var cardScenes:Array
 
 func summonerIntroCompleted():

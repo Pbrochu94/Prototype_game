@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bthxcu6v85h3k"
-path="res://.godot/imported/Heal black and white.png-4157ebccc2efe592e6e7216362a0eb03.ctex"
+uid="uid://bupx60n7u4sca"
+path="res://.godot/imported/FrontLight.png-1a4a797bdcf61a6a73c38d57bd9c62cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BackgroundSprite/HealEncounter/Heal black and white.png"
-dest_files=["res://.godot/imported/Heal black and white.png-4157ebccc2efe592e6e7216362a0eb03.ctex"]
+source_file="res://BackgroundSprite/HealEncounter/FrontLight.png"
+dest_files=["res://.godot/imported/FrontLight.png-1a4a797bdcf61a6a73c38d57bd9c62cd.ctex"]
 
 [params]
 
