@@ -18,8 +18,10 @@ var currentHovered:BaseUnitScript = null
 var nmbOfTargetToSelect:int
 var targets:Array[BaseUnitScript]
 var nmbOfAvailableTargets:int
+var currentlyUsedItem:ItemData
 var isActive:bool= false
 var isSummoning:bool = false
+var isUsingItem:bool = false
 signal selectionEnd
 
 
@@ -111,6 +113,23 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			for enemy in enemyPartyInstances:
 				if not enemy.isDead:
 					enemy.canBeSelected = true
+func startItemSelection(item:ItemData):
+	currentlyUsedItem = item
+	isUsingItem = true
+	match item.partyAffected:
+		Enum.targetPartySelection.ALLY:
+			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
+			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+			print("Player can select ", nmbOfAvailableTargets, " allie(s)")
+			for ally in allyPartyInstances:
+				ally.canBeSelected = true
+		Enum.targetPartySelection.ENEMY:
+			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
+			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
+			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
+			for enemy in enemyPartyInstances:
+				if not enemy.isDead:
+					enemy.canBeSelected = true
 func invocationSelectionStarted():
 	isSummoning = true
 	for enemy in enemyPartyInstances:
@@ -133,7 +152,13 @@ func endSelection():
 	for ally in allyPartyInstances:
 		ally.canBeSelected = false
 	selectingArrow.visible = false
-	turnManager.unitAttack(targets)
+	if isUsingItem:
+		for target in targets:
+			currentlyUsedItem.use(target)
+		currentlyUsedItem = null
+		isUsingItem = false
+	else:
+		turnManager.unitAttack(targets)
 	targets.clear()
 	emit_signal("selectionEnd")
 

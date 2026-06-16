@@ -38,7 +38,10 @@ func createSummonerInstance():
 func addItemToInventory(item:ItemData):
 	if item.itemName not in inventory:
 		inventory[item.itemName] = item
-	inventory[item.itemName].amount += 1
+	elif inventory[item.itemName].stack >= inventory[item.itemName].maxStack:
+		print("Max amount of ",inventory[item.itemName].itemName," reached")
+		return
+	inventory[item.itemName].stack += 1
 #PARTY MANAGING ------------------------------------------------------------------------------------
 func initStartingParty():
 #	for i in range(3):

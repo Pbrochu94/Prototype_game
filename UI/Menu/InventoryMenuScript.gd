@@ -19,7 +19,6 @@ func _ready():
 		buttonScene.itemData = RunManager.inventory[item]
 		scrollContainer.add_child(buttonScene)
 		buttonScene.init(RunManager.inventory[item].itemName)
-#		buttonScene.text = item
 	connectSignals()
 
 func connectSignals():
