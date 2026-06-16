@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgpp5im6ruon"]
+[gd_scene load_steps=5 format=3 uid="uid://cgpp5im6ruon"]
 
 [ext_resource type="Script" path="res://UI/Menu/ChoiceMenuScript.gd" id="1_hmvf8"]
 [ext_resource type="Script" path="res://UI/Menu/AttackMenuScript.gd" id="2_l8onr"]
+[ext_resource type="Script" path="res://UI/Menu/InventoryMenuScript.gd" id="3_06kay"]
 [ext_resource type="Script" path="res://UI/Menu/SpellMenuScript.gd" id="3_tcxpq"]
 
 [node name="CombatMenu" type="Control"]
@@ -133,31 +134,74 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemMenu" type="Control" parent="ChoiceMenu/SubMenus"]
+[node name="InventoryMenu" type="Control" parent="ChoiceMenu/SubMenus"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("3_06kay")
 
-[node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/ItemMenu"]
+[node name="ColorRect" type="ColorRect" parent="ChoiceMenu/SubMenus/InventoryMenu"]
 layout_mode = 0
 offset_left = 10.0
-offset_top = -25.0
-offset_right = 31.0
-offset_bottom = 15.0
-scale = Vector2(6.88618, 3.45311)
+offset_top = -99.0
+offset_right = 210.0
+offset_bottom = 101.0
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="ItemLabel" type="Label" parent="ChoiceMenu/SubMenus/ItemMenu/ColorRect"]
-layout_mode = 0
-offset_left = 5.37308
-offset_top = 0.579189
-offset_right = 49.3731
-offset_bottom = 26.5792
-scale = Vector2(0.239056, 0.351309)
-text = "items"
+[node name="Header" type="Control" parent="ChoiceMenu/SubMenus/InventoryMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+
+[node name="IventoryLabel" type="Label" parent="ChoiceMenu/SubMenus/InventoryMenu/ColorRect/Header"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_right = 34.0
+offset_bottom = 37.0
+grow_horizontal = 2
+scale = Vector2(1, 0.992208)
+theme_override_font_sizes/font_size = 24
+text = "Inventory
+"
+
+[node name="Close" type="Button" parent="ChoiceMenu/SubMenus/InventoryMenu/ColorRect/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChoiceMenu/SubMenus/InventoryMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -160.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChoiceMenu/SubMenus/InventoryMenu/ColorRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="SpellMenu" type="Control" parent="ChoiceMenu/SubMenus"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -225,4 +269,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[connection signal="pressed" from="ChoiceMenu/Inventory" to="." method="openInventoryMenu"]
 [connection signal="pressed" from="ChoiceMenu/SubMenus/SpellMenu/ColorRect/Header/Close" to="ChoiceMenu/SubMenus/SpellMenu" method="close"]

@@ -7,7 +7,7 @@ extends Control
 @onready var inventoryBtn = $ChoiceMenu/Inventory
 @onready var spellBtn = $ChoiceMenu/Spells
 @onready var attackMenu = $ChoiceMenu/SubMenus/AttackMenu
-@onready var itemMenu = $ChoiceMenu/SubMenus/ItemMenu
+@onready var inventory = $ChoiceMenu/SubMenus/InventoryMenu
 @onready var spellMenu = $ChoiceMenu/SubMenus/SpellMenu
 @onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
@@ -26,23 +26,25 @@ func init():
 func openAttackMenu():
 	$ChoiceMenu/SubMenus/AttackMenu.choiceMenuParent = self
 	subMenuParent.visible = true
-	itemMenu.visible = false
+	inventory.visible = false
 	spellMenu.visible = false
 	attackMenu.open()
 
 
 func openInventoryMenu():
-#	$ChoiceMenu/SubMenus/InventoryMenu.choiceMenuParent = self
-	emit_signal("actionSelected", "inventory")
+	$ChoiceMenu/SubMenus/InventoryMenu.choiceMenuParent = self
+	subMenuParent.visible = true
+	attackMenu.visible = false
+	spellMenu.visible = false
+	inventory.open()
 
 
 func openSpellMenu():
 	$ChoiceMenu/SubMenus/SpellMenu.choiceMenuParent = self
 	subMenuParent.visible = true
-	itemMenu.visible = false
+	inventory.visible = false
 	attackMenu.visible = false
 	spellMenu.open()
-#	emit_signal("actionSelected", "ability")
 
 func connectSignals():
 	attackBtn.pressed.connect(openAttackMenu)

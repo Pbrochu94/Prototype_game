@@ -30,18 +30,15 @@ func _ready():
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
 	createSummonerInstance()
-	addItemToInventory(ItemDB.consumables["light potion"])
+	for i in range(3):
+		addItemToInventory(ItemDB.consumables["light potion"])
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 #INVENTORY MANAGEMENT ------------------------------------------------------------------------------
 func addItemToInventory(item:ItemData):
-	var itemName = item.itemName
-	var itemObject = {
-		"name": itemName,
-		"icon": item.icon,
-		"amount": 1
-	}
-	inventory[itemName] = itemObject
+	if item.itemName not in inventory:
+		inventory[item.itemName] = item
+	inventory[item.itemName].amount += 1
 #PARTY MANAGING ------------------------------------------------------------------------------------
 func initStartingParty():
 #	for i in range(3):
