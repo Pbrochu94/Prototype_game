@@ -12,3 +12,4 @@ stack = 0
 maxStack = 99
 amount = 50
 partyAffected = 0
+nmbOfTargets = 1

@@ -7,7 +7,8 @@ class_name ItemData
 @export var maxStack: int = 99
 @export var amount: int 
 @export var partyAffected: Enum.targetPartySelection
+@export var nmbOfTargets: int
 
 func use(target):
 	print("healed ", target, " for ", amount, " hp")
-	target.heal(amount)
+	target.heal(self)

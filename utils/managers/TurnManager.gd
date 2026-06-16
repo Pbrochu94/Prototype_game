@@ -19,6 +19,7 @@ var playerWon:bool = false
 var turnTracker:int = 0
 var fightIsOver:bool = false
 var caster:Enum.Caster
+var currentlyUsedItem:ItemData
 
 
 #SIGNALS
@@ -151,6 +152,13 @@ func unitAttack(targets:Array[BaseUnitScript]):
 						currentlyPlaying.getInPosition(target)
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
+func useItem(targets:Array[BaseUnitScript]):
+	print(targets)
+	for target in targets:
+		currentlyUsedItem.use(target)
+	currentlyUsedItem = null
+	targetManager.isUsingItem = false
+	endTurn()
 func endTurn():
 	if fightIsOver:
 		endFight()

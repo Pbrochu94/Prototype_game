@@ -272,22 +272,29 @@ func applyEffect(effect:Effect):
 				print(stats.characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
-				heal()
+				heal(attackSelected)
 		Enum.StatusEffect.RETALIATION:
 			hasRetaliation = true
 			activeEffects.append(effectApplied)
-func heal():
-	var attackName = attackSelected.attackName
-	if attackSelected.focusType == Enum.FocusType.SELF:
-		target.anim.play(attackSelected.attackName.to_lower())
-	else:
-		target = owner.target
-		target.anim.play("heal")
-	print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
-	target.stats.currentHp += attackSelected.effectRes.amount
-	if target.stats.currentHp > target.stats.maxHp:
-		target.stats.currentHp = target.stats.maxHp
-	print(target.stats.characterName," hp AFTER heal: ",target.stats.currentHp)
+func heal(source):
+	if source is ItemData:
+		print(stats.characterName," hp BEFORE heal: ",stats.currentHp)
+		stats.currentHp += source.amount
+		if stats.currentHp > stats.maxHp:
+			stats.currentHp = stats.maxHp
+		print(stats.characterName," hp AFTER heal: ",stats.currentHp)
+	elif source is Ability:
+		var attackName = source.attackName
+		if source.focusType == Enum.FocusType.SELF:
+			target.anim.play(attackSelected.attackName.to_lower())
+		else:
+			target = owner.target
+			target.anim.play("heal")
+		print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
+		target.stats.currentHp += attackSelected.effectRes.amount
+		if target.stats.currentHp > target.stats.maxHp:
+			target.stats.currentHp = target.stats.maxHp
+		print(target.stats.characterName," hp AFTER heal: ",target.stats.currentHp)
 #RECEIVING DAMAGE-----------------------------------------------------------------------------------
 func receiveDamage(attacker,attack, damage):
 	if isInvulnerable:

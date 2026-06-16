@@ -114,8 +114,9 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 				if not enemy.isDead:
 					enemy.canBeSelected = true
 func startItemSelection(item:ItemData):
-	currentlyUsedItem = item
+	turnManager.currentlyUsedItem = item
 	isUsingItem = true
+	nmbOfTargetToSelect = item.nmbOfTargets
 	match item.partyAffected:
 		Enum.targetPartySelection.ALLY:
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
@@ -153,10 +154,7 @@ func endSelection():
 		ally.canBeSelected = false
 	selectingArrow.visible = false
 	if isUsingItem:
-		for target in targets:
-			currentlyUsedItem.use(target)
-		currentlyUsedItem = null
-		isUsingItem = false
+		turnManager.useItem(targets)
 	else:
 		turnManager.unitAttack(targets)
 	targets.clear()
