@@ -3,6 +3,7 @@ class_name BaseUnitScript
 
 #NODES
 @onready var anim = $SpritePivot/AnimatedSprite2D
+@onready var shaderMaterial := anim.material as ShaderMaterial
 @onready var stateMachine = $StateMachine
 @onready var startingPosition:Vector2
 @onready var hitboxShape = $Hitbox/CollisionShape2D
@@ -114,12 +115,27 @@ func orientSprite(direction:int):
 func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
 	target.add_child(visual.instantiate())
 func hurtFlash():
-	var mat = anim.material as ShaderMaterial
-	mat.set_shader_parameter("flash_amount", 1.0)
+	shaderMaterial.set_shader_parameter("flash_color", Vector3(1, 1, 1)) # blanc
 	var tween = create_tween()
-	tween.tween_method(
-		func(value):
-			mat.set_shader_parameter("flash_amount", value),1.0,0.0,0.25)
+# Montée rapide
+	tween.set_trans(Tween.TRANS_EXPO)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.02)
+# Descente plus douce
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.20)
+func healFlash():
+	shaderMaterial.set_shader_parameter("flash_color", Vector3(0, 1, 0)) # vert
+	var tween = create_tween()
+	# Montée douce
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.35)
+	# Descente douce
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.35)
 
 #INIT ----------------------------------------------------------------------------------------------
 func connectSignals():
@@ -277,6 +293,8 @@ func applyEffect(effect:Effect):
 			hasRetaliation = true
 			activeEffects.append(effectApplied)
 func heal(source):
+	healFlash()
+	await anim.animation_finished
 	if source is ItemData:
 		print(stats.characterName," hp BEFORE heal: ",stats.currentHp)
 		stats.currentHp += source.amount

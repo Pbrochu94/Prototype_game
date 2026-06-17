@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Invocations/Archer/BaseArcherScript.gd" id="1_owjqr"]
 [ext_resource type="Texture2D" uid="uid://ddnauqpw1s6ta" path="res://CharacterSprite/Archer/death.png" id="2_4ffy3"]
-[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="2_8x6du"]
+[ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_lctas"]
 [ext_resource type="Texture2D" uid="uid://6yqussp8i6yn" path="res://CharacterSprite/Archer/special attack.png" id="2_wfhkc"]
 [ext_resource type="Texture2D" uid="uid://ysii3y6piowq" path="res://CharacterSprite/Archer/All.png" id="2_ysouo"]
 [ext_resource type="Texture2D" uid="uid://baklk4ax615bp" path="res://CharacterSprite/Archer/run.png" id="3_eds7e"]
@@ -19,7 +19,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3h5na"]
 resource_local_to_scene = true
-shader = ExtResource("2_8x6du")
+shader = ExtResource("2_lctas")
+shader_parameter/flash_color = Vector3(1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2jmv"]
