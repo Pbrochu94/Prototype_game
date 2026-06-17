@@ -19,3 +19,4 @@ atk = 50
 baseAtk = 50
 scene = ExtResource("1_ped1m")
 summonCost = 25
+element = 1

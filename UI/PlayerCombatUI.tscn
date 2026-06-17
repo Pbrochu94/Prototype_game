@@ -270,4 +270,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="pressed" from="ChoiceMenu/Inventory" to="." method="openInventoryMenu"]
+[connection signal="pressed" from="ChoiceMenu/SubMenus/InventoryMenu/ColorRect/Header/Close" to="ChoiceMenu/SubMenus/InventoryMenu" method="close"]
 [connection signal="pressed" from="ChoiceMenu/SubMenus/SpellMenu/ColorRect/Header/Close" to="ChoiceMenu/SubMenus/SpellMenu" method="close"]

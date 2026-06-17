@@ -64,3 +64,7 @@ enum UnitLocation{
 	INTRO,
 	FIRST_WORLD,
 }
+enum Element{
+	WHITE,
+	RED,
+}

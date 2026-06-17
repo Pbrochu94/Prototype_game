@@ -1,8 +1,8 @@
 [gd_scene load_steps=105 format=3 uid="uid://0gmygfaywn0b"]
 
-[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="1_manxf"]
 [ext_resource type="Script" path="res://Invocations/Samurai/BaseSamuraiScript.gd" id="1_sps1a"]
 [ext_resource type="Texture2D" uid="uid://bwull4bnvkq31" path="res://CharacterSprite/Samurai/Sci-fi Samurai with Sword 124x49.png" id="2_3jdm4"]
+[ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_i55hs"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_mtelm"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/IdleSamurai.gd" id="5_5jnhc"]
 [ext_resource type="Script" path="res://Invocations/Samurai/States/GetInPositionSamurai.gd" id="6_ok88i"]
@@ -46,7 +46,8 @@ baseAtk = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2fykn"]
 resource_local_to_scene = true
-shader = ExtResource("1_manxf")
+shader = ExtResource("2_i55hs")
+shader_parameter/flash_color = Vector3(1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kn0ci"]

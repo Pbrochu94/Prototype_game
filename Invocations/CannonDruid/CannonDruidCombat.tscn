@@ -1,9 +1,9 @@
 [gd_scene load_steps=133 format=3 uid="uid://67avdf4jdwg3"]
 
 [ext_resource type="Script" path="res://Invocations/CannonDruid/BaseCannonDruidScript.gd" id="1_5f126"]
+[ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_ff173"]
 [ext_resource type="Texture2D" uid="uid://cu68ygnjp41d" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Shoot.png" id="2_njyno"]
 [ext_resource type="Texture2D" uid="uid://3vseu4jvnovf" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Inventory DOwn.png" id="2_pg1n1"]
-[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="2_spec7"]
 [ext_resource type="Texture2D" uid="uid://b2tw7ka81nxvb" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sprite Sheet 135x38.png" id="3_gf0hk"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="3_gj5uk"]
 [ext_resource type="Texture2D" uid="uid://6s28kiyswxid" path="res://CharacterSprite/Cannon Druid/Cannon Mode Sheet-Heal.png" id="4_mjo78"]
@@ -20,7 +20,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_st5x7"]
 resource_local_to_scene = true
-shader = ExtResource("2_spec7")
+shader = ExtResource("2_ff173")
+shader_parameter/flash_color = Vector3(1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obmaw"]

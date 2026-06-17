@@ -30,4 +30,5 @@ func createUnitInstance(characterTag:String):
 	unit.baseSpeed =  unit.definition.speed
 	unit.baseDeff =  unit.definition.deff
 	unit.baseAtk =  unit.definition.atk
+	unit.element = unit.definition.element
 	return unit

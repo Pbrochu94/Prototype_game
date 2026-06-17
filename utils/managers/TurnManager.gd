@@ -156,6 +156,8 @@ func useItem(targets:Array[BaseUnitScript]):
 	print(targets)
 	for target in targets:
 		currentlyUsedItem.use(target)
+	RunManager.inventory[currentlyUsedItem.itemName].stack -= 1
+	print("Inventory: ", RunManager.inventory[currentlyUsedItem.itemName].stack)
 	currentlyUsedItem = null
 	targetManager.isUsingItem = false
 	endTurn()

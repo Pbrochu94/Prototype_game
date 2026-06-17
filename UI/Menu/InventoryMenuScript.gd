@@ -14,21 +14,25 @@ signal cancelSelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for item in RunManager.inventory:
-		var buttonScene = preload("res://UI/Items/BaseItemButtonScene.tscn").instantiate()
-		buttonScene.itemData = RunManager.inventory[item]
-		scrollContainer.add_child(buttonScene)
-		buttonScene.init(RunManager.inventory[item].itemName)
 	connectSignals()
 
 func connectSignals():
 	pass
 
 func open():
+	updateInventory()
 	self.visible = true
 	for child in self.get_children():
 		child.visible = true
-
+func updateInventory():
+	for child in scrollContainer.get_children():
+		child.queue_free()
+	for item in RunManager.inventory:
+		if RunManager.inventory[item].stack > 0: 
+			var buttonScene = preload("res://UI/Items/BaseItemButtonScene.tscn").instantiate()
+			buttonScene.itemData = RunManager.inventory[item]
+			scrollContainer.add_child(buttonScene)
+			buttonScene.init(RunManager.inventory[item].itemName)
 func close():
 	targetManager.cancelSelection()
 	self.visible = false

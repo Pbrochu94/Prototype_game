@@ -46,7 +46,7 @@ func addItemToInventory(item:ItemData):
 func initStartingParty():
 #	for i in range(3):
 #		currentParty.append(UnitDB.createUnitInstance("cannon droid"))
-	currentParty.append(UnitDB.createUnitInstance("archer"))
+	currentParty.append(UnitDB.createUnitInstance("lord of flames"))
 func addUnitToParty(unit:UnitInstance):
 	var unitData = unit.duplicate(true)
 	currentParty.append(unitData)

@@ -17,4 +17,4 @@ class_name UnitDefinition
 @export var scene:PackedScene
 @export var summonCost:int
 @export var baseTemplate:UnitDefinition
-
+@export var element:Enum.Element

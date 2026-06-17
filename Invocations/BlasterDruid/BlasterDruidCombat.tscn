@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Invocations/BlasterDruid/BaseBlasterDroidScript.gd" id="1_0xp15"]
 [ext_resource type="Texture2D" uid="uid://wv1dg5clr7yo" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Move.png" id="2_jq4id"]
 [ext_resource type="Texture2D" uid="uid://blf21jxd0ecle" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Death.png" id="2_n71qu"]
-[ext_resource type="Shader" path="res://Shaders/Hurt/HurtWhiteFlash.gdshader" id="2_srfow"]
+[ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_yn03n"]
 [ext_resource type="Texture2D" uid="uid://byk11bj5k8758" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot Start.png" id="3_dfm8k"]
 [ext_resource type="Texture2D" uid="uid://cvn0j37sy1k3k" path="res://CharacterSprite/Blaster Druid/Blaster Mode Sheet-Shoot.png" id="4_357ha"]
 [ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="4_mltf0"]
@@ -24,7 +24,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d0i3p"]
 resource_local_to_scene = true
-shader = ExtResource("2_srfow")
+shader = ExtResource("2_yn03n")
+shader_parameter/flash_color = Vector3(1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oguey"]

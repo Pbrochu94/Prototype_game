@@ -12,6 +12,7 @@ class_name BaseUnitScript
 @onready var spriteOrientation:Node2D = $SpritePivot
 @onready var area = $Area2D
 @export var faction:Enum.Faction
+@export var element:Enum.Element
 var partyManager:Node
 
 
@@ -114,18 +115,45 @@ func orientSprite(direction:int):
 	z_index = 1
 func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
 	target.add_child(visual.instantiate())
-func hurtFlash():
-	shaderMaterial.set_shader_parameter("flash_color", Vector3(1, 1, 1)) # blanc
-	var tween = create_tween()
-# Montée rapide
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.02)
-# Descente plus douce
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.20)
-func healFlash():
+func hurtFlash()-> Tween:
+	match stats.element:
+		Enum.Element.WHITE:
+			shaderMaterial.set_shader_parameter("flash_color", Vector3(1, 1, 1)) # Blanc
+			var tween = create_tween()
+		# Montée rapide
+			tween.set_trans(Tween.TRANS_EXPO)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.02)
+		# Descente plus douce
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_IN)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.20)
+			return tween
+		Enum.Element.RED:
+			shaderMaterial.set_shader_parameter("flash_color", Vector3(1.0, 0.2, 0.0)) # Rouge
+			var tween = create_tween()
+		# Montée rapide
+			tween.set_trans(Tween.TRANS_EXPO)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.02)
+		# Descente plus douce
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_IN)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.20)
+			return tween
+		_: # Blanc par default
+			shaderMaterial.set_shader_parameter("flash_color", Vector3(1, 1, 1)) # Blanc
+			var tween = create_tween()
+		# Montée rapide
+			tween.set_trans(Tween.TRANS_EXPO)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 1.0, 0.02)
+		# Descente plus douce
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_IN)
+			tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.20)
+			return tween
+func healFlash()-> Tween:
 	shaderMaterial.set_shader_parameter("flash_color", Vector3(0, 1, 0)) # vert
 	var tween = create_tween()
 	# Montée douce
@@ -136,7 +164,7 @@ func healFlash():
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(shaderMaterial, "shader_parameter/flash_amount", 0.0, 0.35)
-
+	return tween
 #INIT ----------------------------------------------------------------------------------------------
 func connectSignals():
 	turnManager.targetSelectionStarted.connect(isSelectable)
@@ -293,9 +321,9 @@ func applyEffect(effect:Effect):
 			hasRetaliation = true
 			activeEffects.append(effectApplied)
 func heal(source):
-	healFlash()
-	await anim.animation_finished
+	print(source)
 	if source is ItemData:
+		await healFlash().finished
 		print(stats.characterName," hp BEFORE heal: ",stats.currentHp)
 		stats.currentHp += source.amount
 		if stats.currentHp > stats.maxHp:
@@ -307,7 +335,7 @@ func heal(source):
 			target.anim.play(attackSelected.attackName.to_lower())
 		else:
 			target = owner.target
-			target.anim.play("heal")
+			await target.healFlash().finished
 		print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
 		target.stats.currentHp += attackSelected.effectRes.amount
 		if target.stats.currentHp > target.stats.maxHp:
@@ -327,7 +355,7 @@ func receiveDamage(attacker,attack, damage):
 		print(attackerName, " attack ", stats.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", stats.deff,"(deff) for a total of ",trueDamage)
 		print(stats.characterName," has ", stats.currentHp, " hp before attack ")
 		stats.currentHp-= trueDamage
-		hurtFlash()
+		await hurtFlash().finished
 		emit_signal("hpChanged")
 		checkIfDead()
 		print(stats.characterName," now have ", stats.currentHp, " hp after attack ")
