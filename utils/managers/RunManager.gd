@@ -30,8 +30,8 @@ func _ready():
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
 	createSummonerInstance()
-	for i in range(3):
-		addItemToInventory(ItemDB.consumables["light potion"])
+#	for i in range(3):
+#		addItemToInventory(ItemDB.consumables["light potion"])
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 #INVENTORY MANAGEMENT ------------------------------------------------------------------------------
@@ -61,7 +61,6 @@ func gameOver():
 	changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
 func runReset():
 	resetParty()
-	print(currentParty)
 	resetMapProgress()
 	resetSummonerPerks()
 	initStartingParty()

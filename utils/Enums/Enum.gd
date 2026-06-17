@@ -68,3 +68,9 @@ enum Element{
 	WHITE,
 	RED,
 }
+enum RewardType{
+	LIGHT_SHARD,
+	ITEM,
+	SUMMON,
+	SPELL
+}

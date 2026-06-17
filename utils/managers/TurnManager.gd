@@ -77,9 +77,8 @@ func updatePlayOrder():
 			return a.faction == Enum.Faction.ENEMY
 		return a.stats.speed > b.stats.speed
 	)
-	print("Updating play order : ", playOrder)
+#	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
-	print(playOrder)
 	if playerLost:
 		return
 	if not currentlyPlaying:
@@ -153,7 +152,6 @@ func unitAttack(targets:Array[BaseUnitScript]):
 					else:
 						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
 func useItem(targets:Array[BaseUnitScript]):
-	print(targets)
 	for target in targets:
 		currentlyUsedItem.use(target)
 	RunManager.inventory[currentlyUsedItem.itemName].stack -= 1

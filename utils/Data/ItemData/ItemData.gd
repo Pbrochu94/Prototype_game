@@ -8,7 +8,7 @@ class_name ItemData
 @export var amount: int 
 @export var partyAffected: Enum.targetPartySelection
 @export var nmbOfTargets: int
-
+@export var type: Enum.RewardType
 func use(target):
 	print("healed ", target, " for ", amount, " hp")
 	target.heal(self)

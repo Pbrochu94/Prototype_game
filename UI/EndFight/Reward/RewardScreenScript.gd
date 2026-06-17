@@ -2,6 +2,7 @@ extends Control
 
 var currentCombatScene:CombatEncounter
 @onready var continueButton:Button =  $CenterContainer/ColorRect/VBoxContainer/Button
+@onready var rewardManager = get_tree().get_first_node_in_group("reward manager")
 
 func init():
 	visible = false
@@ -15,18 +16,16 @@ func buttonPressed():
 	RunManager.unlockNextNode()
 
 func gainReward():
-	var lightShardsGained = currentCombatScene.combatEncounterData.lightShardReward
 	var xpGained = currentCombatScene.combatEncounterData.xpReward
-	RunManager.currentLightShards += lightShardsGained
 	RunManager.currentXp += currentCombatScene.combatEncounterData.xpReward
-	print("You gain: ", lightShardsGained, " light shards")
 	print("You gain: ", xpGained, " xp")
 
 
 func open():
 	connectSignals()
 	visible = true
-	gainReward()
+	rewardManager.grantReward()
+	#IN THE FUTURE NEED TO WAIT UNTIL REWARD IS GIVEN BEFORE MOVING ALONG WITH THE CODE
 	RunManager.removeDownedAllyFromParty()
 	choosingInvocation()
 	print(RunManager.getPlayerInfo())

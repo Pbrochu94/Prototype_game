@@ -321,7 +321,6 @@ func applyEffect(effect:Effect):
 			hasRetaliation = true
 			activeEffects.append(effectApplied)
 func heal(source):
-	print(source)
 	if source is ItemData:
 		await healFlash().finished
 		print(stats.characterName," hp BEFORE heal: ",stats.currentHp)

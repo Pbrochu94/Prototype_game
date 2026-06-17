@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxonaee0pw4bh"]
+[gd_scene load_steps=9 format=3 uid="uid://cxonaee0pw4bh"]
 
 [ext_resource type="Script" path="res://MapNodes/Combat/CombatEncounterScript.gd" id="1_57k4s"]
 [ext_resource type="PackedScene" uid="uid://debwlw6fs83mb" path="res://UI/EndFight/Reward/RewardScreen.tscn" id="2_qisru"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqafjc6iqlfqe" path="res://utils/Managers/TargetManager.tscn" id="4_cx0va"]
 [ext_resource type="PackedScene" uid="uid://cien54hksgjv" path="res://utils/Managers/TurnManager.tscn" id="5_w1hj5"]
 [ext_resource type="PackedScene" uid="uid://cgpp5im6ruon" path="res://UI/PlayerCombatUI.tscn" id="6_rwakw"]
+[ext_resource type="PackedScene" uid="uid://bn6lo2pyghkye" path="res://utils/Managers/RewardManager.tscn" id="8_tdm1d"]
 
 [node name="CombatEncounterScene" type="Node2D" groups=["combat scene"]]
 script = ExtResource("1_57k4s")
@@ -62,3 +63,5 @@ position = Vector2(-195, 77)
 
 [node name="SummonerIntroStart" type="Node2D" parent="."]
 position = Vector2(-285, 77)
+
+[node name="RewardManager" parent="." instance=ExtResource("8_tdm1d")]

@@ -76,7 +76,6 @@ func enemySelected(enemy:BaseUnitScript):
 		endSelection()
 #MOUSE HANDLING
 func allyHovered(ally:BaseUnitScript):
-	print(ally)
 	currentHovered = ally
 	updateArrow(ally)
 	selectingArrow.visible = true

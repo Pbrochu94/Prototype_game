@@ -10,7 +10,6 @@ func init():
 
 
 func addUnitToParty():
-	print(RunManager.currentParty)
 	for unit in RunManager.currentParty:
 		party.append(unit)
 	for i in range(party.size()):
