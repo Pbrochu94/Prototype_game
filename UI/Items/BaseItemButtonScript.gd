@@ -9,7 +9,7 @@ var itemData:ItemData
 
 # Called when the node enters the scene tree for the first time.
 func init(itemName:String):
-	itemData = ItemDB.consumables[itemName]
+	itemData = ItemDB.consumables[itemName].res
 	icon.texture = itemData.icon
 	nameLabel.text = itemData.itemName
 	amount.text = str(itemData.stack)
