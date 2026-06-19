@@ -3,6 +3,15 @@ class_name IntroMap
 
 var encounters:Array[EncounterData]
 var nodeScenes:Array
+@onready var nodeAnchors=[
+	$Anchors/Node,
+	$Anchors/Node2,
+	$Anchors/Node3,
+	$Anchors/Node4,
+	$Anchors/Node5,
+	$Anchors/Node6,
+	$Anchors/Node7,
+]
 
 
 func _ready():
@@ -10,8 +19,8 @@ func _ready():
 	for i in range(7):
 		encounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
 	generateWorldNodes(encounters.size())
-#	for i in nodeScenes.size():
-#		nodeScenes[i].unlocked = true
+	for i in nodeScenes.size():
+		nodeScenes[i].unlocked = true
 
 
 #func combatNode1Clicked():
@@ -44,8 +53,11 @@ func generateWorldNodes(amount:int):
 	placeWorldNodes()
 
 func placeWorldNodes():
+	var anchorCounter=0
 	for scene in nodeScenes:
 		add_child(scene)
+		scene.global_position = nodeAnchors[anchorCounter].global_position
+		anchorCounter += 1
 #func enterNode(nodeId:int):
 #	if RunManager.nodes[nodeId]["completed"]:
 #		print("Level completed !")
