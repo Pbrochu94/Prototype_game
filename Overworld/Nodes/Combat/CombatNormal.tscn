@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bixpo6djda1o5"]
+
+[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/Sprites/BaseCombatNode.tscn" id="1_3hs24"]
+[ext_resource type="Script" path="res://Overworld/Nodes/Sprites/OverworldNodeBaseScript.gd" id="2_vm5j8"]
+[ext_resource type="Texture2D" uid="uid://byr1sc0moicvj" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1.png" id="2_wyluj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh4lx"]
+atlas = ExtResource("2_wyluj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nw17s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh4lx")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[node name="Node" instance=ExtResource("1_3hs24")]
+script = ExtResource("2_vm5j8")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_nw17s")
+animation = &"active"
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+[connection signal="input_event" from="Area2D" to="." method="onClick"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExit"]
