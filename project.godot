@@ -20,6 +20,7 @@ Enum="*res://utils/Enums/Enum.gd"
 RunManager="*res://utils/Managers/RunManager.gd"
 UnitDB="*res://utils/Data/UnitData/UnitDB.gd"
 ItemDB="*res://utils/Data/ItemData/ItemDB.gd"
+EncounterDB="*res://utils/Data/EncounterData/EncounterDB.gd"
 
 [display]
 

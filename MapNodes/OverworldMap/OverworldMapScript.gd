@@ -1,7 +1,9 @@
 extends Node2D
 
+@onready var nodes = [
+	$Nodes/Combat
+]
 @onready var buttons = [
-	$HBoxContainer/CombatNode1,
 	$HBoxContainer/CombatNode2,
 	$HBoxContainer/VBoxContainer/SpellEncounter1,
 	$HBoxContainer/VBoxContainer/CombatNode3,
@@ -12,8 +14,10 @@ extends Node2D
 
 func _ready():
 	print(RunManager.getPlayerInfo())
-	for i in buttons.size():
-		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
+	for i in nodes.size():
+		nodes[i].unlocked = true
+#	for i in buttons.size():
+#		buttons[i].disabled = !RunManager.nodes[i]["unlocked"]
 
 func combatNode1Clicked():
 	enterNode(0)
@@ -37,6 +41,10 @@ func healNode1Clicked():
 
 func combatNode5Clicked():
 	enterNode(6)
+
+func generateNodes():
+	for i in range(7):
+		createEncounter()
 
 func enterNode(nodeId:int):
 	if RunManager.nodes[nodeId]["completed"]:

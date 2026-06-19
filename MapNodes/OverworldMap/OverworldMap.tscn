@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6tr3sgcy32ik"]
+[gd_scene load_steps=3 format=3 uid="uid://c6tr3sgcy32ik"]
 
 [ext_resource type="Script" path="res://MapNodes/OverworldMap/OverworldMapScript.gd" id="1_wr0ug"]
+[ext_resource type="PackedScene" uid="uid://bixpo6djda1o5" path="res://Overworld/Nodes/Combat/CombatNormal.tscn" id="2_ddt13"]
 
-[node name="OverworldMap" type="Node2D"]
+[node name="OverworldMap" type="Node2D" groups=["overworld"]]
 script = ExtResource("1_wr0ug")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -19,12 +20,6 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
-
-[node name="CombatNode1" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Combat 1"
 
 [node name="CombatNode2" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -71,7 +66,11 @@ text = "Combat 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[connection signal="pressed" from="HBoxContainer/CombatNode1" to="." method="combatNode1Clicked"]
+[node name="Nodes" type="Node" parent="."]
+
+[node name="Combat" parent="Nodes" instance=ExtResource("2_ddt13")]
+position = Vector2(-513, 0)
+
 [connection signal="pressed" from="HBoxContainer/CombatNode2" to="." method="combatNode2Clicked"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/SpellEncounter1" to="." method="spellNode1Clicked"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/CombatNode3" to="." method="combatNode3Clicked"]

@@ -26,8 +26,6 @@ script = ExtResource("2_vm5j8")
 sprite_frames = SubResource("SpriteFrames_nw17s")
 animation = &"active"
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-
 [connection signal="input_event" from="Area2D" to="." method="onClick"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
 [connection signal="mouse_exited" from="Area2D" to="." method="onMouseExit"]
