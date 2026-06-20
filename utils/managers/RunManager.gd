@@ -1,6 +1,6 @@
 extends Node
 #NODES & TRACKING
-var currentNode:int
+var currentNodeId:int
 var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres").duplicate(true)
 var currentParty:Array[UnitInstance] 
 var currentLightShards:int
@@ -185,14 +185,14 @@ var nodes = [
 		"encounter data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
 	}
 ]
-func unlockNextNode():
-	RunManager.nodes[RunManager.currentNode]["completed"] = true
-	var sameLevelNodes:Array =  RunManager.nodes[RunManager.currentNode]["same level nodes"]
-	for nodeId in sameLevelNodes:
-		RunManager.nodes[nodeId]["completed"] = true
-	var nextNodes = RunManager.nodes[currentNode]["next"]
-	for nodeId in nextNodes:
-		RunManager.nodes[nodeId]["unlocked"] = true
-	get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
+#func unlockNextNode():
+#	RunManager.nodes[RunManager.currentNode]["completed"] = true
+#	var sameLevelNodes:Array =  RunManager.nodes[RunManager.currentNode]["same level nodes"]
+#	for nodeId in sameLevelNodes:
+#		RunManager.nodes[nodeId]["completed"] = true
+#	var nextNodes = RunManager.nodes[currentNode]["next"]
+#	for nodeId in nextNodes:
+#		RunManager.nodes[nodeId]["unlocked"] = true
+#	get_tree().change_scene_to_file("res://MapNodes/OverworldMap/OverworldMap.tscn")
 func changeScene(scenePath:String):
 	get_tree().change_scene_to_file(scenePath)

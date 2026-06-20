@@ -15,7 +15,7 @@ var encounterType:Enum.EncounterType
 func onHover():
 	if unlocked:
 		anim.modulate = Color(1.5, 1.5, 1.5)
-		print("hover")
+		print(id)
 #		anim.scale = Vector2(1.1, 1.1)
 
 
@@ -32,3 +32,4 @@ func onMouseExit():
 func onClick(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and unlocked:
 		print("clicked")
+		overworld.enterNode(id)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Overworld/WorldMaps/Intro/IntroMapScript.gd" id="1_8ny77"]
 
-[node name="Overworld" type="Node2D"]
+[node name="Overworld" type="Node2D" groups=["overworld"]]
 script = ExtResource("1_8ny77")
 
 [node name="Camera2D" type="Camera2D" parent="."]

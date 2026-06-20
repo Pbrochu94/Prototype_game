@@ -8,6 +8,9 @@ class_name CombatEncounterData
 @export var xpReward:int
 @export var itemReward:int
 @export var rareItemChance:float
+@export var baseScene:PackedScene
+@export var sceneInstance:CombatEncounter
+
 
 var hasBudget:bool = true 
 #@export var rewards : Array[RewardData]

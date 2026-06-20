@@ -33,13 +33,13 @@ var playerStartingPosition:Vector2
 var enemyStartingPosition:Vector2
 
 #DATA
-var combatEncounterData:EncounterData
+var encounterData:EncounterData
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pickRandomBackground()
 	initSummoner() 
-	combatEncounterData = RunManager.currentEncounterData
+#	encounterData = RunManager.currentEncounterData
 	RunManager.summoner.sceneInstance.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()

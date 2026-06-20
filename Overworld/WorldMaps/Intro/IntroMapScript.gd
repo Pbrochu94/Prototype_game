@@ -58,7 +58,22 @@ func placeWorldNodes():
 		add_child(scene)
 		scene.global_position = nodeAnchors[anchorCounter].global_position
 		anchorCounter += 1
-#func enterNode(nodeId:int):
+func enterNode(nodeId:int):
+	var matchingIdEncounter:EncounterData
+	for encounter in encounters:
+		print(encounter.id)
+		print(nodeId)
+		if encounter.id == nodeId:
+			matchingIdEncounter = encounter
+	if matchingIdEncounter:
+		RunManager.createSummonerInstance()
+		RunManager.currentNodeId = nodeId
+		RunManager.currentEncounterData = matchingIdEncounter
+		print(RunManager.currentEncounterData)
+		get_tree().change_scene_to_file(matchingIdEncounter.sceneInstance)
+	else:
+		print("No matching id found in encounters generated")
+		return
 #	if RunManager.nodes[nodeId]["completed"]:
 #		print("Level completed !")
 #		return

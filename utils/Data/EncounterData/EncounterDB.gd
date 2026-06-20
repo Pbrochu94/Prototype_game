@@ -1,5 +1,6 @@
 extends Node
 
+var idCounter:int = 0
 
 const encounters = {
 	"combatLV0": {
@@ -35,6 +36,8 @@ const encounters = {
 
 func createEncounter(type:Enum.EncounterType):
 	var encounter = pickRandomEncounter(type)
+	encounter.id = generateEncounterID() 
+	encounter.sceneInstance = encounter.baseScene.instantiate()
 	return encounter
 
 
@@ -44,6 +47,9 @@ func pickRandomEncounter(type:Enum.EncounterType):
 		if encounters[encounterName].type == type:
 			validEncounters.append(encounters[encounterName])
 	return validEncounters.pick_random().data.duplicate(true)
+func generateEncounterID() -> int:
+	idCounter += 1
+	return idCounter
 #func getEncountersDependingOnType(type:Enum.EncounterType):
 #	var validEncounters:Array
 #	for encounterName in encounters:

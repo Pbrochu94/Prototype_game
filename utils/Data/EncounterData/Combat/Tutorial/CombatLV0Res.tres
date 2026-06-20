@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CombatEncounterLV0Data" load_steps=3 format=3 uid="uid://bh6raoxy6q1l7"]
+[gd_resource type="Resource" script_class="CombatEncounterLV0Data" load_steps=4 format=3 uid="uid://bh6raoxy6q1l7"]
 
+[ext_resource type="PackedScene" uid="uid://cxonaee0pw4bh" path="res://MapNodes/Combat/CombatEncounterScene.tscn" id="1_j7eus"]
 [ext_resource type="PackedScene" uid="uid://bixpo6djda1o5" path="res://Overworld/Nodes/Combat/CombatNormal.tscn" id="1_khpw1"]
 [ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/Tutorial/CombatEncounterLV0Data.gd" id="1_p8e2t"]
 
@@ -11,5 +12,7 @@ lightShardReward = 3
 xpReward = 1
 itemReward = 0
 rareItemChance = 0.0
+baseScene = ExtResource("1_j7eus")
 encounterType = 0
 overworldNodeScene = ExtResource("1_khpw1")
+id = 0

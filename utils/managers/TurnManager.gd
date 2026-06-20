@@ -185,7 +185,7 @@ func endFight():
 		openEndingScreen()
 	else:
 		print("GAME OVER")
-		RunManager.nodes[RunManager.currentNode]["completed"] = false
+#		RunManager.nodes[RunManager.currentNodeId]["completed"] = false
 		RunManager.gameOver()
 func openEndingScreen():
 	currentCombatScene.endingScreen.open()
