@@ -1,7 +1,7 @@
 extends Node
 #NODES & TRACKING
 var currentNodeId:int
-var currentEncounterData:EncounterData = preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres").duplicate(true)
+var currentEncounterData:EncounterData 
 var currentParty:Array[UnitInstance] 
 var currentLightShards:int
 var currentXp:int

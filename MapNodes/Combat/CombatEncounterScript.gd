@@ -39,7 +39,7 @@ var encounterData:EncounterData
 func _ready():
 	pickRandomBackground()
 	initSummoner() 
-#	encounterData = RunManager.currentEncounterData
+	encounterData = RunManager.currentEncounterData
 	RunManager.summoner.sceneInstance.introAnimCompleted.connect(playerPartyManager.placeUnit)
 	enemyPartyManager.init()
 	playerPartyManager.init()

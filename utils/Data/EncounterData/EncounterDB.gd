@@ -36,8 +36,7 @@ const encounters = {
 
 func createEncounter(type:Enum.EncounterType):
 	var encounter = pickRandomEncounter(type)
-	encounter.id = generateEncounterID() 
-	encounter.sceneInstance = encounter.baseScene.instantiate()
+	initEncounterData(encounter)
 	return encounter
 
 
@@ -47,16 +46,10 @@ func pickRandomEncounter(type:Enum.EncounterType):
 		if encounters[encounterName].type == type:
 			validEncounters.append(encounters[encounterName])
 	return validEncounters.pick_random().data.duplicate(true)
+func initEncounterData(encounter:EncounterData):
+	encounter.id = generateEncounterID() 
 func generateEncounterID() -> int:
 	idCounter += 1
 	return idCounter
-#func getEncountersDependingOnType(type:Enum.EncounterType):
-#	var validEncounters:Array
-#	for encounterName in encounters:
-#		return encounters[encounterName].type == type
-#	print(validEncounters)
 
-#func getRandomCombatEncounter(level:int):
-#	var validPicks:Array
-#
-#	combat.values().pick_random()
+

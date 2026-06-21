@@ -22,34 +22,16 @@ func _ready():
 	for i in nodeScenes.size():
 		nodeScenes[i].unlocked = true
 
-
-#func combatNode1Clicked():
-#	enterNode(0)
-#
-#
-#func combatNode2Clicked():
-#	enterNode(1)
-#
-#
-#func spellNode1Clicked():
-#	enterNode(2)
-#
-#func combatNode3Clicked():
-#	enterNode(3)
-#
-#func combatNode4Clicked():
-#	enterNode(4)
-#
-#func healNode1Clicked():
-#	enterNode(5)
-#
-#func combatNode5Clicked():
-#	enterNode(6)
-
 func generateWorldNodes(amount:int):
+	var previousEncounter
 	for encounter in encounters:
 		var encounterNode = encounter.overworldNodeScene.instantiate()
+		if previousEncounter:
+			encounterNode.previousNodes.append(previousEncounter)
+			previousEncounter.nextNodes.append(encounterNode)
+		encounterNode.encounterData = encounter
 		nodeScenes.append(encounterNode)
+		previousEncounter = encounterNode
 	placeWorldNodes()
 
 func placeWorldNodes():
@@ -58,41 +40,11 @@ func placeWorldNodes():
 		add_child(scene)
 		scene.global_position = nodeAnchors[anchorCounter].global_position
 		anchorCounter += 1
-func enterNode(nodeId:int):
-	var matchingIdEncounter:EncounterData
-	for encounter in encounters:
-		print(encounter.id)
-		print(nodeId)
-		if encounter.id == nodeId:
-			matchingIdEncounter = encounter
-	if matchingIdEncounter:
-		RunManager.createSummonerInstance()
-		RunManager.currentNodeId = nodeId
-		RunManager.currentEncounterData = matchingIdEncounter
-		print(RunManager.currentEncounterData)
-		get_tree().change_scene_to_file(matchingIdEncounter.sceneInstance)
-	else:
-		print("No matching id found in encounters generated")
-		return
-#	if RunManager.nodes[nodeId]["completed"]:
-#		print("Level completed !")
-#		return
-#	RunManager.createSummonerInstance()
-#	RunManager.currentNode = nodeId
-#	RunManager.currentEncounterData = RunManager.nodes[nodeId]["encounter data"]
-#	match  RunManager.nodes[nodeId]["type"]:
-#		Enum.EncounterType.COMBAT:
-#			get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-#			print("ENTERING COMBAT SCENE Id:", nodeId)
-#		Enum.EncounterType.SPELL:
-#			print("ENTERING SPELL SCENE Id:", nodeId)
-#			get_tree().change_scene_to_file("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/SpellEncounterScene.tscn")
-#		Enum.EncounterType.BOSS:
-#			print("ENTERING BOSS SCENE Id:", nodeId)
-#			get_tree().change_scene_to_file("res://MapNodes/Combat/CombatEncounterScene.tscn")
-#		Enum.EncounterType.HEAL:
-#			print("ENTERING HEAL SCENE Id:", nodeId)
-#			get_tree().change_scene_to_file("res://utils/Data/EncounterData/HealEncounter/HealEncounterCaveScene.tscn")
+func enterNode(encounterData:EncounterData):
+	RunManager.createSummonerInstance()
+	RunManager.currentNodeId = encounterData.id
+	RunManager.currentEncounterData = encounterData
+	get_tree().change_scene_to_packed(encounterData.baseScene)
 
 
 
