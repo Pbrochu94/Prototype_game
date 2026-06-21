@@ -17,20 +17,27 @@ func _ready():
 
 
 func onHover():
-	if encounterData.unlocked:
+	if encounterData.unlocked and not encounterData.completed:
 		anim.modulate = Color(1.5, 1.5, 1.5)
-		print(getNodeDetail())
+	elif encounterData.completed:
+		print("Encounter completed")
+	print(getNodeDetail())
 
 
 func onMouseExit():
 	if encounterData.unlocked:
 		anim.modulate = Color(1, 1, 1)
 		anim.scale = Vector2(1, 1)
+	elif encounterData.completed:
+		print("Encounter completed")
+		print(getNodeDetail())
 
 
 
 func onClick(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and encounterData.unlocked:
+		overworld.enterNode(encounterData)
+	elif event is InputEventMouseButton and event.pressed and encounterData.completed:
 		overworld.enterNode(encounterData)
 
 func getNodeDetail() -> Dictionary:
