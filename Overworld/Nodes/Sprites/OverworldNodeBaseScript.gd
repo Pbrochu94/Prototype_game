@@ -4,7 +4,6 @@ class_name OverworldNode
 @onready var overworld = get_tree().get_first_node_in_group("overworld")
 
 var encounterData:EncounterData
-var unlocked:bool = false
 var completed:bool = false
 var id:int 
 var previousNodes:Array
@@ -13,7 +12,7 @@ var encounterType:Enum.EncounterType
 
 
 func onHover():
-	if unlocked:
+	if encounterData.unlocked:
 		anim.modulate = Color(1.5, 1.5, 1.5)
 		print(getNodeDetail())
 
@@ -21,20 +20,27 @@ func onHover():
 
 
 func onMouseExit():
-	if unlocked:
+	if encounterData.unlocked:
 		anim.modulate = Color(1, 1, 1)
 		anim.scale = Vector2(1, 1)
 
 
 
 func onClick(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed and unlocked:
+	if event is InputEventMouseButton and event.pressed and encounterData.unlocked:
 		overworld.enterNode(encounterData)
 
 func getNodeDetail() -> Dictionary:
-	return {
-		"Encounter Type": encounterType,
-		"Id": id,
-		"Previous nodes": previousNodes,
-		"Next nodes": nextNodes
+	var previousEncounterIds:Array
+	var nextEncounterIds:Array
+	for encounter in encounterData.previousEncounters:
+		previousEncounterIds.append(encounter.id)
+	for encounter in encounterData.nextEncounters:
+		nextEncounterIds.append(encounter.id)
+	var dict = {
+		"Encounter Type": encounterData.encounterType,
+		"Id": encounterData.id,
+		"Previous encounters": previousEncounterIds,
+		"Next encounters": nextEncounterIds
 	}
+	return dict

@@ -1,7 +1,7 @@
 extends Node2D
 class_name IntroMap
 
-var encounters:Array[EncounterData]
+
 var nodeScenes:Array
 @onready var nodeAnchors=[
 	$Anchors/Node,
@@ -16,22 +16,14 @@ var nodeScenes:Array
 
 func _ready():
 	print(RunManager.getPlayerInfo())
-	for i in range(7):
-		encounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
-	generateWorldNodes(encounters.size())
-	for i in nodeScenes.size():
-		nodeScenes[i].unlocked = true
+	generateEncounterNodes(RunManager.worldEncounters.size())
 
-func generateWorldNodes(amount:int):
-	var previousEncounter
-	for encounter in encounters:
+
+func generateEncounterNodes(amount:int):
+	for encounter in RunManager.worldEncounters:
 		var encounterNode = encounter.overworldNodeScene.instantiate()
-		if previousEncounter:
-			encounterNode.previousNodes.append(previousEncounter)
-			previousEncounter.nextNodes.append(encounterNode)
 		encounterNode.encounterData = encounter
 		nodeScenes.append(encounterNode)
-		previousEncounter = encounterNode
 	placeWorldNodes()
 
 func placeWorldNodes():
