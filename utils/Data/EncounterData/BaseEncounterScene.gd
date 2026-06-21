@@ -42,4 +42,4 @@ func summonerIntroCompleted():
 
 func changeScene():
 	RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
-	RunManager.unlockNextNode()
+#	RunManager.unlockNextNode()

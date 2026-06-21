@@ -199,10 +199,9 @@ var currentWorldEncounters:Array[EncounterData]
 #	}
 #]
 func unlockNextNode():
-	print(currentEncounterData)
-	print(currentEncounterData.nextEncounters)
 	for encounter in currentEncounterData.nextEncounters:
 		encounter.unlocked = true
+		currentEncounterData.completed = true
 	get_tree().change_scene_to_file("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn")
 func changeScene(scenePath:String):
 	get_tree().change_scene_to_file(scenePath)

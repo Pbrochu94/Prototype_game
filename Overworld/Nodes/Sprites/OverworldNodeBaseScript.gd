@@ -4,19 +4,22 @@ class_name OverworldNode
 @onready var overworld = get_tree().get_first_node_in_group("overworld")
 
 var encounterData:EncounterData
-var completed:bool = false
 var id:int 
 var previousNodes:Array
 var nextNodes:Array
 var encounterType:Enum.EncounterType
+
+func _ready():
+	if encounterData.completed == true:
+		anim.play("completed")
+	else:
+		anim.play("active")
 
 
 func onHover():
 	if encounterData.unlocked:
 		anim.modulate = Color(1.5, 1.5, 1.5)
 		print(getNodeDetail())
-
-
 
 
 func onMouseExit():
@@ -41,6 +44,8 @@ func getNodeDetail() -> Dictionary:
 		"Encounter Type": encounterData.encounterType,
 		"Id": encounterData.id,
 		"Previous encounters": previousEncounterIds,
-		"Next encounters": nextEncounterIds
+		"Next encounters": nextEncounterIds,
+		"Completed": encounterData.completed,
+		"Unlocked": encounterData.unlocked
 	}
 	return dict
