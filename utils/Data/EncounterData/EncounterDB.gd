@@ -30,7 +30,7 @@ const encounters = {
 		"type":Enum.EncounterType.MINI_BOSS,
 		"level":null,
 		"data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres"), 
-		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
+#		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
 		},
 	"spellEncounterBase": {
 		"type":Enum.EncounterType.SPELL,

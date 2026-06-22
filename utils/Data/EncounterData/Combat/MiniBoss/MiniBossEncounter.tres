@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="MiniBossEncounter" load_steps=3 format=3 uid="uid://docvmwudcumqr"]
+[gd_resource type="Resource" script_class="MiniBossEncounter" load_steps=4 format=3 uid="uid://docvmwudcumqr"]
 
 [ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.gd" id="1_g8ap0"]
 [ext_resource type="PackedScene" uid="uid://cxonaee0pw4bh" path="res://MapNodes/Combat/CombatEncounterScene.tscn" id="1_n770p"]
+[ext_resource type="PackedScene" uid="uid://bpj5i86wtoxnq" path="res://Overworld/Nodes/Combat/CombatMiniBossNode.tscn" id="2_nkflg"]
 
 [resource]
 script = ExtResource("1_g8ap0")
@@ -13,6 +14,7 @@ itemReward = 0
 rareItemChance = 0.0
 baseScene = ExtResource("1_n770p")
 encounterType = 2
+overworldNodeScene = ExtResource("2_nkflg")
 id = 0
 nextEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
 previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])

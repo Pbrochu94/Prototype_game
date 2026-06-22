@@ -39,6 +39,8 @@ func initIntroMap():
 	for i in range(7):
 		if i == 3:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL))
+		elif i == 6:
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.MINI_BOSS))
 		else:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
 	worldEncounters[0].unlocked = true

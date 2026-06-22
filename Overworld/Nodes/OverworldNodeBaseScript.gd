@@ -56,3 +56,4 @@ func getNodeDetail() -> Dictionary:
 		"Unlocked": encounterData.unlocked
 	}
 	return dict
+
