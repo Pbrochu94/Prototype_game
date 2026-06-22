@@ -41,5 +41,5 @@ func summonerIntroCompleted():
 	print("intro done")
 
 func changeScene():
-	RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
-#	RunManager.unlockNextNode()
+	RunManager.changeScene(RunManager.currentWorld.scene_file_path)
+	RunManager.unlockNextNode()

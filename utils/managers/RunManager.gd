@@ -9,7 +9,7 @@ var currentXp:int
 const startingLightShards:int = 0
 var summoner:SummonerDef
 var inventory:Dictionary
-var currentMapScene = preload("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn").instantiate()
+var currentWorld
 var worldEncounters:Array[EncounterData]
 #STATS
 var learnedSpells:Dictionary
@@ -35,6 +35,7 @@ func initNewPlayer():
 	createSummonerInstance()
 	initIntroMap()
 func initIntroMap():
+	currentWorld = WorldsDB.worlds.intro.instantiate()
 	for i in range(7):
 		if i == 3:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL))
@@ -57,7 +58,6 @@ func linkEncounters():
 	node3.nextEncounters.append_array([node4,node5])
 	node4.previousEncounters.append(node3)
 	node4.nextEncounters.append(node6)
-	node4.unlocked = true
 	node5.previousEncounters.append(node3)
 	node5.nextEncounters.append(node6)
 	node6.previousEncounters.append_array([node4,node5])
@@ -145,74 +145,6 @@ func addNewSpell(spellTag:String):
 	print("Spell inventory: ",RunManager.learnedSpells)
 #NODE PROGRESSION ----------------------------------------------------------------------------------
 var currentWorldEncounters:Array[EncounterData]
-#func populateNodesWithOverworldEncounters(mapEncounters:Array[EncounterData]):
-#	for encounter in mapEncounters:
-#		currentWorldEncounters.append(encounter)
-#var nodes = [
-#	{
-#		"id": 0,
-#		"next":[1],
-#		"same level nodes":[],
-#		"type": Enum.EncounterType.COMBAT,
-#		"completed": false,
-#		"unlocked": true,
-#		"encounter data": preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres")
-#	},
-#	{
-#		"id": 1,
-#		"next":[2,3],
-#		"same level nodes":[],
-#		"type": Enum.EncounterType.COMBAT,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres")
-#	},
-#	{
-#		"id": 2,
-#		"next":[4],
-#		"same level nodes":[3],
-#		"type": Enum.EncounterType.SPELL,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres")
-#	},
-#	{
-#		"id": 3,
-#		"next":[4],
-#		"same level nodes":[2],
-#		"type": Enum.EncounterType.COMBAT,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
-#	},
-#	{
-#		"id": 4,
-#		"next":[5],
-#		"same level nodes":[],
-#		"type": Enum.EncounterType.COMBAT,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres")
-#	},
-#	{
-#		"id": 5,
-#		"next":[6],
-#		"same level nodes":[],
-#		"type": Enum.EncounterType.HEAL,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/HealEncounter/HealEncounterRes.gd")
-#	},
-#	{
-#		"id": 6,
-#		"next":[],
-#		"same level nodes":[],
-#		"type": Enum.EncounterType.BOSS,
-#		"completed": false,
-#		"unlocked": false,
-#		"encounter data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres")
-#	}
-#]
 func unlockNextNode():
 	for encounter in currentEncounterData.nextEncounters:
 		encounter.unlocked = true
@@ -220,4 +152,6 @@ func unlockNextNode():
 	previousEncounter = currentEncounterData
 	get_tree().change_scene_to_file("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn")
 func changeScene(scenePath:String):
-	get_tree().change_scene_to_file(scenePath)
+	var path = str(currentWorld.scene_file_path)
+	print(path)
+	get_tree().change_scene_to_file(path)

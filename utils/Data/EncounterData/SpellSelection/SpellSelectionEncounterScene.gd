@@ -43,5 +43,6 @@ func endScene():
 	print("ending scene")
 	summoner.setState("walkout")
 
-func changingScene():
-	RunManager.changeScene(RunManager.currentMapScene.scene_file_path)
+#func changingScene():
+#	RunManager.unlockNextNode()
+#	RunManager.changeScene(RunManager.currentWorld.scene_file_path)
