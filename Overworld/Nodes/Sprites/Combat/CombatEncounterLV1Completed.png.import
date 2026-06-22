@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2voybtekfcxc"
-path="res://.godot/imported/CombatEncounterLV1Completed.png-61d86b61a3e64a6d054a45274e8abc36.ctex"
+uid="uid://cjxgi15jv3wyd"
+path="res://.godot/imported/CombatEncounterLV1Completed.png-1ff90211e458684234cd7ec13ce6a2b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Overworld/Nodes/Sprites/CombatEncounterLV1Completed.png"
-dest_files=["res://.godot/imported/CombatEncounterLV1Completed.png-61d86b61a3e64a6d054a45274e8abc36.ctex"]
+source_file="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1Completed.png"
+dest_files=["res://.godot/imported/CombatEncounterLV1Completed.png-1ff90211e458684234cd7ec13ce6a2b4.ctex"]
 
 [params]
 

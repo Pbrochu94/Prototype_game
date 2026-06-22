@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://7kkxx8n0waks"]
+
+[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_b1ip5"]
+[ext_resource type="Texture2D" uid="uid://xv0sb85yd7c" path="res://Overworld/Nodes/Sprites/SpellEncounter/SpellEncounterBase.png" id="2_fi2ja"]
+[ext_resource type="Script" path="res://Overworld/Nodes/OverworldNodeBaseScript.gd" id="2_ih44p"]
+[ext_resource type="Texture2D" uid="uid://b0y36o38oyvu2" path="res://Overworld/Nodes/Sprites/SpellEncounter/SpellEncounterBaseCompleted.png" id="3_3x124"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqg7i"]
+atlas = ExtResource("2_fi2ja")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snskm"]
+atlas = ExtResource("3_3x124")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aqnbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqg7i")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snskm")
+}],
+"loop": true,
+"name": &"completed",
+"speed": 5.0
+}]
+
+[node name="Node" instance=ExtResource("1_b1ip5")]
+script = ExtResource("2_ih44p")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_aqnbn")
+animation = &"completed"
+
+[connection signal="input_event" from="Area2D" to="." method="onClick"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExit"]

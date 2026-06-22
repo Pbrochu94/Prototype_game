@@ -36,7 +36,7 @@ const encounters = {
 		"type":Enum.EncounterType.SPELL,
 		"level":null,
 		"data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres"), 
-		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
+		"node": preload("res://Overworld/Nodes/SpellEncounter/BaseSpellEncounterNode.tscn")
 		},
 }
 

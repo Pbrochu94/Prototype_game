@@ -1,27 +1,27 @@
 [gd_scene load_steps=8 format=3 uid="uid://bixpo6djda1o5"]
 
 [ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_3hs24"]
-[ext_resource type="Texture2D" uid="uid://byr1sc0moicvj" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1.png" id="2_wyluj"]
-[ext_resource type="Texture2D" uid="uid://b2voybtekfcxc" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1Completed.png" id="4_bab56"]
+[ext_resource type="Texture2D" uid="uid://cc4boup0hw6uv" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1.png" id="2_fqyyi"]
+[ext_resource type="Texture2D" uid="uid://cjxgi15jv3wyd" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1Completed.png" id="3_cq3ym"]
 
 [sub_resource type="GDScript" id="GDScript_3peaf"]
 script/source = "extends OverworldNode
 
 "
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lh4lx"]
-atlas = ExtResource("2_wyluj")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv0ah"]
+atlas = ExtResource("2_fqyyi")
 region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b6e08"]
-atlas = ExtResource("4_bab56")
+[sub_resource type="AtlasTexture" id="AtlasTexture_a83uy"]
+atlas = ExtResource("3_cq3ym")
 region = Rect2(0, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nw17s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lh4lx")
+"texture": SubResource("AtlasTexture_vv0ah")
 }],
 "loop": true,
 "name": &"active",
@@ -29,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b6e08")
+"texture": SubResource("AtlasTexture_a83uy")
 }],
 "loop": true,
 "name": &"completed",
@@ -41,7 +41,7 @@ script = SubResource("GDScript_3peaf")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_nw17s")
-animation = &"active"
+animation = &"completed"
 
 [connection signal="input_event" from="Area2D" to="." method="onClick"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onHover"]

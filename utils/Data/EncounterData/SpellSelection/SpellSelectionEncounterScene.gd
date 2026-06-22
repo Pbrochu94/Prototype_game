@@ -44,4 +44,4 @@ func endScene():
 	summoner.setState("walkout")
 
 func changingScene():
-	RunManager.changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
+	RunManager.changeScene(RunManager.currentMapScene.scene_file_path)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byr1sc0moicvj"
-path="res://.godot/imported/CombatEncounterLV1.png-c26b0cb78d4bf2dfa64e901cbf2ddd45.ctex"
+uid="uid://b0y36o38oyvu2"
+path="res://.godot/imported/SpellEncounterBaseCompleted.png-df08ebbf9f1c8496e747e8157740e91f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Overworld/Nodes/Sprites/CombatEncounterLV1.png"
-dest_files=["res://.godot/imported/CombatEncounterLV1.png-c26b0cb78d4bf2dfa64e901cbf2ddd45.ctex"]
+source_file="res://Overworld/Nodes/Sprites/SpellEncounter/SpellEncounterBaseCompleted.png"
+dest_files=["res://.godot/imported/SpellEncounterBaseCompleted.png-df08ebbf9f1c8496e747e8157740e91f.ctex"]
 
 [params]
 
