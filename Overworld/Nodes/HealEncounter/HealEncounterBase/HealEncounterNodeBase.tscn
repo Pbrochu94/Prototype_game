@@ -1,11 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://boc2jggybkqsn"]
+[gd_scene load_steps=8 format=3 uid="uid://boc2jggybkqsn"]
 
 [ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_svxuw"]
 [ext_resource type="Script" path="res://Overworld/Nodes/OverworldNodeBaseScript.gd" id="2_2ath1"]
 [ext_resource type="Texture2D" uid="uid://dg52c7f8smhw6" path="res://Overworld/Nodes/Sprites/HealEncounter/HealEncounterBase.png" id="3_bk16o"]
+[ext_resource type="Texture2D" uid="uid://cn018r6xo007b" path="res://Overworld/Nodes/Sprites/HealEncounter/HealEncounterBaseCompleted.png" id="4_ywg85"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12orq"]
 atlas = ExtResource("3_bk16o")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upcym"]
+atlas = ExtResource("4_ywg85")
 region = Rect2(0, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yh4i8"]
@@ -18,7 +23,10 @@ animations = [{
 "name": &"active",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upcym")
+}],
 "loop": true,
 "name": &"completed",
 "speed": 5.0
