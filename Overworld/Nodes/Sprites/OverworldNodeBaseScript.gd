@@ -35,9 +35,9 @@ func onMouseExit():
 
 
 func onClick(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed and encounterData.unlocked:
-		overworld.enterNode(encounterData)
-	elif event is InputEventMouseButton and event.pressed and encounterData.completed:
+	if event is InputEventMouseButton and event.pressed and encounterData.completed:
+		print("Already completed !")
+	elif event is InputEventMouseButton and event.pressed and encounterData.unlocked:
 		overworld.enterNode(encounterData)
 
 func getNodeDetail() -> Dictionary:

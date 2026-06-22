@@ -36,8 +36,13 @@ func enterNode(encounterData:EncounterData):
 	RunManager.createSummonerInstance()
 	RunManager.currentNodeId = encounterData.id
 	RunManager.currentEncounterData = encounterData
+	if RunManager.previousEncounter:
+		closeUnchosenNodes(RunManager.previousEncounter)
 	get_tree().change_scene_to_packed(encounterData.baseScene)
 
-
+func closeUnchosenNodes(previousEncounter:EncounterData):
+	print(previousEncounter.nextEncounters)
+	for unchosenNode in previousEncounter.nextEncounters:
+		unchosenNode.completed = true
 
 

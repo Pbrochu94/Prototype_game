@@ -2,6 +2,7 @@ extends Node
 #NODES & TRACKING
 var currentNodeId:int
 var currentEncounterData:EncounterData 
+var previousEncounter:EncounterData
 var currentParty:Array[UnitInstance] 
 var currentLightShards:int
 var currentXp:int
@@ -39,14 +40,24 @@ func initIntroMap():
 	worldEncounters[0].unlocked = true
 	linkEncounters()
 func linkEncounters():
-	var previousEncounter
-	for encounter in worldEncounters:
-#		var encounterNode = encounter.overworldNodeScene.instantiate()
-#		encounterNode.encounterData = encounter
-		if previousEncounter:
-			encounter.previousEncounters.append(previousEncounter)
-			previousEncounter.nextEncounters.append(encounter)
-		previousEncounter = encounter
+	var node1 = worldEncounters[0]
+	var node2 = worldEncounters[1]
+	var node3 = worldEncounters[2]
+	var node4 = worldEncounters[3]
+	var node5 = worldEncounters[4]
+	var node6 = worldEncounters[5]
+	var node7 = worldEncounters[6]
+	node1.nextEncounters.append(node2)
+	node2.previousEncounters.append(node1)
+	node2.nextEncounters.append(node3)
+	node3.previousEncounters.append(node2)
+	node3.nextEncounters.append_array([node4,node5])
+	node4.previousEncounters.append(node3)
+	node4.nextEncounters.append(node6)
+	node5.previousEncounters.append(node3)
+	node5.nextEncounters.append(node6)
+	node6.previousEncounters.append_array([node4,node5])
+	node6.nextEncounters.append(node7)
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 #INVENTORY MANAGEMENT ------------------------------------------------------------------------------
@@ -202,6 +213,7 @@ func unlockNextNode():
 	for encounter in currentEncounterData.nextEncounters:
 		encounter.unlocked = true
 		currentEncounterData.completed = true
+	previousEncounter = currentEncounterData
 	get_tree().change_scene_to_file("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn")
 func changeScene(scenePath:String):
 	get_tree().change_scene_to_file(scenePath)
