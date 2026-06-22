@@ -16,3 +16,7 @@ baseScene = ExtResource("1_c74he")
 encounterType = 0
 overworldNodeScene = ExtResource("1_jxw0g")
 id = 0
+nextEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+completed = false
+unlocked = false

@@ -3,7 +3,7 @@ class_name SpellSelectionEncounterRes
 
 @export var nmbOfChoices:int 
 @export var spellOffered:Array[SummonerSpell]
-@export var scene:PackedScene
+@export var baseScene:PackedScene
 var sceneInstance
 #func _ready():
 ##	sceneInstance = scene.instantiate()

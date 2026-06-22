@@ -1,9 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://bixpo6djda1o5"]
 
-[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/Sprites/BaseCombatNode.tscn" id="1_3hs24"]
-[ext_resource type="Script" path="res://Overworld/Nodes/Sprites/OverworldNodeBaseScript.gd" id="2_vm5j8"]
+[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_3hs24"]
 [ext_resource type="Texture2D" uid="uid://byr1sc0moicvj" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1.png" id="2_wyluj"]
 [ext_resource type="Texture2D" uid="uid://b2voybtekfcxc" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1Completed.png" id="4_bab56"]
+
+[sub_resource type="GDScript" id="GDScript_3peaf"]
+script/source = "extends OverworldNode
+
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lh4lx"]
 atlas = ExtResource("2_wyluj")
@@ -33,7 +37,7 @@ animations = [{
 }]
 
 [node name="Node" instance=ExtResource("1_3hs24")]
-script = ExtResource("2_vm5j8")
+script = SubResource("GDScript_3peaf")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_nw17s")

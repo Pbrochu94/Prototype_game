@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://bixpo6djda1o5"]
+
+[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_3hs24"]
+[ext_resource type="Texture2D" uid="uid://byr1sc0moicvj" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1.png" id="2_wyluj"]
+[ext_resource type="Texture2D" uid="uid://b2voybtekfcxc" path="res://Overworld/Nodes/Sprites/CombatEncounterLV1Completed.png" id="4_bab56"]
+
+[sub_resource type="GDScript" id="GDScript_3peaf"]
+script/source = "extends Node
+
+@onready var anim = $AnimatedSprite2D
+@onready var overworld = get_tree().get_first_node_in_group(\"overworld\")
+
+var encounterData:EncounterData
+var id:int 
+var previousNodes:Array
+var nextNodes:Array
+var encounterType:Enum.EncounterType
+
+func _ready():
+	if encounterData.completed == true:
+		anim.play(\"completed\")
+	else:
+		anim.play(\"active\")
+
+
+func onHover():
+	if encounterData.unlocked and not encounterData.completed:
+		anim.modulate = Color(1.5, 1.5, 1.5)
+	elif encounterData.completed:
+		print(\"Encounter completed\")
+	print(getNodeDetail())
+
+
+func onMouseExit():
+	if encounterData.unlocked:
+		anim.modulate = Color(1, 1, 1)
+		anim.scale = Vector2(1, 1)
+	elif encounterData.completed:
+		print(\"Encounter completed\")
+		print(getNodeDetail())
+
+
+
+func onClick(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and encounterData.completed:
+		print(\"Already completed !\")
+	elif event is InputEventMouseButton and event.pressed and encounterData.unlocked:
+		overworld.enterNode(encounterData)
+
+func getNodeDetail() -> Dictionary:
+	var previousEncounterIds:Array
+	var nextEncounterIds:Array
+	for encounter in encounterData.previousEncounters:
+		previousEncounterIds.append(encounter.id)
+	for encounter in encounterData.nextEncounters:
+		nextEncounterIds.append(encounter.id)
+	var dict = {
+		\"Encounter Type\": encounterData.encounterType,
+		\"Id\": encounterData.id,
+		\"Previous encounters\": previousEncounterIds,
+		\"Next encounters\": nextEncounterIds,
+		\"Completed\": encounterData.completed,
+		\"Unlocked\": encounterData.unlocked
+	}
+	return dict
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh4lx"]
+atlas = ExtResource("2_wyluj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6e08"]
+atlas = ExtResource("4_bab56")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nw17s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh4lx")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6e08")
+}],
+"loop": true,
+"name": &"completed",
+"speed": 5.0
+}]
+
+[node name="Node" instance=ExtResource("1_3hs24")]
+script = SubResource("GDScript_3peaf")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_nw17s")
+animation = &"active"
+
+[connection signal="input_event" from="Area2D" to="." method="onClick"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExit"]

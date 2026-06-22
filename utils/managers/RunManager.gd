@@ -36,7 +36,10 @@ func initNewPlayer():
 	initIntroMap()
 func initIntroMap():
 	for i in range(7):
-		worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
+		if i == 3:
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL))
+		else:
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
 	worldEncounters[0].unlocked = true
 	linkEncounters()
 func linkEncounters():
@@ -54,6 +57,7 @@ func linkEncounters():
 	node3.nextEncounters.append_array([node4,node5])
 	node4.previousEncounters.append(node3)
 	node4.nextEncounters.append(node6)
+	node4.unlocked = true
 	node5.previousEncounters.append(node3)
 	node5.nextEncounters.append(node6)
 	node6.previousEncounters.append_array([node4,node5])

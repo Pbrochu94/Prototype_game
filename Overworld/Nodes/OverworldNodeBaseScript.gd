@@ -48,7 +48,7 @@ func getNodeDetail() -> Dictionary:
 	for encounter in encounterData.nextEncounters:
 		nextEncounterIds.append(encounter.id)
 	var dict = {
-		"Encounter Type": encounterData.encounterType,
+		"Encounter Type": Enum.EncounterType.keys()[encounterType],
 		"Id": encounterData.id,
 		"Previous encounters": previousEncounterIds,
 		"Next encounters": nextEncounterIds,

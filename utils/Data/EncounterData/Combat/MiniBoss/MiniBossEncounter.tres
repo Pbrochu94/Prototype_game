@@ -14,3 +14,7 @@ rareItemChance = 0.0
 baseScene = ExtResource("1_n770p")
 encounterType = 2
 id = 0
+nextEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+completed = false
+unlocked = false
