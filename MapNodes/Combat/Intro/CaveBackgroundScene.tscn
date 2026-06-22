@@ -10,13 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://pt3podfnqvrw" path="res://BackgroundSprite/Intro/CombatEncounter/Tunnels/8-ground(Modified).png" id="8_dsmw6"]
 
 [node name="IntroCombatEncounter" type="Node2D"]
+position = Vector2(-67.0144, -2.30388)
 
 [node name="Environement" type="ParallaxBackground" parent="."]
 scale = Vector2(1.895, 1.895)
 transform = Transform2D(1.895, 0, 0, 1.895, 0, 0)
 
 [node name="1-bk" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D" type="Node2D" parent="Environement/1-bk"]
@@ -27,7 +28,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("1_4no6y")
 
 [node name="2-superFar" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D2" type="Node2D" parent="Environement/2-superFar"]
@@ -38,7 +39,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("2_hwxdq")
 
 [node name="3-far" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D3" type="Node2D" parent="Environement/3-far"]
@@ -49,7 +50,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("3_5mv54")
 
 [node name="4-farLight" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D4" type="Node2D" parent="Environement/4-farLight"]
@@ -60,7 +61,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("4_eqkd4")
 
 [node name="5-close" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D5" type="Node2D" parent="Environement/5-close"]
@@ -71,7 +72,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("5_gsict")
 
 [node name="6-closeLight" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D6" type="Node2D" parent="Environement/6-closeLight"]
@@ -82,7 +83,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("6_7ji14")
 
 [node name="7-tileset" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D7" type="Node2D" parent="Environement/7-tileset"]
@@ -93,7 +94,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("7_0fy4c")
 
 [node name="8-ground" type="ParallaxLayer" parent="Environement"]
-position = Vector2(-106.061, -111.713)
+position = Vector2(-141.425, -112.929)
 scale = Vector2(1.02, 1.02)
 
 [node name="Node2D8" type="Node2D" parent="Environement/8-ground"]
