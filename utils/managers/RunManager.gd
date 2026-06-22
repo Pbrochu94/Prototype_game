@@ -39,6 +39,8 @@ func initIntroMap():
 	for i in range(7):
 		if i == 3:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL))
+		elif i == 5:
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.HEAL))
 		elif i == 6:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.MINI_BOSS))
 		else:
@@ -64,6 +66,10 @@ func linkEncounters():
 	node5.nextEncounters.append(node6)
 	node6.previousEncounters.append_array([node4,node5])
 	node6.nextEncounters.append(node7)
+#	node4.unlocked = true
+#	node5.unlocked = true
+#	node6.unlocked = true
+#	node7.unlocked = true
 func createSummonerInstance():
 	summoner.sceneInstance = summoner.scene.instantiate()
 #INVENTORY MANAGEMENT ------------------------------------------------------------------------------

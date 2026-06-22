@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://boc2jggybkqsn"]
+
+[ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_svxuw"]
+[ext_resource type="Script" path="res://Overworld/Nodes/OverworldNodeBaseScript.gd" id="2_2ath1"]
+[ext_resource type="Texture2D" uid="uid://dg52c7f8smhw6" path="res://Overworld/Nodes/Sprites/HealEncounter/HealEncounterBase.png" id="3_bk16o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12orq"]
+atlas = ExtResource("3_bk16o")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yh4i8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12orq")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"completed",
+"speed": 5.0
+}]
+
+[node name="Node" instance=ExtResource("1_svxuw")]
+script = ExtResource("2_2ath1")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_yh4i8")
+animation = &"completed"
+
+[connection signal="input_event" from="Area2D" to="." method="onClick"]
+[connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onMouseExit"]

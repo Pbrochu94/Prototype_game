@@ -18,7 +18,11 @@ func _ready():
 
 func onHover():
 	if encounterData.unlocked and not encounterData.completed:
-		anim.modulate = Color(1.5, 1.5, 1.5)
+		match encounterData.encounterType:
+			Enum.EncounterType.COMBAT,Enum.EncounterType.SPELL,Enum.EncounterType.ELITE,Enum.EncounterType.BOSS, Enum.EncounterType.MINI_BOSS:
+				anim.modulate = Color(1.5, 1.5, 1.5)
+			Enum.EncounterType.HEAL:
+				anim.modulate = Color(1.1, 1.1, 1.1)
 	elif encounterData.completed:
 		print("Encounter completed")
 	print(getNodeDetail())
@@ -48,7 +52,7 @@ func getNodeDetail() -> Dictionary:
 	for encounter in encounterData.nextEncounters:
 		nextEncounterIds.append(encounter.id)
 	var dict = {
-		"Encounter Type": Enum.EncounterType.keys()[encounterType],
+		"Encounter Type": Enum.EncounterType.keys()[encounterData.encounterType],
 		"Id": encounterData.id,
 		"Previous encounters": previousEncounterIds,
 		"Next encounters": nextEncounterIds,
@@ -56,4 +60,5 @@ func getNodeDetail() -> Dictionary:
 		"Unlocked": encounterData.unlocked
 	}
 	return dict
+
 

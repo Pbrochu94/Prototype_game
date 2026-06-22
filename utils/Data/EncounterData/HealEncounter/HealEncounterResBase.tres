@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HealEncounterRes" load_steps=4 format=3 uid="uid://6ge23704hf2v"]
+
+[ext_resource type="Script" path="res://utils/Data/EncounterData/HealEncounter/HealEncounterRes.gd" id="1_22r17"]
+[ext_resource type="PackedScene" uid="uid://boc2jggybkqsn" path="res://Overworld/Nodes/HealEncounter/HealEncounterBase/HealEncounterNodeBase.tscn" id="1_ss51s"]
+[ext_resource type="PackedScene" uid="uid://235ahsir718s" path="res://utils/Data/EncounterData/HealEncounter/HealEncounterCaveScene.tscn" id="2_7mc0c"]
+
+[resource]
+script = ExtResource("1_22r17")
+encounterType = 6
+overworldNodeScene = ExtResource("1_ss51s")
+id = 0
+nextEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+completed = false
+unlocked = false
+baseScene = ExtResource("2_7mc0c")

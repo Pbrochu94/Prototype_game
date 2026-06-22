@@ -38,6 +38,12 @@ const encounters = {
 		"data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres"), 
 		"node": preload("res://Overworld/Nodes/SpellEncounter/BaseSpellEncounterNode.tscn")
 		},
+	"healEncounterBase": {
+		"type":Enum.EncounterType.HEAL,
+		"level":null,
+		"data": preload("res://utils/Data/EncounterData/HealEncounter/HealEncounterResBase.tres"), 
+		"node": preload("res://Overworld/Nodes/SpellEncounter/BaseSpellEncounterNode.tscn")
+		},
 }
 
 func createEncounter(type:Enum.EncounterType):
@@ -56,6 +62,7 @@ func pickRandomEncounter(type:Enum.EncounterType):
 	return validEncounters.pick_random().data.duplicate(true)
 func initEncounterData(encounter:EncounterData):
 	encounter.id = generateEncounterID() 
+	encounter.encounterData = encounter
 func generateEncounterID() -> int:
 	idCounter += 1
 	return idCounter
