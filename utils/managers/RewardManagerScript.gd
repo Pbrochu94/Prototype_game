@@ -3,7 +3,7 @@ extends Node
 
 var rewardBank = [
 	{"type": Enum.RewardType.LIGHT_SHARD, "chance": 50},
-	{"type": Enum.RewardType.ITEM, "chance": 5000},
+	{"type": Enum.RewardType.ITEM, "chance": 5},
 #	{"type": Enum.RewardType.SPELL, "chance": 15},
 #	{"type": Enum.RewardType.SUMMON, "chance": 10}
 ]
@@ -42,9 +42,10 @@ func randomlySelectConsumable():
 	for itemName in ItemDB.consumables:
 		currentWeight += ItemDB.consumables[itemName].chance
 		if roll <= currentWeight:
+			print("You got a ",ItemDB.consumables[itemName].res.itemName)
 			return ItemDB.consumables[itemName].res
 func generateLightAmount():
-	var lightShardsGained = currentScene.combatEncounterData.lightShardReward
+	var lightShardsGained = currentScene.encounterData.lightShardReward
 	RunManager.currentLightShards += lightShardsGained
 	print("You gain: ", lightShardsGained, " light shards")
 func close():

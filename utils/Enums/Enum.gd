@@ -74,3 +74,6 @@ enum RewardType{
 	SUMMON,
 	SPELL
 }
+enum CurrencyType{
+	LIGHT_SHARD
+}

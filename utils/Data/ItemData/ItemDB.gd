@@ -8,5 +8,11 @@ const consumables : Dictionary = {
 	}
 }
 
+const currency:Dictionary = {
+	Enum.CurrencyType.LIGHT_SHARD : {
+		
+	}
+}
+
 func createItemInstance():
 	pass
