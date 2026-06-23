@@ -31,7 +31,7 @@ func onHover():
 func onMouseExit():
 	if encounterData.unlocked:
 		anim.modulate = Color(1, 1, 1)
-		anim.scale = Vector2(1, 1)
+#		anim.scale = Vector2(0.5, 0.5)
 	elif encounterData.completed:
 		print("Encounter completed")
 		print(getNodeDetail())

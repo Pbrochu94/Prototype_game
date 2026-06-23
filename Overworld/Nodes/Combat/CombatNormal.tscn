@@ -1,27 +1,27 @@
 [gd_scene load_steps=8 format=3 uid="uid://bixpo6djda1o5"]
 
 [ext_resource type="PackedScene" uid="uid://b8m1h48hvygbq" path="res://Overworld/Nodes/BaseNode.tscn" id="1_3hs24"]
-[ext_resource type="Texture2D" uid="uid://cc4boup0hw6uv" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1.png" id="2_fqyyi"]
-[ext_resource type="Texture2D" uid="uid://cjxgi15jv3wyd" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1Completed.png" id="3_cq3ym"]
+[ext_resource type="Texture2D" uid="uid://cotkh4calvidd" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1.png" id="2_fqyyi"]
+[ext_resource type="Texture2D" uid="uid://c5ejia7jabqg6" path="res://Overworld/Nodes/Sprites/Combat/CombatEncounterLV1Completed.png" id="3_cq3ym"]
 
 [sub_resource type="GDScript" id="GDScript_3peaf"]
 script/source = "extends OverworldNode
 
 "
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vv0ah"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_78ir0"]
 atlas = ExtResource("2_fqyyi")
-region = Rect2(0, 0, 100, 100)
+region = Rect2(0, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a83uy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsx1g"]
 atlas = ExtResource("3_cq3ym")
-region = Rect2(0, 0, 100, 100)
+region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nw17s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vv0ah")
+"texture": SubResource("AtlasTexture_78ir0")
 }],
 "loop": true,
 "name": &"active",
@@ -29,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a83uy")
+"texture": SubResource("AtlasTexture_nsx1g")
 }],
 "loop": true,
 "name": &"completed",
@@ -40,6 +40,7 @@ animations = [{
 script = SubResource("GDScript_3peaf")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_nw17s")
 animation = &"completed"
 

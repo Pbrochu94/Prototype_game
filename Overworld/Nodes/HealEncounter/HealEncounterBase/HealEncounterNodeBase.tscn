@@ -5,19 +5,19 @@
 [ext_resource type="Texture2D" uid="uid://dg52c7f8smhw6" path="res://Overworld/Nodes/Sprites/HealEncounter/HealEncounterBase.png" id="3_bk16o"]
 [ext_resource type="Texture2D" uid="uid://cn018r6xo007b" path="res://Overworld/Nodes/Sprites/HealEncounter/HealEncounterBaseCompleted.png" id="4_ywg85"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_12orq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsd8e"]
 atlas = ExtResource("3_bk16o")
-region = Rect2(0, 0, 100, 100)
+region = Rect2(0, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_upcym"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwqy2"]
 atlas = ExtResource("4_ywg85")
-region = Rect2(0, 0, 100, 100)
+region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yh4i8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_12orq")
+"texture": SubResource("AtlasTexture_wsd8e")
 }],
 "loop": true,
 "name": &"active",
@@ -25,7 +25,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_upcym")
+"texture": SubResource("AtlasTexture_bwqy2")
 }],
 "loop": true,
 "name": &"completed",
@@ -36,8 +36,9 @@ animations = [{
 script = ExtResource("2_2ath1")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yh4i8")
-animation = &"completed"
+animation = &"active"
 
 [connection signal="input_event" from="Area2D" to="." method="onClick"]
 [connection signal="mouse_entered" from="Area2D" to="." method="onHover"]
