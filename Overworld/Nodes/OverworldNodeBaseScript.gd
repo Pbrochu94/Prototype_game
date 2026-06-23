@@ -22,7 +22,7 @@ func onHover():
 			Enum.EncounterType.COMBAT,Enum.EncounterType.SPELL,Enum.EncounterType.ELITE,Enum.EncounterType.BOSS, Enum.EncounterType.MINI_BOSS:
 				anim.modulate = Color(1.5, 1.5, 1.5)
 			Enum.EncounterType.HEAL:
-				anim.modulate = Color(1.1, 1.1, 1.1)
+				anim.modulate = Color(1.2, 1.2, 1.2)
 	elif encounterData.completed:
 		print("Encounter completed")
 	print(getNodeDetail())
