@@ -4,14 +4,16 @@ class_name CombatEncounterData
 
 @export var encounterBudget : int 
 @export var name : String 
-@export var lightShardReward:int
-@export var xpReward:int
+@export var lightShardReward:Array[int]
+@export var xpReward:Array[int]
 @export var itemReward:int
 @export var rareItemChance:float
+@export var level:int
 
 
 
 var hasBudget:bool = true 
+
 #@export var rewards : Array[RewardData]
 #@export var isElite : bool
 #@export var isMiniBoss : bool

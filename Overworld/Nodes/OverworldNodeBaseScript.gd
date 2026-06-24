@@ -59,6 +59,8 @@ func getNodeDetail() -> Dictionary:
 		"Completed": encounterData.completed,
 		"Unlocked": encounterData.unlocked
 	}
+	if "level" in encounterData:
+		dict["Difficulty"] = encounterData.level
 	return dict
 
 

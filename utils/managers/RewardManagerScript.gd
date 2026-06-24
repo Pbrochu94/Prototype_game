@@ -3,7 +3,7 @@ extends Node
 
 var rewardBank = [
 	{"type": Enum.RewardType.LIGHT_SHARD, "chance": 50},
-	{"type": Enum.RewardType.ITEM, "chance": 5},
+	{"type": Enum.RewardType.ITEM, "chance": 25},
 #	{"type": Enum.RewardType.SPELL, "chance": 15},
 #	{"type": Enum.RewardType.SUMMON, "chance": 10}
 ]
@@ -45,7 +45,9 @@ func randomlySelectConsumable():
 			print("You got a ",ItemDB.consumables[itemName].res.itemName)
 			return ItemDB.consumables[itemName].res
 func generateLightAmount():
-	var lightShardsGained = currentScene.encounterData.lightShardReward
+	var lightShardGainFloor:int = currentScene.encounterData.lightShardReward[0]
+	var lightShardGainCeiling:int = currentScene.encounterData.lightShardReward[1]
+	var lightShardsGained = randi_range(lightShardGainFloor, lightShardGainCeiling)
 	RunManager.currentLightShards += lightShardsGained
 	print("You gain: ", lightShardsGained, " light shards")
 func close():

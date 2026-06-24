@@ -53,11 +53,9 @@ func createEncounter(type:Enum.EncounterType):
 
 
 func pickRandomEncounter(type:Enum.EncounterType):
-	print("AHHH ",Enum.EncounterType.keys()[type])
 	var validEncounters:Array
 	for encounterName in encounters:
 		if encounters[encounterName].type == type:
-			print(Enum.EncounterType.keys()[encounters[encounterName].type])
 			validEncounters.append(encounters[encounterName])
 	return validEncounters.pick_random().data.duplicate(true)
 func initEncounterData(encounter:EncounterData):
