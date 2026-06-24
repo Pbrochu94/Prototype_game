@@ -45,7 +45,7 @@ func _ready():
 	playerPartyManager.init()
 #	print_tree()
 	endingScreen.init()
-	endingScreen.currentCombatScene = combatScene
+	endingScreen.currentScene = combatScene
 	turnManager.currentCombatScene = combatScene
 	turnManager.init()
 	targetManager.init()

@@ -5,18 +5,18 @@ var idCounter:int = 0
 const encounters = {
 	"combatLV0": {
 		"type":Enum.EncounterType.COMBAT,
-		"level":0,
+		"level":Enum.EncounterLevel.TUTORIAL,
 		"data": preload("res://utils/Data/EncounterData/Combat/Tutorial/CombatLV0Res.tres"), 
 		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
 		},
 	"combatLV1": {
 		"type":Enum.EncounterType.COMBAT,
-		"level":1,
+		"level":Enum.EncounterLevel.MINOR,
 		"data": preload("res://utils/Data/EncounterData/Combat/LV1/CombatEncounterLV1Data.tres"), 
 		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
 		},
 	"combatLV2": {
-		"type":Enum.EncounterType.COMBAT,
+		"type":Enum.EncounterLevel.MAJOR,
 		"level":2,
 		"data": preload("res://utils/Data/EncounterData/Combat/LV2/CombatEncounterLV2DataRes.tres"), 
 		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
@@ -28,34 +28,34 @@ const encounters = {
 #		},
 	"combatMiniBoss": {
 		"type":Enum.EncounterType.MINI_BOSS,
-		"level":null,
+		"level":Enum.EncounterLevel.TUTORIAL,
 		"data": preload("res://utils/Data/EncounterData/Combat/MiniBoss/MiniBossEncounter.tres"), 
 #		"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
 		},
 	"spellEncounterBase": {
 		"type":Enum.EncounterType.SPELL,
-		"level":null,
+		"level":Enum.EncounterLevel.TUTORIAL,
 		"data": preload("res://utils/Data/EncounterData/SpellSelection/BasicSpellEncounter/BasicSpellEncounterRes.tres"), 
 		"node": preload("res://Overworld/Nodes/SpellEncounter/BaseSpellEncounterNode.tscn")
 		},
 	"healEncounterBase": {
 		"type":Enum.EncounterType.HEAL,
-		"level":null,
+		"level":Enum.EncounterLevel.TUTORIAL,
 		"data": preload("res://utils/Data/EncounterData/HealEncounter/HealEncounterResBase.tres"), 
 		"node": preload("res://Overworld/Nodes/SpellEncounter/BaseSpellEncounterNode.tscn")
 		},
 }
 
-func createEncounter(type:Enum.EncounterType):
-	var encounter = pickRandomEncounter(type)
+func createEncounter(type:Enum.EncounterType, level:Enum.EncounterLevel):
+	var encounter = pickRandomEncounter(type, level)
 	initEncounterData(encounter)
 	return encounter
 
 
-func pickRandomEncounter(type:Enum.EncounterType):
+func pickRandomEncounter(type:Enum.EncounterType, level:Enum.EncounterLevel):
 	var validEncounters:Array
 	for encounterName in encounters:
-		if encounters[encounterName].type == type:
+		if encounters[encounterName].type == type and encounters[encounterName].level == level:
 			validEncounters.append(encounters[encounterName])
 	return validEncounters.pick_random().data.duplicate(true)
 func initEncounterData(encounter:EncounterData):

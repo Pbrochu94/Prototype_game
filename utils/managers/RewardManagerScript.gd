@@ -1,12 +1,13 @@
 extends Node
 @onready var currentScene = get_tree().current_scene
+var rewardBank 
 
-var rewardBank = [
-	{"type": Enum.RewardType.LIGHT_SHARD, "chance": 50},
-	{"type": Enum.RewardType.ITEM, "chance": 25},
-#	{"type": Enum.RewardType.SPELL, "chance": 15},
-#	{"type": Enum.RewardType.SUMMON, "chance": 10}
-]
+func init(encounterData):
+	rewardBank = [
+		{"type": Enum.RewardType.LIGHT_SHARD, "chance": encounterData.LightShardChance},
+		{"type": Enum.RewardType.ITEM, "chance": encounterData.itemChance},
+	]
+
 var consumableChance = [
 	{"name": Enum.RewardType.ITEM, "chance": 50},
 ]
@@ -14,7 +15,7 @@ var rewardsReceived:Array
 
 func grantReward():
 	var rewardType = selectRewardType()
-	rewardsReceived.append(selectRewardItem(rewardType))
+	rewardsReceived.append(selectReward(rewardType))
 #	for reward in rewardsReceived:
 #		RunManager.addItemToInventory(reward)
 func selectRewardType():
@@ -27,7 +28,7 @@ func selectRewardType():
 		currentWeight += reward.chance
 		if roll <= currentWeight:
 			return reward.type
-func selectRewardItem(type:Enum.RewardType):
+func selectReward(type:Enum.RewardType):
 	match type:
 		Enum.RewardType.LIGHT_SHARD:
 			generateLightAmount()

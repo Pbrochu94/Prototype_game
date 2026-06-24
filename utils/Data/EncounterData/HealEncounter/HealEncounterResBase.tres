@@ -14,3 +14,4 @@ previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterDat
 completed = false
 unlocked = false
 baseScene = ExtResource("2_7mc0c")
+level = 0

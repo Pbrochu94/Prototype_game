@@ -77,3 +77,11 @@ enum RewardType{
 enum CurrencyType{
 	LIGHT_SHARD
 }
+
+enum EncounterLevel{
+	TUTORIAL,
+	MINOR,
+	STANDARD,
+	MAJOR,
+	OMEGA
+}

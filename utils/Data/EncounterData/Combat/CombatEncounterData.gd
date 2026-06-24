@@ -8,7 +8,7 @@ class_name CombatEncounterData
 @export var xpReward:Array[int]
 @export var itemReward:int
 @export var rareItemChance:float
-@export var level:int
+
 
 
 

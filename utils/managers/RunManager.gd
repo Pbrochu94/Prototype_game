@@ -38,13 +38,13 @@ func initIntroMap():
 	currentWorld = WorldsDB.worlds.intro.instantiate()
 	for i in range(7):
 		if i == 3:
-			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL))
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL,Enum.EncounterLevel.TUTORIAL))
 		elif i == 5:
-			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.HEAL))
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.HEAL,Enum.EncounterLevel.TUTORIAL))
 		elif i == 6:
-			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.MINI_BOSS))
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.MINI_BOSS,Enum.EncounterLevel.TUTORIAL))
 		else:
-			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT))
+			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.COMBAT, Enum.EncounterLevel.TUTORIAL))
 	worldEncounters[0].unlocked = true
 	linkEncounters()
 func linkEncounters():

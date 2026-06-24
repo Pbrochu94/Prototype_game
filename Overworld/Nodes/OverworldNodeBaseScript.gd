@@ -60,7 +60,7 @@ func getNodeDetail() -> Dictionary:
 		"Unlocked": encounterData.unlocked
 	}
 	if "level" in encounterData:
-		dict["Difficulty"] = encounterData.level
+		dict["Difficulty"] = Enum.EncounterLevel.keys()[encounterData.level]
 	return dict
 
 

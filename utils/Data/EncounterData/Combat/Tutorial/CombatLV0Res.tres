@@ -20,3 +20,6 @@ previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterDat
 completed = false
 unlocked = false
 baseScene = ExtResource("1_j7eus")
+level = 0
+LightShardChance = 50
+itemChance = 0

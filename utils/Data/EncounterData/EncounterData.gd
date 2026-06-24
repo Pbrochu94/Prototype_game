@@ -12,3 +12,6 @@ class_name EncounterData
 @export var baseScene:PackedScene
 @export var sceneInstance:CombatEncounter
 @export var encounterData:EncounterData
+@export var level:Enum.EncounterLevel
+@export var LightShardChance:int
+@export var itemChance:int
