@@ -31,4 +31,8 @@ func createUnitInstance(characterTag:String):
 	unit.baseDeff =  unit.definition.deff
 	unit.baseAtk =  unit.definition.atk
 	unit.element = unit.definition.element
+	var attackRes:Array[Ability]
+	for attack in unit.definition.attacks:
+		attackRes.append(attack.duplicate(true))
+	unit.attacks = attackRes
 	return unit

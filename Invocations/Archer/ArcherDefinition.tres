@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://dmgp62drulcpe"]
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=5 format=3 uid="uid://dmgp62drulcpe"]
 
 [ext_resource type="PackedScene" uid="uid://c1glvlmpjolmj" path="res://Invocations/Archer/ArcherCombat.tscn" id="1_lpyl7"]
 [ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_qcs25"]
+[ext_resource type="Resource" uid="uid://bna5nscetmrgr" path="res://Invocations/Archer/Attacks/BowShot/BowShot.tres" id="1_uiqmi"]
+[ext_resource type="Resource" uid="uid://lg6qfiatta5s" path="res://Invocations/Archer/Attacks/BowPowerShot/BowPowerShot.tres" id="2_bbqbp"]
 
 [resource]
 script = ExtResource("1_qcs25")
 characterName = "archer"
 characterTag = "archer"
 maxHp = 100
-currentHp = 100
+currentHp = 1000
 speed = 4
 baseSpeed = 4
 unitRank = 0
@@ -18,4 +20,6 @@ baseDeff = 10
 atk = 30
 baseAtk = 30
 scene = ExtResource("1_lpyl7")
-summonCost = 3
+summonCost = 1
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_uiqmi"), ExtResource("2_bbqbp")])

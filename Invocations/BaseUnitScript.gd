@@ -35,7 +35,6 @@ var previousState:String
 @export var maxHp:int 
 @export var currentHp:int 
 @export var speed:int 
-@export var attacks:Dictionary = {}
 @export var attackSelected:Ability
 @export var deff:int
 @export var atk:int
@@ -214,13 +213,13 @@ func enemyStartTurn():
 			emit_signal("selectedSelf")
 func getRandomAttack() -> Ability:
 	var availableAtk = []
-	for attackName in attacks:
-		var attack = attacks[attackName]
+	for attack in stats.attacks:
+#		var attack = attacks[attackName]
 		if attack.currentCooldown <= 0 :
 			availableAtk.append(attack)
-	for attackName in attacks:
-		var attackCd = attacks[attackName].currentCooldown
-	var keys = attacks.keys()
+	for attack in stats.attacks:
+		var attackCd = attack.currentCooldown
+#	var keys = attacks.keys()
 	var randomAtk = availableAtk.pick_random()
 	randomAtk.currentCooldown = randomAtk.cooldown
 	return randomAtk
@@ -263,11 +262,11 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 	if attack.hasProjectile:
 		spawnVisuals(attack.visual,enemy)
 	var attackName:String = attackSelected.attackName
-	if attacks[attackName]["cooldown"] >  0:
-		var cooldown:int = attacks[attackName]["cooldown"]
+	if attackSelected.cooldown >  0:
+		var cooldown:int = attackSelected.cooldown
 		print(attackName, " goes on a ", cooldown, " turn cooldown")
-		attacks[attackName]["currentCooldown"] = cooldown
-		attacks[attackName]["justUsed"] = true
+		attackSelected.currentCooldown = cooldown
+		attackSelected.justUsed = true
 	match attack.type:
 		Enum.AbilityType.ATTACK:
 			var atkStat = stats.atk
@@ -429,6 +428,9 @@ func getUnitInfo():
 						effectSummary["duration"] = effect.duration
 						effectSummaries.append(effectSummary)
 		var effectSummary = {}
+	var attacks = []
+	for attack in stats.attacks:
+		attacks.append(attack)
 	return {
 		"Name": stats.characterName,
 		"Stats": {
@@ -438,6 +440,7 @@ func getUnitInfo():
 			"speed":stats.speed
 		},
 		"Active effects": effectSummaries,
+		"Attacks": attacks,
 #		"State": currentState,
 #		"z": z_index
 	}
@@ -458,11 +461,11 @@ func reduceTimers():
 							stats.get(statAffected) - effect.amountAppliedToUnit
 						)
 			activeEffects.remove_at(i)
-	for attack in attacks:
-		if attacks[attack]["currentCooldown"] > 0 and not attacks[attack]["justUsed"]:
-			attacks[attack]["currentCooldown"] -= 1
-			print("attack: ", attack," cd = ", attacks[attack]["currentCooldown"])
-		attacks[attack]["justUsed"] = false
+	for attack in stats.attacks:
+		if attack.currentCooldown > 0 and not attack.justUsed:
+			attack.currentCooldown -= 1
+			print("attack: ", attack," cd = ", attack.currentCooldown)
+		attack.justUsed = false
 func resetAllStatsBesideHp():
 	stats.atk = stats.baseAtk
 	stats.deff = stats.baseDeff

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_p8e2t")
-encounterBudget = 3
+encounterBudget = 1
 name = "tutorial combat res"
 lightShardReward = Array[int]([1, 1])
 xpReward = Array[int]([])

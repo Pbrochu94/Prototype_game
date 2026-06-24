@@ -16,6 +16,7 @@ class_name UnitInstance
 @export var baseAtk:int 
 @export var sceneInstance:Node2D
 @export var element:Enum.Element
+@export var attacks:Array[Ability]
 
 func getInfo():
 	var summary = {

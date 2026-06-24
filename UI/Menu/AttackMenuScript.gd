@@ -28,13 +28,13 @@ func open():
 	self.visible = true
 	if vBox.get_child_count() > 0:
 		return
-	for attack in currentlyPlayingUnit.attacks:
+	for attack in currentlyPlayingUnit.stats.attacks:
 		var attackButton = preload("res://UI/Attack/AttackButton.tscn").instantiate()
-		attackButton.text = attack
+		attackButton.text = attack.attackName
 		vBox.add_child(attackButton)
 		attackButtonInstances.append(attackButton)
 		attackButton.currentlyPlayingUnit = currentlyPlayingUnit
-		attackButton.attackLinked = currentlyPlayingUnit.attacks[attackButton.text]
+		attackButton.attackLinked = attack
 		attackButton.attackSelected.connect(turnManager.onAttackSelected)
 
 func resetAttackButton():

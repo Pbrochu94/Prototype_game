@@ -18,3 +18,4 @@ class_name UnitDefinition
 @export var summonCost:int
 @export var baseTemplate:UnitDefinition
 @export var element:Enum.Element
+@export var attacks:Array[Ability]
