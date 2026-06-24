@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://cl8cfloa1jx6w"]
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=6 format=3 uid="uid://cl8cfloa1jx6w"]
 
+[ext_resource type="Resource" uid="uid://blipysc6nleh7" path="res://Invocations/LordOfFlames/Attacks/FireSlash/FireSlash.tres" id="1_7idpj"]
 [ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_o82nq"]
 [ext_resource type="PackedScene" uid="uid://vf35ymhc31wt" path="res://Invocations/LordOfFlames/LordOfFlamesScene.tscn" id="1_ped1m"]
+[ext_resource type="Resource" uid="uid://dit6kyly3lg61" path="res://Invocations/LordOfFlames/Attacks/Ablaze/AblazeRes.tres" id="2_qchy5"]
+[ext_resource type="Resource" uid="uid://chht6opudnl86" path="res://Invocations/LordOfFlames/Attacks/Combustion/CombustionRes.tres" id="3_d3omy"]
 
 [resource]
 script = ExtResource("1_o82nq")
@@ -20,3 +23,4 @@ baseAtk = 50
 scene = ExtResource("1_ped1m")
 summonCost = 25
 element = 1
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_7idpj"), ExtResource("2_qchy5"), ExtResource("3_d3omy")])

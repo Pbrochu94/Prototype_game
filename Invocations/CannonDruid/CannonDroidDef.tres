@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://um6tcdrsxrpi"]
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=5 format=3 uid="uid://um6tcdrsxrpi"]
 
+[ext_resource type="Resource" uid="uid://t500f2m7s8jv" path="res://Invocations/CannonDruid/Attacks/CannonShot/Cannonshot.tres" id="1_fbaqt"]
 [ext_resource type="PackedScene" uid="uid://67avdf4jdwg3" path="res://Invocations/CannonDruid/CannonDruidCombat.tscn" id="1_h7d8i"]
 [ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_terbi"]
+[ext_resource type="Resource" uid="uid://dvhs8ihaupanc" path="res://Invocations/CannonDruid/Attacks/Rebuild/Rebuild.tres" id="2_i2kc0"]
 
 [resource]
 script = ExtResource("1_terbi")
 characterName = "cannon droid"
 characterTag = "cannon droid"
 maxHp = 150
-currentHp = 100
+currentHp = 150
 speed = 1
 baseSpeed = 1
 unitRank = 0
@@ -19,3 +21,5 @@ atk = 20
 baseAtk = 20
 scene = ExtResource("1_h7d8i")
 summonCost = 5
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_fbaqt"), ExtResource("2_i2kc0")])

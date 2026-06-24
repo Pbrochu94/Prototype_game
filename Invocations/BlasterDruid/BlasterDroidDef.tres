@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="UnitDefinition" load_steps=3 format=3 uid="uid://bfxuii11he6tq"]
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=5 format=3 uid="uid://bfxuii11he6tq"]
 
 [ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_4tmo7"]
+[ext_resource type="Resource" uid="uid://bt77piknigplf" path="res://Invocations/BlasterDruid/Attacks/GunShot/GunShot.tres" id="1_k8vbq"]
 [ext_resource type="PackedScene" uid="uid://b4ujsi8dfa3g" path="res://Invocations/BlasterDruid/BlasterDruidCombat.tscn" id="1_w766w"]
+[ext_resource type="Resource" uid="uid://y5j8ksmvehl2" path="res://Invocations/BlasterDruid/Attacks/InstabilityScan/Scan.tres" id="2_y42tu"]
 
 [resource]
 script = ExtResource("1_4tmo7")
@@ -19,3 +21,5 @@ atk = 10
 baseAtk = 10
 scene = ExtResource("1_w766w")
 summonCost = 5
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_k8vbq"), ExtResource("2_y42tu")])
