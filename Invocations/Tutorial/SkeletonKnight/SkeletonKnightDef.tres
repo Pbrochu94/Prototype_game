@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=4 format=3 uid="uid://cvnev5b8plhwi"]
+
+[ext_resource type="PackedScene" uid="uid://ddeapviv52di4" path="res://Invocations/Tutorial/SkeletonKnight/SkeletonKnightScene.tscn" id="1_1vhsh"]
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_kmw3g"]
+[ext_resource type="Resource" uid="uid://bmlmwcix73h5l" path="res://Invocations/Tutorial/SkeletonKnight/Attacks/SwordStrikeRes.tres" id="1_sybbv"]
+
+[resource]
+script = ExtResource("1_kmw3g")
+characterName = "Skeleton Knight"
+characterTag = "skeleton knight"
+maxHp = 100
+currentHp = 100
+speed = 2
+baseSpeed = 2
+unitRank = 0
+unitLocation = 0
+deff = 15
+baseDeff = 15
+atk = 15
+baseAtk = 15
+scene = ExtResource("1_1vhsh")
+summonCost = 1
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_sybbv")])
+walkSpeed = 180

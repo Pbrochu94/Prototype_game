@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://bmlmwcix73h5l"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_mhjki"]
+
+[resource]
+script = ExtResource("1_mhjki")
+attackName = "sword strike"
+damage = 10
+type = 0
+focusType = 1
+healAmount = 0
+numberOfTargets = 1
+element = "Light"
+hitboxName = ""
+effectAmount = 0
+needToMove = true
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0
+cooldown = 0
+currentCooldown = 0
+hasProjectile = false

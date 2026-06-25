@@ -23,3 +23,4 @@ scene = ExtResource("1_w766w")
 summonCost = 5
 element = 0
 attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_k8vbq"), ExtResource("2_y42tu")])
+walkSpeed = 150
