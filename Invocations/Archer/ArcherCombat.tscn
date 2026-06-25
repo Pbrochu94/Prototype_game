@@ -646,7 +646,6 @@ size = Vector2(20, 23)
 
 [node name="Archer" type="Node2D" groups=["enemy", "unit"]]
 script = ExtResource("1_owjqr")
-walkSpeed = 200
 maxHp = 100
 currentHp = 100
 speed = 4

@@ -358,8 +358,6 @@ material = SubResource("ShaderMaterial_mm2wi")
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_04nqx")
 animation = &"downed"
-frame = 14
-frame_progress = 1.0
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource("5_nibce")

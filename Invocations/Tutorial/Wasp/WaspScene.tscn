@@ -1,11 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://bt078w3fds6jm"]
+[gd_scene load_steps=35 format=3 uid="uid://bt078w3fds6jm"]
 
 [ext_resource type="PackedScene" uid="uid://o3pk3ttlbnmm" path="res://Invocations/BaseUnitScene.tscn" id="1_imauc"]
 [ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_lvi77"]
 [ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/WaspCombatScript.gd" id="2_xadsk"]
 [ext_resource type="Texture2D" uid="uid://dxgsmqtinwjf0" path="res://CharacterSprite/Tutorial/Wasp/Wasp 16x16 Sprite Sheet.png" id="3_30bu4"]
 [ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspIdle.gd" id="5_2sj0p"]
-[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="5_kbxsh"]
 [ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspGetInPositionState.gd" id="6_h5wvb"]
 [ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspWalkingBackState.gd" id="7_oe4qs"]
 [ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspAttackingState.gd" id="8_2um6x"]
@@ -185,16 +184,12 @@ animations = [{
 
 [node name="Character" instance=ExtResource("1_imauc")]
 script = ExtResource("2_xadsk")
-walkSpeed = null
 
 [node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
 material = SubResource("ShaderMaterial_adiqu")
 position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_kwyld")
 flip_h = true
-
-[node name="StateMachine" parent="." index="1"]
-script = ExtResource("5_kbxsh")
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource("5_2sj0p")
