@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=4 format=3 uid="uid://d3e67cjs7wwkj"]
+
+[ext_resource type="Resource" uid="uid://crt7l0m4x8hhq" path="res://Invocations/Tutorial/Wasp/Attack/LightDrainRes.tres" id="1_3ym3u"]
+[ext_resource type="PackedScene" uid="uid://bt078w3fds6jm" path="res://Invocations/Tutorial/Wasp/WaspScene.tscn" id="1_12aq2"]
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_k06m5"]
+
+[resource]
+script = ExtResource("1_k06m5")
+characterName = "light wasp"
+characterTag = "light wasp"
+maxHp = 50
+currentHp = 50
+speed = 8
+baseSpeed = 8
+unitRank = 0
+unitLocation = 0
+deff = 1
+baseDeff = 1
+atk = 1000
+baseAtk = 10
+scene = ExtResource("1_12aq2")
+summonCost = 3
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_3ym3u")])
+walkSpeed = 300

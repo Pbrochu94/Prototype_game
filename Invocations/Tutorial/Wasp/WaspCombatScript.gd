@@ -1,4 +1,3 @@
 extends BaseUnitScript
 
-func _ready():
-	super()
+

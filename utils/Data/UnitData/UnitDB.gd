@@ -7,6 +7,7 @@ const units : Dictionary = {
 	"archer": preload("res://Invocations/Archer/ArcherDefinition.tres"),
 	"blaster droid":preload("res://Invocations/BlasterDruid/BlasterDroidDef.tres"),
 	"cannon droid": preload("res://Invocations/CannonDruid/CannonDroidDef.tres"),
+	"light wasp": preload("res://Invocations/Tutorial/Wasp/WaspDef.tres"),
 	#ELITES:
 	#MINI_BOSSES:
 	"lord of flames": preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
@@ -31,6 +32,7 @@ func createUnitInstance(characterTag:String):
 	unit.baseDeff =  unit.definition.deff
 	unit.baseAtk =  unit.definition.atk
 	unit.element = unit.definition.element
+	unit.walkSpeed = unit.definition.walkSpeed
 	var attackRes:Array[Ability]
 	for attack in unit.definition.attacks:
 		attackRes.append(attack.duplicate(true))

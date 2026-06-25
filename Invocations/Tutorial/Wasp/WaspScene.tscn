@@ -1,0 +1,221 @@
+[gd_scene load_steps=36 format=3 uid="uid://bt078w3fds6jm"]
+
+[ext_resource type="PackedScene" uid="uid://o3pk3ttlbnmm" path="res://Invocations/BaseUnitScene.tscn" id="1_imauc"]
+[ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="2_lvi77"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/WaspCombatScript.gd" id="2_xadsk"]
+[ext_resource type="Texture2D" uid="uid://dxgsmqtinwjf0" path="res://CharacterSprite/Tutorial/Wasp/Wasp 16x16 Sprite Sheet.png" id="3_30bu4"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspIdle.gd" id="5_2sj0p"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="5_kbxsh"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspGetInPositionState.gd" id="6_h5wvb"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspWalkingBackState.gd" id="7_oe4qs"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspAttackingState.gd" id="8_2um6x"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspEndingTurnState.gd" id="9_lo3ll"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspHurtState.gd" id="10_7m14w"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspDownedState.gd" id="11_sfiv8"]
+[ext_resource type="Script" path="res://Invocations/Tutorial/Wasp/States/LightWaspOutroState.gd" id="12_4r1eb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adiqu"]
+resource_local_to_scene = true
+shader = ExtResource("2_lvi77")
+shader_parameter/flash_color = Vector3(1, 1, 1)
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81s11"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdxn3"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npqso"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr0vp"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alc4u"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s665b"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heevo"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3duqq"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd5wh"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgrvb"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j151d"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k0lg"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scoly"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shbtb"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtvks"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm5q3"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_conqg"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnmfc"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egs4a"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkda"]
+atlas = ExtResource("3_30bu4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwyld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81s11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdxn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npqso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr0vp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alc4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s665b")
+}],
+"loop": false,
+"name": &"downed",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_heevo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3duqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd5wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgrvb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j151d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k0lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scoly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shbtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtvks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm5q3")
+}],
+"loop": false,
+"name": &"light drain",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_conqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnmfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egs4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkda")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Character" instance=ExtResource("1_imauc")]
+script = ExtResource("2_xadsk")
+walkSpeed = null
+
+[node name="AnimatedSprite2D" parent="SpritePivot" index="0"]
+material = SubResource("ShaderMaterial_adiqu")
+position = Vector2(0, 0)
+sprite_frames = SubResource("SpriteFrames_kwyld")
+flip_h = true
+
+[node name="StateMachine" parent="." index="1"]
+script = ExtResource("5_kbxsh")
+
+[node name="Idle" parent="StateMachine" index="0"]
+script = ExtResource("5_2sj0p")
+
+[node name="GetInPosition" parent="StateMachine" index="1"]
+script = ExtResource("6_h5wvb")
+
+[node name="WalkingBack" parent="StateMachine" index="2"]
+script = ExtResource("7_oe4qs")
+
+[node name="Attacking" parent="StateMachine" index="3"]
+script = ExtResource("8_2um6x")
+
+[node name="EndingTurn" parent="StateMachine" index="4"]
+script = ExtResource("9_lo3ll")
+
+[node name="Hurt" parent="StateMachine" index="5"]
+script = ExtResource("10_7m14w")
+
+[node name="Downed" parent="StateMachine" index="6"]
+script = ExtResource("11_sfiv8")
+
+[node name="Outro" parent="StateMachine" index="7"]
+script = ExtResource("12_4r1eb")

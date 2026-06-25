@@ -17,6 +17,7 @@ class_name UnitInstance
 @export var sceneInstance:Node2D
 @export var element:Enum.Element
 @export var attacks:Array[Ability]
+@export var walkSpeed:int
 
 func getInfo():
 	var summary = {

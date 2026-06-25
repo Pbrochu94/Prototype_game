@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://crt7l0m4x8hhq"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_h4tpp"]
+[ext_resource type="Resource" uid="uid://boy5584cdw5wq" path="res://Invocations/Tutorial/Wasp/Attack/DrainEffectRes.tres" id="1_psoj6"]
+
+[resource]
+script = ExtResource("1_h4tpp")
+attackName = "light drain"
+damage = 10
+type = 0
+focusType = 1
+healAmount = 0
+numberOfTargets = 1
+element = "light"
+hitboxName = ""
+effectAmount = 0
+needToMove = true
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0
+cooldown = 0
+currentCooldown = 0
+effectRes = ExtResource("1_psoj6")
+hasProjectile = false

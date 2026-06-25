@@ -31,7 +31,7 @@ var previousState:String
 #STATS
 @export var definition : UnitDefinition
 @export var stats : UnitInstance
-@export var walkSpeed:int
+#@export var walkSpeed:int
 @export var maxHp:int 
 @export var currentHp:int 
 @export var speed:int 
@@ -174,7 +174,7 @@ func connectSignals():
 func walk(delta, destination:Vector2):
 	if not isWalking:
 		return
-	global_position = global_position.move_toward(destination, walkSpeed*delta)
+	global_position = global_position.move_toward(destination, stats.walkSpeed*delta)
 	if stateMachine.currentState == states["getinposition"]:
 		if global_position == destination:
 			isWalking = false
@@ -315,7 +315,7 @@ func applyEffect(effect:Effect):
 				print(stats.characterName, " received the effect ", effectApplied.name)
 				activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
-				heal(attackSelected)
+				heal(attackSelected.effectRes)
 		Enum.StatusEffect.RETALIATION:
 			hasRetaliation = true
 			activeEffects.append(effectApplied)
@@ -336,6 +336,19 @@ func heal(source):
 			await target.healFlash().finished
 		print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
 		target.stats.currentHp += attackSelected.effectRes.amount
+		if target.stats.currentHp > target.stats.maxHp:
+			target.stats.currentHp = target.stats.maxHp
+		print(target.stats.characterName," hp AFTER heal: ",target.stats.currentHp)
+	elif source is Effect:
+		var effectName = source.name
+		if source.target == Enum.FocusType.SELF:
+			target = self
+			await healFlash().finished
+		else:
+			target = owner.target
+			await target.healFlash().finished
+		print(target.stats.characterName," hp BEFORE heal: ",target.stats.currentHp)
+		target.stats.currentHp += source.digitAmount
 		if target.stats.currentHp > target.stats.maxHp:
 			target.stats.currentHp = target.stats.maxHp
 		print(target.stats.characterName," hp AFTER heal: ",target.stats.currentHp)
