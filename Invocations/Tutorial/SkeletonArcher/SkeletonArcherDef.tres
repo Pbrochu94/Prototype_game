@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=4 format=3 uid="uid://cmv6i1einnpum"]
+
+[ext_resource type="Resource" uid="uid://c2v3wrbhjxmnd" path="res://Invocations/Tutorial/SkeletonArcher/Attacks/BowShotRes.tres" id="1_plk03"]
+[ext_resource type="Script" path="res://utils/Data/UnitData/UnitDefinition.gd" id="1_y6ttm"]
+[ext_resource type="PackedScene" uid="uid://d232x4ovmrxhx" path="res://Invocations/Tutorial/SkeletonArcher/SkeletonArcherScene.tscn" id="2_gdxdy"]
+
+[resource]
+script = ExtResource("1_y6ttm")
+characterName = "Skeleton archer"
+characterTag = "skeleton archer"
+maxHp = 100
+currentHp = 100
+speed = 3
+baseSpeed = 3
+unitRank = 0
+unitLocation = 0
+deff = 10
+baseDeff = 10
+atk = 10
+baseAtk = 10
+scene = ExtResource("2_gdxdy")
+summonCost = 1
+element = 0
+attacks = Array[Resource("res://utils/Attacks/Ability.gd")]([ExtResource("1_plk03")])
+walkSpeed = 180

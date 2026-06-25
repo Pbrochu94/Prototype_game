@@ -10,6 +10,7 @@ const units : Dictionary = {
 	"light wasp": preload("res://Invocations/Tutorial/Wasp/WaspDef.tres"),
 	"skeleton unarmed": preload("res://Invocations/Tutorial/SkeletonUnarmed/SkeletonUnarmedDef.tres"),
 	"skeleton knight": preload("res://Invocations/Tutorial/SkeletonKnight/SkeletonKnightDef.tres"),
+	"skeleton archer": preload("res://Invocations/Tutorial/SkeletonArcher/SkeletonArcherDef.tres"),
 	#ELITES:
 	#MINI_BOSSES:
 	"lord of flames": preload("res://Invocations/LordOfFlames/LordOfFlamesDef.tres")
