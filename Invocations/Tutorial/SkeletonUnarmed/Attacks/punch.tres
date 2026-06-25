@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://c8nuufxw81x5x"]
+
+[ext_resource type="Script" path="res://utils/Attacks/Ability.gd" id="1_xj0r4"]
+
+[resource]
+script = ExtResource("1_xj0r4")
+attackName = "punch"
+damage = 10
+type = 0
+focusType = 1
+healAmount = 0
+numberOfTargets = 1
+element = "light"
+hitboxName = ""
+effectAmount = 0
+needToMove = true
+effectDuration = 0
+statusEffect = 0
+splashDamage = 0
+cooldown = 0
+currentCooldown = 0
+hasProjectile = false

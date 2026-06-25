@@ -705,7 +705,7 @@ atk = 20
 material = SubResource("ShaderMaterial_2fykn")
 position = Vector2(1, -9.5)
 sprite_frames = SubResource("SpriteFrames_fxuqu")
-animation = &"outro"
+animation = &"idle"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_mtelm")

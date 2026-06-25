@@ -417,6 +417,7 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 		emit_signal("clickedOn", self)
 #UTILS ---------------------------------------------------------------------------------------------
 func setState(newState:String):
+	print(states)
 	stateMachine.setState(states[newState])
 func getUnitInfo():
 	var effectSummaries = []

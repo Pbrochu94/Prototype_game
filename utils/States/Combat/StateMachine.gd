@@ -34,5 +34,7 @@ func setState(state:State):
 	owner.currentState = state.name.to_lower()
 #	if owner is BaseSummonerScript:
 #		print(owner.def.characterName," enter state: ",currentState.name)
+#	if owner is BaseUnitScript:
+#		print(owner.stats.characterName," enter state: ",currentState.name)
 #	else:
 #		print(owner.stats.characterName," enter state: ",currentState.name)

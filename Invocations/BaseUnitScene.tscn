@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://o3pk3ttlbnmm"]
+[gd_scene load_steps=7 format=3 uid="uid://o3pk3ttlbnmm"]
 
 [ext_resource type="Shader" path="res://Shaders/BaseShader/BaseShader.gdshader" id="1_a0n7y"]
+[ext_resource type="Script" path="res://utils/States/Combat/StateMachine.gd" id="2_owg6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g38hc"]
 resource_local_to_scene = true
@@ -48,6 +49,7 @@ sprite_frames = SubResource("SpriteFrames_0nh23")
 animation = &"walk"
 
 [node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_owg6d")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 
