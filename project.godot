@@ -22,6 +22,7 @@ UnitDB="*res://utils/Data/UnitData/UnitDB.gd"
 ItemDB="*res://utils/Data/ItemData/ItemDB.gd"
 EncounterDB="*res://utils/Data/EncounterData/EncounterDB.gd"
 WorldsDB="*res://utils/Data/WorldData/WorldsDB.gd"
+MenuPathDB="*res://utils/Data/MenuSceneDB/MenuSceneDB.gd"
 
 [display]
 

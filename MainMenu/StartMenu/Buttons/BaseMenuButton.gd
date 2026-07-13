@@ -17,4 +17,5 @@ func onMouseExit():
 
 func onClick():
 	print("starting game")
-	get_tree().change_scene_to_file("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn")
+	RunManager.init()
+	RunManager.changeScene(RunManager.currentWorld)

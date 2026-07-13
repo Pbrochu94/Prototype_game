@@ -20,6 +20,7 @@ func _ready():
 
 
 func generateEncounterNodes(amount:int):
+	nodeScenes.clear()
 	for encounter in RunManager.worldEncounters:
 		var encounterNode = encounter.overworldNodeScene.instantiate()
 		encounterNode.encounterData = encounter

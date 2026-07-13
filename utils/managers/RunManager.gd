@@ -27,7 +27,7 @@ var nmbOfSpellChoice:int = 2
 var spellSlot:int = 2
 
 #FIRST BOOT ----------------------------------------------------------------------------------------
-func _ready():
+func init():
 	initNewPlayer()
 	initStartingParty()
 func initNewPlayer():
@@ -35,6 +35,7 @@ func initNewPlayer():
 	createSummonerInstance()
 	initIntroMap()
 func initIntroMap():
+	worldEncounters.clear()
 	currentWorld = WorldsDB.worlds.intro.instantiate()
 	for i in range(7):
 		if i == 3:
@@ -96,12 +97,11 @@ func removeDownedAllyFromParty():
 #RUN RESET -----------------------------------------------------------------------------------------
 func gameOver():
 	runReset()
-	changeScene("res://MapNodes/OverworldMap/OverworldMap.tscn")
+	changeScene(MenuPathDB.mainMenu)
 func runReset():
 	resetParty()
 	resetMapProgress()
 	resetSummonerPerks()
-	initStartingParty()
 func resetSummonerPerks():
 	learnedSpells.clear()
 func resetParty():
@@ -135,14 +135,18 @@ func calculateSummonCost(unitCost:int):
 func getPlayerInfo():
 	var playerInfo: Dictionary = {
 		"light shards": RunManager.currentLightShards,
-		"xp": RunManager.currentXp
+		"xp": RunManager.currentXp,
 	}
+	if not currentParty.is_empty():
+		playerInfo["party"] = []
+		for unit in currentParty:
+			playerInfo["party"].append(unit.characterName)
 	if not inventory.is_empty():
 		playerInfo["inventory"] = []
 		for itemName in inventory:
 			var inventorySummary = {
 				"name": itemName,
-				"amount": inventory[itemName]["amount"]
+				"amount": inventory[itemName]["stack"]
 			}
 			playerInfo["inventory"].append(inventorySummary)
 	return playerInfo
@@ -159,7 +163,15 @@ func unlockNextNode():
 		currentEncounterData.completed = true
 	previousEncounter = currentEncounterData
 	get_tree().change_scene_to_file("res://Overworld/WorldMaps/Intro/IntroMapScene.tscn")
-func changeScene(scenePath:String):
-	var path = str(currentWorld.scene_file_path)
-	print(path)
+func changeScene(scene):
+	var path: String
+	if scene is String:
+		path = scene
+	elif scene is PackedScene:
+		path = scene.resource_path
+	elif scene is Node:
+		path = scene.scene_file_path
+	else:
+		push_error("Unsupported scene type: %s" % typeof(scene))
+		return
 	get_tree().change_scene_to_file(path)
