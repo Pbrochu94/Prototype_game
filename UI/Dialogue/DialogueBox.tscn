@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpuhvu53cyc0c"]
+
+[ext_resource type="Script" path="res://UI/Dialogue/DialogueBox.gd" id="1_6p4mp"]
+
+[node name="DialogueBox" type="CanvasLayer"]
+script = ExtResource("1_6p4mp")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPortait" type="TextureRect" parent="UI"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 520.0
+offset_bottom = 520.0
+expand_mode = 1
+
+[node name="RightPortrait" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_bottom = 500.0
+
+[node name="DialoguePanel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -210.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="NameLabel" type="Label" parent="UI/DialoguePanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+
+[node name="TextBox" type="RichTextLabel" parent="UI/DialoguePanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 1220.0
+offset_bottom = 100.0
+
+[node name="NextIcon" type="TextureRect" parent="UI/DialoguePanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0

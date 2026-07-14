@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogueRes" load_steps=2 format=3 uid="uid://b3u4f7aychm6v"]
+[gd_resource type="Resource" script_class="DialogueRes" load_steps=3 format=3 uid="uid://b3u4f7aychm6v"]
 
 [ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueRes.gd" id="1_avagr"]
+[ext_resource type="Resource" uid="uid://d24yyjm7pcf5p" path="res://CharacterProfiles/CharacterProfile/Summoner/SummonerProfile.tres" id="2_ut6k5"]
 
 [resource]
 script = ExtResource("1_avagr")
-speakers = Array[String](["Shinji"])
+speakers = Array[Resource("res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd")]([ExtResource("2_ut6k5")])
 texts = Array[String]([])
