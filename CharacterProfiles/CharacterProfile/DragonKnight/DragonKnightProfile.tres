@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterProfile" load_steps=3 format=3 uid="uid://b4vu166lnqavt"]
+
+[ext_resource type="Script" path="res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd" id="1_o3q2l"]
+[ext_resource type="Texture2D" uid="uid://dc6qv7fdjehs8" path="res://CharacterProfiles/CharacterProfile/DragonKnight/Sprites/Dragon knight(Facing left).png" id="1_wfpqk"]
+
+[resource]
+script = ExtResource("1_o3q2l")
+name = "Dragon"
+portraitNeutral = ExtResource("1_wfpqk")

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="DialogueRes" load_steps=3 format=3 uid="uid://b3u4f7aychm6v"]
+[gd_resource type="Resource" script_class="DialogueRes" load_steps=4 format=3 uid="uid://b3u4f7aychm6v"]
 
 [ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueRes.gd" id="1_avagr"]
 [ext_resource type="Resource" uid="uid://d24yyjm7pcf5p" path="res://CharacterProfiles/CharacterProfile/Summoner/SummonerProfile.tres" id="2_ut6k5"]
+[ext_resource type="Resource" uid="uid://b4vu166lnqavt" path="res://CharacterProfiles/CharacterProfile/DragonKnight/DragonKnightProfile.tres" id="3_xeqos"]
 
 [resource]
 script = ExtResource("1_avagr")
-speakers = Array[Resource("res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd")]([ExtResource("2_ut6k5")])
+speakers = Array[Resource("res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd")]([ExtResource("2_ut6k5"), ExtResource("3_xeqos")])
 texts = Array[String]([])
