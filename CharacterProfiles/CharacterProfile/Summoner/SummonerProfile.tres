@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterProfile" load_steps=3 format=3 uid="uid://d24yyjm7pcf5p"]
+
+[ext_resource type="Script" path="res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd" id="1_41ffy"]
+[ext_resource type="Texture2D" uid="uid://cjejjulhvsibe" path="res://CharacterProfiles/CharacterProfile/Summoner/Sprites/ShinjiNeutral.png" id="1_v6oi7"]
+
+[resource]
+script = ExtResource("1_41ffy")
+name = "Shinji"
+portraitNeutral = ExtResource("1_v6oi7")

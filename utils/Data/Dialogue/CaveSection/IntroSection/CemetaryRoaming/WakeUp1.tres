@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueRes" load_steps=2 format=3 uid="uid://b3u4f7aychm6v"]
+
+[ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueRes.gd" id="1_avagr"]
+
+[resource]
+script = ExtResource("1_avagr")
+speakers = Array[String](["Shinji"])
+texts = Array[String]([])

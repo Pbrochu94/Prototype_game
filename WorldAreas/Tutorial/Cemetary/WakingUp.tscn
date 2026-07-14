@@ -2391,7 +2391,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608,
 [node name="FloorCollision" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
-polygon = PackedVector2Array(0, 464, 847, 464, 1071, 352, 1279, 352, 1280, 500, 0, 498)
+polygon = PackedVector2Array(0, 464, 0, 183, 33, 183, 34, 464, 847, 464, 1071, 352, 1279, 352, 1280, 500, 0, 498)
 
 [node name="MainCharacter" parent="." instance=ExtResource("2_k2sih")]
 position = Vector2(168, 378)
