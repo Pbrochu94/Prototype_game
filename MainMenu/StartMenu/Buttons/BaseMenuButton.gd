@@ -18,4 +18,5 @@ func onMouseExit():
 func onClick():
 	print("starting game")
 	RunManager.init()
-	RunManager.changeScene(RunManager.currentWorld)
+	RunManager.changeScene(RunManager.currentScene)
+#	RunManager.changeScene(RunManager.currentWorld)

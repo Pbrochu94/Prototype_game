@@ -85,3 +85,12 @@ enum EncounterLevel{
 	MAJOR,
 	OMEGA
 }
+
+#------------------------SECTIONS AND SCENES----------------------
+
+enum Section{
+	CAVE
+}
+enum Area{
+	HUB
+}

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hesc2pa1atpr"
-path="res://.godot/imported/MainLev2.0(Black and white).png-17b376c7489c2ccfcef8abc37cc3c70a.ctex"
+uid="uid://cxwv0c7b7248k"
+path="res://.godot/imported/DoorClosed.png-4f4439ab246256390078b85deebc1206.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WorldAreas/Tutorial/Cemetary/Sprites/MainLev2.0(Black and white).png"
-dest_files=["res://.godot/imported/MainLev2.0(Black and white).png-17b376c7489c2ccfcef8abc37cc3c70a.ctex"]
+source_file="res://WorldAreas/Tutorial/Cemetary/Sprites/accessories/DoorClosed.png"
+dest_files=["res://.godot/imported/DoorClosed.png-4f4439ab246256390078b85deebc1206.ctex"]
 
 [params]
 

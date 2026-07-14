@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br2js71er7v3j"
-path="res://.godot/imported/mainlevbuild(BW).png-d26d29260ad5cf923012d7f74f7e953d.ctex"
+uid="uid://berqlvwp42yqc"
+path="res://.godot/imported/hero sprite not sword(BW).png-585c2000d140d31daaa7c6b13c95cd9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WorldAreas/Tutorial/Cemetary/Sprites/mainlevbuild(BW).png"
-dest_files=["res://.godot/imported/mainlevbuild(BW).png-d26d29260ad5cf923012d7f74f7e953d.ctex"]
+source_file="res://Summoner/FreeRoam/Sprite/Template/hero sprite not sword(BW).png"
+dest_files=["res://.godot/imported/hero sprite not sword(BW).png-585c2000d140d31daaa7c6b13c95cd9f.ctex"]
 
 [params]
 

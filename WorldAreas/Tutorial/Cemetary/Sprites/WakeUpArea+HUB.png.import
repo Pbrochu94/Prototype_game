@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gopc4kha7hjn"
-path="res://.godot/imported/decorative(Black and white).png-5db88a1b00814924f08900b83e29ddc5.ctex"
+uid="uid://2t5fe0mmy26a"
+path="res://.godot/imported/WakeUpArea+HUB.png-2ebf887067e942ef974ef3b4dc372cab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WorldAreas/Tutorial/Cemetary/Sprites/decorative(Black and white).png"
-dest_files=["res://.godot/imported/decorative(Black and white).png-5db88a1b00814924f08900b83e29ddc5.ctex"]
+source_file="res://WorldAreas/Tutorial/Cemetary/Sprites/WakeUpArea+HUB.png"
+dest_files=["res://.godot/imported/WakeUpArea+HUB.png-2ebf887067e942ef974ef3b4dc372cab.ctex"]
 
 [params]
 

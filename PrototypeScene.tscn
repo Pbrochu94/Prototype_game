@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcelirrfixell"]
 
-[ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://player/playerWorld/playerWorld.tscn" id="1_6fvex"]
+[ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://player/playerWorld/SummonerRoaming.tscn" id="1_6fvex"]
 [ext_resource type="Script" path="res://PrototypeScene.gd" id="1_rcay3"]
 [ext_resource type="PackedScene" uid="uid://b6eu8gs55c5b1" path="res://Invocations/Minor gun enemy/World/minor_gun_enemy_world.tscn" id="3_ak7a5"]
 

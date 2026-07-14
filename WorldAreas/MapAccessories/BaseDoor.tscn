@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0mijiuen0r7o"]
+
+[ext_resource type="Texture2D" uid="uid://cxwv0c7b7248k" path="res://WorldAreas/Tutorial/Cemetary/Sprites/accessories/DoorClosed.png" id="1_x2qy4"]
+[ext_resource type="Script" path="res://WorldAreas/Tutorial/Cemetary/Sprites/accessories/DoorCemetary1.gd" id="2_op28x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh5u7"]
+atlas = ExtResource("1_x2qy4")
+region = Rect2(0, 0, 106, 198)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_va3v3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mh5u7")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbxii"]
+size = Vector2(73, 196)
+
+[node name="Door1" type="AnimatedSprite2D"]
+z_index = 4
+position = Vector2(1144, 256)
+sprite_frames = SubResource("SpriteFrames_va3v3")
+animation = &"closed"
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_op28x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_vbxii")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="onBodyEntered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="onBodyExited"]

@@ -10,6 +10,7 @@ const startingLightShards:int = 0
 var summoner:SummonerDef
 var inventory:Dictionary
 var currentWorld
+var currentScene
 var worldEncounters:Array[EncounterData]
 #STATS
 var learnedSpells:Dictionary
@@ -28,6 +29,9 @@ var spellSlot:int = 2
 
 #FIRST BOOT ----------------------------------------------------------------------------------------
 func init():
+	initNewGame()
+func initNewGame():
+	currentScene = RoamingSceneDB.scene[Enum.Section.CAVE][Enum.Area.HUB]
 	initNewPlayer()
 	initStartingParty()
 func initNewPlayer():
