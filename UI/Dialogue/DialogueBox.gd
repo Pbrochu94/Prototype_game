@@ -17,7 +17,4 @@ func start(dialogue:DialogueRes):
 	dialogueRes = dialogue
 	nameLabel.text = dialogueRes.speakers[0].name
 	leftPortrait.texture = dialogueRes.speakers[0].portraitNeutral
-	print(dialogueRes.speakers[0].portraitNeutral)
-	print(leftPortrait.texture)
-	leftPortrait.modulate = Color.RED
 #	portrait.scale = Vector2(0.8,0.8)
