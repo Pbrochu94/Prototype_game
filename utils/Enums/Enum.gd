@@ -94,3 +94,8 @@ enum Section{
 enum Area{
 	HUB
 }
+
+#------------------------Dialogue----------------------------------
+enum DialogueType{
+	INNER
+}

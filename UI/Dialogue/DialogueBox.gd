@@ -18,4 +18,8 @@ func start(dialogue:DialogueRes):
 	nameLabel.text = dialogueRes.speakers[0].name
 	leftPortrait.texture = dialogueRes.speakers[0].portraitNeutral
 	rightPortrait.texture = dialogueRes.speakers[1].portraitNeutral
+	readLine()
 #	portrait.scale = Vector2(0.8,0.8)
+
+func readLine():
+	dialogueBox.text = dialogueRes.line[0]

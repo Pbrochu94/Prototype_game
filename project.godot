@@ -25,6 +25,7 @@ WorldsDB="*res://utils/Data/WorldData/WorldsDB.gd"
 MenuPathDB="*res://utils/Data/MenuSceneDB/MenuSceneDB.gd"
 RoamingSceneDB="*res://utils/Data/RoamingSceneDB/RoamingSceneDB.gd"
 DialogueManager="*res://utils/Managers/DialogueManager.gd"
+DialogueDB="*res://utils/Data/Dialogue/DialogueDB.gd"
 
 [display]
 

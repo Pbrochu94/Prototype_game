@@ -7,4 +7,4 @@
 [resource]
 script = ExtResource("1_avagr")
 speakers = Array[Resource("res://CharacterProfiles/CharacterProfile/CharacterProfileRes.gd")]([ExtResource("2_ut6k5"), ExtResource("3_xeqos")])
-texts = Array[String]([])
+line = Array[String](["Hmmm?"])

@@ -10,3 +10,8 @@ func _ready():
 func spawnSummoner():
 	summoner.global_position = respawnAnchor.global_position
 	summoner.spawn()
+	match RunManager.death:
+		2:
+			pass
+		0:
+			DialogueManager.startDialogue(DialogueDB.dialogue[Enum.Section.CAVE][Enum.Area.HUB][Enum.DialogueType.INNER][0])
