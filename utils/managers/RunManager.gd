@@ -12,6 +12,7 @@ var inventory:Dictionary
 var currentWorld
 var currentScene
 var worldEncounters:Array[EncounterData]
+var death = 0
 #STATS
 var learnedSpells:Dictionary
 var allSpells:Dictionary = {
@@ -31,13 +32,18 @@ var spellSlot:int = 2
 func init():
 	initNewGame()
 func initNewGame():
-	currentScene = RoamingSceneDB.scene[Enum.Section.CAVE][Enum.Area.HUB]
+	createHubInstance()
 	initNewPlayer()
+	await changeScene(currentScene)
+	spawnSummoner()
 	initStartingParty()
+	initIntroMap()
+func createHubInstance():
+	RoamingSceneDB.createMapInstance(Enum.Section.CAVE,Enum.Area.HUB)
+	currentScene = RoamingSceneDB.sceneInstance[Enum.Section.CAVE][Enum.Area.HUB]
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
 	createSummonerInstance()
-	initIntroMap()
 func initIntroMap():
 	worldEncounters.clear()
 	currentWorld = WorldsDB.worlds.intro.instantiate()
@@ -76,7 +82,8 @@ func linkEncounters():
 #	node6.unlocked = true
 #	node7.unlocked = true
 func createSummonerInstance():
-	summoner.sceneInstance = summoner.scene.instantiate()
+	summoner.sceneInstance = preload("res://Summoner/SummonerCombatScene.tscn").instantiate()
+	summoner.roamingSceneInstance = preload("res://Summoner/FreeRoam/SummonerRoaming.tscn").instantiate()
 #INVENTORY MANAGEMENT ------------------------------------------------------------------------------
 func addItemToInventory(item:ItemData):
 	if item.itemName not in inventory:
@@ -99,9 +106,15 @@ func removeDownedAllyFromParty():
 			currentParty.erase(unit) 
 
 #RUN RESET -----------------------------------------------------------------------------------------
+func spawnSummoner():
+	print(currentScene)
+	currentScene.add_child(summoner.roamingSceneInstance)
+	currentScene.spawnSummoner()
 func gameOver():
+	death += 1
 	runReset()
-	changeScene(MenuPathDB.mainMenu)
+	await changeScene(RoamingSceneDB.scene[Enum.Section.CAVE][Enum.Area.HUB])
+	spawnSummoner()
 func runReset():
 	resetParty()
 	resetMapProgress()
@@ -112,6 +125,7 @@ func resetParty():
 	currentParty.clear()
 func resetMapProgress():
 	currentWorldEncounters.clear()
+
 
 #SUMMON AND INVOKING -------------------------------------------------------------------------------
 func summon(unit:UnitInstance):
@@ -140,6 +154,7 @@ func getPlayerInfo():
 	var playerInfo: Dictionary = {
 		"light shards": RunManager.currentLightShards,
 		"xp": RunManager.currentXp,
+		"deaths": death
 	}
 	if not currentParty.is_empty():
 		playerInfo["party"] = []
@@ -179,3 +194,5 @@ func changeScene(scene):
 		push_error("Unsupported scene type: %s" % typeof(scene))
 		return
 	get_tree().change_scene_to_file(path)
+	await get_tree().process_frame
+	currentScene = get_tree().current_scene

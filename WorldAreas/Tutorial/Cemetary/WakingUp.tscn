@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c733fdcfr1s8r"]
+[gd_scene load_steps=8 format=3 uid="uid://c733fdcfr1s8r"]
 
 [ext_resource type="Script" path="res://WorldAreas/Tutorial/Cemetary/WakingUpSceneScript.gd" id="1_hfw28"]
 [ext_resource type="Texture2D" uid="uid://2t5fe0mmy26a" path="res://WorldAreas/Tutorial/Cemetary/Sprites/WakeUpArea+HUB.png" id="1_wn51l"]
 [ext_resource type="Resource" uid="uid://b3u4f7aychm6v" path="res://utils/Data/Dialogue/CaveSection/IntroSection/CemetaryRoaming/WakeUp1.tres" id="2_6msxk"]
-[ext_resource type="PackedScene" uid="uid://c0pg8a4xs3ao4" path="res://Summoner/FreeRoam/SummonerRoaming.tscn" id="2_k2sih"]
 [ext_resource type="PackedScene" uid="uid://d0mijiuen0r7o" path="res://WorldAreas/MapAccessories/BaseDoor.tscn" id="3_652ls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y8xag"]
@@ -2397,9 +2396,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608,
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorCollision"]
 polygon = PackedVector2Array(0, 464, 0, 183, 33, 183, 34, 464, 847, 464, 1071, 352, 1279, 352, 1280, 500, 0, 498)
 
-[node name="MainCharacter" parent="." instance=ExtResource("2_k2sih")]
-position = Vector2(168, 378)
-
 [node name="Door1" parent="." instance=ExtResource("3_652ls")]
 
 [node name="FlowerCollision" type="StaticBody2D" parent="."]
@@ -2408,3 +2404,6 @@ position = Vector2(168, 378)
 z_index = 10
 position = Vector2(168, 395)
 shape = SubResource("RectangleShape2D_xpf04")
+
+[node name="RespawnAnchor" type="Node2D" parent="." groups=["respawn"]]
+position = Vector2(168, 378)

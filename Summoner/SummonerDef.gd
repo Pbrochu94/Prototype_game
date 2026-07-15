@@ -13,8 +13,10 @@ class_name SummonerDef
 #@export var baseDeff:int 
 #@export var atk:int
 #@export var baseAtk:int 
-@export var scene:PackedScene
+#@export var scene:PackedScene
 @export var sceneInstance:Node2D
+@export var roamingSceneInstance:Node2D
+
 #@export var summonCost:int
 #@export var baseTemplate:UnitDefinition
 @export var baseWalkSpeed:int
