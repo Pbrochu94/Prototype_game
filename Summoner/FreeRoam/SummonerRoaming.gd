@@ -13,7 +13,8 @@ enum State {
 	RUNNING,
 	JUMPING,
 	FALLING,
-	SPAWN
+	SPAWN,
+	DIALOGUE
 }
 
 
@@ -74,10 +75,13 @@ func enterState(state):
 		State.SPAWN:
 			canMove = false
 			anim.play("spawn")
+		State.DIALOGUE:
+			canMove = false
+			updateAnim("idle")
 func exitState(state):
 	pass #Not sure yet what happens here
 func updateAnim(animation:String):
-	if anim.animation != animation and canMove:
+	if anim.animation != animation :
 		anim.play(animation)
 func jump():
 	velocity.y = jump_force

@@ -43,6 +43,7 @@ func createHubInstance():
 	currentScene = RoamingSceneDB.sceneInstance[Enum.Section.CAVE][Enum.Area.HUB]
 func initNewPlayer():
 	summoner = preload("res://Summoner/SummonerDefRes.tres").duplicate(true)
+	DialogueManager.init()
 	createSummonerInstance()
 func initIntroMap():
 	worldEncounters.clear()

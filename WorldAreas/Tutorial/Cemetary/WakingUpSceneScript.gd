@@ -1,4 +1,5 @@
-extends Node2D
+extends BaseRoamingScene
+class_name HubScene
 
 @onready var respawnAnchor = $RespawnAnchor
 @onready var summoner = RunManager.summoner.roamingSceneInstance
@@ -11,7 +12,8 @@ func spawnSummoner():
 	summoner.global_position = respawnAnchor.global_position
 	summoner.spawn()
 	match RunManager.death:
-		2:
-			pass
 		0:
 			DialogueManager.startDialogue(DialogueDB.dialogue[Enum.Section.CAVE][Enum.Area.HUB][Enum.DialogueType.INNER][0])
+		1:
+			pass
+#			Dialogue when you die after tuto
