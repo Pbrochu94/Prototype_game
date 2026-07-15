@@ -32,12 +32,12 @@ var spellSlot:int = 2
 func init():
 	initNewGame()
 func initNewGame():
+	initIntroMap()
 	createHubInstance()
 	initNewPlayer()
 	await changeScene(currentScene)
 	spawnSummoner()
 	initStartingParty()
-	initIntroMap()
 func createHubInstance():
 	RoamingSceneDB.createMapInstance(Enum.Section.CAVE,Enum.Area.HUB)
 	currentScene = RoamingSceneDB.sceneInstance[Enum.Section.CAVE][Enum.Area.HUB]
@@ -113,6 +113,7 @@ func spawnSummoner():
 func gameOver():
 	death += 1
 	runReset()
+	initIntroMap()
 	await changeScene(RoamingSceneDB.scene[Enum.Section.CAVE][Enum.Area.HUB])
 	spawnSummoner()
 func runReset():
@@ -123,6 +124,7 @@ func resetSummonerPerks():
 	learnedSpells.clear()
 func resetParty():
 	currentParty.clear()
+	initStartingParty()
 func resetMapProgress():
 	currentWorldEncounters.clear()
 
