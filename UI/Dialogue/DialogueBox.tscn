@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpuhvu53cyc0c"]
+[gd_scene load_steps=3 format=3 uid="uid://cpuhvu53cyc0c"]
 
 [ext_resource type="Script" path="res://UI/Dialogue/DialogueBox.gd" id="1_6p4mp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f30wb"]
 
 [node name="DialogueBox" type="CanvasLayer"]
 script = ExtResource("1_6p4mp")
@@ -51,7 +53,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -48.015
+offset_top = -43.545
+offset_right = -16.015
+offset_bottom = -11.545
 grow_horizontal = 0
 grow_vertical = 0
+texture = SubResource("CanvasTexture_f30wb")

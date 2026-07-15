@@ -10,13 +10,17 @@ var dialogueRes
 @onready var rightPortrait = $UI/RightPortait
 
 func _ready():
-	nextIcon.visible = false
+	hideNextIcon()
+	pass
 
 func start(dialogue:DialogueRes):
-	print(dialogue.speakers[0].name)
 	dialogueRes = dialogue
-	nameLabel.text = dialogueRes.speakers[0].name
-	leftPortrait.texture = dialogueRes.speakers[0].portraitNeutral
-	rightPortrait.texture = dialogueRes.speakers[1].portraitNeutral
+	nameLabel.text = DialogueManager.currentLine.speaker.name
+	leftPortrait.texture = DialogueManager.currentLine.speaker.portraitNeutral
+#	rightPortrait.texture = dialogueRes.speakers[1].portraitNeutral
 	DialogueManager.readLine()
 #	portrait.scale = Vector2(0.8,0.8)
+func hideNextIcon():
+	nextIcon.visible = false
+func showNextIcon():
+	nextIcon.visible = true

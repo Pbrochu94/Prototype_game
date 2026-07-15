@@ -99,3 +99,8 @@ enum Area{
 enum DialogueType{
 	INNER
 }
+
+enum PortraitSide{
+	LEFT,
+	RIGHT
+}
