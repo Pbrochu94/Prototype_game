@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_o3q2l")
-name = "Dragon"
+name = "DragonKnight"
 portraitNeutral = ExtResource("1_wfpqk")

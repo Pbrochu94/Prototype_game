@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogueRes" load_steps=6 format=3 uid="uid://b3u4f7aychm6v"]
+[gd_resource type="Resource" script_class="DialogueRes" load_steps=8 format=3 uid="uid://b3u4f7aychm6v"]
 
 [ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueRes.gd" id="1_avagr"]
 [ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueLine.gd" id="1_ub1j1"]
 [ext_resource type="Resource" uid="uid://d24yyjm7pcf5p" path="res://CharacterProfiles/CharacterProfile/Summoner/SummonerProfile.tres" id="2_ut6k5"]
+[ext_resource type="Resource" uid="uid://b4vu166lnqavt" path="res://CharacterProfiles/CharacterProfile/DragonKnight/DragonKnightProfile.tres" id="3_d8k6u"]
 
 [sub_resource type="Resource" id="Resource_uoer5"]
 script = ExtResource("1_ub1j1")
@@ -16,6 +17,12 @@ speaker = ExtResource("2_ut6k5")
 text = "What is this place ?"
 side = 0
 
+[sub_resource type="Resource" id="Resource_chb4u"]
+script = ExtResource("1_ub1j1")
+speaker = ExtResource("3_d8k6u")
+text = "..."
+side = 1
+
 [resource]
 script = ExtResource("1_avagr")
-lines = Array[ExtResource("1_ub1j1")]([SubResource("Resource_uoer5"), SubResource("Resource_30mjy")])
+lines = Array[ExtResource("1_ub1j1")]([SubResource("Resource_uoer5"), SubResource("Resource_30mjy"), SubResource("Resource_chb4u")])

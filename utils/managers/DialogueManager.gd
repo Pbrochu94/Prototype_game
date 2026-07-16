@@ -24,9 +24,11 @@ func startDialogue(dialogueRes:DialogueRes):
 	dialogueBoxInstance.start(dialogueRes)
 
 func readLine():
+	currentLine = currentDialogue.lines[currentLineIndex]
+	dialogueBoxInstance.nameLabel.text = currentLine.speaker.name
+	dialogueBoxInstance.showPortrait(currentLine.speaker.portraitNeutral,currentLine.side)
 	dialogueBoxInstance.hideNextIcon()
 	lineDone = false
-	currentLine = currentDialogue.lines[currentLineIndex]
 	var textBox = dialogueBoxInstance.textBox
 	var text = currentDialogue.lines[currentLineIndex].text
 	textBox.text = text
