@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CombatEncounterData" load_steps=5 format=3 uid="uid://bmypmtaq4pdaw"]
+
+[ext_resource type="PackedScene" uid="uid://cxonaee0pw4bh" path="res://MapNodes/Combat/CombatEncounterScene.tscn" id="1_8kviu"]
+[ext_resource type="Script" path="res://utils/Data/EncounterData/Combat/CombatEncounterData.gd" id="1_k58d4"]
+[ext_resource type="PackedScene" uid="uid://bixpo6djda1o5" path="res://Overworld/Nodes/Combat/CombatNormal.tscn" id="1_wxwtc"]
+[ext_resource type="Resource" uid="uid://b8eg7rt1c7eyc" path="res://Invocations/Tutorial/SkeletonUnarmed/SkeletonUnarmedDef.tres" id="4_jnybn"]
+
+[resource]
+script = ExtResource("1_k58d4")
+encounterBudget = 0
+name = "first tutorial encounter"
+lightShardReward = Array[int]([0, 1])
+xpReward = Array[int]([])
+itemReward = 0
+rareItemChance = 0.0
+encounterType = 0
+overworldNodeScene = ExtResource("1_wxwtc")
+id = 0
+nextEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+previousEncounters = Array[Resource("res://utils/Data/EncounterData/EncounterData.gd")]([])
+completed = false
+unlocked = false
+baseScene = ExtResource("1_8kviu")
+level = 0
+LightShardChance = 50
+itemChance = 0
+isScripted = true
+scriptedUnits = Array[Resource("res://utils/Data/UnitData/UnitDefinition.gd")]([ExtResource("4_jnybn")])

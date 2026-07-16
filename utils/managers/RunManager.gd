@@ -49,7 +49,9 @@ func initIntroMap():
 	worldEncounters.clear()
 	currentWorld = WorldsDB.worlds.intro.instantiate()
 	for i in range(7):
-		if i == 3:
+		if i == 0:
+			worldEncounters.append(EncounterDB.createSpecificEncounter(EncounterDB.specificEncounters["tutorial"]["encounter0"]["data"]))
+		elif i == 3:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.SPELL,Enum.EncounterLevel.TUTORIAL))
 		elif i == 5:
 			worldEncounters.append(EncounterDB.createEncounter(Enum.EncounterType.HEAL,Enum.EncounterLevel.TUTORIAL))

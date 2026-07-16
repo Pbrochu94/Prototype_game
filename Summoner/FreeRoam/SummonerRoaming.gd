@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var currentState = State.SPAWN
 
 var canMove:bool
+var isMoving:bool
 var direction
 enum State {
 	IDLE,
@@ -41,6 +42,8 @@ func move():
 func inputListener():
 	if Input.is_action_just_pressed("jump") and currentState in [State.IDLE, State.RUNNING]:
 		jump()
+	if Input.is_action_just_pressed("sprint") and isMoving == true:
+		speed *= 2
 func updateState(direction):
 	if not is_on_floor() and canMove:
 		if velocity.y < 0:
@@ -61,9 +64,11 @@ func setState(newState):
 func enterState(state):
 	match state:
 		State.IDLE:
+			isMoving = false
 			canMove = true
 			updateAnim("idle")
 		State.RUNNING:
+			isMoving = true
 			canMove = true
 			updateAnim("run")
 		State.JUMPING:

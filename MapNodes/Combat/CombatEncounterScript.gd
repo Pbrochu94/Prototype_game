@@ -50,6 +50,9 @@ func _ready():
 	turnManager.init()
 	targetManager.init()
 	choiceMenu.init()
+func startCombat():
+	if encounterData.introDialogue:
+		DialogueManager.startDialogue(encounterData.introDialogue)
 
 func initSummoner():
 #	print(RunManager.summoner.sceneInstance)

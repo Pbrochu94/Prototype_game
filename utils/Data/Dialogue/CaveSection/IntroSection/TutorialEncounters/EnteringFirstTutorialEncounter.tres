@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DialogueRes" load_steps=5 format=3 uid="uid://1w8k5di370kf"]
+
+[ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueRes.gd" id="1_nviug"]
+[ext_resource type="Script" path="res://utils/Data/Dialogue/DialogueLine.gd" id="1_rvl0g"]
+[ext_resource type="Resource" uid="uid://d24yyjm7pcf5p" path="res://CharacterProfiles/CharacterProfile/Summoner/SummonerProfile.tres" id="2_kos48"]
+
+[sub_resource type="Resource" id="Resource_pa185"]
+script = ExtResource("1_rvl0g")
+speaker = ExtResource("2_kos48")
+text = "Are these two fighting?"
+side = 0
+
+[resource]
+script = ExtResource("1_nviug")
+lines = Array[ExtResource("1_rvl0g")]([SubResource("Resource_pa185")])

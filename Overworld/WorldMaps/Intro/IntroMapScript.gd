@@ -29,6 +29,7 @@ func generateEncounterNodes(amount:int):
 
 func placeWorldNodes():
 	var anchorCounter=0
+	print("SCENES", nodeScenes)
 	for scene in nodeScenes:
 		add_child(scene)
 		scene.global_position = nodeAnchors[anchorCounter].global_position

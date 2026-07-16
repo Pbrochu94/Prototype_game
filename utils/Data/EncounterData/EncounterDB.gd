@@ -46,10 +46,25 @@ const encounters = {
 		},
 }
 
+const specificEncounters = {
+		"tutorial":{
+		"encounter0":{
+			"type":Enum.EncounterType.COMBAT,
+			"level":Enum.EncounterLevel.TUTORIAL,
+			"data": preload("res://utils/Data/EncounterData/Combat/Tutorial/FirstTutorialEncounter.tres"), 
+			"node": preload("res://Overworld/Nodes/Combat/CombatNormal.tscn")
+		}
+	},
+}
+
 func createEncounter(type:Enum.EncounterType, level:Enum.EncounterLevel):
 	var encounter = pickRandomEncounter(type, level)
 	initEncounterData(encounter)
 	return encounter
+
+func createSpecificEncounter(encounterRes:EncounterData):
+	initEncounterData(encounterRes)
+	return encounterRes
 
 
 func pickRandomEncounter(type:Enum.EncounterType, level:Enum.EncounterLevel):

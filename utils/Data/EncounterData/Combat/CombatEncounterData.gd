@@ -11,7 +11,6 @@ class_name CombatEncounterData
 
 
 
-
 var hasBudget:bool = true 
 
 #@export var rewards : Array[RewardData]

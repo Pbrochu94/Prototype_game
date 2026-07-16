@@ -58,6 +58,7 @@ func playIntro():
 	RunManager.summoner.sceneInstance.playIntro()
 
 func startCombat():
+	currentCombatScene.startCombat()
 	initPlayOrder()
 	startTurn()
 

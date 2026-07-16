@@ -15,9 +15,15 @@ func init():
 	placeUnit()
 
 func loadTeam():
-	var generatedEnemies = encounter.generateEncounter(currentCombatScene.encounterData.encounterType)
-	for enemyData in generatedEnemies:
-		party.append(enemyData)
+	if currentCombatScene.encounterData.isScripted:
+#		var enemies:Array[UnitInstance]
+		for unit in currentCombatScene.encounterData.scriptedUnits:
+			var unitInstance = UnitDB.createUnitInstance(unit.characterTag)
+			party.append(unitInstance)
+	else:
+		var generatedEnemies = encounter.generateEncounter(currentCombatScene.encounterData.encounterType)
+		for enemyData in generatedEnemies:
+			party.append(enemyData)
 
 func addEnemyToParty():
 	for i in range(party.size()):

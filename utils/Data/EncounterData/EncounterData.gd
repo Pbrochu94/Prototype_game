@@ -15,3 +15,7 @@ class_name EncounterData
 @export var level:Enum.EncounterLevel
 @export var LightShardChance:int
 @export var itemChance:int
+@export var introDialogue:DialogueRes
+@export var endingDialogue:DialogueRes
+@export var isScripted:bool
+@export var scriptedUnits:Array[UnitDefinition]
