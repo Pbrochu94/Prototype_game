@@ -2,7 +2,7 @@ extends Node
 
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
 
-var currentlyPlayingUnit:BaseUnitScript
+var currentlyPlayingUnit:UnitInstance
 var attackLinked:Ability
 
 signal attackSelected(attack:Ability)

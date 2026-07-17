@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var partyContainer = self
-var party:Array[BaseUnitScript]
+var party:Array[UnitInstance]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for character in get_tree().get_nodes_in_group("character"):

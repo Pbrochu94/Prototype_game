@@ -4,7 +4,7 @@ extends Control
 @onready var hpBar = $VBoxContainer/HBoxContainer/HpBar
 @onready var hpText = $VBoxContainer/HBoxContainer/HpText
 
-var character:BaseUnitScript
+var character:UnitInstance
 
 func setup(char):
 	character = char  

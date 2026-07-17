@@ -32,6 +32,7 @@ func addEnemyToParty():
 		enemy.characterName +=  " enemy " + numberNameTag 
 		aliveCount += 1
 		enemy.faction = Enum.Faction.ENEMY
-	currentlyAliveCharacters = partyInstances
+	currentlyAliveCharacters = party
+
 
 

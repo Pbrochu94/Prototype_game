@@ -17,9 +17,9 @@ var partyManager:Node
 
 
 #VARIABLES
-var target:BaseUnitScript
-var multipleTargets:Array[BaseUnitScript]
-var collateralTargets:Array[BaseUnitScript]
+var target:UnitInstance
+var multipleTargets:Array[UnitInstance]
+var collateralTargets:Array[UnitInstance]
 var canBeSelected = false
 var currentState:String
 var isWalking = false
@@ -39,7 +39,7 @@ var abilityCooldown:int
 
 #EFFECTS
 var isInvulnerable:bool = false
-var hasRetaliation:bool = false
+#var hasRetaliation:bool = false
 
 #TIMERS
 var timers:Dictionary = {
@@ -67,7 +67,7 @@ var isSelectingToSummon:bool = false
 
 #SIGNALS
 signal introFinished
-signal inPositionToAttack(enemy:BaseUnitScript)
+signal inPositionToAttack(enemy:UnitInstance)
 signal stopSelectingTarget
 signal dealDamage(amount:int)
 signal turnFinished
@@ -75,11 +75,11 @@ signal startSelectingEnemyTarget
 signal selectedSelf()
 signal hpChanged(currentHp, maxHp)
 signal isDowned(character)
-signal hovered(character:BaseUnitScript)
-signal unhovered(character:BaseUnitScript)
-signal enemySelected(enemy:BaseUnitScript)
+signal hovered(character:UnitInstance)
+signal unhovered(character:UnitInstance)
+signal enemySelected(enemy:UnitInstance)
 signal donePreparing
-signal clickedOn(unit:BaseUnitScript)
+signal clickedOn(unit:UnitInstance)
 signal selectedForSummon(unit:UnitInstance)
 
 
@@ -107,7 +107,7 @@ func onAnimationFinished():
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
 	z_index = 1
-func spawnVisuals(visual:PackedScene,target:BaseUnitScript):
+func spawnVisuals(visual:PackedScene,target:UnitInstance):
 	target.add_child(visual.instantiate())
 func hurtFlash()-> Tween:
 	match unit.element:
@@ -199,7 +199,7 @@ func enemyStartTurn():
 		Enum.FocusType.ENEMY_AOE:
 			pass
 		Enum.FocusType.SELF:
-			target = self
+			target = unit
 			if attackSelected.type == Enum.AbilityType.EFFECT:
 				anim.play(attackSelected.attackName)
 				await anim.animation_finished
@@ -224,7 +224,7 @@ func enemyChooseTarget(nmbOfTargetOfAttack:int):
 	print("Enemy select ", nmbOfAvailableTargets, " targets")
 	for i in range(nmbOfAvailableTargets):
 		target = unitSelectable.pick_random()
-		print("Enemy ",self.unit.characterName, " selected ", target.unit.characterName)
+		print("Enemy ",unit.characterName, " selected ", target.characterName)
 		if attackSelected.needToMove:
 			getInPosition(target)
 		else:
@@ -245,14 +245,14 @@ func onChosenAttack(attack:Ability):
 		Enum.FocusType.ALLY_MULTIPLE:
 			pass
 		Enum.FocusType.SELF:
-			target = self
+			target = unit
 			if attackSelected.type == Enum.AbilityType.EFFECT:
 				attack(target,attackSelected)
 			emit_signal("selectedSelf")
-func getInPosition(enemy:BaseUnitScript):
+func getInPosition(enemy:UnitInstance):
 	target = enemy
 	setState("getinposition")
-func attack(enemy:BaseUnitScript,attack:Ability):
+func attack(enemy:UnitInstance,attack:Ability):
 	setState("attacking")
 	if attack.hasProjectile:
 		spawnVisuals(attack.visual,enemy)
@@ -266,7 +266,7 @@ func attack(enemy:BaseUnitScript,attack:Ability):
 		Enum.AbilityType.ATTACK:
 			var atkStat = unit.atk
 			var damageOutput:int = atkStat + attack.damage
-			enemy.receiveDamage(self,attack,damageOutput)
+			enemy.scene.receiveDamage(self,attack,damageOutput)
 			if attack.effectRes:
 				if attack.effectRes.target == Enum.FocusType.SELF:
 					applyEffect(attack.effectRes)
@@ -312,7 +312,7 @@ func applyEffect(effect:Effect):
 		Enum.StatusEffect.HEAL:
 				heal(attackSelected.effectRes)
 		Enum.StatusEffect.RETALIATION:
-			hasRetaliation = true
+			unit.hasRetaliation = true
 			activeEffects.append(effectApplied)
 func heal(source):
 	if source is ItemData:
@@ -337,7 +337,7 @@ func heal(source):
 	elif source is Effect:
 		var effectName = source.name
 		if source.target == Enum.FocusType.SELF:
-			target = self
+			target = unit
 			await healFlash().finished
 		else:
 			target = owner.target
@@ -365,11 +365,11 @@ func receiveDamage(attacker,attack, damage):
 		emit_signal("hpChanged")
 		checkIfDead()
 		print(unit.characterName," now have ", unit.currentHp, " hp after attack ")
-func receiveRetaliationDamage(enemy:BaseUnitScript):
+func receiveRetaliationDamage(enemy:UnitInstance):
 	for effect in enemy.activeEffects:
 		if effect.name == "retaliation":
 			receiveDamage(self,effect,effect.amount)
-func negateDamage(attacker:BaseUnitScript):
+func negateDamage(attacker:UnitInstance):
 	if isInvulnerable:
 		print(unit.characterName, " is invulnerable and negated the attack from ", attacker)
 func checkIfDead():
@@ -398,18 +398,18 @@ func endSelection():
 func onMouseEntered():
 	print(getUnitInfo())
 	if canBeSelected:
-		emit_signal("hovered", self)
+		emit_signal("hovered", unit)
 	else:
 		return
 func onMouseExited():
-	emit_signal("unhovered", self)
+	emit_signal("unhovered", unit)
 func onArea2DInputEvent(viewport, event, shape_idx):
 	if not canBeSelected:
 		return
 	if event is InputEventMouseButton and event.pressed and isSelectingToSummon:
 		emit_signal("selectedForSummon", unit)
 	elif event is InputEventMouseButton and event.pressed:
-		emit_signal("clickedOn", self)
+		emit_signal("clickedOn", unit)
 #UTILS ---------------------------------------------------------------------------------------------
 func setState(newState:String):
 	stateMachine.setState(states[newState])

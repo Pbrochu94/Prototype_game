@@ -21,7 +21,7 @@ func addUnitToParty():
 		unit.characterName = unit.definition.characterName
 		unit.characterName +=  " player " + numberNameTag 
 		unitScene.faction = Enum.Faction.PLAYER
-	currentlyAliveCharacters = partyInstances
+	currentlyAliveCharacters = party
 
 
 

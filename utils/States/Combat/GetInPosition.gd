@@ -1,14 +1,14 @@
 extends State
 class_name GetInPositionState
 
-var player:BaseUnitScript
-var target:BaseUnitScript
+var player:UnitInstance
+var target:UnitInstance
 var attackSelected:Ability
 
 func enter():
-	player = owner
-	target = player.target
-	attackSelected = player.attackSelected
+	player = owner.unit
+	target = player.scene.target
+	attackSelected = player.scene.attackSelected
 	owner.isWalking = true
 	owner.anim.play("walk")
 

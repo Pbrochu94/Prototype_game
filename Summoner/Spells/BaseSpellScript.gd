@@ -4,7 +4,7 @@ class_name BaseSpellScript
 @onready var caster = get_tree().get_first_node_in_group("summoner")
 
 
-var targets:Array[BaseUnitScript] 
+var targets:Array[UnitInstance] 
 var targetsPosition:Array[Vector2]
 var projectileSpeed:float
 var acceleration :float

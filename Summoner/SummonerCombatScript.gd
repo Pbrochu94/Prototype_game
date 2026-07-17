@@ -14,8 +14,8 @@ class_name BaseSummonerScript
 #@export var walkSpeed:int = 100
 
 #VARIABLES
-var targets:Array[BaseUnitScript]
-var target:BaseUnitScript
+var targets:Array[UnitInstance]
+var target:UnitInstance
 var currentState:String
 var startingPosition:Vector2
 var states:Dictionary
@@ -61,7 +61,7 @@ func walk(delta, destination:Vector2):
 		onFinishedWalkout()
 func orientSprite(direction:int):
 	spriteOrientation.scale.x = direction
-func castSpell(target:BaseUnitScript):
+func castSpell(target:UnitInstance):
 	var spellInstance = spellSelected.spellScene.instantiate()
 #	spellCooldowns.append({
 #		"name": spellSelected.spellName,

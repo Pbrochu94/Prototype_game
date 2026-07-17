@@ -2,7 +2,7 @@ extends GetInPositionState
 
 
 func update(delta):
-	var targetPosition = owner.target.global_position
+	var targetPosition = owner.target.scene.global_position
 	var offset:float
 	if owner.global_position.x < targetPosition.x:
 		offset = -15

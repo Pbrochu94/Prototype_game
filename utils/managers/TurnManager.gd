@@ -10,7 +10,7 @@ extends Node
 var everyLivingUnits
 var summoner:SummonerDef
 var currentTurn = "player"
-var enemy:BaseUnitScript 
+var enemy:UnitInstance 
 var isSelecting = false
 var playOrder:Array[UnitInstance]
 var currentlyPlaying:UnitInstance
@@ -138,7 +138,7 @@ func endSelection():
 	currentCombatScene.choiceMenu.close()
 	for enemy in enemyPartyManager.party:
 		targetManager.endSelection()
-func unitAttack(targets:Array[BaseUnitScript]):
+func unitAttack(targets:Array[UnitInstance]):
 		choiceMenu.attackMenu.resetAttackButton()
 		summoner.sceneInstance.targets = targets
 		match caster:
@@ -149,13 +149,13 @@ func unitAttack(targets:Array[BaseUnitScript]):
 					summoner.sceneInstance.castSpell(summoner.sceneInstance.target)
 			Enum.Caster.UNIT:
 				for target in targets:
-					currentlyPlaying.target = target
-					target.canBeSelected = false
-					if currentlyPlaying.attackSelected.needToMove:
-						currentlyPlaying.getInPosition(target)
+					currentlyPlaying.scene.target = target
+					target.scene.canBeSelected = false
+					if currentlyPlaying.scene.attackSelected.needToMove:
+						currentlyPlaying.scene.getInPosition(target)
 					else:
-						currentlyPlaying.attack(target, currentlyPlaying.attackSelected)
-func useItem(targets:Array[BaseUnitScript]):
+						currentlyPlaying.scene.attack(target, currentlyPlaying.scene.attackSelected)
+func useItem(targets:Array[UnitInstance]):
 	for target in targets:
 		currentlyUsedItem.use(target)
 	RunManager.inventory[currentlyUsedItem.itemName].stack -= 1
@@ -195,7 +195,7 @@ func openEndingScreen():
 	currentCombatScene.endingScreen.open()
 
 #ENEMY BEHAVIORS
-func enemyMoveToAttack(target:BaseUnitScript):
+func enemyMoveToAttack(target:UnitInstance):
 	currentlyPlaying.getInPosition(target)
 func enemyAttack():
 	pass

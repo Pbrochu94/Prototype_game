@@ -19,6 +19,9 @@ class_name UnitInstance
 var faction:Enum.Faction
 var isDead:bool
 
+#------------------------------EFFECTS-----------------------------------------
+var hasRetaliation:bool = false
+
 func getInfo():
 	var summary = {
 		"Name":characterName,

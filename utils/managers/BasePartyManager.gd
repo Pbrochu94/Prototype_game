@@ -9,7 +9,7 @@ class_name BasePartyManager
 var party:Array[UnitInstance]
 var partyInstances:Array[BaseUnitScript]
 var aliveCount:int
-var currentlyAliveCharacters:Array[BaseUnitScript]
+var currentlyAliveCharacters:Array[UnitInstance]
 var partyFaction
 
 #SIGNALS
@@ -22,7 +22,7 @@ func init():
 func connectSignals():
 	turnManager.playOutroAnim.connect(outroAnim)
 #PARTY HANDLERS
-func onCharacterDeath(character:BaseUnitScript):
+func onCharacterDeath(character:UnitInstance):
 	aliveCount -= 1
 	removeUnitFromQ(character)
 	currentlyAliveCharacters = partyInstances.filter(
@@ -41,7 +41,7 @@ func outroAnim():
 		character.setState("outro")
 #TEST DATA
 
-func assignUnitFaction(character:BaseUnitScript):
+func assignUnitFaction(character:UnitInstance):
 	character.faction = partyFaction
 
 func removeUnitFromQ(character):
@@ -57,7 +57,7 @@ func removeUnitsFromParties():
 			RunManager.currentParty.erase(unit)
 			unit.scene.queue_free()
 
-func addUnitConnections(character:BaseUnitScript):
+func addUnitConnections(character:Node2D):
 	character.isDowned.connect(onCharacterDeath)
 
 func getPartyInfo():
@@ -67,11 +67,11 @@ func getPartyInfo():
 	return infoArray
 
 func placeUnit():
-	for instance in partyInstances:
-		instance.currentCombatScene = currentCombatScene
-		addUnitConnections(instance)
-	for i in range(partyInstances.size()):
-		currentCombatScene.add_child(partyInstances[i])
+	for unit in party:
+		unit.scene.currentCombatScene = currentCombatScene
+		addUnitConnections(unit.scene)
+	for i in range(party.size()):
+		currentCombatScene.add_child(party[i].scene)
 		if partyFaction == Enum.Faction.PLAYER:
 			if i < currentCombatScene.playerAnchors.size():
 				partyInstances[i].global_position = currentCombatScene.playerAnchors[i].global_position
