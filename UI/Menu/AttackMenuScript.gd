@@ -7,8 +7,10 @@ extends Control
 @onready var closeBtn = $ColorRect/Header/Close
 @onready var vBox = $ColorRect/ScrollContainer/VBoxContainer
 @onready var turnManager = get_tree().get_first_node_in_group("turn manager")
+@onready var currentCombatScene = get_tree().get_first_node_in_group("combat scene")
+
 var choiceMenuParent:Control
-var currentlyPlayingUnit:BaseUnitScript
+var currentlyPlayingUnit:UnitInstance
 var attackButtonInstances:Array
 
 #SINGALS
@@ -28,7 +30,7 @@ func open():
 	self.visible = true
 	if vBox.get_child_count() > 0:
 		return
-	for attack in currentlyPlayingUnit.stats.attacks:
+	for attack in currentlyPlayingUnit.attacks:
 		var attackButton = preload("res://UI/Attack/AttackButton.tscn").instantiate()
 		attackButton.text = attack.attackName
 		vBox.add_child(attackButton)

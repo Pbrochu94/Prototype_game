@@ -12,7 +12,7 @@ extends Control
 @onready var targetManager = get_tree().get_first_node_in_group("target manager")
 var turnManager:Node
 var summoner:SummonerDef
-var currentlyPlayingUnit:BaseUnitScript
+var currentlyPlayingUnit:UnitInstance
 #SIGNALS
 signal selectionCancelled
 

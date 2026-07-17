@@ -7,7 +7,7 @@ func _onready():
 
 func enter():
 	owner.anim.play("idle")
-	if owner.faction == Enum.Faction.PLAYER:
+	if owner.unit.faction == Enum.Faction.PLAYER:
 		owner.orientSprite(1)
 	else:
 		owner.orientSprite(-1)

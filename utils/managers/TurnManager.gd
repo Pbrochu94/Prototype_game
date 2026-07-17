@@ -5,15 +5,15 @@ extends Node
 @onready var playerPartyManager:Node = get_tree().get_first_node_in_group("player party manager")
 @onready var enemyPartyManager:Node = get_tree().get_first_node_in_group("enemy party manager")
 @onready var targetManager:Node = get_tree().get_first_node_in_group("target manager")
-@onready var everyUnits:Array[Node] 
+@onready var everyUnits:Array[UnitInstance] 
 @onready var currentCombatScene = $CombatEncounterScene
 var everyLivingUnits
 var summoner:SummonerDef
 var currentTurn = "player"
 var enemy:BaseUnitScript 
 var isSelecting = false
-var playOrder:Array
-var currentlyPlaying:BaseUnitScript
+var playOrder:Array[UnitInstance]
+var currentlyPlaying:UnitInstance
 var playerLost:bool = false
 var playerWon:bool = false
 var turnTracker:int = 0
@@ -64,7 +64,10 @@ func startCombat():
 
 #ORDER HANDLERS
 func initPlayOrder():
-	everyUnits = get_tree().get_nodes_in_group("unit")
+	for unit in playerPartyManager.party:
+		everyUnits.append(unit)
+	for unit in enemyPartyManager.party:
+		everyUnits.append(unit)
 	for unit in everyUnits:
 		playOrder.append(unit)
 	updatePlayOrder()
@@ -74,7 +77,7 @@ func updatePlayOrder():
 		if unit.isDead:
 			playOrder.erase(unit)
 	playOrder.sort_custom(func(a, b):
-		if a.stats.speed == b.stats.speed:
+		if a.speed == b.speed:
 			return a.faction == Enum.Faction.ENEMY
 		return a.stats.speed > b.stats.speed
 	)
@@ -100,27 +103,27 @@ func resetPlayingOrder():
 func startTurn():
 	if not currentlyPlaying:
 		return
-	currentlyPlaying.reduceTimers()
-	print("Now playing :", currentlyPlaying.getUnitInfo())
+	currentlyPlaying.scene.reduceTimers()
+	print("Now playing :", currentlyPlaying.scene.getUnitInfo())
 	print("Summoner info: " ,summoner.sceneInstance.getInfo())
 	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()
 	else:
-		currentlyPlaying.enemyStartTurn()
+		currentlyPlaying.scene.enemyStartTurn()
 func chooseAction():
 	currentCombatScene.choiceMenu.open()
-	print(currentlyPlaying.stats.characterName," is choosing what to do...")
+	print(currentlyPlaying.characterName," is choosing what to do...")
 func onSpellSelected(spell:SummonerSpell):
 	caster = Enum.Caster.SUMMONER
 	summoner.sceneInstance.spellSelected = spell
 	unitSelectingTarget(spell.focusType,spell.numberOfTargets)
 func onAttackSelected(attack:Ability):
 	caster = Enum.Caster.UNIT
-	currentlyPlaying.onChosenAttack(attack)
+	currentlyPlaying.scene.onChosenAttack(attack)
 func unitSelectingTarget(focusType, nmbOfTargets):
 	match focusType:
 		Enum.FocusType.ENEMY_SINGLE, Enum.FocusType.ENEMY_AOE:
-			print(currentlyPlaying.stats.characterName," is selecting a target")
+			print(currentlyPlaying.characterName," is selecting a target")
 			targetManager.startSelection(nmbOfTargets, Enum.targetPartySelection.ENEMY)
 		Enum.FocusType.SELF:
 			emit_signal("selectionCompleted")

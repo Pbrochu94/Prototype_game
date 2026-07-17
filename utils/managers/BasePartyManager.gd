@@ -72,16 +72,16 @@ func placeUnit():
 		addUnitConnections(instance)
 	for i in range(partyInstances.size()):
 		currentCombatScene.add_child(partyInstances[i])
-		if i < currentCombatScene.playerAnchors.size():
-			partyInstances[i].global_position = currentCombatScene.playerAnchors[i].global_position
-			partyInstances[i].startingPosition = currentCombatScene.playerAnchors[i].global_position
+		if partyFaction == Enum.Faction.PLAYER:
+			if i < currentCombatScene.playerAnchors.size():
+				partyInstances[i].global_position = currentCombatScene.playerAnchors[i].global_position
+				partyInstances[i].startingPosition = currentCombatScene.playerAnchors[i].global_position
+		else:
+			if i < currentCombatScene.enemyAnchors.size():
+				partyInstances[i].global_position = currentCombatScene.enemyAnchors[i].global_position
+				partyInstances[i].startingPosition = currentCombatScene.enemyAnchors[i].global_position
 
 func addUnitToPartyInstances():
 		for i in range(party.size()):
 			var unit = party[i]
-			var unitScene = unit.definition.scene.instantiate()
-			#HERE TO CORRECT AFTER SEPARATING STATS
-			unitScene.stats = unit
-#			unitScene.definition = unit.definition
-			unit.scene = unitScene
-			partyInstances.append(unitScene)
+			partyInstances.append(unit.scene)

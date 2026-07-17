@@ -16,6 +16,8 @@ class_name UnitInstance
 @export var element:Enum.Element
 @export var attacks:Array[Ability]
 @export var walkSpeed:int
+var faction:Enum.Faction
+var isDead:bool
 
 func getInfo():
 	var summary = {

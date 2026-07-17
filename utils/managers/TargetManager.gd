@@ -9,7 +9,7 @@ extends Node
 
 
 #VARIABLES
-var enemyParty:Array[BaseUnitScript]
+var enemyParty:Array[UnitInstance]
 var enemyPartyInstances:Array[BaseUnitScript]
 var allyParty:Array[BaseUnitScript] 
 var allyPartyInstances:Array[BaseUnitScript]
@@ -109,7 +109,7 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " enemie(s)")
-			for enemy in enemyPartyInstances:
+			for enemy in enemyParty:
 				if not enemy.isDead:
 					enemy.canBeSelected = true
 func startItemSelection(item:ItemData):

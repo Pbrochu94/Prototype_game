@@ -37,6 +37,7 @@ func createUnitInstance(characterTag:String):
 	unit.element = unit.definition.element
 	unit.walkSpeed = unit.definition.walkSpeed
 	unit.scene = unit.definition.scene.instantiate()
+	unit.scene.unit = unit
 	var attackRes:Array[Ability]
 	for attack in unit.definition.attacks:
 		attackRes.append(attack.duplicate(true))
