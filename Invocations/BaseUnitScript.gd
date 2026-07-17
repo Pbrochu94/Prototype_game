@@ -32,12 +32,8 @@ var previousState:String
 @export var definition : UnitDefinition
 @export var stats : UnitInstance
 #@export var walkSpeed:int
-@export var maxHp:int 
-@export var currentHp:int 
-@export var speed:int 
-@export var attackSelected:Ability
-@export var deff:int
-@export var atk:int
+var attackSelected:Ability
+
 var activeEffects:Array[Effect] = []
 var abilityCooldown:int
 
