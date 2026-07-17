@@ -366,7 +366,7 @@ func receiveDamage(attacker,attack, damage):
 func receiveRetaliationDamage(enemy:UnitInstance):
 	for effect in enemy.activeEffects:
 		if effect.name == "retaliation":
-			receiveDamage(self,effect,effect.amount)
+			receiveDamage(unit,effect,effect.amount)
 func negateDamage(attacker:UnitInstance):
 	if isInvulnerable:
 		print(unit.characterName, " is invulnerable and negated the attack from ", attacker)
@@ -437,6 +437,10 @@ func reduceTimers():
 			attack.currentCooldown -= 1
 			print("attack: ", attack," cd = ", attack.currentCooldown)
 		attack.justUsed = false
+func removeAllActiveEffects():
+	for effect in unit.activeEffects:
+		unit.activeEffects.erase(effect)
+		resetAllStatsBesideHp()
 func resetAllStatsBesideHp():
 	unit.atk = unit.baseAtk
 	unit.deff = unit.baseDeff

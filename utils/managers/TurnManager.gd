@@ -182,7 +182,7 @@ func endGlobalTurn():
 func endFight():
 	emit_signal("playOutroAnim")
 	for unit in playerPartyManager.currentlyAliveCharacters:
-		unit.scene.resetAllStatsBesideHp()
+		unit.scene.removeAllActiveEffects()
 	summoner.sceneInstance.resetSpellCooldowns()
 	if playerWon:
 		print("You won !!")
