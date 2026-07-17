@@ -29,8 +29,8 @@ func addUnitToPartyInstances():
 			var unitScene = unit.definition.scene.instantiate()
 			#HERE TO CORRECT AFTER SEPARATING STATS
 			unitScene.stats = unit
-			unitScene.definition = unit.definition
-			unit.sceneInstance = unitScene
+#			unitScene.definition = unit.definition
+			unit.scene = unitScene
 			partyInstances.append(unitScene)
 
 func placeUnit():

@@ -45,17 +45,17 @@ func assignUnitFaction(character:BaseUnitScript):
 	character.faction = partyFaction
 
 func removeUnitFromQ(character):
-	var sceneInstance = character.stats.sceneInstance
-	sceneInstance.isSelectable()
-	turnManager.playOrder.erase(sceneInstance)
+	var scene = character.stats.scene
+	scene.isSelectable()
+	turnManager.playOrder.erase(scene)
 
 func removeUnitsFromParties():
 	for unit in party:
-		if unit.sceneInstance.isDead:
-			partyInstances.erase(unit.sceneInstance)
+		if unit.scene.isDead:
+			partyInstances.erase(unit.scene)
 			party.erase(unit)
 			RunManager.currentParty.erase(unit)
-			unit.sceneInstance.queue_free()
+			unit.scene.queue_free()
 
 func addUnitConnections(character:BaseUnitScript):
 	character.isDowned.connect(onCharacterDeath)

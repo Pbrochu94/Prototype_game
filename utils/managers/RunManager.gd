@@ -28,15 +28,17 @@ var allSpells:Dictionary = {
 var nmbOfSpellChoice:int = 2
 var spellSlot:int = 2
 
+func _ready():
+	init()
 #FIRST BOOT ----------------------------------------------------------------------------------------
 func init():
 	initNewGame()
 func initNewGame():
 	initIntroMap()
-	createHubInstance()
+#	createHubInstance()
 	initNewPlayer()
 	await changeScene(currentScene)
-	spawnSummoner()
+#	spawnSummoner()
 	initStartingParty()
 func createHubInstance():
 	RoamingSceneDB.createMapInstance(Enum.Section.CAVE,Enum.Area.HUB)
@@ -105,7 +107,7 @@ func addUnitToParty(unit:UnitInstance):
 	currentParty.append(unitData)
 func removeDownedAllyFromParty():
 	for unit in currentParty:
-		if unit.sceneInstance.isDead:
+		if unit.scene.isDead:
 			currentParty.erase(unit) 
 
 #RUN RESET -----------------------------------------------------------------------------------------

@@ -37,7 +37,7 @@ func addUnitToPartyInstances():
 		for i in range(party.size()):
 			var unit = party[i]
 			var unitScene = unit.definition.scene.instantiate()
-			unit.sceneInstance = unitScene
+			unit.scene = unitScene
 			#HERE TO CORRECT AFTER SEPARATING STATS
 			unitScene.stats = unit
 			unitScene.definition = unit.definition
