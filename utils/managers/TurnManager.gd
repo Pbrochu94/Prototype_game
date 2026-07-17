@@ -104,7 +104,7 @@ func startTurn():
 	if not currentlyPlaying:
 		return
 	currentlyPlaying.scene.reduceTimers()
-	print("Now playing :", currentlyPlaying.scene.getUnitInfo())
+	print("Now playing :", currentlyPlaying.getUnitInfo())
 	print("Summoner info: " ,summoner.sceneInstance.getInfo())
 	if currentlyPlaying.faction == Enum.Faction.PLAYER:
 		chooseAction()

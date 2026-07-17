@@ -54,7 +54,7 @@ func enemyHovered(enemy:UnitInstance):
 	if enemy.scene.canBeSelected and isSummoning:
 		print("This unit cost : ", enemy.definition.summonCost, " lightshards")
 	if enemy.scene.canBeSelected and not isSummoning:
-		print(enemy.scene.getUnitInfo())
+		print(enemy.getUnitInfo())
 	currentHovered = enemy
 	updateArrow(enemy)
 	selectingArrow.visible = true

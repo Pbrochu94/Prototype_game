@@ -33,8 +33,6 @@ var previousState:String
 @export var unit : UnitInstance
 #@export var walkSpeed:int
 var attackSelected:Ability
-
-var activeEffects:Array[Effect] = []
 var abilityCooldown:int
 
 #EFFECTS
@@ -266,7 +264,7 @@ func attack(enemy:UnitInstance,attack:Ability):
 		Enum.AbilityType.ATTACK:
 			var atkStat = unit.atk
 			var damageOutput:int = atkStat + attack.damage
-			enemy.scene.receiveDamage(self,attack,damageOutput)
+			enemy.scene.receiveDamage(unit,attack,damageOutput)
 			if attack.effectRes:
 				if attack.effectRes.target == Enum.FocusType.SELF:
 					applyEffect(attack.effectRes)
@@ -295,7 +293,7 @@ func applyEffect(effect:Effect):
 	match effect.type:
 		Enum.StatusEffect.INVULNERABLE:
 			isInvulnerable = true
-			activeEffects.append(effectApplied)
+			unit.activeEffects.append(effectApplied)
 		Enum.StatusEffect.STAT_MODIFIER:
 			for statAffected in effect.statsAffected:
 				var modifier = int(unit.get(statAffected) * effectApplied.amount)
@@ -308,12 +306,12 @@ func applyEffect(effect:Effect):
 					unit.get(statAffected) + modifier
 				)
 				print(unit.characterName, " received the effect ", effectApplied.name)
-				activeEffects.append(effectApplied)
+				unit.activeEffects.append(effectApplied)
 		Enum.StatusEffect.HEAL:
 				heal(attackSelected.effectRes)
 		Enum.StatusEffect.RETALIATION:
 			unit.hasRetaliation = true
-			activeEffects.append(effectApplied)
+			unit.activeEffects.append(effectApplied)
 func heal(source):
 	if source is ItemData:
 		await healFlash().finished
@@ -397,7 +395,7 @@ func isSelectable():
 func endSelection():
 	canBeSelected = false
 func onMouseEntered():
-	print(getUnitInfo())
+	print(unit.getUnitInfo())
 	if canBeSelected:
 		emit_signal("hovered", unit)
 	else:
@@ -414,48 +412,10 @@ func onArea2DInputEvent(viewport, event, shape_idx):
 #UTILS ---------------------------------------------------------------------------------------------
 func setState(newState:String):
 	stateMachine.setState(states[newState])
-func getUnitInfo():
-	var effectSummaries = []
-	for effect in activeEffects:
-		match effect.type:
-			Enum.StatusEffect.STAT_MODIFIER:
-						var effectSummary:Dictionary
-						effectSummary["name"] = effect.name
-						effectSummary["amount %"] = effect.amount if "amount" in effect else ""
-						effectSummary["amount digit"] = effect.digitAmount
-						effectSummary["duration"] = effect.duration
-						effectSummaries.append(effectSummary)
-			Enum.StatusEffect.RETALIATION:
-						var effectSummary:Dictionary
-						effectSummary["name"] = effect.name
-						effectSummary["amount"] = effect.amount if "amount" in effect else ""
-						effectSummary["duration"] = effect.duration
-						effectSummaries.append(effectSummary)
-			Enum.StatusEffect.INVULNERABLE:
-						var effectSummary:Dictionary
-						effectSummary["name"] = effect.name
-						effectSummary["duration"] = effect.duration
-						effectSummaries.append(effectSummary)
-		var effectSummary = {}
-	var attacks = []
-	for attack in unit.attacks:
-		attacks.append(attack)
-	return {
-		"Name": unit.characterName,
-		"Stats": {
-			"currentHp": unit.currentHp,
-			"atk":unit.atk,
-			"deff":unit.deff,
-			"speed":unit.speed
-		},
-		"Active effects": effectSummaries,
-		"Attacks": attacks,
-#		"State": currentState,
-#		"z": z_index
-	}
+
 func reduceTimers():
-	for i in range(activeEffects.size() - 1, -1, -1):
-		var effect = activeEffects[i]
+	for i in range(unit.activeEffects.size() - 1, -1, -1):
+		var effect = unit.activeEffects[i]
 		effect["duration"] -= 1
 		if effect["duration"] <= 0:
 			match effect.type:
@@ -469,7 +429,7 @@ func reduceTimers():
 							statAffected,
 							unit.get(statAffected) - effect.amountAppliedToUnit
 						)
-			activeEffects.remove_at(i)
+			unit.activeEffects.remove_at(i)
 	print("unit =", unit)
 	print("scene =", self)
 	for attack in unit.attacks:
