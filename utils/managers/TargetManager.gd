@@ -74,7 +74,8 @@ func enemySelected(enemy:UnitInstance):
 		endSelection()
 #MOUSE HANDLING
 func allyHovered(ally:UnitInstance):
-	currentHovered = ally
+	if ally.scene.canBeSelected:
+		currentHovered = ally
 	updateArrow(ally)
 	selectingArrow.visible = true
 func allyUnhovered(ally:UnitInstance):
@@ -98,10 +99,10 @@ func startSelection(nmbOfTarget:int, partyFocus:Enum.targetPartySelection):
 	nmbOfTargetToSelect = nmbOfTarget
 	match partyFocus:
 		Enum.targetPartySelection.ALLY:
-			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters
+			var unitSelectable = turnManager.playerPartyManager.currentlyAliveCharacters
 			nmbOfAvailableTargets = min(nmbOfTargetToSelect, unitSelectable.size())
 			print("Player can select ", nmbOfAvailableTargets, " allie(s)")
-			for ally in allyParty:
+			for ally in playerPartyManager.party:
 				ally.scene.canBeSelected = true
 		Enum.targetPartySelection.ENEMY:
 			var unitSelectable = turnManager.enemyPartyManager.currentlyAliveCharacters

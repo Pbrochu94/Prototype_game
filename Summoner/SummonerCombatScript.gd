@@ -72,10 +72,10 @@ func castSpell(target:UnitInstance):
 		Enum.SummonerSpellStartingPoint.SUMMONER:
 			add_child(spellInstance)
 		Enum.SummonerSpellStartingPoint.UNIT:
-			target.add_child(spellInstance)
+			target.scene.add_child(spellInstance)
 	var spellResource = spellInstance.spellRes
 	if spellSelected.hasEffect:
-		target.applyEffect(spellSelected.effectRes)
+		target.scene.applyEffect(spellSelected.effectRes)
 	setState("casting")
 	print("Summoner cast ",spellSelected.spellName, " on ", target.characterName)
 
