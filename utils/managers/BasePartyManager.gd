@@ -25,7 +25,7 @@ func connectSignals():
 func onCharacterDeath(character:UnitInstance):
 	aliveCount -= 1
 	removeUnitFromQ(character)
-	currentlyAliveCharacters = partyInstances.filter(
+	currentlyAliveCharacters = party.filter(
 		func(character):
 			return not character.isDead
 	)
@@ -38,24 +38,23 @@ func onCharacterDeath(character:UnitInstance):
 			turnManager.playerWon = true
 func outroAnim():
 	for character in currentlyAliveCharacters:
-		character.setState("outro")
+		character.scene.setState("outro")
 #TEST DATA
 
 func assignUnitFaction(character:UnitInstance):
 	character.faction = partyFaction
 
 func removeUnitFromQ(character):
-	var scene = character.stats.scene
+	var scene = character.scene
 	scene.isSelectable()
 	turnManager.playOrder.erase(scene)
 
 func removeUnitsFromParties():
 	for unit in party:
-		if unit.scene.isDead:
-			partyInstances.erase(unit.scene)
+		if unit.isDead:
 			party.erase(unit)
 			RunManager.currentParty.erase(unit)
-			unit.scene.queue_free()
+#			unit.scene.queue_free()
 
 func addUnitConnections(character:Node2D):
 	character.isDowned.connect(onCharacterDeath)

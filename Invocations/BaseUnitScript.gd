@@ -357,7 +357,7 @@ func receiveDamage(attacker,attack, damage):
 		trueDamage = 0
 		print(attacker.unit.characterName, " does no damage to ", unit.characterName)
 	else:
-		var attackerName = attacker.characterName if attacker is UnitInstance else attacker.unit.characterName
+		var attackerName = attacker.characterName if attacker is UnitInstance else attacker.characterName
 		print(attackerName, " attack ", unit.characterName, " for ", damage, "(damage+atk) ", attack.element, " damage minus ", unit.deff,"(deff) for a total of ",trueDamage)
 		print(unit.characterName," has ", unit.currentHp, " hp before attack ")
 		unit.currentHp-= trueDamage
@@ -375,6 +375,7 @@ func negateDamage(attacker:UnitInstance):
 func checkIfDead():
 	if unit.currentHp <= 0:
 		unit.isDead = true
+		emit_signal("isDowned", unit)
 		match currentState:
 			"attacking":
 				await anim.animation_finished

@@ -10,6 +10,7 @@ func init():
 
 
 func addUnitToParty():
+	party.clear()
 	for unit in RunManager.currentParty:
 		party.append(unit)
 	for i in range(party.size()):
@@ -21,8 +22,12 @@ func addUnitToParty():
 		unit.characterName = unit.definition.characterName
 		unit.characterName +=  " player " + numberNameTag 
 		unitScene.faction = Enum.Faction.PLAYER
+		if !unit.scene:
+			createSceneInstance(unit)
 	currentlyAliveCharacters = party
 
-
+func createSceneInstance(unit:UnitInstance):
+	unit.scene = unit.definition.scene.instantiate()
+	unit.scene.unit = unit
 
 

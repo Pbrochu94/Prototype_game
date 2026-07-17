@@ -77,7 +77,7 @@ func castSpell(target:UnitInstance):
 	if spellSelected.hasEffect:
 		target.applyEffect(spellSelected.effectRes)
 	setState("casting")
-	print("Summoner cast ",spellSelected.spellName, " on ", target.stats.characterName)
+	print("Summoner cast ",spellSelected.spellName, " on ", target.characterName)
 
 #TURN FLOW
 func playIntro():

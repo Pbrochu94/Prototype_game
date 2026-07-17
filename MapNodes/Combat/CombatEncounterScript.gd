@@ -41,8 +41,8 @@ func _ready():
 	initSummoner() 
 	encounterData = RunManager.currentEncounterData
 	RunManager.summoner.sceneInstance.introAnimCompleted.connect(playerPartyManager.placeUnit)
-	enemyPartyManager.init()
 	playerPartyManager.init()
+	enemyPartyManager.init()
 #	print_tree()
 	endingScreen.init()
 	endingScreen.currentScene = combatScene

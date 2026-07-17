@@ -14,9 +14,9 @@ func _process(delta):
 	projectileSpeed = max(projectileSpeed, minSpeed)
 	if isMoving:
 		for unit in targets:
-			var unitLocation = unit.global_position
+			var unitLocation = unit.scene.global_position
 			global_position = global_position.move_toward(unitLocation, projectileSpeed*delta)
 			if global_position == unitLocation:
 				isMoving = false
-				unit.receiveDamage(caster,spellSelected ,spellSelected.amount)
+				unit.scene.receiveDamage(caster,spellSelected ,spellSelected.amount)
 				exit()

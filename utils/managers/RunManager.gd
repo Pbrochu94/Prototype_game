@@ -82,8 +82,8 @@ func linkEncounters():
 	node5.nextEncounters.append(node6)
 	node6.previousEncounters.append_array([node4,node5])
 	node6.nextEncounters.append(node7)
-#	node4.unlocked = true
-#	node5.unlocked = true
+	node4.unlocked = true
+	node5.unlocked = true
 #	node6.unlocked = true
 #	node7.unlocked = true
 func createSummonerInstance():
@@ -107,7 +107,7 @@ func addUnitToParty(unit:UnitInstance):
 	currentParty.append(unitData)
 func removeDownedAllyFromParty():
 	for unit in currentParty:
-		if unit.scene.isDead:
+		if unit.isDead:
 			currentParty.erase(unit) 
 
 #RUN RESET -----------------------------------------------------------------------------------------

@@ -79,7 +79,7 @@ func updatePlayOrder():
 	playOrder.sort_custom(func(a, b):
 		if a.speed == b.speed:
 			return a.faction == Enum.Faction.ENEMY
-		return a.stats.speed > b.stats.speed
+		return a.speed > b.speed
 	)
 #	print("Updating play order : ", playOrder)
 func updateCurrentlyPlaying():
@@ -145,7 +145,7 @@ func unitAttack(targets:Array[UnitInstance]):
 			Enum.Caster.SUMMONER:
 				for target in targets:
 					summoner.sceneInstance.target = target
-					target.canBeSelected = false
+					target.scene.canBeSelected = false
 					summoner.sceneInstance.castSpell(summoner.sceneInstance.target)
 			Enum.Caster.UNIT:
 				for target in targets:
@@ -182,7 +182,7 @@ func endGlobalTurn():
 func endFight():
 	emit_signal("playOutroAnim")
 	for unit in playerPartyManager.currentlyAliveCharacters:
-		unit.resetAllStatsBesideHp()
+		unit.scene.resetAllStatsBesideHp()
 	summoner.sceneInstance.resetSpellCooldowns()
 	if playerWon:
 		print("You won !!")
